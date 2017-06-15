@@ -56,7 +56,7 @@ router.post('/delete', function(req, res, next) {
   // delete
   // method #1 userData.delete({"_id": db.id(id)});
   // i could bind the database query to variable which is then promise...
-  userData.removeById(id);
+  userData.remove(id);
 });
 
 module.exports = router;
