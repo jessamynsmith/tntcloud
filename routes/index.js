@@ -3,20 +3,25 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Cool, huh', condition: true, anyArray: [1,2,3] });
+  res.render('index', { title: 'Form Validation', success: req.session.success, errors: req.session.errors });
+  req.session.errors = null;
 });
 
-// Get route /test/ + parameter "id"
-router.get('/test/:id', function(req, res, next){
-  // response: render 'test' route (test.hbs)
-  // "output" is the variable to be called in "test" template
-  res.render('test', {output: req.params.id})
-});
+// validation
+router.post('/submit', function(req, res, next) {
+  // Check validity
+  req.check('email', 'Invalid email address').isEmail();
+  // Min lenght 4 characters, and validate the password = confirm password field
+  req.check('password', 'Password is invalid').isLength({min: 4}).equals(req.body.confirmPassword);
 
-// Post for when form submitted, plus redirect after form submitted
-router.post('/test/submit', function(req, res, next) {
-  var id = req.body.id;
-  res.redirect('/test/' + id);
+  var errors = req.validationErrors();
+  if (errors) {
+    req.session.errors = errors;
+    req.session.success = false;
+  } else {
+    req.session.success = true;
+  }
+  res.redirect('/');
 });
 
 module.exports = router;

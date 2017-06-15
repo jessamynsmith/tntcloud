@@ -5,6 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('express-handlebars');
+var expressValidator = require('express-validator');
+var expressSession = require('express-session');
+
 // import route files
 var index = require('./routes/index');
 var dispatch = require('./routes/dispatch');
@@ -23,8 +26,12 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// validator must be added after the bodyParser, because validator needs access to content of the bodyParser
+app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// by default express Session uses 'memory storage' which is not good for production, use another module for storage
+app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
 
 // define routes and route resource files -see @routes files
 app.use('/', index);
