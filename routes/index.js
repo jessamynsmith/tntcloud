@@ -44,11 +44,10 @@ router.post('/update', function(req, res, next) {
   };
   // identify id of item to update
 //  var id = req.body.id;
-var titleNew = 'whats up';
   // update
   // method #1: userData.update({"_id", db.id(id)}, item);
   // i could bind the database query to variable which is then promise...
-  userData.update({title: 'nnnnnnnnnn'}, {title: titleNew, content: 'okay', author: 'okay'});
+  userData.update({title: 'okay'}, item);
 });
 // Delete Data
 router.post('/delete', function(req, res, next) {
