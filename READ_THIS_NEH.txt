@@ -1,0 +1,13 @@
+Server Start
+nodemon start 
+
+Node + Express Video Series
+https://www.youtube.com/playlist?list=PL55RiY5tL51oGJorjEgl6NVeDbx_fO5jR
+
+Node Modules:
+Contains both mongodb + monk but only monk is needed.
+Keeping mongodb because the first several GIT branches use mongodb.
+
+Excel Notes
+Node + Express - Academind
+
