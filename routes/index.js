@@ -10,11 +10,11 @@ router.get('/', function(req, res, next) {
   res.render('index');
   req.session.errors = null;
 });
+
 // Get Data
 router.get('/get-data', function(req, res, next) {
   // pass empty object { } to get all data in the collection
-  var data = userData.find({});
-  data.on('success', function(docs) {
+  userData.find({}).then((docs)=>{
     // pass the results to our 'index' view ...render
     // i could bind the database query to variable which is then promise...
     res.render('index', {items: docs});
@@ -43,11 +43,12 @@ router.post('/update', function(req, res, next) {
     author: req.body.author
   };
   // identify id of item to update
-  var id = req.body.id;
+//  var id = req.body.id;
+var title = req.body.id;
   // update
   // method #1: userData.update({"_id", db.id(id)}, item);
   // i could bind the database query to variable which is then promise...
-  userData.updateById(id, item);
+  userData.update({title: 'new'}, {title: 'bar'});
 });
 // Delete Data
 router.post('/delete', function(req, res, next) {
