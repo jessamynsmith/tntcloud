@@ -1,6 +1,3 @@
-Server Start
-nodemon start 
-
 Node + Express Video Series
 https://www.youtube.com/playlist?list=PL55RiY5tL51oGJorjEgl6NVeDbx_fO5jR
 
@@ -11,3 +8,10 @@ Keeping mongodb because the first several GIT branches use mongodb.
 Excel Notes
 Node + Express - Academind
 
+Server Start
+nodemon start
+Runs on localhost:3030
+
+Run MongoDB
+terminal window #1:		mongod
+terminal window #2:		mongod
