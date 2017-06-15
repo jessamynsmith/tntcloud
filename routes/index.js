@@ -76,7 +76,19 @@ router.post('/update', function(req, res, next) {
 });
 // Delete Data
 router.post('/delete', function(req, res, next) {
-
+  // identify id of item to delete
+  var id = req.body.id;
+  // delete
+  mongo.connect(url, function(err, db) {
+    assert.equal(null, err);
+    // access the db collection into which you want to insert data
+    // 'insertOne' used to insert one entry ... replace 'objectId' with {$set: item}
+    db.collection('user-data').deleteOne({"_id": objectId(id)}, function(err, result) {
+      assert.equal(null, err);
+      console.log("Item deleted");
+      db.close();
+    });
+  });
 });
 
 module.exports = router;
