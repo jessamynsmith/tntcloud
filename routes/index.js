@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var mongo = require('mongodb');
+var mongo = require('mongodb').MongoClient;
+// for Update
+var objectId = require('mongodb').ObjectID;
 // mongo support module
 var assert = require('assert');
 
@@ -11,7 +13,7 @@ router.get('/', function(req, res, next) {
   res.render('index');
   req.session.errors = null;
 });
-
+// Get Data
 router.get('/get-data', function(req, res, next) {
   var resultArray = [];
   mongo.connect(url, function(err, db) {
@@ -28,7 +30,7 @@ router.get('/get-data', function(req, res, next) {
     });
   });
 });
-
+// Insert Data
 router.post('/insert', function(req, res, next) {
   // get the form fields data
   var item = {
@@ -36,7 +38,6 @@ router.post('/insert', function(req, res, next) {
     content: req.body.content,
     author: req.body.author
   };
-
   // insert
   mongo.connect(url, function(err, db) {
     assert.equal(null, err);
@@ -48,18 +49,34 @@ router.post('/insert', function(req, res, next) {
       db.close();
     });
   });
-
   // url redirect after post
   res.redirect('/');
 });
-
+// Update Data
 router.post('/update', function(req, res, next) {
-
+  // get the form fields data
+  var item = {
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author
+  };
+  // identify id of item to update
+  var id = req.body.id;
+  // update
+  mongo.connect(url, function(err, db) {
+    assert.equal(null, err);
+    // access the db collection into which you want to insert data
+    // 'insertOne' used to insert one entry ... replace 'objectId' with {$set: item}
+    db.collection('user-data').updateOne({"_id": objectId(id)}, {$set: item}, function(err, result) {
+      assert.equal(null, err);
+      console.log("Item updated");
+      db.close();
+    });
+  });
 });
-
+// Delete Data
 router.post('/delete', function(req, res, next) {
 
 });
-
 
 module.exports = router;
