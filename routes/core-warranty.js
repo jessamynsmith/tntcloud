@@ -62,7 +62,6 @@ router.post('/insert-core', function(req, res, next) {
   res.redirect('/core-warranty');
 });
 
-
 // this is a subroute of the above / .../users
 router.get('/list-warranty', function(req, res, next) {
   res.send('warranty list');

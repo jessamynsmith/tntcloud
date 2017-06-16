@@ -1,14 +1,6 @@
 var express = require('express');
 var router = express.Router();
-/*******************************************************************************
- * Firebase Initialize
- ******************************************************************************/
- var firebase = require("../firebase");
-
-// var firebaseAuth = require("../firebase-auth");
-
-/** Firebase End **************************************************************/
-
+var firebase = require("../firebase");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -16,11 +8,14 @@ router.get('/', function(req, res, next) {
   req.session.errors = null;
 });
 
+/*******************************************************************************
+ * Login
+ ******************************************************************************/
 router.post('/login', function(req, res){
 
 	var email = req.body.email;
 	var pass = req.body.password;
-
+  console.log("user email ", email)
   // Sign in
   firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
     // Handle Errors here.
@@ -32,7 +27,7 @@ router.post('/login', function(req, res){
     } else {
       document.getElementById('errorMessage').innerHTML = errorMessage;
     }
-    console.log(error);
+//    console.log(error);
     // [END_EXCLUDE]
   });
 
@@ -53,8 +48,9 @@ router.post('/login', function(req, res){
 //      window.location.href = `/dispatch/`;
     }
   });
-
 });
+/** Login End ****************************************************************/
+
 
 /*******************************************************************************
  * Logout
@@ -65,5 +61,6 @@ router.post('/logout', function(req, res){
 
   res.redirect('/');
 });
+/** Logout End ****************************************************************/
 
 module.exports = router;
