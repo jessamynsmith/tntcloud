@@ -1,9 +1,5 @@
 var express = require('express');
 var router = express.Router();
-// get database connection
-var db = require('monk')('localhost:27017/test');
-// get the collection 'user-data'... setup data object
-var userData = db.get('user-data');
 /*******************************************************************************
  * Firebase Initialize
  ******************************************************************************/
@@ -21,13 +17,6 @@ var userData = db.get('user-data');
  var ref = firebase.database().ref('node');
 
  var warrantyRef = ref.child('warranty');
-/*
- warrantyRef.push({
-   RO: 'from Node 3',
-   VIN: 'from Node 3',
-   WHAT: 'from Node 3',
- });
-*/
 /** Firebase End **************************************************************/
 
 
