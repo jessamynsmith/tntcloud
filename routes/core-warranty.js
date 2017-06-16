@@ -19,31 +19,36 @@ router.get('/', function(req, res, next) {
   req.session.errors = null;
 });
 
+/*******************************************************************************
+ * Create Warranty
+ ******************************************************************************/
 router.get('/create-warranty', function(req, res, next) {
   res.render('core-warranty/create-warranty');
-  // Insert Data
-  function submitWarrantyForm() {
-    router.post('/insert', function(req, res, next) {
-      // get the form fields data
-      var item = {
-        title: req.body.title,
-        content: req.body.content,
-        author: req.body.author
-      };
-      // insert
-      // i could bind the database query to variable which is then promise...
-      warrantyRef.push(item);
-      // url redirect after post
-      res.redirect('/');
-    });
-  };
 });
 
+// Insert Data
+router.post('/insert', function(req, res, next) {
+  // get the form fields data
+  var item = {
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author
+  };
+  // insert
+  // i could bind the database query to variable which is then promise...
+  warrantyRef.push(item);
+  // url redirect after post
+//  res.redirect('http://google.com');
+});
+
+/*******************************************************************************
+ * Create Core
+ ******************************************************************************/
 router.get('/create-core', function(req, res, next) {
   res.render('core-warranty/create-core');
 });
 
-router.post('/create-core', function(req, res, next) {
+router.post('/insert-core', function(req, res, next) {
   // get the form fields data
   var item = {
     title: req.body.title,
@@ -54,7 +59,7 @@ router.post('/create-core', function(req, res, next) {
   // i could bind the database query to variable which is then promise...
   coreRef.push(item);
   // url redirect after post
-//      res.redirect('/');
+  res.redirect('/core-warranty');
 });
 
 
