@@ -48,7 +48,7 @@ router.post('/login', function(req, res){
     if(firebaseUser) {
       console.log(firebaseUser);
       // Redirect upon user login
-      window.location.href = `/dispatch/`;
+//      window.location.href = `/dispatch/`;
     }
   });
 
