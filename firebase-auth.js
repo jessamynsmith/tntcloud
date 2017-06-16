@@ -1,11 +1,15 @@
+
 /*
 var firebase = require("../firebase");
 
+function authenticate(email, password) {
 
-var firebaseAuth = function getLog() {
-  console.log(firebaseAuth);
+	firebase.auth().signInWithEmailAndPassword({
+		email : email,
+		password : password
+	});
+
 }
 
-module.exports = firebase-auth;
-
+module.exports = authenticate;
 */
