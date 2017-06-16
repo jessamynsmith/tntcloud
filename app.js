@@ -11,7 +11,7 @@ var expressSession = require('express-session');
 // import route files
 var index = require('./routes/index');
 var dispatch = require('./routes/dispatch/dispatch');
-var coreWarranty = require('./routes/core-warranty/core-warranty');
+var coreWarranty = require('./routes/core-warranty');
 var users = require('./routes/users/users');
 
 var app = express();
