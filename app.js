@@ -40,6 +40,7 @@ app.use('/dispatch-requests', dispatch);
 app.use('/dispatching', dispatch);
 app.use('/core-warranty', coreWarranty);
 app.use('/create-warranty', coreWarranty);
+app.use('/create-core', coreWarranty);
 app.use('/users', users);
 
 // catch 404 and forward to error handler

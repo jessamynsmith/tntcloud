@@ -39,6 +39,25 @@ router.get('/create-warranty', function(req, res, next) {
   };
 });
 
+router.get('/create-core', function(req, res, next) {
+  res.render('core-warranty/create-core');
+});
+
+router.post('/create-core', function(req, res, next) {
+  // get the form fields data
+  var item = {
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author
+  };
+  // insert
+  // i could bind the database query to variable which is then promise...
+  coreRef.push(item);
+  // url redirect after post
+//      res.redirect('/');
+});
+
+
 // this is a subroute of the above / .../users
 router.get('/list-warranty', function(req, res, next) {
   res.send('warranty list');
