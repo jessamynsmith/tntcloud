@@ -37,7 +37,7 @@ router.post('/login', function(req, res){
   });
 
   res.redirect('/core-warranty');
-  
+
   /*****************************************************************************
    * Auth State Changed
    * Redirect-loop problems: When this was outside/below this Login if() with
@@ -56,5 +56,14 @@ router.post('/login', function(req, res){
 
 });
 
+/*******************************************************************************
+ * Logout
+ ******************************************************************************/
+// Check if logout button exists before adding listener, otherwise error problems
+router.post('/logout', function(req, res){
+  firebase.auth().signOut();
+
+  res.redirect('/');
+});
 
 module.exports = router;
