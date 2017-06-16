@@ -3,11 +3,11 @@ var router = express.Router();
 /*******************************************************************************
  * Firebase Initialize
  ******************************************************************************/
- var getFirebase = require("../firebase");
+ var firebase = require("../firebase");
 
- var ref = getFirebase.database().ref('node');
+ var dbRef = firebase.database().ref('node');
 
- var warrantyRef = ref.child('warranty');
+ var warrantyRef = dbRef.child('warranty');
 /** Firebase End **************************************************************/
 
 

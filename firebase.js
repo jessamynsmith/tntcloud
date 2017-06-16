@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Firebase Initialize
  ******************************************************************************/
- var gotFirebase = require("firebase");
+ var firebase = require("firebase");
 
  // Initialize Firebase
  // TODO: Replace with your project's customized code snippet
@@ -10,8 +10,8 @@
    authDomain: "tnt-dispatch.firebaseapp.com",
    databaseURL: "https://tnt-dispatch.firebaseio.com",
  };
- gotFirebase.initializeApp(config);
+ firebase.initializeApp(config);
 
 /** Firebase End **************************************************************/
 
-module.exports = gotFirebase;
+module.exports = firebase;
