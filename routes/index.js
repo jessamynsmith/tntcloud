@@ -4,6 +4,31 @@ var router = express.Router();
 var db = require('monk')('localhost:27017/test');
 // get the collection 'user-data'... setup data object
 var userData = db.get('user-data');
+/*******************************************************************************
+ * firebase
+ ******************************************************************************/
+ var firebase = require("firebase");
+
+ // Initialize Firebase
+ // TODO: Replace with your project's customized code snippet
+ var config = {
+   apiKey: "AIzaSyC7ARZ2iEIz23_gMPKW3qxDSvuKmWrsXBQ",
+   authDomain: "tnt-dispatch.firebaseapp.com",
+   databaseURL: "https://tnt-dispatch.firebaseio.com",
+ };
+ firebase.initializeApp(config);
+
+ var ref = firebase.database().ref('node');
+
+ var warrantyRef = ref.child('warranty');
+
+ warrantyRef.push({
+   RO: 'from Node 3',
+   VIN: 'from Node 3',
+   WHAT: 'from Node 3',
+ });
+/** Firebase End **************************************************************/
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
