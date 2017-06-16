@@ -10,9 +10,9 @@ var expressSession = require('express-session');
 
 // import route files
 var index = require('./routes/index');
-var dispatch = require('./routes/dispatch/dispatch');
+var dispatch = require('./routes/dispatch');
 var coreWarranty = require('./routes/core-warranty');
-var users = require('./routes/users/users');
+var users = require('./routes/users');
 
 var app = express();
 
@@ -39,6 +39,7 @@ app.use('/dispatch', dispatch);
 app.use('/dispatch-requests', dispatch);
 app.use('/dispatching', dispatch);
 app.use('/core-warranty', coreWarranty);
+app.use('/create-warranty', coreWarranty);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
