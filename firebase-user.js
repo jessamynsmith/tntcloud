@@ -34,39 +34,3 @@ firebase.auth().onAuthStateChanged(firebaseUser => {
     }
   }
 });
-
-/*******************************************************************************
- * Password Reset
- ******************************************************************************/
-
-const btnPasswordReset = document.getElementById('btnPasswordReset');
-
-// Check if password-reset button exists before adding listener, otherwise error problems
-if(btnPasswordReset) {
-  btnPasswordReset.addEventListener('click', sendPasswordReset, false);
-}
-
-function sendPasswordReset() {
-  var email = txtEmail.value;
-  // [START sendpasswordemail]
-  firebase.auth().sendPasswordResetEmail(email).then(function() {
-    // Password Reset Email Sent!
-    // [START_EXCLUDE]
-    alert('Password Reset Email Sent!');
-    // [END_EXCLUDE]
-  }).catch(function(error) {
-    // Handle Errors here.
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    // [START_EXCLUDE]
-    if (errorCode == 'auth/invalid-email') {
-      document.getElementById('errorMessage').innerHTML = "Enter your correct email address to receive a password reset email.";
-    } else if (errorCode == 'auth/user-not-found') {
-      alert(errorMessage);
-    }
-    console.log(error);
-    // [END_EXCLUDE]
-  });
-  // [END sendpasswordemail];
-}
-/** End Password Reset ********************************************************/

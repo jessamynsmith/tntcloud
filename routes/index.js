@@ -15,7 +15,15 @@ router.post('/login', function(req, res){
 
 	var email = req.body.email;
 	var pass = req.body.password;
-  console.log("user email ", email)
+  // Email & password length checks
+  if (email.length < 4) {
+    document.getElementById('errorMessage').innerHTML = "Please enter an email address.";
+    return;
+  }
+  if (pass.length < 4) {
+    document.getElementById('errorMessage').innerHTML = "Please enter a password.";
+    return;
+  }
   // Sign in
   firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
     // Handle Errors here.
@@ -55,12 +63,42 @@ router.post('/login', function(req, res){
 /*******************************************************************************
  * Logout
  ******************************************************************************/
-// Check if logout button exists before adding listener, otherwise error problems
 router.post('/logout', function(req, res){
   firebase.auth().signOut();
 
   res.redirect('/');
 });
 /** Logout End ****************************************************************/
+
+/*******************************************************************************
+ * Password Reset
+ ******************************************************************************/
+router.post('/password-reset', function(req, res){
+    var email = req.body.emailPasswordReset;
+    // [START sendpasswordemail]
+    firebase.auth().sendPasswordResetEmail(email).then(function() {
+      // Password Reset Email Sent!
+      // [START_EXCLUDE]
+      alert('Password Reset Email Sent!');
+      // [END_EXCLUDE]
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // [START_EXCLUDE]
+      if (errorCode == 'auth/invalid-email') {
+        document.getElementById('errorMessage').innerHTML = "Enter your correct email address to receive a password reset email.";
+      } else if (errorCode == 'auth/user-not-found') {
+        alert(errorMessage);
+      }
+      console.log(error);
+      // [END_EXCLUDE]
+    });
+    // [END sendpasswordemail];
+
+    res.redirect('/');
+});
+/** Logout End ****************************************************************/
+
 
 module.exports = router;

@@ -4,37 +4,48 @@
 <!-- https://codepen.io/johngerome/pen/pdrgk -->
 <!-- DO NOT USE <FORM> as wrapper of firebase auth input fields -->
 <div class="large-3 large-centered columns">
-<form action="/login" method="post">
   <div id="loginBox">
     <div class="row">
       <div class="large-12 columns">
-        <!--Error Message----------------------------------------->
+        <!--Error Message------------------------------>
         <div class="row">
           <div class="large-12 columns">
             <div id="errorMessage"></div>
           </div>
         </div>
-        <!--Inputs------------------------------------------------>
-        <div class="row">
-          <div class="large-12 columns">
-            <input id="email" type="email" placeholder="Email" name="email">
+        <!-- Login Form ------------------------------------------------------->
+        <form action="/login" method="post">
+          <!--Inputs----------------------------------->
+          <div class="row">
+            <div class="large-12 columns">
+              <input id="email" type="email" placeholder="Email" name="email">
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="large-12 columns">
-            <input id="password" type="password" placeholder="Password" name="password">
+          <div class="row">
+            <div class="large-12 columns">
+              <input id="password" type="password" placeholder="Password" name="password">
+            </div>
           </div>
-        </div>
-        <!--Buttons----------------------------------------------->
-        <button id="btnLogin" class="button">
-          Log In
-        </button>
-        <a id="btnPasswordReset" class="">
-          Password Reset
-        </a>
+          <!--Button----------------------->
+          <button id="btnLogin" class="button">
+            Log In
+          </button>
+        </form>
+        <!-- End Login Form --------------------------------------------------->
+        <!-- Password reset --------------------------------------------------->
+        <form action="/password-reset" method="post">
+          <div class="row">
+            <div class="large-12 columns">
+              <input id="emailPasswordReset" type="email" placeholder="Email" name="emailPasswordReset">
+            </div>
+          </div>
+          <!--Button----------------------->
+          <button id="btnPasswordReset" class="button">
+            Password Reset
+          </button>
+        </form>
         <!-------------------------------------------------------->
       </div>
     </div>
   </div>
-</form>
 </div>
