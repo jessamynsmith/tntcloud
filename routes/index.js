@@ -36,6 +36,8 @@ router.post('/login', function(req, res){
     // [END_EXCLUDE]
   });
 
+  res.redirect('/core-warranty');
+  
   /*****************************************************************************
    * Auth State Changed
    * Redirect-loop problems: When this was outside/below this Login if() with
