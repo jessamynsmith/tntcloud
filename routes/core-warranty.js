@@ -27,7 +27,7 @@ router.get('/create-warranty', function(req, res, next) {
 });
 
 // Insert Data
-router.post('/insert', function(req, res, next) {
+router.post('/insert-warranty', function(req, res, next) {
   // get the form fields data
   var item = {
     title: req.body.title,
@@ -38,7 +38,7 @@ router.post('/insert', function(req, res, next) {
   // i could bind the database query to variable which is then promise...
   warrantyRef.push(item);
   // url redirect after post
-//  res.redirect('http://google.com');
+  res.redirect('/core-warranty');
 });
 
 /*******************************************************************************
