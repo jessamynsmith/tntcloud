@@ -5,7 +5,7 @@ var db = require('monk')('localhost:27017/test');
 // get the collection 'user-data'... setup data object
 var userData = db.get('user-data');
 /*******************************************************************************
- * firebase
+ * Firebase Initialize
  ******************************************************************************/
  var firebase = require("firebase");
 
@@ -21,12 +21,13 @@ var userData = db.get('user-data');
  var ref = firebase.database().ref('node');
 
  var warrantyRef = ref.child('warranty');
-
+/*
  warrantyRef.push({
    RO: 'from Node 3',
    VIN: 'from Node 3',
    WHAT: 'from Node 3',
  });
+*/
 /** Firebase End **************************************************************/
 
 
@@ -36,15 +37,6 @@ router.get('/', function(req, res, next) {
   req.session.errors = null;
 });
 
-// Get Data
-router.get('/get-data', function(req, res, next) {
-  // pass empty object { } to get all data in the collection
-  userData.find({}).then((docs)=>{
-    // pass the results to our 'index' view ...render
-    // i could bind the database query to variable which is then promise...
-    res.render('index', {items: docs});
-  });
-});
 // Insert Data
 router.post('/insert', function(req, res, next) {
   // get the form fields data
@@ -55,9 +47,20 @@ router.post('/insert', function(req, res, next) {
   };
   // insert
   // i could bind the database query to variable which is then promise...
-  userData.insert(item);
+//  userData.insert(item);
+  warrantyRef.push(item);
   // url redirect after post
   res.redirect('/');
+});
+
+// Get Data
+router.get('/get-data', function(req, res, next) {
+  // pass empty object { } to get all data in the collection
+  userData.find({}).then((docs)=>{
+    // pass the results to our 'index' view ...render
+    // i could bind the database query to variable which is then promise...
+    res.render('index', {items: docs});
+  });
 });
 // Update Data
 router.post('/update', function(req, res, next) {
