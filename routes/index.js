@@ -5,6 +5,8 @@ var router = express.Router();
  ******************************************************************************/
  var firebase = require("../firebase");
 
+ var firebaseAuth = require("../firebase-auth");
+
 /** Firebase End **************************************************************/
 
 
@@ -12,7 +14,16 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index');
   req.session.errors = null;
+
+  var login = {
+    email: req.body.txtEmail,
+    password: req.body.txtPassword
+  };
+
+
+
 });
+
 
 
 module.exports = router;
