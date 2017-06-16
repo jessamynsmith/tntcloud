@@ -3,18 +3,9 @@ var router = express.Router();
 /*******************************************************************************
  * Firebase Initialize
  ******************************************************************************/
- var firebase = require("firebase");
+ var getFirebase = require("../firebase");
 
- // Initialize Firebase
- // TODO: Replace with your project's customized code snippet
- var config = {
-   apiKey: "AIzaSyC7ARZ2iEIz23_gMPKW3qxDSvuKmWrsXBQ",
-   authDomain: "tnt-dispatch.firebaseapp.com",
-   databaseURL: "https://tnt-dispatch.firebaseio.com",
- };
- firebase.initializeApp(config);
-
- var ref = firebase.database().ref('node');
+ var ref = getFirebase.database().ref('node');
 
  var warrantyRef = ref.child('warranty');
 /** Firebase End **************************************************************/
