@@ -4,7 +4,7 @@ var firebase = require("../firebase");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('index', { condition: true});
   req.session.errors = null;
 });
 
@@ -15,15 +15,7 @@ router.post('/login', function(req, res){
 
 	var email = req.body.email;
 	var pass = req.body.password;
-  // Email & password length checks
-  if (email.length < 4) {
-    document.getElementById('errorMessage').innerHTML = "Please enter an email address.";
-    return;
-  }
-  if (pass.length < 4) {
-    document.getElementById('errorMessage').innerHTML = "Please enter a password.";
-    return;
-  }
+  
   // Sign in
   firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
     // Handle Errors here.
@@ -31,15 +23,16 @@ router.post('/login', function(req, res){
     var errorMessage = error.message;
     // [START_EXCLUDE]
     if (errorCode === 'auth/wrong-password') {
-      document.getElementById('errorMessage').innerHTML = "Wrong password.";
+      var err = "Wrong password.";
+      console.log(err);
+
     } else {
-      document.getElementById('errorMessage').innerHTML = errorMessage;
+      var err = errorMessage;
     }
-//    console.log(error);
+
     // [END_EXCLUDE]
   });
 
-  res.redirect('/core-warranty');
 
   /*****************************************************************************
    * Auth State Changed
@@ -51,6 +44,7 @@ router.post('/login', function(req, res){
   firebase.auth().onAuthStateChanged(firebaseUser => {
     // Check if the user exists
     if(firebaseUser) {
+      res.redirect('/core-warranty');
       console.log(firebaseUser);
       // Redirect upon user login
 //      window.location.href = `/dispatch/`;
