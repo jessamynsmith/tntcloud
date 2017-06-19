@@ -4,7 +4,7 @@ var firebase = require("../firebase");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { condition: true});
+  res.render('index');
   req.session.errors = null;
 });
 
@@ -15,7 +15,7 @@ router.post('/login', function(req, res){
 
 	var email = req.body.email;
 	var pass = req.body.password;
-  
+
   // Sign in
   firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
     // Handle Errors here.
@@ -25,11 +25,10 @@ router.post('/login', function(req, res){
     if (errorCode === 'auth/wrong-password') {
       var err = "Wrong password.";
       console.log(err);
-
     } else {
       var err = errorMessage;
     }
-
+    res.render('index', { error: err});
     // [END_EXCLUDE]
   });
 
@@ -44,10 +43,9 @@ router.post('/login', function(req, res){
   firebase.auth().onAuthStateChanged(firebaseUser => {
     // Check if the user exists
     if(firebaseUser) {
+      // redirect upon user login
       res.redirect('/core-warranty');
       console.log(firebaseUser);
-      // Redirect upon user login
-//      window.location.href = `/dispatch/`;
     }
   });
 });
