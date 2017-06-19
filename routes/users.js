@@ -28,7 +28,7 @@ router.get('/user-create', function(req, res, next) {
 router.get('/user-create-input', function(req, res, next) {
   res.send('yup ');
 });
-
+/*
 // Insert Data
 router.post('/user-create-input', function(req, res, next) {
   // get the form fields data
@@ -42,17 +42,19 @@ router.post('/user-create-input', function(req, res, next) {
   // url redirect after post
   res.redirect('/core-warranty');
 });
-
+*/
 /*******************************************************************************
  * Login
  ******************************************************************************/
-/*
+
 router.post('/user-create-input', function(req, res){
 
   var item = {
   	email: req.body.email,
   	pass: req.body.password
   };
+
+  warrantyRef.push(item);
 
   admin.auth().createUser(item)
   .then(function(userRecord) {
@@ -62,11 +64,11 @@ router.post('/user-create-input', function(req, res){
   .catch(function(error) {
     console.log("Error creating new user:", error);
   });
+
   // i could bind the database query to variable which is then promise...
   // url redirect after post
   res.redirect('user-create');
-
 });
-*/
+
 
 module.exports = router;
