@@ -3,6 +3,15 @@ var router = express.Router();
 var firebase = require('firebase');
 var admin = require('../firebase-admin-init')
 
+/*******************************************************************************
+ * Firebase Initialize
+ ******************************************************************************/
+ var dbRef = firebase.database().ref('node');
+
+ var usersRef = dbRef.child('users');
+/** Firebase End **************************************************************/
+
+
 /* GET users listing. */
 // this router is for /users dir, see app.js for initializer
 router.get('/', function(req, res, next) {
@@ -22,15 +31,12 @@ router.get('/user-create-input', function(req, res, next) {
  ******************************************************************************/
 router.post('/user-create-input', function(req, res){
 
-	var email = req.body.email;
-	var pass = req.body.password;
+  var item = {
+  	email: req.body.email,
+  	pass: req.body.password
+  };
 
-  admin.auth().createUser({
-    email: email,
-    emailVerified: false,
-    password: pass,
-    disabled: false
-  })
+  admin.auth().createUser(item)
   .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
     console.log("Successfully created new user:", userRecord.uid);
@@ -38,7 +44,14 @@ router.post('/user-create-input', function(req, res){
   .catch(function(error) {
     console.log("Error creating new user:", error);
   });
-  res.render('users/user-create');
+
+  // insert
+  // i could bind the database query to variable which is then promise...
+//  warrantyRef.push(item);
+  // url redirect after post
+  res.redirect('user-create');
+
+
 });
 
 
