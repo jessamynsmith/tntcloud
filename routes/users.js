@@ -12,13 +12,25 @@ router.get('/', function(req, res, next) {
 router.get('/user-create', function(req, res, next) {
   res.render('user-create');
 });
+// this is a subroute of the above / .../users
+router.get('/user-create-input', function(req, res, next) {
+  res.send('yup ');
+});
 
-admin.auth().createUser({
-  email: "yay@example.com",
-  emailVerified: false,
-  password: "secretPassword",
-  disabled: false
-})
+/*******************************************************************************
+ * Login
+ ******************************************************************************/
+router.post('/user-create-input', function(req, res){
+
+	var email = req.body.email;
+	var pass = req.body.password;
+
+  admin.auth().createUser({
+    email: email,
+    emailVerified: false,
+    password: pass,
+    disabled: false
+  })
   .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
     console.log("Successfully created new user:", userRecord.uid);
@@ -26,5 +38,8 @@ admin.auth().createUser({
   .catch(function(error) {
     console.log("Error creating new user:", error);
   });
+  res.render('/');
+});
+
 
 module.exports = router;

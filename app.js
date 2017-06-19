@@ -43,6 +43,7 @@ app.use('/create-warranty', coreWarranty);
 app.use('/create-core', coreWarranty);
 app.use('/users', users);
 app.use('/user-create', users);
+app.use('/user-create-input', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
