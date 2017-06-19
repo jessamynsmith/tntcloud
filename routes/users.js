@@ -38,7 +38,7 @@ router.post('/user-create-input', function(req, res){
   .catch(function(error) {
     console.log("Error creating new user:", error);
   });
-  res.render('/');
+  res.render('users/user-create');
 });
 
 
