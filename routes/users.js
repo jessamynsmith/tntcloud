@@ -28,7 +28,7 @@ router.get('/user-create', function(req, res, next) {
 router.get('/user-create-input', function(req, res, next) {
   res.send('yup ');
 });
-/*
+
 // Insert Data
 router.post('/user-create-input', function(req, res, next) {
   // get the form fields data
@@ -42,7 +42,7 @@ router.post('/user-create-input', function(req, res, next) {
   // url redirect after post
   res.redirect('/core-warranty');
 });
-*/
+
 /*******************************************************************************
  * Login
  ******************************************************************************/
