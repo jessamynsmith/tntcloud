@@ -2,7 +2,7 @@ var firebase = require('firebase');
 var admin = require('../firebase-admin-init')
 
 admin.auth().createUser({
-  email: "newfilename@example.com",
+  email: "anotherTest@example.com",
   emailVerified: false,
   password: "secretPassword",
   disabled: false

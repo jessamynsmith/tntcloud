@@ -1,0 +1,42 @@
+<h1>Create User</h1>
+
+<!-- Firebase User Create ----------------------------------------------------->
+<!-- https://codepen.io/johngerome/pen/pdrgk -->
+<!-- DO NOT USE <FORM> as wrapper of firebase auth input fields -->
+<div class="large-3 large-centered columns">
+  <div id="loginBox">
+    <div class="row">
+      <div class="large-12 columns">
+        <!--Error Message------------------------------>
+        <div class="row">
+          <div class="large-12 columns">
+            <div id="errorMessage">
+              {{# if error }}
+                {{ error }}
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        <!-- User Create Form ------------------------------------------------->
+        <form action="/user-create-input" method="post">
+          <!--Inputs----------------------------------->
+          <div class="row">
+            <div class="large-12 columns">
+              <input id="email" type="email" placeholder="Email" name="email">
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-12 columns">
+              <input id="password" type="password" placeholder="Password" name="password">
+            </div>
+          </div>
+          <!--Button----------------------->
+          <button id="btnUserCreate" class="button">
+            Create User
+          </button>
+        </form>
+        <!-- End User Create Form --------------------------------------------->
+      </div>
+    </div>
+  </div>
+</div>
