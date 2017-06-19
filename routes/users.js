@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 });
 // this is a subroute of the above / .../users
 router.get('/user-create', function(req, res, next) {
-  res.render('user-create');
+  res.render('users/user-create');
 });
 // this is a subroute of the above / .../users
 router.get('/user-create-input', function(req, res, next) {
