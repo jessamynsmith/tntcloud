@@ -14,7 +14,6 @@ var router = express.Router();
 var admin = require('../firebase-admin-init')
 
 
-
 /* GET users listing. */
 // this router is for /users dir, see app.js for initializer
 router.get('/', function(req, res, next) {
@@ -28,21 +27,7 @@ router.get('/user-create', function(req, res, next) {
 router.get('/user-create-input', function(req, res, next) {
   res.send('yup ');
 });
-/*
-// Insert Data
-router.post('/user-create-input', function(req, res, next) {
-  // get the form fields data
-  var item = {
-  	email: req.body.email,
-  	pass: req.body.password
-  };
-  // insert
-  // i could bind the database query to variable which is then promise...
-  warrantyRef.push(item);
-  // url redirect after post
-  res.redirect('/core-warranty');
-});
-*/
+
 /*******************************************************************************
  * Login
  ******************************************************************************/
@@ -54,11 +39,11 @@ router.post('/user-create-input', function(req, res){
   	pass: req.body.password
   };
 
-  warrantyRef.push(item);
-
   admin.auth().createUser(item)
   .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
+    item.uid = userRecord.uid;
+    warrantyRef.push(item);
     console.log("Successfully created new user:", userRecord.uid);
   })
   .catch(function(error) {
