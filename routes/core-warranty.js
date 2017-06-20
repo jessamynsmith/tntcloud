@@ -12,6 +12,11 @@ var router = express.Router();
 /** Firebase End **************************************************************/
 
 
+
+
+
+/** Retrieve User Data End ****************************************************/
+
 /* GET users listing. */
 // this router is for /core-warranty dir, see app.js for initializer
 router.get('/', function(req, res, next) {

@@ -13,5 +13,20 @@
  firebase.initializeApp(config);
 
 /** Firebase End **************************************************************/
+/**
+ * The ID of the currently signed-in User. We keep track of this to detect Auth state change events that are just
+ * programmatic token refresh but not a User status change.
+ */
+
+/*******************************************************************************
+ * User Email Display
+ ******************************************************************************/
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    console.log("user IS signed in");
+  } else {
+    console.log("no user signed in");
+  }
+});
 
 module.exports = firebase;
