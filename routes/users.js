@@ -36,19 +36,25 @@ router.post('/user-create-input', function(req, res){
   var newUser = {
   	email: req.body.email,
   	pass: req.body.password,
+  	role: req.body.role
   };
 
   admin.auth().createUser({
     email: newUser.email,
     emailVerified: true,
     password: newUser.pass,
-    disabled: false
+    disabled: false,
+    role: newUser.role
   })
   .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
     // Add user id to 'item' object so it can be added pushed to db
-    newUser.uid = userRecord.uid;
-    usersRef.push(newUser);
+    var newId = userRecord.uid;
+    // Create new child to a specific path for the uid - use 'set' instead of 'push'
+    usersRef.child(newId).set({
+      email: newUser.email,
+      role: newUser.role
+    });
     console.log("Successfully created new user:", userRecord.uid);
   })
   .catch(function(error) {
