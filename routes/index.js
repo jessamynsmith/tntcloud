@@ -24,7 +24,7 @@ router.post('/login', function(req, res){
     // [START_EXCLUDE]
     if (errorCode === 'auth/wrong-password') {
       var err = "Wrong password.";
-      console.log(err);
+      // console.log(err);
     } else {
       var err = errorMessage;
     }
@@ -45,7 +45,7 @@ router.post('/login', function(req, res){
     if(firebaseUser) {
       // redirect upon user login
       res.redirect('/core-warranty');
-      console.log(firebaseUser);
+      // console.log(firebaseUser);
     }
   });
 });
@@ -83,7 +83,7 @@ router.post('/password-reset', function(req, res){
       } else if (errorCode == 'auth/user-not-found') {
         alert(errorMessage);
       }
-      console.log(error);
+      // console.log(error);
       // [END_EXCLUDE]
     });
     // [END sendpasswordemail];
