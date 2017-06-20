@@ -35,18 +35,13 @@ router.post('/user-create-input', function(req, res){
   // get email and password entered into create user form
   var newUser = {
   	email: req.body.email,
-    emailVerified: true,
   	pass: req.body.password,
-    disabled: false
   };
 
-  	var email = req.body.email;
-  	var pass =  req.body.password;
-
   admin.auth().createUser({
-    email: email,
+    email: newUser.email,
     emailVerified: true,
-    password: pass,
+    password: newUser.pass,
     disabled: false
   })
   .then(function(userRecord) {
