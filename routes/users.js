@@ -50,6 +50,7 @@ router.post('/user-create-input', function(req, res){
     // Get UID and add user id to 'item' object so it can be set as child of users collection
     var newId = userRecord.uid;
     // Create new child to a specific path for the uid - use 'set' instead of 'push'
+    // https://firebase.google.com/docs/database/admin/save-data
     usersRef.child(newId).set({
       email: newUser.email,
       role: newUser.role
