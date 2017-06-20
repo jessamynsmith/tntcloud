@@ -32,7 +32,6 @@ router.post('/login', function(req, res){
     // [END_EXCLUDE]
   });
 
-
   /*****************************************************************************
    * Auth State Changed
    * Redirect-loop problems: When this was outside/below this Login if() with
@@ -62,6 +61,7 @@ router.post('/logout', function(req, res){
 });
 /** Logout End ****************************************************************/
 
+
 /*******************************************************************************
  * Password Reset
  ******************************************************************************/
@@ -79,7 +79,7 @@ router.post('/password-reset', function(req, res){
       var errorMessage = error.message;
       // [START_EXCLUDE]
       if (errorCode == 'auth/invalid-email') {
-        document.getElementById('errorMessage').innerHTML = "Enter your correct email address to receive a password reset email.";
+        // document.getElementById('errorMessage').innerHTML = "Enter your correct email address to receive a password reset email.";
       } else if (errorCode == 'auth/user-not-found') {
         alert(errorMessage);
       }
@@ -90,7 +90,7 @@ router.post('/password-reset', function(req, res){
 
     res.redirect('/');
 });
-/** Logout End ****************************************************************/
+/** Password Reset End ********************************************************/
 
 
 module.exports = router;
