@@ -28,13 +28,17 @@ function loggedIn(req, res, next) {
   app.locals.uid = app.locals.user.uid;
 //    console.log("Got UID here ", app.locals.uid);
     //next();
-  app.locals.myUser = app.locals.dbRef.child('/users/' + app.locals.uid).once('value')
+
+  var roleRef = app.locals.dbRef.child('/users/' + app.locals.uid + '/role');
+  roleRef.once('value', snap => console.log("The Value ", snap.val()));
+/*
   .then(function(snapshot) {
-    var userRole = snapshot.val().role;
-
-  console.log("User Role is ", userRole);
+    userRoleVal = snapshot.val();
+//    console.log("User Role is ", userRole);
+return userRoleVal;
   });
-
+  app.locals.userRole.userRoleVal;
+*/
   // If user logged in then continue, otherwise redirect to / root
   if (app.locals.user) {
     next();
