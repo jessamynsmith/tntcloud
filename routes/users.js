@@ -1,17 +1,7 @@
 var express = require('express');
 var router = express.Router();
-/*******************************************************************************
- * Firebase Initialize
- ******************************************************************************/
- var firebase = require("../firebase");
-
- var dbRef = firebase.database().ref('node');
-
- var usersRef = dbRef.child('users');
-/** Firebase End **************************************************************/
-
+// Firebase admin
 var admin = require('../firebase-admin-init')
-
 
 /* GET users listing. */
 // this router is for /users dir, see app.js for initializer
@@ -49,6 +39,7 @@ router.post('/user-create-input', function(req, res){
     // See the UserRecord reference doc for the contents of userRecord.
     // Get UID and add user id to 'item' object so it can be set as child of users collection
     var newId = userRecord.uid;
+    var usersRef = req.app.locals.dbRef.child('users');
     // Create new child to a specific path for the uid - use 'set' instead of 'push'
     // https://firebase.google.com/docs/database/admin/save-data
     usersRef.child(newId).set({

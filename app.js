@@ -13,7 +13,7 @@ var app = express();
 // Import firebase initializer
 app.locals.firebase = require("./firebase");
 // Global dbRef ... so firebase connection available everywhere without import
-app.locals.dbRef = app.locals.firebase.database().ref('node');
+app.locals.dbRef = app.locals.firebase.database().ref();
 
 var firebaseUser = require("./firebase-user");
 
