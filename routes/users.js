@@ -7,8 +7,7 @@ var router = express.Router();
 
  var dbRef = firebase.database().ref('node');
 
- var warrantyRef = dbRef.child('warranty');
-// var usersRef = dbRef.child('users');
+ var usersRef = dbRef.child('users');
 /** Firebase End **************************************************************/
 
 var admin = require('../firebase-admin-init')
@@ -33,22 +32,35 @@ router.get('/user-create-input', function(req, res, next) {
  ******************************************************************************/
 
 router.post('/user-create-input', function(req, res){
-
-  var item = {
+  // get email and password entered into create user form
+  var newUser = {
   	email: req.body.email,
-  	pass: req.body.password
+    emailVerified: true,
+  	pass: req.body.password,
+    disabled: false
   };
 
-  admin.auth().createUser(item)
+  	var email = req.body.email;
+  	var pass =  req.body.password;
+
+  admin.auth().createUser({
+    email: email,
+    emailVerified: true,
+    password: pass,
+    disabled: false
+  })
   .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
-    item.uid = userRecord.uid;
-    warrantyRef.push(item);
+    // Add user id to 'item' object so it can be added pushed to db
+    newUser.uid = userRecord.uid;
+    usersRef.push(newUser);
     console.log("Successfully created new user:", userRecord.uid);
   })
   .catch(function(error) {
     console.log("Error creating new user:", error);
   });
+
+  // firebase.auth().sendPasswordResetEmail(emailOnly);
 
   // i could bind the database query to variable which is then promise...
   // url redirect after post
