@@ -28,17 +28,16 @@ router.get('/user-create-input', function(req, res, next) {
 });
 
 /*******************************************************************************
- * Login
+ * Create New User
  ******************************************************************************/
-
 router.post('/user-create-input', function(req, res){
-  // get email and password entered into create user form
+  // get email, password, and role entered into create user form
   var newUser = {
   	email: req.body.email,
   	pass: req.body.password,
   	role: req.body.role
   };
-
+  // Firebase auth createUser
   admin.auth().createUser({
     email: newUser.email,
     emailVerified: true,
@@ -48,7 +47,7 @@ router.post('/user-create-input', function(req, res){
   })
   .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
-    // Add user id to 'item' object so it can be added pushed to db
+    // Get UID and add user id to 'item' object so it can be set as child of users collection
     var newId = userRecord.uid;
     // Create new child to a specific path for the uid - use 'set' instead of 'push'
     usersRef.child(newId).set({
@@ -60,13 +59,8 @@ router.post('/user-create-input', function(req, res){
   .catch(function(error) {
     console.log("Error creating new user:", error);
   });
-
-  // firebase.auth().sendPasswordResetEmail(emailOnly);
-
-  // i could bind the database query to variable which is then promise...
   // url redirect after post
   res.redirect('user-create');
 });
-
 
 module.exports = router;
