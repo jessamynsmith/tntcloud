@@ -6,6 +6,7 @@ var admin = require('../firebase-admin-init')
 /* GET users listing. */
 // this router is for /users dir, see app.js for initializer
 router.get('/', function(req, res, next) {
+
   res.send('user list');
 });
 // this is a subroute of the above / .../users

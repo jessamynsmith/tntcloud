@@ -4,14 +4,21 @@ var router = express.Router();
 /* Core-warranty route */
 // this router is for /core-warranty dir, see app.js for initializer
 router.get('/', function(req, res, next) {
-  req.session.errors = null;
+  // create local 'user' variable from global user
+  var user = req.app.locals.user;
+  // User is signed in.
+  console.log("user IS signed in", user.uid);
 
-    var user = req.app.locals.user;
-    // User is signed in.
-    console.log("user IS signed in", user.uid);
+  var userId = user.uid;
+
+  var userRef = req.app.locals.dbRef.child('/users/' + userId).once('value')
+  .then(function(snapshot) {
+    var userRole = snapshot.val().role;
+    console.log("User Role is ", userRole);
+  });
+  console.log("user ID from mydata ", userRef);
 
   res.render('core-warranty/core-warranty');
-
 });
 
 /*******************************************************************************
