@@ -12,20 +12,8 @@ var router = express.Router();
 /** Firebase End **************************************************************/
 
 var firebaseUser = require("../firebase-user");
+// console.log("Firebase User from import ", firebaseUser);
 
-// console.log("Firebase User from import ", myUser);
-/*
-var user = firebase.auth().currentUser;
-
-if (user) {
-  // User is signed in.
-    user.uid;
-    user.email;
-    console.log("user IS signed in", user.uid, user.email);
-} else {
-  // No user is signed in.
-}
-*/
 /** Retrieve User Data End ****************************************************/
 
 /* GET users listing. */
@@ -33,6 +21,18 @@ if (user) {
 router.get('/', function(req, res, next) {
   res.render('core-warranty/core-warranty');
   req.session.errors = null;
+
+  var user = firebaseUser.getUser();
+
+  if (user) {
+    // User is signed in.
+      console.log("user IS signed in", user.uid);
+  } else {
+    // No user is signed in.
+  }
+
+
+
 });
 
 /*******************************************************************************
@@ -40,6 +40,14 @@ router.get('/', function(req, res, next) {
  ******************************************************************************/
 router.get('/create-warranty', function(req, res, next) {
   res.render('core-warranty/create-warranty');
+  var user = firebaseUser.getUser();
+
+  if (user) {
+    // User is signed in.
+      console.log("user IS signed in @ create warranty ", user.uid);
+  } else {
+    // No user is signed in.
+  }
 });
 
 // Insert Data
