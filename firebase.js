@@ -23,7 +23,7 @@
  ******************************************************************************/
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
-    console.log("user IS signed in", user.uid);
+    console.log("user IS signed in", user.uid, user.email);
   } else {
     console.log("no user signed in");
   }
