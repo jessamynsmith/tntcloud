@@ -24,14 +24,44 @@ var firebaseUser = require("./firebase-user");
 function loggedIn(req, res, next) {
   // Global use of user: make user available in any route
   app.locals.user = firebaseUser.getUser();
+  // get User ID from Firebase user
+  app.locals.uid = app.locals.user.uid;
+//    console.log("Got UID here ", app.locals.uid);
+    //next();
+  app.locals.myUser = app.locals.dbRef.child('/users/' + app.locals.uid).once('value')
+  .then(function(snapshot) {
+    var userRole = snapshot.val().role;
+
+  console.log("User Role is ", userRole);
+  });
+
   // If user logged in then continue, otherwise redirect to / root
   if (app.locals.user) {
     next();
   } else {
-  res.redirect('/');
+    res.redirect('/');
   }
 }
 /** End Firebase User *********************************************************/
+
+
+/*******************************************************************************
+ * User Role */
+// create local 'user' variable from global user
+// var user = app.locals.user;
+// User is signed in.
+// console.log("user IS signed in", user.uid);
+// User ID of signed in user (Firebase Auth)
+// app.locals.uid = app.locals.user.uid;
+// User Role of signed in user (Realtime DB)
+/*
+var userRef = app.locals.dbRef.child('/users/' + app.locals.uid).once('value')
+.then(function(snapshot) {
+  var userRole = snapshot.val().role;
+  console.log("User Role is ", userRole);
+});
+*/
+/** End User Role *************************************************************/
 
 // import route files
 var index = require('./routes/index');
