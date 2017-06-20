@@ -11,10 +11,21 @@ var router = express.Router();
  var coreRef = dbRef.child('core');
 /** Firebase End **************************************************************/
 
+var firebaseUser = require("../firebase-user");
 
+// console.log("Firebase User from import ", myUser);
+/*
+var user = firebase.auth().currentUser;
 
-
-
+if (user) {
+  // User is signed in.
+    user.uid;
+    user.email;
+    console.log("user IS signed in", user.uid, user.email);
+} else {
+  // No user is signed in.
+}
+*/
 /** Retrieve User Data End ****************************************************/
 
 /* GET users listing. */

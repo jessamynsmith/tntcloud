@@ -19,14 +19,17 @@
  */
 
 /*******************************************************************************
- * User Email Display
+ * User Info Display
  ******************************************************************************/
+/*
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
+    user.uid;
+    user.email;
     console.log("user IS signed in", user.uid, user.email);
   } else {
     console.log("no user signed in");
   }
 });
-
+*/
 module.exports = firebase;
