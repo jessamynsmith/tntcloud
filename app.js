@@ -15,8 +15,9 @@ app.locals.firebase = require("./firebase");
 // Global dbRef ... so firebase connection available everywhere without import
 app.locals.dbRef = app.locals.firebase.database().ref();
 
+/*******************************************************************************
+ * Firebase User */
 var firebaseUser = require("./firebase-user");
-
 // Middleware
 // Set user as property on the app, so it is available everywhere
 // https://stackoverflow.com/questions/18739725/how-to-know-if-user-is-logged-in-with-passport-js/18739922#18739922
@@ -30,6 +31,7 @@ function loggedIn(req, res, next) {
   res.redirect('/');
   }
 }
+/** End Firebase User *********************************************************/
 
 // import route files
 var index = require('./routes/index');
