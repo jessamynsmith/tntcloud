@@ -8,6 +8,19 @@ var hbs = require('express-handlebars');
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
 
+var firebase = require("./firebase");
+var firebaseUser = require("./firebase-user");
+
+// Middleware
+function loggedIn(req, res, next) {
+  var user = firebaseUser.getUser();
+    if (user) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+}
+
 // import route files
 var index = require('./routes/index');
 var dispatch = require('./routes/dispatch');
@@ -38,7 +51,7 @@ app.use('/', index);
 app.use('/dispatch', dispatch);
 app.use('/dispatch-requests', dispatch);
 app.use('/dispatching', dispatch);
-app.use('/core-warranty', coreWarranty);
+app.use('/core-warranty', loggedIn, coreWarranty);
 app.use('/create-warranty', coreWarranty);
 app.use('/create-core', coreWarranty);
 app.use('/users', users);
