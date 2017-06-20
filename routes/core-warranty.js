@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
+/* Core-warranty route */
 // this router is for /core-warranty dir, see app.js for initializer
 router.get('/', function(req, res, next) {
   req.session.errors = null;
@@ -30,7 +30,7 @@ router.post('/insert-warranty', function(req, res, next) {
     content: req.body.content,
     author: req.body.author
   };
-
+  // Use firebase from app.js and set child db node
   var warrantyRef = req.app.locals.dbRef.child('warranty');
   warrantyRef.push(item);
   // url redirect after post
@@ -44,6 +44,7 @@ router.get('/create-core', function(req, res, next) {
   res.render('core-warranty/create-core');
 });
 
+// Insert Data
 router.post('/insert-core', function(req, res, next) {
   // get the form fields data
   var item = {
@@ -51,21 +52,24 @@ router.post('/insert-core', function(req, res, next) {
     content: req.body.content,
     author: req.body.author
   };
-
+  // Use firebase from app.js and set child db node
   var coreRef = req.app.locals.dbRef.child('core');
   coreRef.push(item);
   // url redirect after post
   res.redirect('/core-warranty');
 });
 
-// this is a subroute of the above / .../users
+/*******************************************************************************
+ * Other
+ ******************************************************************************/
+
 router.get('/list-warranty', function(req, res, next) {
   res.send('warranty list');
 });
 
-// this is a subroute of the above / .../users
 router.get('/list-core', function(req, res, next) {
   res.send('List core');
 });
+
 
 module.exports = router;
