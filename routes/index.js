@@ -17,11 +17,17 @@ router.post('/login', function(req, res){
 	var pass = req.body.password;
 
   // Sign in
-  firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+  firebase.auth().signInWithEmailAndPassword(email, pass)
+  .then(function() {
+    console.log("index.js logged in ");
+    res.redirect('/core-warranty');
+  })
+  .catch(function(error) {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
     // [START_EXCLUDE]
+    console.log("index.js err ", errorCode, errorMessage);
     if (errorCode === 'auth/wrong-password') {
       var err = "Wrong password.";
       // console.log(err);
@@ -39,6 +45,7 @@ router.post('/login', function(req, res){
    * solved hours of troubleshooting.
    ****************************************************************************/
   // Add a realtime listener
+/*
   firebase.auth().onAuthStateChanged(firebaseUser => {
     // Check if the user exists
     if(firebaseUser) {
@@ -47,6 +54,7 @@ router.post('/login', function(req, res){
       // console.log(firebaseUser);
     }
   });
+  */
 });
 /** Login End ****************************************************************/
 

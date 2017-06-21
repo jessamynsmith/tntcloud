@@ -24,47 +24,37 @@ var firebaseUser = require("./firebase-user");
 function loggedIn(req, res, next) {
   // Global use of user: make user available in any route
   app.locals.user = firebaseUser.getUser();
+//  console.log("App.js user ", app.locals.user);
+  //console.log("app.js getUser", firebaseUser.getUser().uid);
   // get User ID from Firebase user
-  app.locals.uid = app.locals.user.uid;
-//    console.log("Got UID here ", app.locals.uid);
-    //next();
-
-  var roleRef = app.locals.dbRef.child('/users/' + app.locals.uid + '/role');
-  roleRef.once('value', snap => console.log("The Value ", snap.val()));
-/*
-  .then(function(snapshot) {
-    userRoleVal = snapshot.val();
-//    console.log("User Role is ", userRole);
-return userRoleVal;
-  });
-  app.locals.userRole.userRoleVal;
-*/
+  // app.locals.userRole = firebaseUser.userRole;
+  // console.log("Got UID here ", app.locals.uid);
   // If user logged in then continue, otherwise redirect to / root
-  if (app.locals.user) {
+  if (app.locals.user.uid) {
+    app.locals.uid = app.locals.user.uid;
+    console.log("App.js user ..next ", app.locals.user);
     next();
   } else {
+    console.log("App.js user ..else redirect", app.locals.user);
     res.redirect('/');
   }
 }
+
+function roleAdmin(req, res, next) {
+  firebaseUser.getRole().then(function(userRole) {
+    // This may or may not be needed
+    app.locals.userRole = userRole;
+    console.log("App.js User Role ", app.locals.userRole);
+  // If user is admin then continue, otherwise redirect to / root
+  if (app.locals.userRole == 'admin') {
+    next();
+  } else {
+    res.redirect('/core-warranty');
+  }
+  });
+}
 /** End Firebase User *********************************************************/
 
-
-/*******************************************************************************
- * User Role */
-// create local 'user' variable from global user
-// var user = app.locals.user;
-// User is signed in.
-// console.log("user IS signed in", user.uid);
-// User ID of signed in user (Firebase Auth)
-// app.locals.uid = app.locals.user.uid;
-// User Role of signed in user (Realtime DB)
-/*
-var userRef = app.locals.dbRef.child('/users/' + app.locals.uid).once('value')
-.then(function(snapshot) {
-  var userRole = snapshot.val().role;
-  console.log("User Role is ", userRole);
-});
-*/
 /** End User Role *************************************************************/
 
 // import route files
@@ -92,15 +82,15 @@ app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false})
 
 // define routes and route resource files -see @routes files
 app.use('/', index);
-app.use('/dispatch', dispatch);
-app.use('/dispatch-requests', dispatch);
-app.use('/dispatching', dispatch);
+app.use('/dispatch', loggedIn, dispatch);
+app.use('/dispatch-requests', loggedIn, dispatch);
+app.use('/dispatching', loggedIn, dispatch);
 app.use('/core-warranty', loggedIn, coreWarranty);
-app.use('/create-warranty', coreWarranty);
-app.use('/create-core', coreWarranty);
-app.use('/users', users);
-app.use('/user-create', users);
-app.use('/user-create-input', users);
+app.use('/create-warranty', loggedIn, coreWarranty);
+app.use('/create-core', loggedIn, coreWarranty);
+app.use('/users', loggedIn, roleAdmin, users);
+app.use('/user-create', loggedIn, roleAdmin, users);
+app.use('/user-create-input', loggedIn, roleAdmin, users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
