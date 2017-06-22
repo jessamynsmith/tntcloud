@@ -2,18 +2,24 @@ var express = require('express');
 var router = express.Router();
 var mw = require('../middleware');
 
+/*******************************************************************************
+ * Core Warranty Home
+ ******************************************************************************/
 /* Core-warranty route */
 // this router is for /core-warranty dir, see app.js for initializer
-router.get('/', function(req, res, next) {
+router.get('/', mw.userRole, function(req, res, next) {
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+
 
   console.log("core-warranty.js: Got UID here ", req.app.locals.uid);
 //  console.log("User Role is ", req.app.locals.userRole);
 
-  res.render('core-warranty/core-warranty');
+  res.render('core-warranty/core-warranty', { isAdmin: isAdmin });
 });
 
 /*******************************************************************************
- * Create Warranty
+ * Create Warranty Form
  ******************************************************************************/
 router.get('/create-warranty', function(req, res, next) {
   var user = req.app.locals.user;
