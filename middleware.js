@@ -16,10 +16,10 @@ module.exports.loggedIn = function(req, res, next) {
   // If user logged in then continue, otherwise redirect to / root
   if (req.app.locals.user.uid) {
     req.app.locals.uid = req.app.locals.user.uid;
-    console.log("App.js user ..next ", req.app.locals.user);
+//    console.log("middleware.js user ..next ", req.app.locals.user);
     next();
   } else {
-    console.log("App.js user ..else redirect", req.app.locals.user);
+//    console.log("middleware.js user ..else redirect", req.app.locals.user);
     res.redirect('/');
   }
 }
@@ -34,7 +34,7 @@ module.exports.userRole = function(req, res, next) {
   firebaseUser.getRole().then(function(userRole) {
     // Store userRole as Global variable
     req.app.locals.userRole = userRole;
-    console.log("App.js User Role ", req.app.locals.userRole);
+//    console.log("middleware.js User Role ", req.app.locals.userRole);
     // if i didn't have next(); then no pages that use the userRole would be executed
     next();
   });

@@ -12,7 +12,7 @@ router.get('/', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-  console.log("core-warranty.js: Got UID here ", req.app.locals.uid);
+//  console.log("core-warranty.js: Got UID here ", req.app.locals.uid);
 //  console.log("User Role is ", req.app.locals.userRole);
 
   res.render('core-warranty/core-warranty', { isAdmin: isAdmin });
@@ -75,58 +75,27 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
    * Data for Handlebars + Output HTML for Handlebars
   *****************************************************************************/
   // 'on' is firebase method for keeping live data, and 'value' is saying you want values
-  dbRef.once('value', gotData, errData);
-
-  function gotData(data) {
-    // access data values
-    var context = data.val();
-
-    /***************************************
-    * Handlebars
-    ***************************************/
 /*
-    var rawTemplate = document.getElementById("rowsTemplate").innerHTML;
-    // Node.js is needed if I want to pre-compile templates
-    var compiledTemplate = Handlebars.compile(rawTemplate);
+  dbRef.child('/warranty/').once('value')
+  .then(function(snapshot) {
+    userRole = snapshot.val();
+    resolve(userRole);
+    // console.log("User role ", userRole);
+  }).catch(function(error) {
+    resolve('');
+  });
+  console.log("Database Ref ", dbRef);
+*/
 
-    // pass the array data values
-    var html = compiledTemplate(context);
-    // add html output to ID
-    document.getElementById('records-list').innerHTML += html;
-
-    /***************************************
-    * Sort initial table by Date
-    ***************************************/
-    // http://jsfiddle.net/UdvDD/
-    var $wrapper = $('.list');
-
-    $wrapper.find('.data-row').sort(function (a, b) {
-      return b.dataset.sort - a.dataset.sort;
-    })
-    .appendTo( $wrapper );
-
-    /***************************************
-    * LIST JS = Search and Columns Sort
-    ***************************************/
-    // <th> 'data-sort' value and <td> 'class' value must match to work
-    /* DATE SORT required work-around:
-     * (because of Date Turned In format DD/MM/YYY, which would work properly if it was YYYY/MM/DD)
-     * The column "Date Turned In" contains data-sort="w-date-server-turned-in"
-     * that actually sorts by the DateTimeStampServer column, which is hidden. */
-    var options = {
-      valueNames: [ 'w-date-server-turned-in', 'w-customer', 'w-description', 'w-failed-part-number', 'w-quantity', 'w-received-by', 'w-ro', 'w-turned-in-by', 'w-vendor', 'w-vin' ]
-    };
-    var monkeyList = new List('warranty', options);
-
-  } // End gotData function (sort needs to be included in this function)
-
-  function errData(err) {
-    console.log('Error!');
-    console.log(err);
-  }
-
+  dbRef.child('/warranty/').once('value')
+  .then((snapshot)=>{
+  console.log("Database Ref ", dbRef);
 
   res.render('core-warranty/list-warranty', { isAdmin: isAdmin });
+      // pass the results to our 'index' view ...render
+    // i could bind the database query to variable which is then promise...
+  });
+
 });
 
 
