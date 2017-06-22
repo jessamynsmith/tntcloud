@@ -15,60 +15,8 @@ app.locals.firebase = require("./firebase");
 // Global dbRef ... so firebase connection available everywhere without import
 app.locals.dbRef = app.locals.firebase.database().ref();
 
-/*******************************************************************************
- * Firebase User
- ******************************************************************************/
-var firebaseUser = require("./firebase-user");
-
-/** Redirect to homepage if visitor not logged in *****************************/
-// Middleware
-// https://stackoverflow.com/questions/18739725/how-to-know-if-user-is-logged-in-with-passport-js/18739922#18739922
-function loggedIn(req, res, next) {
-  // Global use of user: make user available in any route
-  app.locals.user = firebaseUser.getUser();
-  //  console.log("App.js user ", app.locals.user);
-  //console.log("app.js getUser", firebaseUser.getUser().uid);
-  // If user logged in then continue, otherwise redirect to / root
-  if (app.locals.user.uid) {
-    app.locals.uid = app.locals.user.uid;
-    console.log("App.js user ..next ", app.locals.user);
-    next();
-  } else {
-    console.log("App.js user ..else redirect", app.locals.user);
-    res.redirect('/');
-  }
-}
-/** End Redirect to homepage if visitor not logged in *************************/
-
-
-/** User Role Get - Middleware ************************************************/
-/* use in app.js to create functions specifically identifying user type */
-function userRole(req, res, next) {
-  firebaseUser.getRole().then(function(userRole) {
-    // Store userRole as Global variable
-    app.locals.userRole = userRole;
-    console.log("App.js User Role ", app.locals.userRole);
-    // if i didn't have next(); then no pages that use the userRole would be executed
-    next();
-  });
-}
-/** End User Role Get - Middleware ********************************************/
-
-/** User Role Check if Admin - Middleware *************************************/
-/* restrict route to admin by applying to route parameters in app.js */
-function roleAdmin(req, res, next) {
-  // If user is admin then continue, otherwise redirect to / root
-  if (app.locals.userRole == 'admin') {
-    next();
-  } else {
-    res.redirect('/core-warranty');
-  }
-}
-/** End User Role Check if Admin - Middleware *********************************/
-
-
-/** End Firebase User *********************************************************/
-
+// Middleware must be required after ./firebase because middleware uses it
+var mw = require('./middleware');
 
 // import route files
 var index = require('./routes/index');
@@ -95,15 +43,15 @@ app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false})
 
 // define routes and route resource files -see @routes files
 app.use('/', index);
-app.use('/dispatch', loggedIn, dispatch);
-app.use('/dispatch-requests', loggedIn, dispatch);
-app.use('/dispatching', loggedIn, dispatch);
-app.use('/core-warranty', loggedIn, coreWarranty);
-app.use('/create-warranty', loggedIn, coreWarranty);
-app.use('/create-core', loggedIn, coreWarranty);
-app.use('/users', loggedIn, userRole, roleAdmin, users);
-app.use('/user-create', loggedIn, userRole, roleAdmin, users);
-app.use('/user-create-input', loggedIn, userRole, roleAdmin, users);
+app.use('/dispatch', mw.loggedIn, dispatch);
+app.use('/dispatch-requests', mw.loggedIn, dispatch);
+app.use('/dispatching', mw.loggedIn, dispatch);
+app.use('/core-warranty', mw.loggedIn, coreWarranty);
+app.use('/create-warranty', mw.loggedIn, coreWarranty);
+app.use('/create-core', mw.loggedIn, coreWarranty);
+app.use('/users', mw.loggedIn, mw.userRoleAndAdmin, users);
+app.use('/user-create', mw.loggedIn, mw.userRoleAndAdmin, users);
+app.use('/user-create-input', mw.loggedIn, mw.userRoleAndAdmin, users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

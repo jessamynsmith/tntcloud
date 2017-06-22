@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var mw = require('../middleware');
 
 /* Core-warranty route */
 // this router is for /core-warranty dir, see app.js for initializer
@@ -20,7 +21,8 @@ router.get('/create-warranty', function(req, res, next) {
 });
 
 // Insert Data
-router.post('/insert-warranty', function(req, res, next) {
+// Restrict post capability by applying the middlware from app.js
+router.post('/insert-warranty', mw.userRoleAndAdmin, function(req, res, next) {
   // get the form fields data
   var item = {
     title: req.body.title,

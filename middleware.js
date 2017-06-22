@@ -1,0 +1,53 @@
+/*******************************************************************************
+ * Firebase User
+ ******************************************************************************/
+var firebaseUser = require("./firebase-user");
+
+/** Redirect to homepage if visitor not logged in *****************************/
+// Middleware
+// https://stackoverflow.com/questions/18739725/how-to-know-if-user-is-logged-in-with-passport-js/18739922#18739922
+module.exports.loggedIn = function(req, res, next) {
+  // Global use of user: make user available in any route
+  req.app.locals.user = firebaseUser.getUser();
+  //  console.log("App.js user ", req.app.locals.user);
+  //console.log("app.js getUser", firebaseUser.getUser().uid);
+  // If user logged in then continue, otherwise redirect to / root
+  if (req.app.locals.user.uid) {
+    req.app.locals.uid = req.app.locals.user.uid;
+    console.log("App.js user ..next ", req.app.locals.user);
+    next();
+  } else {
+    console.log("App.js user ..else redirect", req.app.locals.user);
+    res.redirect('/');
+  }
+}
+/** End Redirect to homepage if visitor not logged in *************************/
+
+
+/** User Role Get - Middleware ************************************************/
+/* use in req.app.js to create functions specifically identifying user type */
+module.exports.userRole = function(req, res, next) {
+  firebaseUser.getRole().then(function(userRole) {
+    // Store userRole as Global variable
+    req.app.locals.userRole = userRole;
+    console.log("App.js User Role ", req.app.locals.userRole);
+    // if i didn't have next(); then no pages that use the userRole would be executed
+    next();
+  });
+}
+/** End User Role Get - Middleware ********************************************/
+
+/** User Role Check if Admin - Middleware *************************************/
+/* restrict route to admin by applying to route parameters in req.app.js */
+module.exports.roleAdmin = function(req, res, next) {
+  // If user is admin then continue, otherwise redirect to / root
+  if (req.app.locals.userRole == 'admin') {
+    next();
+  } else {
+    res.redirect('/core-warranty');
+  }
+}
+/** End User Role Check if Admin - Middleware *********************************/
+
+
+module.exports.userRoleAndAdmin = [module.exports.userRole, module.exports.roleAdmin];
