@@ -6,7 +6,7 @@ var fbUser = {};
 var dbRef = firebase.database().ref();
 var userRole = '';
 /*******************************************************************************
- * Auth State Changed
+ * Auth State Changed: Get Firebase UID
  ******************************************************************************/
 firebase.auth().onAuthStateChanged(function(user) {
   // Get 'user' from onAuthStateChanged and set to above fbUser

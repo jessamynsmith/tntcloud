@@ -19,8 +19,9 @@ app.locals.dbRef = app.locals.firebase.database().ref();
  * Firebase User
  ******************************************************************************/
 var firebaseUser = require("./firebase-user");
+
+/** Redirect to homepage if visitor not logged in *****************************/
 // Middleware
-// Set user as property on the app, so it is available everywhere
 // https://stackoverflow.com/questions/18739725/how-to-know-if-user-is-logged-in-with-passport-js/18739922#18739922
 function loggedIn(req, res, next) {
   // Global use of user: make user available in any route
@@ -37,7 +38,9 @@ function loggedIn(req, res, next) {
     res.redirect('/');
   }
 }
+/** End Redirect to homepage if visitor not logged in *************************/
 
+/** User Role Get *************************************************************/
 // TODO split this into two middlewares one that populates the role and one that
 // checks if it's admin
 function roleAdmin(req, res, next) {
@@ -53,6 +56,28 @@ function roleAdmin(req, res, next) {
   }
   });
 }
+/** End User Role Get *********************************************************/
+
+
+/** User Role Check if Admin  *************************************************/
+// TODO split this into two middlewares one that populates the role and one that
+// checks if it's admin
+function roleAdmin(req, res, next) {
+  firebaseUser.getRole().then(function(userRole) {
+    // This may or may not be needed
+    app.locals.userRole = userRole;
+    console.log("App.js User Role ", app.locals.userRole);
+  // If user is admin then continue, otherwise redirect to / root
+  if (app.locals.userRole == 'admin') {
+    next();
+  } else {
+    res.redirect('/core-warranty');
+  }
+  });
+}
+/** End User Role Check if Admin **********************************************/
+
+
 /** End Firebase User *********************************************************/
 
 
