@@ -1,0 +1,258 @@
+
+/*******************************************************************************
+ * Login Box
+ ******************************************************************************/
+#loginBox {
+  background: #fff;
+  border: 1px solid #ddd;
+  margin: 100px 0;
+  padding: 40px 20px 0 20px;
+}
+#btnPasswordReset {
+  float: right;
+}
+/*******************************************************************************
+ * Foundation Grid Notes
+ ******************************************************************************/
+/*
+.small-xx = from 0px to 640px
+.medium-xx = from 641px to 899px
+.large-xx = from 900px+
+*/
+
+/*******************************************************************************
+ * HTML
+ ******************************************************************************/
+
+@media screen and (min-width: 0px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  html {
+    font-size: 100%;
+  }
+}
+
+/*******************************************************************************
+ * Body
+ ******************************************************************************/
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+
+/*******************************************************************************
+ * Header
+ ******************************************************************************/
+.header {
+  background-color: #1779ba;
+  padding: .5rem 1rem;
+  color: white;
+  font-size: 2rem;
+}
+.front .header {
+  padding: .85rem 1rem;
+}
+.front .header .title {
+  font-weight: 300;
+}
+
+/*******************************************************************************
+ * All Site Wrap
+ ******************************************************************************/
+.all-site-wrap {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+/*******************************************************************************
+ * Page Wrap
+ ******************************************************************************/
+.all-site-wrap .page-wrap {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 1 5000px;
+  -moz-box-flex: 0;
+  -ms-flex: 0 1 5000px;
+  flex: 0 1 5000px;
+}
+.page-wrap {
+  overflow: hidden;
+}
+
+/*******************************************************************************
+ * Nav Main
+ ******************************************************************************/
+.all-site-wrap .main-nav {
+   -webkit-box-flex: 0;
+   -webkit-flex: 0 0 100px;
+   -moz-box-flex: 0;
+   -ms-flex: 0 0 100px;
+   flex: 0 0 100px;
+}
+.main-nav {
+   text-align: center;
+   position: relative;
+   z-index: 30;
+   background: #f7f7f7;
+   border-right: 1px solid #efefef;
+   padding: 1rem;
+   min-height: 100vh;
+}
+
+/*******************************************************************************
+ * Top Bar
+ ******************************************************************************/
+.top-bar {
+  border-bottom: 1px solid #efefef;
+}
+.top-bar,
+.top-bar .menu {
+  background: none;
+}
+.top-bar .inner {
+
+}
+
+/*******************************************************************************
+ * Grid
+ ******************************************************************************/
+.row {
+  max-width: 100%;
+}
+
+/*******************************************************************************
+ * Firebase Login
+ ******************************************************************************/
+#firebaseui-auth-container {
+  margin-top: 3rem;
+}
+
+/*******************************************************************************
+ * Card
+ ******************************************************************************/
+.card {
+}
+
+.card-divider {
+  color: black;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #e6e6e6;
+  padding: .5rem;
+}
+
+/*******************************************************************************
+ * Output Form & Print Area
+ ******************************************************************************/
+
+#output-form {
+  width: 700px;
+}
+
+#output-form table {
+  margin-bottom: 0;
+}
+
+#output-form table.data-table thead,
+#output-form table.data-table tfoot {
+  background: #fff;
+}
+
+#output-form table thead td,
+#output-form table thead th {
+  padding: .75rem .625rem 0rem .625rem;
+}
+
+#output-form table tbody td {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#output-form table tfoot tr {
+  border: 1px solid #e6e6e6;
+}
+
+#output-form .footer th,
+#output-form .footer td {
+  border-top: 1px solid #e6e6e6;
+}
+
+/*******************************************************************************
+ * Output Form: Print Area for Browser to pick up only what we want printed
+ ******************************************************************************/
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #output-form.print-area * {
+    visibility: visible;
+  }
+  #output-form.print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+/*******************************************************************************
+ * Buttons
+ ******************************************************************************/
+ /* yes, both need to be targeted because different files have different class order */
+.button.list-record,
+.list-record .button {
+  margin: 0;
+}
+
+
+/*******************************************************************************
+ * Tables Layout
+ ******************************************************************************/
+
+.data-table {
+  table-layout: fixed;
+  width: 100%;
+  white-space: wrap;
+}
+.data-table td {
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*******************************************************************************
+ * Table Sort
+ ******************************************************************************/
+.col-hidden,
+.w-date-server-turned-in,
+.c-date-server-turned-in {
+  display: none;
+}
+
+.sort {
+  height: 0;
+  background: url(../images/imgbg.gif) no-repeat center right;
+  position: relative;
+  top:4px;
+}
+.sort.asc {
+  height: 0;
+  background: url(../images/imgasc.gif) no-repeat center right;
+  position: relative;
+  top:4px;
+}
+.sort.desc {
+  height: 0;
+  background: url(../images/imgdesc.gif) no-repeat center right;
+  position: relative;
+  top:4px;
+}
