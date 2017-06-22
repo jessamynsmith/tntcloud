@@ -1,0 +1,114 @@
+
+<!-- Title/Intro ------------------------------------------------------------>
+<div class="section-intro">
+  <h1>Warranty Records</h2>
+  <p><a class="button hollow" href="create-warranty">Create Warranty Record</a></p>
+</div>
+
+<!-- Primary Content -------------------------------------------------------->
+<div id="warranty">
+  <!-- Search Form -->
+  <input type="text" class="search" placeholder="Search warranty records...">
+
+  <!-- Records list -->
+  <table class="data-table stack">
+    <thead>
+      <th class="col1 sort desc" data-sort="w-date-server-turned-in">Date Turned In</th>
+      <th class="col-hidden" data-sort="w-server-time-stamp">Server Time Stamp</th>
+      <th class="col2 sort" data-sort="w-ro">RO</th>
+      <th class="col3 sort" data-sort="w-vin">VIN</th>
+      <th class="col4 sort" data-sort="w-vendor">Vendor</th>
+      <th class="col5 sort" data-sort="w-customer">Customer</th>
+      <th class="col6 sort" data-sort="w-turned-in-by">Turned In By</th>
+      <th class="col7 sort" data-sort="w-received-by">Received By</th>
+      <th class="col8 sort" data-sort="w-failed-part-number">Failed Part #</th>
+      <th class="col9 sort" data-sort="w-description">Description</th>
+      <th class="col10">Qty</th>
+      <th class="col11">View</th>
+    </thead>
+    <tbody id="records-list" class="list">
+    </tbody>
+  </table>
+</div>
+
+<!--------------------------------------------------------------------------->
+<!-- Handlebars ------------------------------------------------------------->
+<!--------------------------------------------------------------------------->
+<script id="rowsTemplate" type="text/x-handlebars-template">
+  {{#each warranty}}
+    <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
+      <td class="w-date-turned-in">{{Date}}</td>
+      <td class="w-date-server-turned-in">{{DateTimeStampServer}}</td>
+      <td class="w-ro">{{RO}}</td>
+      <td class="w-vin">{{VIN}}</td>
+      <td class="w-vendor">{{Vendor}}</td>
+      <td class="w-customer">{{Customer}}</td>
+      <td class="w-turned-in-by">{{TurnedInBy}}</td>
+      <td class="w-received-by">{{ReceivedBy}}</td>
+      <td class="w-failed-part-number">{{FailedPartNumber}}</td>
+      <td class="w-description">{{Description}}</td>
+      <td class="w-quantity">{{Quantity}}</td>
+      <td><a class="button list-record" href="track-record-warranty.html?KEY={{@key}}">View</a></td>
+    </tr>
+  {{/each}}
+</script>
+
+<!-- JavaScript ------------------------------------------------------------->
+<script type="text/javascript">
+
+/*****************************************************************************
+ * Data for Handlebars + Output HTML for Handlebars
+*****************************************************************************/
+// dbRef on root because above Handlebars template targets 'warranty'
+var dbRef = database.ref();
+// 'on' is firebase method for keeping live data, and 'value' is saying you want values
+dbRef.once('value', gotData, errData);
+
+function gotData(data) {
+  // access data values
+  var context = data.val();
+
+  /***************************************
+  * Handlebars
+  ***************************************/
+  var rawTemplate = document.getElementById("rowsTemplate").innerHTML;
+  // Node.js is needed if I want to pre-compile templates
+  var compiledTemplate = Handlebars.compile(rawTemplate);
+
+  // pass the array data values
+  var html = compiledTemplate(context);
+  // add html output to ID
+  document.getElementById('records-list').innerHTML += html;
+
+  /***************************************
+  * Sort initial table by Date
+  ***************************************/
+  // http://jsfiddle.net/UdvDD/
+  var $wrapper = $('.list');
+
+  $wrapper.find('.data-row').sort(function (a, b) {
+    return b.dataset.sort - a.dataset.sort;
+  })
+  .appendTo( $wrapper );
+
+  /***************************************
+  * LIST JS = Search and Columns Sort
+  ***************************************/
+  // <th> 'data-sort' value and <td> 'class' value must match to work
+  /* DATE SORT required work-around:
+   * (because of Date Turned In format DD/MM/YYY, which would work properly if it was YYYY/MM/DD)
+   * The column "Date Turned In" contains data-sort="w-date-server-turned-in"
+   * that actually sorts by the DateTimeStampServer column, which is hidden. */
+  var options = {
+    valueNames: [ 'w-date-server-turned-in', 'w-customer', 'w-description', 'w-failed-part-number', 'w-quantity', 'w-received-by', 'w-ro', 'w-turned-in-by', 'w-vendor', 'w-vin' ]
+  };
+  var monkeyList = new List('warranty', options);
+
+} // End gotData function (sort needs to be included in this function)
+
+function errData(err) {
+  console.log('Error!');
+  console.log(err);
+}
+
+</script>

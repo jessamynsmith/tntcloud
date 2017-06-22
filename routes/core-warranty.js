@@ -66,9 +66,11 @@ router.post('/insert-core', function(req, res, next) {
 /*******************************************************************************
  * List Warranty
  ******************************************************************************/
+router.get('/list-warranty', mw.userRole, function(req, res, next) {
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
 
-router.get('/list-warranty', function(req, res, next) {
-  res.send('warranty list');
+  res.render('core-warranty/list-warranty', { isAdmin: isAdmin });
 });
 
 
@@ -78,7 +80,7 @@ router.get('/list-warranty', function(req, res, next) {
 router.get('/list-core', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
-  
+
   res.render('core-warranty/list-core', { isAdmin: isAdmin });
 });
 
