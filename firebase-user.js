@@ -25,8 +25,8 @@ module.exports.getRole = function() {
     if (userRole) {
       resolve(userRole);
     }
-
     // This case should rarely be hit, as the onAuthStateChanged handles populating fbUser
+    // https://firebase.google.com/docs/auth/web/manage-users#get_the_currently_signed-in_user
     if (!fbUser.uid) {
       user = firebase.auth().currentUser;
       if (user) {
