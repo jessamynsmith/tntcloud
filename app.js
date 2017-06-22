@@ -40,9 +40,26 @@ function loggedIn(req, res, next) {
 }
 /** End Redirect to homepage if visitor not logged in *************************/
 
-/** User Role Get *************************************************************/
-// TODO split this into two middlewares one that populates the role and one that
-// checks if it's admin
+
+/** User Role Get - Middleware ************************************************/
+/* use in app.js to create functions specifically identifying user type */
+firebaseUser.getRole().then(function(userRole) {
+  // Store userRole as Global variable
+  app.locals.userRole = userRole;
+  console.log("App.js User Role ", app.locals.userRole);
+  // If user is admin then continue, otherwise redirect to / root
+  if (app.locals.userRole) {
+    // What does 'next()' do???
+    next();
+  } else {
+    // Remove redirect on this???
+    // res.redirect('/core-warranty');
+  }
+});
+/** End User Role Get - Middleware ********************************************/
+
+/** User Role Check if Admin - Middleware *************************************/
+/* restrict route to admin by applying to route parameters in app.js */
 function roleAdmin(req, res, next) {
   firebaseUser.getRole().then(function(userRole) {
     // This may or may not be needed
@@ -56,26 +73,7 @@ function roleAdmin(req, res, next) {
   }
   });
 }
-/** End User Role Get *********************************************************/
-
-
-/** User Role Check if Admin  *************************************************/
-// TODO split this into two middlewares one that populates the role and one that
-// checks if it's admin
-function roleAdmin(req, res, next) {
-  firebaseUser.getRole().then(function(userRole) {
-    // This may or may not be needed
-    app.locals.userRole = userRole;
-    console.log("App.js User Role ", app.locals.userRole);
-  // If user is admin then continue, otherwise redirect to / root
-  if (app.locals.userRole == 'admin') {
-    next();
-  } else {
-    res.redirect('/core-warranty');
-  }
-  });
-}
-/** End User Role Check if Admin **********************************************/
+/** End User Role Check if Admin - Middleware *********************************/
 
 
 /** End Firebase User *********************************************************/
