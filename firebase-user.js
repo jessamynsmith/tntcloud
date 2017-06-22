@@ -10,22 +10,13 @@ var userRole = '';
  ******************************************************************************/
 firebase.auth().onAuthStateChanged(function(user) {
   // Get 'user' from onAuthStateChanged and set to above fbUser
+  fbUser = user;
   if (user) {
-    fbUser = user;
     console.log("firebase-user.js ", fbUser.uid);
   } else {
     // If there is no user, clear the role
     userRole = '';
   }
-
-/*
-  if (fbUser) {
-    dbRef.child('/users/' + fbUser.uid + '/role').once('value').then(function(snapshot) {
-      userRole = snapshot.val();
-      // console.log("User role ", userRole);
-    });
-  }
-  */
 });
 /******************************************************************************/
 
@@ -55,9 +46,7 @@ module.exports.getRole = function() {
     }).catch(function(error) {
       resolve('');
     });
-
   });
-
 }
 
 module.exports.getUser = function () {

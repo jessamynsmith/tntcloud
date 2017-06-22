@@ -16,7 +16,8 @@ app.locals.firebase = require("./firebase");
 app.locals.dbRef = app.locals.firebase.database().ref();
 
 /*******************************************************************************
- * Firebase User */
+ * Firebase User
+ ******************************************************************************/
 var firebaseUser = require("./firebase-user");
 // Middleware
 // Set user as property on the app, so it is available everywhere
@@ -24,11 +25,8 @@ var firebaseUser = require("./firebase-user");
 function loggedIn(req, res, next) {
   // Global use of user: make user available in any route
   app.locals.user = firebaseUser.getUser();
-//  console.log("App.js user ", app.locals.user);
+  //  console.log("App.js user ", app.locals.user);
   //console.log("app.js getUser", firebaseUser.getUser().uid);
-  // get User ID from Firebase user
-  // app.locals.userRole = firebaseUser.userRole;
-  // console.log("Got UID here ", app.locals.uid);
   // If user logged in then continue, otherwise redirect to / root
   if (app.locals.user.uid) {
     app.locals.uid = app.locals.user.uid;
@@ -40,6 +38,8 @@ function loggedIn(req, res, next) {
   }
 }
 
+// TODO split this into two middlewares one that populates the role and one that
+// checks if it's admin
 function roleAdmin(req, res, next) {
   firebaseUser.getRole().then(function(userRole) {
     // This may or may not be needed
@@ -55,7 +55,6 @@ function roleAdmin(req, res, next) {
 }
 /** End Firebase User *********************************************************/
 
-/** End User Role *************************************************************/
 
 // import route files
 var index = require('./routes/index');

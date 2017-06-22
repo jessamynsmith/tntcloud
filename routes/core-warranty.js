@@ -5,25 +5,9 @@ var router = express.Router();
 // this router is for /core-warranty dir, see app.js for initializer
 router.get('/', function(req, res, next) {
 
-
-  console.log("Got UID here ", req.app.locals.uid);
+  console.log("core-warranty.js: Got UID here ", req.app.locals.uid);
 //  console.log("User Role is ", req.app.locals.userRole);
 
-/*
-  // create local 'user' variable from global user
-  var user = req.app.locals.user;
-  // User is signed in.
-  console.log("user IS signed in", user.uid);
-  // User ID of signed in user (Firebase Auth)
-  var userId = user.uid;
-  // User Role of signed in user (Realtime DB)
-  var userRole = {};
-  var userRef = req.app.locals.dbRef.child('/users/' + userId).once('value')
-  .then(function(snapshot) {
-    userRole = snapshot.val().role;
-    console.log("User Role is ", userRole);
-  });
-*/
   res.render('core-warranty/core-warranty');
 });
 

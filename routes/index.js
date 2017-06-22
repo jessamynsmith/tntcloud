@@ -37,24 +37,6 @@ router.post('/login', function(req, res){
     res.render('index', { error: err});
     // [END_EXCLUDE]
   });
-
-  /*****************************************************************************
-   * Auth State Changed
-   * Redirect-loop problems: When this was outside/below this Login if() with
-   * redirect command, it would create infinite redirect loop.  Once moved here,
-   * solved hours of troubleshooting.
-   ****************************************************************************/
-  // Add a realtime listener
-/*
-  firebase.auth().onAuthStateChanged(firebaseUser => {
-    // Check if the user exists
-    if(firebaseUser) {
-      // redirect upon user login
-      res.redirect('/core-warranty');
-      // console.log(firebaseUser);
-    }
-  });
-  */
 });
 /** Login End ****************************************************************/
 
