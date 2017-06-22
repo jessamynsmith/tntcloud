@@ -3,7 +3,23 @@
 <head>
   <meta charset="utf-8">
   <title>{{ title }}</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
+  <!-- Jquery required for Foundation, and LISTJS -->
+  <script src="/javascripts/jquery/3.2.1/jquery.min.js"></script>
+  <!-- FOUNDATION -->
+  <!-- Compressed CSS -->
+  <link rel="stylesheet" href="/foundation/6.3.1/foundation.min.css" integrity="sha256-itWEYdFWzZPBG78bJOOiQIn06QCgN/F0wMDcC4nOhxY=" crossorigin="anonymous" />
+  <!-- Compressed JavaScript -->
+  <script src="/foundation/6.3.1/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs=" crossorigin="anonymous"></script>
+  <!-- END FOUDATION -->
+  <!-- LISTJS -->
+  <script src="/javascripts/listjs/1.5.0/list.min.js"></script>
+  <!-- END LISTJS -->
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/stylesheets/styles.css" />
+  <!-- Other -->
+  <script src="/javascripts/moment.min.js"></script>
+  <script src="/javascripts/urlParameters.js"></script>
+  <script src="/javascripts/search.js"></script>
 </head>
 <body>
   <form action="/logout" method="post">
