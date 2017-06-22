@@ -75,8 +75,11 @@ router.get('/list-warranty', function(req, res, next) {
 /*******************************************************************************
  * List Core
  ******************************************************************************/
-router.get('/list-core', function(req, res, next) {
-  res.send('List core');
+router.get('/list-core', mw.userRole, function(req, res, next) {
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+  
+  res.render('core-warranty/list-core', { isAdmin: isAdmin });
 });
 
 
