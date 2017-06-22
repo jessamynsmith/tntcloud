@@ -87,14 +87,19 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
   console.log("Database Ref ", dbRef);
 */
 
-  dbRef.child('/warranty/').once('value')
-  .then((snapshot)=>{
-  console.log("Database Ref ", dbRef);
+  dbRef.once('value', gotData);
 
-  res.render('core-warranty/list-warranty', { isAdmin: isAdmin });
-      // pass the results to our 'index' view ...render
+  function gotData(data) {
+      // access data values
+    var context = data.val();
+
+
+    res.render('core-warranty/list-warranty', { isAdmin: isAdmin });
+
+    console.log("Database Ref ", context);
+    // pass the results to our 'index' view ...render
     // i could bind the database query to variable which is then promise...
-  });
+  };
 
 });
 
