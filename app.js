@@ -43,35 +43,26 @@ function loggedIn(req, res, next) {
 
 /** User Role Get - Middleware ************************************************/
 /* use in app.js to create functions specifically identifying user type */
-firebaseUser.getRole().then(function(userRole) {
-  // Store userRole as Global variable
-  app.locals.userRole = userRole;
-  console.log("App.js User Role ", app.locals.userRole);
-  // If user is admin then continue, otherwise redirect to / root
-  if (app.locals.userRole) {
-    // What does 'next()' do???
+function userRole(req, res, next) {
+  firebaseUser.getRole().then(function(userRole) {
+    // Store userRole as Global variable
+    app.locals.userRole = userRole;
+    console.log("App.js User Role ", app.locals.userRole);
+    // if i didn't have next(); then no pages that use the userRole would be executed
     next();
-  } else {
-    // Remove redirect on this???
-    // res.redirect('/core-warranty');
-  }
-});
+  });
+}
 /** End User Role Get - Middleware ********************************************/
 
 /** User Role Check if Admin - Middleware *************************************/
 /* restrict route to admin by applying to route parameters in app.js */
 function roleAdmin(req, res, next) {
-  firebaseUser.getRole().then(function(userRole) {
-    // This may or may not be needed
-    app.locals.userRole = userRole;
-    console.log("App.js User Role ", app.locals.userRole);
   // If user is admin then continue, otherwise redirect to / root
   if (app.locals.userRole == 'admin') {
     next();
   } else {
     res.redirect('/core-warranty');
   }
-  });
 }
 /** End User Role Check if Admin - Middleware *********************************/
 
@@ -110,9 +101,9 @@ app.use('/dispatching', loggedIn, dispatch);
 app.use('/core-warranty', loggedIn, coreWarranty);
 app.use('/create-warranty', loggedIn, coreWarranty);
 app.use('/create-core', loggedIn, coreWarranty);
-app.use('/users', loggedIn, roleAdmin, users);
-app.use('/user-create', loggedIn, roleAdmin, users);
-app.use('/user-create-input', loggedIn, roleAdmin, users);
+app.use('/users', loggedIn, userRole, roleAdmin, users);
+app.use('/user-create', loggedIn, userRole, roleAdmin, users);
+app.use('/user-create-input', loggedIn, userRole, roleAdmin, users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
