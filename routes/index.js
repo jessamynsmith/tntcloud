@@ -69,7 +69,6 @@ router.post('/password-reset', function(req, res){
       var errorMessage = error.message;
       // [START_EXCLUDE]
       if (errorCode == 'auth/invalid-email') {
-        // document.getElementById('errorMessage').innerHTML = "Enter your correct email address to receive a password reset email.";
       } else if (errorCode == 'auth/user-not-found') {
         alert(errorMessage);
       }
