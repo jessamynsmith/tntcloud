@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Warranty Records</title>
+  <!-- Jquery required for Foundation, and LISTJS -->
+  <script src="../theme/js/jquery/3.2.1/jquery.min.js"></script>
+  <!-- FOUNDATION -->
+  <!-- Compressed CSS -->
+  <link rel="stylesheet" href="../theme/foundation/6.3.1/foundation.min.css" integrity="sha256-itWEYdFWzZPBG78bJOOiQIn06QCgN/F0wMDcC4nOhxY=" crossorigin="anonymous" />
+  <!-- Compressed JavaScript -->
+  <script src="../theme/foundation/6.3.1/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs=" crossorigin="anonymous"></script>
+  <!-- END FOUDATION -->
+  <!-- LISTJS -->
+  <script src="../theme/js/listjs/1.5.0/list.min.js"></script>
+  <!-- END LISTJS -->
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../theme/css/styles.css" />
+  <!-- Other -->
+  <script src="../firebase/4.1.2/firebase.js"></script>
+  <script src="../firebase/firebase-conn.js"></script>
+  <script src="../theme/handlebars/4.0.10/handlebars-v4.0.10.js"></script>
+  <script src="../theme/js/moment.min.js"></script>
+  <script src="../theme/js/urlParameters.js"></script>
+  <script src="../theme/js/search.js"></script>
+</head>
+<body>
+  <!-- HEADER ----------------------------------------------------------------->
+  <div class="header">
+    <div>TNT Cloud</div>
+  </div>
+
+  <!-- All Site Wrap ---------------------------------------------------------->
+  <div class="all-site-wrap">
+
+  <!-- Main Nav --------------------------------------------------------------->
+  <nav class="main-nav" id="main-Nav">
+    <ul class="vertical menu">
+      <li><a href="../dispatch/">Dispatch</a></li>
+      <li><a href="/core-warranty/">Core/Warranty</a></li>
+      <li><a href="/users/userlist.html">Users</a></li>
+    </ul>
+    <button id="sign-out-button" class="button" onClick="signOut()">Sign Out</button>
+  </nav>
+
+  <!-- Page Wrap -------------------------------------------------------------->
+  <div class="page-wrap">
+
+  <!-- Section Nav ------------------------------------------------------------>
+  <div class="top-bar">
+    <div class="row small-11">
+      <ul class="menu">
+        <li><a href="track-list-warranty.html">Warranty</a></li>
+        <li><a href="track-list-core.html">Core</a></li>
+        <li><a href="peoplelist.html">People</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Wrap -------------------------------------------------------------->
+  <div class="main-wrap row small-11 columns">
+
+  <!-- Title/Intro ------------------------------------------------------------>
+  <div class="section-intro">
+    <h1>Create Core Record</h1>
+  </div>
+
+  <!-- Main ------------------------------------------------------------------->
+  <div class="row expanded small-12 medium-10 large-6 columns">
+    <form id="core-input-form" class="input-form" onSubmit="return submitCoreForm(this)">
+      <div class="">
+        <div class="card">
+          <div class="card-divider">
+            <h4>Create Core Record</h4>
+          </div>
+        </div>
+        <div class="input-group">
+          <span class="input-group-label">Branch</span>
+          <select id="core-branch" required class="input-group-field">
+            <option value="">Select Branch</option>
+            <option value="JAX">JAX</option>
+            <option value="NFWS">NFWS</option>
+            <option value="LC">LC</option>
+            <option value="WC">WC</option>
+            <option value="440">440</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <span class="input-group-label">Turned In By</span>
+          <select id="turned-in-by" required class="input-group-field">
+            <option value="">Select Name</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <span class="input-group-label">Received By</span>
+          <select id="received-by" required class="input-group-field">
+            <option value="">Select Name</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <span class="input-group-label">R/O or Invoice#</span>
+          <input type="text" id="core-ro" placeholder="R/O" required class="input-group-field">
+        </div>
+        <div class="input-group">
+          <span class="input-group-label">Customer</span>
+          <input type="text" id="core-customer" placeholder="Customer" required class="input-group-field"/>
+        </div>
+        <div class="input-group">
+          <span class="input-group-label">Failed Part Number</span>
+          <input type="text" id="core-failed-part-number" placeholder="Failed Part Number" required class="input-group-field"/>
+        </div>
+        <div class="input-group">
+          <span class="input-group-label">Quantity</span>
+          <select id="quantity" class="input-group-field">
+          </select>
+        </div>
+        <div>
+          <div class="input-group-label input-group-field" style="text-align: left;">Description</div>
+          <textarea id="core-description" placeholder="Description" required></textarea>
+          <input id="submit-core" type="submit" class="button primary">
+          <a href="track-list-core.html" class="button secondary">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+
+  /*****************************************************************************
+   * Post form Data to Database
+  *****************************************************************************/
+
+  function submitCoreForm(){
+    event.preventDefault();
+    // Get input field values
+    // Server Date/Time https://firebase.google.com/docs/reference/js/firebase.database.ServerValue
+    const DateTimeStampServer = firebase.database.ServerValue.TIMESTAMP;
+    let Date = DateTimeStampServer;
+    Date = moment().format('L'); // Format date with moment.js
+    let DateTime = moment().format('h:mm:ss A');
+    ////////////////////////////////////////////////////////////////////////////
+    // Form Element Options and Values /////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    let Branch = document.getElementById('core-branch').value;
+    // People //////////////////////////////////////////////////////////////////
+    var selectTurnedInByChoose = document.getElementById("turned-in-by").value;
+    var selectTurnedInBy = document.getElementById("turned-in-by");
+    var TurnedInBy = selectTurnedInBy.options[selectTurnedInBy.selectedIndex].text;
+    var selectReceivedByChoose = document.getElementById("received-by").value;
+    var selectReceivedBy = document.getElementById("received-by");
+    var ReceivedBy = selectReceivedBy.options[selectReceivedBy.selectedIndex].text;
+    // End People //////////////////////////////////////////////////////////////
+    let RO = document.getElementById('core-ro').value;
+    let Customer = document.getElementById('core-customer').value;
+    let FailedPartNumber = document.getElementById('core-failed-part-number').value;
+    let Quantity = document.getElementById('quantity').value;
+    let Description = document.getElementById('core-description').value;
+
+    // A core entry
+    var coreData = {
+      DateTimeStampServer,
+      Date,
+      DateTime,
+      Branch,
+      TurnedInBy,
+      ReceivedBy,
+      RO,
+      Customer,
+      FailedPartNumber,
+      Quantity,
+      Description
+    }
+
+    // Get a key for a new core Record
+    var newCoreKey = firebase.database().ref().child('core').push().key;
+
+    // write the new core data to the core list
+    var updates = {};
+    updates['/core/' + newCoreKey] = coreData;
+
+    // update the new-key-record with the data
+    var dbUpdate = firebase.database().ref().update(updates);
+
+    // redirect page with url parameter containing core key
+    window.location.href = `track-print-core.html?KEY=${newCoreKey}`;
+
+  }; // End submitCoreForm Function
+
+  // console.log(firebase);
+
+  </script>
+
+  <!-- Select Options --------------------------------------------------------->
+  <script src="track-create-option-name.js"></script>
+  <script src="track-create-option-quantity.js"></script>
+
+  </div> <!-- Close Main Wrap ------------------------------------------------->
+
+  </div><!-- Close Page Wrap -------------------------------------------------->
+
+  </div><!-- Close All Site Wrap ---------------------------------------------->
+  <script src="../firebase/firebase-user.js"></script>
+</body>
+</html>

@@ -11,7 +11,6 @@ router.get('/', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-
   console.log("core-warranty.js: Got UID here ", req.app.locals.uid);
 //  console.log("User Role is ", req.app.locals.userRole);
 
@@ -65,13 +64,17 @@ router.post('/insert-core', function(req, res, next) {
 });
 
 /*******************************************************************************
- * Other
+ * List Warranty
  ******************************************************************************/
 
 router.get('/list-warranty', function(req, res, next) {
   res.send('warranty list');
 });
 
+
+/*******************************************************************************
+ * List Core
+ ******************************************************************************/
 router.get('/list-core', function(req, res, next) {
   res.send('List core');
 });
