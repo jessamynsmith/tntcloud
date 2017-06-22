@@ -22,9 +22,37 @@
   <script src="/javascripts/search.js"></script>
 </head>
 <body>
+  <!-- HEADER ----------------------------------------------------------------->
+  <div class="header">
+    <div>TNT Cloud</div>
+  </div>
+
+  <!-- All Site Wrap ---------------------------------------------------------->
+  <div class="all-site-wrap">
+
+  <!-- Main Nav --------------------------------------------------------------->
+  <nav class="main-nav" id="main-Nav">
+    <ul class="vertical menu">
+      <li><a href="/dispatch">Dispatch</a></li>
+      <li><a href="/core-warranty">Core/Warranty</a></li>
+      <li><a href="/users">Users</a></li>
+    </ul>
+    <form action="/logout" method="post">
+      <input id="sign-out-button" class="button" type="submit" value="Sign Out" name="logout">
+    </form>
+  </nav>
+
+  <!-- Page Wrap -------------------------------------------------------------->
+  <div class="page-wrap">
+
+  <!-- Body Template ---------------------------------------------------------->
   {{{ body }}}
-  <form action="/logout" method="post">
-    <input type="submit" value="logout" name="logout">
-  </form>
+  <!-- End Body Template ------------------------------------------------------>
+
+  </div> <!-- Close Main Wrap ------------------------------------------------->
+
+  </div><!-- Close Page Wrap -------------------------------------------------->
+
+  </div><!-- Close All Site Wrap ---------------------------------------------->
 </body>
 </html>
