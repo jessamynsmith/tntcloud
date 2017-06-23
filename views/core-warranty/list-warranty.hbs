@@ -49,3 +49,17 @@
     </tbody>
   </table>
 </div>
+<script>
+
+/***************************************
+* Sort initial table by Date
+***************************************/
+// http://jsfiddle.net/UdvDD/
+var $wrapper = $('.list');
+
+$wrapper.find('.data-row').sort(function (a, b) {
+  return b.dataset.sort - a.dataset.sort;
+})
+.appendTo( $wrapper );
+
+</script>
