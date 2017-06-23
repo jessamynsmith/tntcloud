@@ -28,7 +28,7 @@
     <!--------------------------------------------------------------------------->
     <!-- Handlebars ------------------------------------------------------------->
     <!--------------------------------------------------------------------------->
-      {{#each core}}
+      {{#each data.core}}
         <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
           <td class="date-turned-in">{{Date}}</td>
           <td class="date-server-turned-in">{{DateTimeStampServer}}</td>
@@ -39,7 +39,7 @@
           <td class="failed-part-number">{{FailedPartNumber}}</td>
           <td class="description">{{Description}}</td>
           <td class="quantity">{{Quantity}}</td>
-          <td><a class="button list-record" href="record-warranty.html?KEY={{@key}}">View</a></td>
+          <td><a class="button list-record" href="record-core/?KEY={{@key}}">View</a></td>
         </tr>
       {{/each}}
     </tbody>

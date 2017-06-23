@@ -194,7 +194,7 @@ router.get('/list-core', mw.userRole, function(req, res, next) {
 
     // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
-    res.render('core-warranty/list-core', templateData );
+    res.render('core-warranty/list-core', { isAdmin: isAdmin, data: templateData } );
   };
 });
 
@@ -216,6 +216,27 @@ router.get('/print-core', function(req, res, next) {
     templateData = data.val();
     console.log("Record Data ", templateData);
     res.render('core-warranty/print-core', templateData);
+  };
+});
+
+/*******************************************************************************
+ * View Record Core
+ ******************************************************************************/
+router.get('/record-core', function(req, res, next) {
+
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+  // get key from url query parameter '?KEY='
+  var key = req.query.KEY;
+  // get 'core' data record associated with 'key' value
+  dbRef.child('core/' + key).once('value', gotData);
+
+  function gotData(data) {
+    // access data values
+    templateData = data.val();
+    console.log("Record Data ", templateData);
+    res.render('core-warranty/record-core', templateData);
   };
 });
 

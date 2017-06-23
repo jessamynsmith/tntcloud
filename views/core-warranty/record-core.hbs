@@ -1,0 +1,87 @@
+
+  <!-- Title/Intro ------------------------------------------------------------>
+  <div class="section-intro">
+    <h1>Core Record Print</h2>
+  </div>
+
+  <!-- Primary Content -------------------------------------------------------->
+  <table class="data-table stack">
+    <thead>
+      <tr>
+        <th class="col1">Date Turned In</th>
+        <th class="col2">RO</th>
+        <th class="col5">Customer</th>
+        <th class="col6">Turned In By</th>
+        <th class="col7">Received By</th>
+        <th class="col8">Failed Part #</th>
+        <th class="col9">Description</th>
+        <th class="col10">Qty</th>
+        <th class="col11">Print Sticker</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="data-row list-record">
+        <td id="core-date-turned-in">{{ Date }}&nbsp;{{ DateTime}}</td>
+        <td id="core-ro">{{ RO }}</td>
+        <td id="core-customer">{{ Customer }}</td>
+        <td id="core-turned-in-by">{{ TurnedInBy }}</td>
+        <td id="core-received-by">{{ ReceivedBy }}</td>
+        <td id="core-failed-part-number">{{ FailedPartNumber }}</td>
+        <td id="core-description">{{ Description }}</td>
+        <td id="core-quantity">{{ Quantity }}</td>
+        <td id="core-print-sticker"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+
+  /*****************************************************************************
+   * Back link in browser history
+  *****************************************************************************/
+  function goBack() {
+      window.history.back();
+  }
+
+  /*****************************************************************************
+   * Retrieve core Record from Database using Record Key
+  *****************************************************************************/
+  // URL Parameters -- processed in this file via urlParameter.js
+  // Access parameters by creating a variable equal to: getParam("xxx");
+  const key = getParam("KEY"); // Get key passed to URL from 'view' link
+
+  // Use "KEY" url parameter to target the core/ record
+  let dbRef = firebase.database().ref().child('core/' + key);
+  // Re: "once" https://firebase.google.com/docs/reference/js/firebase.database.Query#once
+  dbRef.once('value', gotData);
+
+  /*****************************************************************************
+   * core Data to Table
+  *****************************************************************************/
+  function gotData(data) {
+    // assign above core data to 'coreRecord'
+    // data.val() returns Object; destructure to pull out individual property values
+    var coreRecord = data.val();
+    // Destructure Object to individual property values
+    let { Branch, Customer, Date, DateTime, Description, FailedPartNumber, Quantity, RO, ReceivedBy, TurnedInBy } = coreRecord;
+
+    // Assign core Data to Table <div>'s
+    document.getElementById("core-customer").innerHTML = Customer;
+    document.getElementById("core-date-turned-in").innerHTML = Date + ' ' + DateTime;
+    document.getElementById("core-description").innerHTML = Description;
+    document.getElementById("core-failed-part-number").innerHTML = FailedPartNumber;
+    document.getElementById("core-quantity").innerHTML = Quantity;
+    document.getElementById("core-received-by").innerHTML = ReceivedBy;
+    document.getElementById("core-ro").innerHTML = RO;
+    document.getElementById("core-turned-in-by").innerHTML = TurnedInBy;
+
+  } // End function gotData
+
+  function errData(err) {
+    console.log('Error!');
+    console.log(err);
+  }
+
+//  console.log(firebase);
+
+  </script>
