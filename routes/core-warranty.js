@@ -213,4 +213,28 @@ router.get('/record-core', function(req, res, next) {
   };
 });
 
+
+/*******************************************************************************
+ * List People
+ ******************************************************************************/
+router.get('/list-people', function(req, res, next) {
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+  dbRef.child('people').once('value', gotData);
+  // global variable so warranty data can be accessed after the function
+  var templateData;
+
+  function gotData(data) {
+    // access data values
+    templateData = data.val();
+
+    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
+    // handlebars object: templateData: templateData === anyName: variableName
+    res.render('core-warranty/list-people', { peopleData: templateData, navCW: navCW } );
+  };
+});
+
+
 module.exports = router;
