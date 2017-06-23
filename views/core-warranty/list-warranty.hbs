@@ -34,6 +34,20 @@
 <!--------------------------------------------------------------------------->
 <!-- Handlebars ------------------------------------------------------------->
 <!--------------------------------------------------------------------------->
+<div id="errorMessage">
+    {{ year }}
+    {{ article }}
+</div>
+
+
+  {{#each warranty}}
+    <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
+      <td class="w-date-turned-in">{{this.Date}}</td>
+      <td class="w-ro">{{this.RO}}</td>
+    </tr>
+  {{/each}}
+
+<!--
   {{#each warranty}}
     <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
       <td class="w-date-turned-in">{{Date}}</td>
@@ -50,3 +64,4 @@
       <td><a class="button list-record" href="track-record-warranty.html?KEY={{@key}}">View</a></td>
     </tr>
   {{/each}}
+-->

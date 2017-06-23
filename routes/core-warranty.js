@@ -72,35 +72,28 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
   var isAdmin = req.app.locals.userRole === 'admin';
 
   /*****************************************************************************
-   * Data for Handlebars + Output HTML for Handlebars
+   * Data for Handlebars
   *****************************************************************************/
-  // 'on' is firebase method for keeping live data, and 'value' is saying you want values
-/*
-  dbRef.child('/warranty/').once('value')
-  .then(function(snapshot) {
-    userRole = snapshot.val();
-    resolve(userRole);
-    // console.log("User role ", userRole);
-  }).catch(function(error) {
-    resolve('');
-  });
-  console.log("Database Ref ", dbRef);
-*/
 
   dbRef.once('value', gotData);
+  // global variable so warranty data can be accessed after the function
+  var warranty = {};
 
   function gotData(data) {
       // access data values
-    var context = data.val();
+    var warranty = data.val();
+    console.log("Warranty DB Ref ", warranty);
 
-
-    res.render('core-warranty/list-warranty', { isAdmin: isAdmin });
-
-    console.log("Database Ref ", context);
     // pass the results to our 'index' view ...render
     // i could bind the database query to variable which is then promise...
   };
+  var templateData = {
+    year: '1999',
+    article: 'whatever'
+  }
 
+  res.render('core-warranty/list-warranty', templateData );
+  console.log("From Render ", res.render.templateData);
 });
 
 
