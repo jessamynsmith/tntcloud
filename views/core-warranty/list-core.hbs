@@ -1,175 +1,78 @@
 
-  <!-- Title/Intro ------------------------------------------------------------>
-  <div class="section-intro">
-    <h1>Core Records</h2>
-    <p><a class="button hollow" href="create-core">Create Core Record</a></p>
-  </div>
+<!-- Title/Intro ------------------------------------------------------------>
+<div class="section-intro">
+  <h1>Core Records</h2>
+  <p><a class="button hollow" href="create-core">Create Core Record</a></p>
+</div>
 
-  <!-- Main ------------------------------------------------------------------->
-  <div id="core">
-    <!-- Search Form -->
-    <input type="text" class="search" placeholder="Search core records...">
+<!-- Primary Content -------------------------------------------------------->
+<div id="table-and-search">
+  <!-- Search Form -->
+  <input type="text" class="search" placeholder="Search core records...">
 
-    <!-- Records list -->
-    <table class="data-table stack">
-      <thead>
-        <th class="col1 sort desc" data-sort="c-date-server-turned-in">Date Turned In</th>
-        <th class="col-hidden" data-sort="c-server-time-stamp">Server Time Stamp</th>
-        <th class="col2 sort" data-sort="c-ro">RO</th>
-        <th class="col3 sort" data-sort="c-customer">Customer</th>
-        <th class="col4 sort" data-sort="c-turned-in-by">Turned In By</th>
-        <th class="col5 sort" data-sort="c-received-by">Received By</th>
-        <th class="col6 sort" data-sort="c-failed-part-number">Failed Part #</th>
-        <th class="col7 sort" data-sort="c-description">Description</th>
-        <th class="col8">Qty</th>
-        <th class="col9">View</th>
-      </thead>
-      <tbody id="records-list" class="list">
-      </tbody>
-    </table>
-  </div>
+  <!-- Records list -->
+  <table class="data-table stack">
+    <thead>
+      <th class="col1 sort desc" data-sort="date-server-turned-in">Date Turned In</th>
+      <th class="col-hidden" data-sort="server-time-stamp">Server Time Stamp</th>
+      <th class="col2 sort" data-sort="ro">RO</th>
+      <th class="col5 sort" data-sort="customer">Customer</th>
+      <th class="col6 sort" data-sort="turned-in-by">Turned In By</th>
+      <th class="col7 sort" data-sort="received-by">Received By</th>
+      <th class="col8 sort" data-sort="failed-part-number">Failed Part #</th>
+      <th class="col9 sort" data-sort="description">Description</th>
+      <th class="col10">Qty</th>
+      <th class="col11">View</th>
+    </thead>
+    <tbody id="records-list" class="list">
+    <!--------------------------------------------------------------------------->
+    <!-- Handlebars ------------------------------------------------------------->
+    <!--------------------------------------------------------------------------->
+      {{#each core}}
+        <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
+          <td class="date-turned-in">{{Date}}</td>
+          <td class="date-server-turned-in">{{DateTimeStampServer}}</td>
+          <td class="ro">{{RO}}</td>
+          <td class="customer">{{Customer}}</td>
+          <td class="turned-in-by">{{TurnedInBy}}</td>
+          <td class="received-by">{{ReceivedBy}}</td>
+          <td class="failed-part-number">{{FailedPartNumber}}</td>
+          <td class="description">{{Description}}</td>
+          <td class="quantity">{{Quantity}}</td>
+          <td><a class="button list-record" href="record-warranty.html?KEY={{@key}}">View</a></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
 
-  <script>
-
-  /*****************************************************************************
-   * Retrieve core Records from Database
-  *****************************************************************************/
-  var ref = database.ref('core');
-  // ref.on is firebase method for keeping live data, and 'value' is saying you want values
-  ref.once('value', gotData, errData);
-
-  function gotData(data) {
-    // assign above core data to 'core'
-    var core = data.val();
-    // Firebase keys/records: assign the core object's Firebase keys to 'keys'
-    var keys = Object.keys(core);
-    // Loop through all the Keys/records
-    var Customer, DateTurnedIn, DateTimeStampServer, Description, FailedPartNumber, Quantity, ReceivedBy, RO, TurnedInBy;
-    for (var i = 0; i < keys.length; i++) {
-      var k = keys[i];
-      // Extract value from each Key record
-
-      var Customer = core[k].Customer.toUpperCase();
-      var DateTimeStampServer = core[k].DateTimeStampServer;
-      var DateTurnedIn = core[k].Date.toUpperCase();
-      var Description = core[k].Description.toUpperCase();
-      var FailedPartNumber = core[k].FailedPartNumber.toUpperCase();
-      var Quantity = core[k].Quantity.toUpperCase();
-      var ReceivedBy = core[k].ReceivedBy.toUpperCase();
-      var RO = core[k].RO.toUpperCase();
-      var TurnedInBy = core[k].TurnedInBy.toUpperCase();
-
-      /***************************************
-       * Build Table Rows from Data Values
-       **************************************/
-
-      /********** Create <td>'s *************/
-      // create <td>
-      var tdCustomer = document.createElement('td');
-      tdCustomer.className += 'c-customer';
-      var tCustomer = document.createTextNode(Customer);
-      tdCustomer.appendChild(tCustomer);
-      // create <td>
-      var tdDateTurnedIn = document.createElement('td');
-      tdDateTurnedIn.className += 'c-date-turned-in';
-      var tDateTurnedIn = document.createTextNode(DateTurnedIn);
-      tdDateTurnedIn.appendChild(tDateTurnedIn);
-      // create <td>
-      var tdDateTimeStampServer = document.createElement('td');
-      tdDateTimeStampServer.className += 'c-date-server-turned-in';
-      var tDateTimeStampServer = document.createTextNode(DateTimeStampServer);
-      tdDateTimeStampServer.appendChild(tDateTimeStampServer);
-      // create <td>
-      var tdDescription = document.createElement('td');
-      tdDescription.className += 'c-description';
-      var tDescription = document.createTextNode(Description);
-      tdDescription.appendChild(tDescription);
-      // create <td>
-      var tdFailedPartNumber = document.createElement('td');
-      tdFailedPartNumber.className += 'c-failed-part-number';
-      var tFailedPartNumber = document.createTextNode(FailedPartNumber);
-      tdFailedPartNumber.appendChild(tFailedPartNumber);
-      // create <td>
-      var tdReceivedBy = document.createElement('td');
-      tdReceivedBy.className += 'c-received-by';
-      var tReceivedBy = document.createTextNode(ReceivedBy);
-      tdReceivedBy.appendChild(tReceivedBy);
-      // create <td>
-      var tdQuantity = document.createElement('td');
-      tdQuantity.className += 'c-quantity';
-      var tQuantity = document.createTextNode(Quantity);
-      tdQuantity.appendChild(tQuantity);
-      // create <td>
-      var tdRo = document.createElement('td');
-      tdRo.className += 'c-ro';
-      var tRo = document.createTextNode(RO);
-      tdRo.appendChild(tRo);
-      // create <td>
-      var tdTurnedInBy = document.createElement('td');
-      tdTurnedInBy.className += 'c-turned-in-by';
-      var tTurnedInBy = document.createTextNode(TurnedInBy);
-      tdTurnedInBy.appendChild(tTurnedInBy);
-
-
-      /******** Create View Link ***********/
-      var a = document.createElement('a');
-      a.className += 'button list-record';
-      var linkText = document.createTextNode('View');
-      a.appendChild(linkText);
-      a.href = `track-record-core.html?KEY=${k}`;
-      var tdLink = document.createElement('td');
-      tdLink.appendChild(a);
-
-
-      /********** Build <tr> ***************/
-      var tr = document.createElement('tr');
-      tr.className += 'data-row';
-      tr.setAttribute("data-sort", DateTimeStampServer); // Used for Date sort
-      tr.id += k; // Add Firebase Record Key as ID
-      // add <td>'s as children of a <tr>
-
-      tr.appendChild(tdDateTurnedIn);
-      tr.appendChild(tdDateTimeStampServer);
-      tr.appendChild(tdRo);
-      tr.appendChild(tdCustomer);
-      tr.appendChild(tdTurnedInBy);
-      tr.appendChild(tdReceivedBy);
-      tr.appendChild(tdFailedPartNumber);
-      tr.appendChild(tdDescription);
-      tr.appendChild(tdQuantity);
-      tr.appendChild(tdLink);
-      document.getElementById("records-list").appendChild(tr);
-
-    } // End for Loop
-
+<!----------------------------------------------------------------------------->
+<!-- JavaScript --------------------------------------------------------------->
+<!----------------------------------------------------------------------------->
+<script>
 
   /***************************************
-   * Sort initial table by Date
-   **************************************/
-   // http://jsfiddle.net/UdvDD/
-   var $wrapper = $('.list');
+  * Table Sort: initial data load
+  ***************************************/
+  // http://jsfiddle.net/UdvDD/
+  var $wrapper = $('.list');
 
-   $wrapper.find('.data-row').sort(function (a, b) {
-       return b.dataset.sort - a.dataset.sort;
-   })
-   .appendTo( $wrapper );
+  $wrapper.find('.data-row').sort(function (a, b) {
+    return b.dataset.sort - a.dataset.sort;
+  })
+  .appendTo( $wrapper );
 
-    /***************************************
-     * LIST JS = Search and Columns Sort
-     **************************************/
-    // <th> 'data-sort' value and <td> 'class' value must match to work
-    /* DATE SORT required work-around:
-     * (because of Date Turned In format DD/MM/YYY, which would work properly if it was YYYY/MM/DD)
-     * The column "Date Turned In" contains data-sort="c-date-server-turned-in"
-     * that actually sorts by the DateTimeStampServer column, which is hidden. */
-    var options = {
-      valueNames: [ 'c-date-server-turned-in', 'c-customer', 'c-description', 'c-failed-part-number', 'c-quantity', 'c-received-by', 'c-ro', 'c-turned-in-by' ]
-    };
-    var monkeyList = new List('core', options);
+  /***************************************
+  * Search and Columns Sort: List JS
+  ***************************************/
+  // <th> 'data-sort' value and <td> 'class' value must match to work
+  /* DATE SORT required work-around:
+   * (because of Date Turned In format DD/MM/YYY, which would work properly if it was YYYY/MM/DD)
+   * The column "Date Turned In" contains data-sort="w-date-server-turned-in"
+   * that actually sorts by the DateTimeStampServer column, which is hidden. */
+  var options = {
+    valueNames: [ 'date-server-turned-in', 'customer', 'description', 'failed-part-number', 'quantity', 'received-by', 'ro', 'turned-in-by' ]
+  };
+  var monkeyList = new List('table-and-search', options);
 
-  } // End gotData(data)
-
-  function errData(err) {
-    console.log('Error!');
-    console.log(err);
-  }
+</script>

@@ -233,8 +233,7 @@ body {
  * Table Sort
  ******************************************************************************/
 .col-hidden,
-.w-date-server-turned-in,
-.c-date-server-turned-in {
+.date-server-turned-in {
   display: none;
 }
 

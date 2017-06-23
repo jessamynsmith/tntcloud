@@ -76,19 +76,17 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
   *****************************************************************************/
   dbRef.once('value', gotData);
   // global variable so warranty data can be accessed after the function
-  var myData;
+  var templateData;
 
   function gotData(data) {
     // access data values
-    myData = data.val();
-    console.log("Warranty DB Ref ", myData);
+    templateData = data.val();
 
     // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
-    res.render('core-warranty/list-warranty', myData );
+    res.render('core-warranty/list-warranty', templateData );
   };
 });
-
 
 /*******************************************************************************
  * List Core
@@ -97,7 +95,21 @@ router.get('/list-core', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-  res.render('core-warranty/list-core', { isAdmin: isAdmin });
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+  dbRef.once('value', gotData);
+  // global variable so warranty data can be accessed after the function
+  var templateData;
+
+  function gotData(data) {
+    // access data values
+    templateData = data.val();
+
+    // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
+    res.render('core-warranty/list-core', templateData );
+  };
 });
 
 
