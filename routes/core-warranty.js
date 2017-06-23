@@ -238,13 +238,18 @@ function gotData(data) {
   var gotPeople = [];
 
   data.forEach(function(data) {
-    gotPeople.push(data.val());
+//    gotPeople.push(data.val());
   //  console.log("Got People ", data.key, gotPeople);
-
-    console.log("The " + data.key + " dinosaur's score is " + data.val().PersonName);
+  gotPeople =
+  `<tr class="data-row" data-sort="{{DateTimeStampServer}}" id="${data.key}">
+    <td>${data.val().PersonName}</td>
+    <td><a class="button list-record" href="people-delete/?KEY=${data.key}">Delete Person</a></td>
+  </tr>`;
+  console.log(gotPeople);
+//    console.log("The " + data.key + " dinosaur's score is " + data.val().PersonName);
   });
 
-    res.render('core-warranty/people-list', { navCW: navCW } );
+    res.render('core-warranty/people-list', { peopleData: gotPeople, navCW: navCW } );
   }
 /*
   var peopleRef = dbRef.child('/people/');
