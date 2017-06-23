@@ -20,8 +20,8 @@
         </thead>
         <tbody>
           <tr class="data-row">
-            <td id="core-ro"></td>
-            <td id="core-customer"></td>
+            <td id="core-ro">{{ RO }}</td>
+            <td id="core-customer">{{ Customer }}</td>
             <td id="core-"></td>
           </tr>
         </tbody>
@@ -35,9 +35,9 @@
         </thead>
         <tbody>
           <tr class="data-row">
-            <td id="core-turned-in-by"></td>
-            <td id="core-date-turned-in"></td>
-            <td id="core-received-by"></td>
+            <td id="core-turned-in-by">{{ TurnedInBy }}</td>
+            <td id="core-date-turned-in">{{ Date }}&nbsp;{{ DateTime}}</td>
+            <td id="core-received-by">{{ ReceivedBy }}</td>
           </tr>
         </tbody>
         <!-- New Head ---------------------->
@@ -50,8 +50,8 @@
         </thead>
         <tbody>
           <tr class="data-row">
-            <td id="core-failed-part-number"></td>
-            <td id="core-quantity"></td>
+            <td id="core-failed-part-number">{{ FailedPartNumber }}</td>
+            <td id="core-quantity">{{ Quantity }}</td>
             <td id="core-"></td>
           </tr>
         </tbody>
@@ -59,7 +59,7 @@
         <tbody id="footer">
           <tr class="data-row footer">
             <th colspan="1" style="text-align: right;">Description</th>
-            <td colspan="2" id="core-description"></td>
+            <td colspan="2" id="core-description">{{ Description }}</td>
           </tr>
         </tbody>
       </table>

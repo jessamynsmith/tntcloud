@@ -159,6 +159,7 @@ body {
 }
 
 #output-form table {
+  font-weight: bold;
   margin-bottom: 0;
 }
 
