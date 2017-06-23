@@ -1,27 +1,3 @@
-<!--
-<h1>Create Core</h1>
-<section class="insert">
-    <h3>Create Core</h3>
-    <form action="/create-core/insert-core" method="post">
-        <div class="input">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title">
-        </div>
-        <div class="input">
-            <label for="content">Content</label>
-            <input type="text" id="content" name="content">
-        </div>
-        <div class="input">
-            <label for="author">Author</label>
-            <input type="text" id="author" name="author">
-        </div>
-        <button type="submit">INSERT</button>
-    </form>
-</section>
-<!----------------------------------------------------------------------------->
-<!----------------------------------------------------------------------------->
-<!----------------------------------------------------------------------------->
-<!----------------------------------------------------------------------------->
 
 <!-- Title/Intro -------------------------------------------------------------->
 <div class="section-intro">
@@ -50,14 +26,20 @@
       </div>
       <div class="input-group">
         <span class="input-group-label">Turned In By</span>
-        <select id="turned-in-by" class="input-group-field" name="turnedInBy">
+        <select id="turned-in-by" class="input-group-field" name="turnedInBy" name="turnedInBy">
           <option value="">Select Name</option>
+          {{#each people}}
+            <option value="{{PersonName}}">{{PersonName}}</option>
+          {{/each}}
         </select>
       </div>
       <div class="input-group">
         <span class="input-group-label">Received By</span>
         <select id="received-by"  class="input-group-field" name="receivedBy">
           <option value="">Select Name</option>
+          {{#each people}}
+            <option value="{{PersonName}}">{{PersonName}}</option>
+          {{/each}}
         </select>
       </div>
       <div class="input-group">

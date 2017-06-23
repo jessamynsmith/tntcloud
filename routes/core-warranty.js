@@ -46,21 +46,36 @@ router.post('/insert-warranty', mw.userRoleAndAdmin, function(req, res, next) {
  * Create Core
  ******************************************************************************/
 router.get('/create-core', function(req, res, next) {
-  res.render('core-warranty/create-core');
+  /*****************************************************************************
+   * Build Employees <options> for <select> drop-down with Employee ID + Name
+  *****************************************************************************/
+  dbRef.once('value', gotData);
+  // global variable so warranty data can be accessed after the function
+  var templateData;
+
+  function gotData(data) {
+    // access data values
+    templateData = data.val();
+
+    // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
+    res.render('core-warranty/create-core', templateData );
+  };
 });
 
-// Insert Data
+// Form: Create Core Record
 router.post('/insert-core', function(req, res, next) {
   // get the form fields data
   var item = {
-    RO: req.body.ro,
+    Branch: req.body.branch,
     Customer: req.body.customer,
     Description: req.body.description,
     FailedPartNumber: req.body.failedPartNumber,
-    Branch: req.body.branch,
-    Quantity: req.body.quantity
+    Quantity: req.body.quantity,
+    RO: req.body.ro,
+    TurnedInBy: req.body.turnedInBy,
+    ReceivedBy: req.body.receivedBy
   };
-  console.log("Branch ", item);
   // Use firebase from app.js and set child db node
   var coreRef = req.app.locals.dbRef.child('core');
   coreRef.push(item);
