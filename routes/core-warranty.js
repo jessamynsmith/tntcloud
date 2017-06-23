@@ -241,7 +241,7 @@ function gotData(data) {
 //    gotPeople.push(data.val());
   //  console.log("Got People ", data.key, gotPeople);
   gotPeople =
-  `<tr class="data-row" data-sort="{{DateTimeStampServer}}" id="${data.key}">
+  `<tr class="data-row" id="${data.key}">
     <td>${data.val().PersonName}</td>
     <td><a class="button list-record" href="people-delete/?KEY=${data.key}">Delete Person</a></td>
   </tr>`;
@@ -249,7 +249,7 @@ function gotData(data) {
 //    console.log("The " + data.key + " dinosaur's score is " + data.val().PersonName);
   });
 
-    res.render('core-warranty/people-list', { peopleData: gotPeople, navCW: navCW } );
+    res.render('core-warranty/people-list', { gotPeople: gotPeople, navCW: navCW } );
   }
 /*
   var peopleRef = dbRef.child('/people/');
