@@ -202,16 +202,14 @@ router.get('/list-core', mw.userRole, function(req, res, next) {
  * Print Core
  ******************************************************************************/
 router.get('/print-core', function(req, res, next) {
-  var gotKey = req.query.KEY;
 
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
-//  let dbRef = firebase.database().ref().child('core/' + key);
-
-  dbRef.child('core/' + gotKey).once('value', gotData);
-  // global variable so warranty data can be accessed after the function
-  var templateData;
+  // get key from url query parameter '?KEY='
+  var key = req.query.KEY;
+  // get 'core' data record associated with 'key' value
+  dbRef.child('core/' + key).once('value', gotData);
 
   function gotData(data) {
     // access data values
