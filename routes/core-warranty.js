@@ -55,8 +55,12 @@ router.post('/insert-core', function(req, res, next) {
   var item = {
     RO: req.body.ro,
     Customer: req.body.customer,
-    FailedPartNumber: req.body.failedPartNumber
+    Description: req.body.description,
+    FailedPartNumber: req.body.failedPartNumber,
+    Branch: req.body.branch,
+    Quantity: req.body.quantity
   };
+  console.log("Branch ", item);
   // Use firebase from app.js and set child db node
   var coreRef = req.app.locals.dbRef.child('core');
   coreRef.push(item);
