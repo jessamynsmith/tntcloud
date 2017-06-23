@@ -1,0 +1,121 @@
+
+  <!-- Title/Intro ------------------------------------------------------------>
+  <div class="section-intro">
+    <h1>Core Record Print</h2>
+  </div>
+
+  <!-- Primary Content -------------------------------------------------------->
+  <div id="output-form" class="print-area">
+    <div class="card">
+      <div class="card-divider">
+        <h4>Core Details</h4>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th class="col1">R/O or Invoice#</th>
+            <th class="col2">CUSTOMER</th>
+            <th class="col3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="data-row">
+            <td id="core-ro"></td>
+            <td id="core-customer"></td>
+            <td id="core-"></td>
+          </tr>
+        </tbody>
+        <!-- New Head ---------------------->
+        <thead>
+          <tr>
+            <th class="col1">Turned In By</th>
+            <th class="col2">Date Turned In</th>
+            <th class="col3">Received By</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="data-row">
+            <td id="core-turned-in-by"></td>
+            <td id="core-date-turned-in"></td>
+            <td id="core-received-by"></td>
+          </tr>
+        </tbody>
+        <!-- New Head ---------------------->
+        <thead>
+          <tr>
+            <th class="col1">Failed Part #</th>
+            <th class="col2">Quantity</th>
+            <th class="col3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="data-row">
+            <td id="core-failed-part-number"></td>
+            <td id="core-quantity"></td>
+            <td id="core-"></td>
+          </tr>
+        </tbody>
+        <!-- Footer ------------------------>
+        <tbody id="footer">
+          <tr class="data-row footer">
+            <th colspan="1" style="text-align: right;">Description</th>
+            <td colspan="2" id="core-description"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div> <!-- Close id=print-area -->
+
+  <p><a class="button success" onclick="window.print()">PRINT</a></p>
+  <!-- <p><a class="button hollow"  onclick="goBack()">Create new core record with this data as starting point</a></p> -->
+  <script>
+
+  /*****************************************************************************
+   * Back link in browser history
+  *****************************************************************************/
+  function goBack() {
+      window.history.back();
+  }
+
+  /*****************************************************************************
+   * Retrieve core Record from Database using Record Key
+  *****************************************************************************/
+  // URL Parameters -- processed in this file via urlParameter.js
+  // Access parameters by creating a variable equal to: getParam("xxx");
+  const key = getParam("KEY"); // Get key passed to URL from 'view' link
+
+  // Use "KEY" url parameter to target the core/ record
+  let dbRef = firebase.database().ref().child('core/' + key);
+  // Re: "once" https://firebase.google.com/docs/reference/js/firebase.database.Query#once
+  dbRef.once('value', gotData);
+
+  /*****************************************************************************
+   * core Data to Table
+  *****************************************************************************/
+  function gotData(data) {
+    // assign above core data to 'coreRecord'
+    // data.val() returns Object; destructure to pull out individual property values
+    var coreRecord = data.val();
+    // Destructure Object to individual property values
+    let { Branch, Customer, Date, DateTime, Description, FailedPartNumber, Quantity, RO, ReceivedBy, TurnedInBy } = coreRecord;
+
+    // Assign core Data to Table <div>'s
+    document.getElementById("core-customer").innerHTML = Customer;
+    document.getElementById("core-date-turned-in").innerHTML = Date + ' ' + DateTime;
+    document.getElementById("core-description").innerHTML = Description;
+    document.getElementById("core-failed-part-number").innerHTML = FailedPartNumber;
+    document.getElementById("core-quantity").innerHTML = Quantity;
+    document.getElementById("core-received-by").innerHTML = ReceivedBy;
+    document.getElementById("core-ro").innerHTML = RO;
+    document.getElementById("core-turned-in-by").innerHTML = TurnedInBy;
+
+  } // End function gotData
+
+  function errData(err) {
+    console.log('Error!');
+    console.log(err);
+  }
+
+//  console.log(firebase);
+
+  </script>

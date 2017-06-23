@@ -53,15 +53,15 @@ router.get('/create-core', function(req, res, next) {
 router.post('/insert-core', function(req, res, next) {
   // get the form fields data
   var item = {
-    title: req.body.title,
-    content: req.body.content,
-    author: req.body.author
+    RO: req.body.ro,
+    Customer: req.body.customer,
+    FailedPartNumber: req.body.failedPartNumber
   };
   // Use firebase from app.js and set child db node
   var coreRef = req.app.locals.dbRef.child('core');
   coreRef.push(item);
   // url redirect after post
-  res.redirect('/core-warranty');
+  res.redirect('/core-warranty/print-core');
 });
 
 /*******************************************************************************
@@ -112,5 +112,12 @@ router.get('/list-core', mw.userRole, function(req, res, next) {
   };
 });
 
+/*******************************************************************************
+ * Print Core
+ ******************************************************************************/
+router.get('/print-core', function(req, res, next) {
+
+  res.render('core-warranty/print-core');
+});
 
 module.exports = router;

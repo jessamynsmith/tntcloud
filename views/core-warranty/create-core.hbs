@@ -1,3 +1,4 @@
+<!--
 <h1>Create Core</h1>
 <section class="insert">
     <h3>Create Core</h3>
@@ -22,14 +23,14 @@
 <!----------------------------------------------------------------------------->
 <!----------------------------------------------------------------------------->
 
-<!-- Title/Intro ------------------------------------------------------------>
+<!-- Title/Intro -------------------------------------------------------------->
 <div class="section-intro">
   <h1>Create Core Record</h1>
 </div>
 
-<!-- Main ------------------------------------------------------------------->
+<!-- Main --------------------------------------------------------------------->
 <div class="row expanded small-12 medium-10 large-6 columns">
-  <form id="core-input-form" class="input-form" onSubmit="return submitCoreForm(this)">
+  <form action="/create-core/insert-core" method="post" class="input-form">
     <div class="">
       <div class="card">
         <div class="card-divider">
@@ -40,36 +41,36 @@
         <span class="input-group-label">Branch</span>
         <select id="core-branch" required class="input-group-field">
           <option value="">Select Branch</option>
-          <option value="JAX">JAX</option>
-          <option value="NFWS">NFWS</option>
-          <option value="LC">LC</option>
-          <option value="WC">WC</option>
-          <option value="440">440</option>
+          <option value="JAX" name="JAX">JAX</option>
+          <option value="NFWS" name="NFWS">NFWS</option>
+          <option value="LC" name="LC">LC</option>
+          <option value="WC" name="WC">WC</option>
+          <option value="440" name="440">440</option>
         </select>
       </div>
       <div class="input-group">
         <span class="input-group-label">Turned In By</span>
-        <select id="turned-in-by" required class="input-group-field">
+        <select id="turned-in-by" class="input-group-field">
           <option value="">Select Name</option>
         </select>
       </div>
       <div class="input-group">
         <span class="input-group-label">Received By</span>
-        <select id="received-by" required class="input-group-field">
+        <select id="received-by"  class="input-group-field">
           <option value="">Select Name</option>
         </select>
       </div>
       <div class="input-group">
         <span class="input-group-label">R/O or Invoice#</span>
-        <input type="text" id="core-ro" placeholder="R/O" required class="input-group-field">
+        <input type="text" id="core-ro" placeholder="R/O" required class="input-group-field" name="ro">
       </div>
       <div class="input-group">
         <span class="input-group-label">Customer</span>
-        <input type="text" id="core-customer" placeholder="Customer" required class="input-group-field"/>
+        <input type="text" id="core-customer" placeholder="Customer" required class="input-group-field" name="customer">
       </div>
       <div class="input-group">
         <span class="input-group-label">Failed Part Number</span>
-        <input type="text" id="core-failed-part-number" placeholder="Failed Part Number" required class="input-group-field"/>
+        <input type="text" id="core-failed-part-number" placeholder="Failed Part Number" required class="input-group-field" name="failedPartNumber">
       </div>
       <div class="input-group">
         <span class="input-group-label">Quantity</span>
@@ -78,9 +79,9 @@
       </div>
       <div>
         <div class="input-group-label input-group-field" style="text-align: left;">Description</div>
-        <textarea id="core-description" placeholder="Description" required></textarea>
+        <textarea id="core-description" placeholder="Description" required name="description"></textarea>
         <input id="submit-core" type="submit" class="button primary">
-        <a href="track-list-core.html" class="button secondary">Cancel</a>
+        <a href="list-core.html" class="button secondary">Cancel</a>
       </div>
     </div>
   </form>
@@ -88,9 +89,9 @@
 
 <script>
 
-/*****************************************************************************
+/*******************************************************************************
  * Post form Data to Database
-*****************************************************************************/
+*******************************************************************************/
 
 function submitCoreForm(){
   event.preventDefault();
