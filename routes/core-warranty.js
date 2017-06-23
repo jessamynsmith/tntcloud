@@ -21,7 +21,7 @@ var navCW =
   `<ul class="menu">
     <li><a href="/core-warranty/list-warranty">Warranty</a></li>
     <li><a href="/core-warranty/list-core">Core</a></li>
-    <li><a href="/core-warranty/peoplelist">People</a></li>
+    <li><a href="/core-warranty/people-list">People</a></li>
   </ul>`;
 
 /*******************************************************************************
@@ -217,7 +217,7 @@ router.get('/record-core', function(req, res, next) {
 /*******************************************************************************
  * List People
  ******************************************************************************/
-router.get('/list-people', function(req, res, next) {
+router.get('/people-list', function(req, res, next) {
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
@@ -232,7 +232,7 @@ router.get('/list-people', function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/list-people', { peopleData: templateData, navCW: navCW } );
+    res.render('core-warranty/people-list', { peopleData: templateData, navCW: navCW } );
   };
 });
 
