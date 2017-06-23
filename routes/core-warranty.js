@@ -62,12 +62,10 @@ router.get('/create-core', function(req, res, next) {
    * Build Employees <options> for <select> drop-down with Employee ID + Name
   *****************************************************************************/
   // ref.on is firebase method for keeping live data, and 'value' is saying you want values
-  dbRef.child('/people/').orderByChild('PersonName').once('value', gotData);
-
-  var gotPeople = [];
+  dbRef.child('/people/').orderByChild('PersonName').on('value', gotData);
 
   function gotData(data) {
-    // assign above warranty data to 'warranty'
+    var gotPeople = [];
 
     data.forEach(function(data) {
       gotPeople.push(data.val());
