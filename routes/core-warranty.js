@@ -75,7 +75,7 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
    * Data for Handlebars
   *****************************************************************************/
 
-  dbRef.child('/warranty/').once('value', gotData);
+  dbRef.once('value', gotData);
   // global variable so warranty data can be accessed after the function
   var warranty = {};
 
@@ -93,7 +93,14 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
   }
 
   var testData =
-  { warranty:
+  {
+    users:
+       { '0fHIeLP0ZebpApMz2T5neW1mzgu2': { email: 'test@test.com', role: 'admin' },
+         '2nXzWZ8oTTf7uOJ4qcodISofI1k2': { email: 'basic@gmail.com', role: 'basic' },
+         I8olhLwiDrQbDLhxEWLjpMkQ1qg2: { email: 'admin@gmail.com', role: 'admin' },
+         uFabw5Vuldfa1ZexUjxI4WgKGwD3: { email: 'basictwo@gmail.com', role: 'basic' },
+         urWikkKSWYTcle3QzWtSbZIZqD82: { email: 'nilshendrick@gmail.com', role: 'admin' } },
+    warranty:
     { '-KlTlm2Gaz8xWXIfoI2b':
       { Date: '05/31/2017',
         RO: '131584' },
