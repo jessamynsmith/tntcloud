@@ -60,9 +60,10 @@ router.get('/create-core', function(req, res, next) {
   function gotData(data) {
     // assign above warranty data to 'warranty'
     var people = data.val();
-    console.log("People ? ", people);
+//    console.log("People ? ", people);
     // Firebase keys/records: assign the warranty object's Firebase keys to 'keys'
     var keys = Object.keys(people);
+//    console.log("People Keys ", keys);
     // Loop through all the Keys/records
     for (var i = 0; i < keys.length; i++) {
       var k = keys[i];
@@ -71,6 +72,7 @@ router.get('/create-core', function(req, res, next) {
 
       // gotPeople array for use after for loop, in below "Sort Option Names"
       gotPeople.push(people[k].PersonName);
+//      console.log("Got People? ", gotPeople);
     } // End for loop
 
     /***************************************************************************
@@ -78,12 +80,12 @@ router.get('/create-core', function(req, res, next) {
      **************************************************************************/
     var sortMe = [];
     gotPeople;
-
+//    console.log("Got people again ? ", gotPeople);
     for (var i = 0; i < gotPeople.length; i++) {
       var person = gotPeople[i];
       sortMe.push(person);
     }
-
+    console.log("Sort me ? ", sortMe);
     sortMe.sort(function(x,y){
       var a = String(x);
       var b = String(y);
