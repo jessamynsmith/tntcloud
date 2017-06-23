@@ -22,9 +22,6 @@ router.get('/', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-//  console.log("core-warranty.js: Got UID here ", req.app.locals.uid);
-//  console.log("User Role is ", req.app.locals.userRole);
-
   res.render('core-warranty/core-warranty', { isAdmin: isAdmin });
 });
 
@@ -70,8 +67,9 @@ router.get('/create-core', function(req, res, next) {
     data.forEach(function(data) {
       gotPeople.push(data.val());
     });
-    // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
-    // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
+    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
+    // handlebars object: templateData: templateData === anyName: variableName
     res.render('core-warranty/create-core', { gotPeople: gotPeople } );
   };
 });
@@ -127,8 +125,9 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
     // access data values
     templateData = data.val();
 
-    // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
-    // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
+    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
+    // handlebars object: templateData: templateData === anyName: variableName
     res.render('core-warranty/list-warranty', templateData );
   };
 });
@@ -150,10 +149,10 @@ router.get('/list-core', mw.userRole, function(req, res, next) {
   function gotData(data) {
     // access data values
     templateData = data.val();
-//    console.log("Core Data", templateData);
 
-    // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
-    // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
+    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
+    // handlebars object: templateData: templateData === anyName: variableName
     res.render('core-warranty/list-core', { isAdmin: isAdmin, coreData: templateData } );
   };
 });
@@ -174,7 +173,7 @@ router.get('/print-core', function(req, res, next) {
   function gotData(data) {
     // access data values
     templateData = data.val();
-//    console.log("Record Data ", templateData);
+
     res.render('core-warranty/print-core', templateData);
   };
 });
@@ -193,10 +192,14 @@ router.get('/record-core', function(req, res, next) {
   dbRef.child('core/' + key).once('value', gotData);
 
   function gotData(data) {
+
+  console.log("My Key ", key);
     // access data values
     templateData = data.val();
-    console.log("Record Data ", templateData);
-    res.render('core-warranty/record-core', templateData);
+    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
+    // handlebars object: templateData: templateData === anyName: variableName
+    res.render('core-warranty/record-core', { templateData: templateData, key: key });
   };
 });
 

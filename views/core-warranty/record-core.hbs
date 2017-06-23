@@ -21,14 +21,14 @@
   </thead>
   <tbody>
     <tr class="data-row list-record">
-      <td id="core-date-turned-in">{{ Date }}&nbsp;{{ DateTime}}</td>
-      <td id="core-ro">{{ RO }}</td>
-      <td id="core-customer">{{ Customer }}</td>
-      <td id="core-turned-in-by">{{ TurnedInBy }}</td>
-      <td id="core-received-by">{{ ReceivedBy }}</td>
-      <td id="core-failed-part-number">{{ FailedPartNumber }}</td>
-      <td id="core-description">{{ Description }}</td>
-      <td id="core-quantity">{{ Quantity }}</td>
+      <td id="core-date-turned-in">{{ templateData.Date }}&nbsp;{{ templateData.DateTime}}</td>
+      <td id="core-ro">{{ templateData.RO }}</td>
+      <td id="core-customer">{{ templateData.Customer }}</td>
+      <td id="core-turned-in-by">{{ templateData.TurnedInBy }}</td>
+      <td id="core-received-by">{{ templateData.ReceivedBy }}</td>
+      <td id="core-failed-part-number">{{ templateData.FailedPartNumber }}</td>
+      <td id="core-description">{{ templateData.Description }}</td>
+      <td id="core-quantity">{{ templateData.Quantity }}</td>
       <td id="core-print-sticker">
         <a class="button" href="/core-warranty/print-core/?KEY={{ key }}">Print</a>
       </td>
