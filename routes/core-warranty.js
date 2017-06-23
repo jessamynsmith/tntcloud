@@ -4,9 +4,10 @@ var firebase = require("firebase");
 var mw = require('../middleware');
 var dbRef = firebase.database().ref();
 
+/*******************************************************************************
+ * Date/Time
+ ******************************************************************************/
 var moment = require('moment');
-
-
 // Server Date/Time https://firebase.google.com/docs/reference/js/firebase.database.ServerValue
 const DateTimeStampServer = firebase.database.ServerValue.TIMESTAMP;
 let Date = DateTimeStampServer;
@@ -16,7 +17,6 @@ let DateTime = moment().format('h:mm:ss A');
 /*******************************************************************************
  * Core Warranty Home
  ******************************************************************************/
-/* Core-warranty route */
 // this router is for /core-warranty dir, see app.js for initializer
 router.get('/', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
@@ -136,9 +136,22 @@ router.post('/insert-core', function(req, res, next) {
     TurnedInBy: req.body.turnedInBy,
     ReceivedBy: req.body.receivedBy
   };
+  // Get a key for a new core Record
+  var newCoreKey = firebase.database().ref().child('core').push().key;
+
+  // write the new core data to the core list
+  var updates = {};
+  updates['/core/' + newCoreKey] = item;
+
+  // update the new-key-record with the data
+  var dbUpdate = req.app.locals.dbRef.update(updates);
+
+  // redirect page with url parameter containing core key
+//  window.location.href = `track-print-core.html?KEY=${newCoreKey}`;
+
   // Use firebase from app.js and set child db node
-  var coreRef = req.app.locals.dbRef.child('core');
-  coreRef.push(item);
+//  var coreRef = req.app.locals.dbRef.child('core');
+//  coreRef.push(item);
   // url redirect after post
   res.redirect('/core-warranty/print-core');
 });
