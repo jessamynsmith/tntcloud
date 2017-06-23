@@ -85,7 +85,7 @@ router.get('/create-core', function(req, res, next) {
       var person = gotPeople[i];
       sortMe.push(person);
     }
-    console.log("Sort me ? ", sortMe);
+//    console.log("Sort me ? ", sortMe);
     sortMe.sort(function(x,y){
       var a = String(x);
       var b = String(y);
@@ -97,13 +97,14 @@ router.get('/create-core', function(req, res, next) {
           return 0;
       }
     });
+//    console.log("Sorted ????? ", sortMe);
     // re-assign sorted 'sortMe' to 'sortedArray'
-    sortedArray = sortMe;
-
+    gotPeople = sortMe;
+    console.log("Got people sorted ? ", gotPeople);
 
     // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
-    res.render('core-warranty/create-core', sortedArray );
+    res.render('core-warranty/create-core', gotPeople );
   };
 });
 
