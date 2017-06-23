@@ -75,7 +75,7 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
    * Data for Handlebars
   *****************************************************************************/
 
-  dbRef.once('value', gotData);
+  dbRef.child('/warranty/').once('value', gotData);
   // global variable so warranty data can be accessed after the function
   var warranty = {};
 
@@ -92,8 +92,24 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
     article: 'whatever'
   }
 
-  res.render('core-warranty/list-warranty', templateData );
-  console.log("From Render ", res.render.templateData);
+  var testData =
+  { warranty:
+    { '-KlTlm2Gaz8xWXIfoI2b':
+      { Date: '05/31/2017',
+        RO: '131584' },
+     '-KlU_4xdFbDdlwhsLNAT':
+      { Date: '05/31/2017',
+        RO: 'S-208308' }
+    }
+  }
+
+  var test = {
+    Date: '1999',
+    RO: 'whatever'
+  }
+
+  res.render('core-warranty/list-warranty', testData );
+//  console.log("From Render ", res.render.templateData);
 });
 
 

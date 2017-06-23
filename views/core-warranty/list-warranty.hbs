@@ -35,15 +35,22 @@
 <!-- Handlebars ------------------------------------------------------------->
 <!--------------------------------------------------------------------------->
 <div id="errorMessage">
-    {{ year }}
-    {{ article }}
+    {{ Date }}
+    {{ RO }}
 </div>
-
+<!--
+{{#each test}}
+  <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
+    <td class="w-date-turned-in">{{this.Date}}</td>
+    <td class="w-ro">{{this.RO}}</td>
+  </tr>
+{{/each}}
+-->
 
   {{#each warranty}}
     <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
-      <td class="w-date-turned-in">{{this.Date}}</td>
-      <td class="w-ro">{{this.RO}}</td>
+      <td class="w-date-turned-in">{{Date}}</td>
+      <td class="w-ro">{{RO}}</td>
     </tr>
   {{/each}}
 
