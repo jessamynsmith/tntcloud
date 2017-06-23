@@ -233,8 +233,10 @@ router.get('/people-list', function(req, res, next) {
     var scoresRef = dbRef.child("/people/");
     scoresRef.orderByValue().on("value", function(snapshot) {
       snapshot.forEach(function(data) {
-        console.log("The " + data.key + " dinosaur's score is " + data.val().PersonName);
+//        console.log("The " + data.key + " dinosaur's score is " + data.val().PersonName);
+        console.log(data.val());
       });
+      res.render('core-warranty/people-list', { /* peopleData: templateData,*/ navCW: navCW } );
     });
 /*
   var peopleRef = dbRef.child('/people/');
@@ -251,7 +253,6 @@ router.get('/people-list', function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-//    res.render('core-warranty/people-list', { /* peopleData: templateData,*/ navCW: navCW } );
 });
 
 
