@@ -76,14 +76,16 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
   *****************************************************************************/
   dbRef.once('value', gotData);
   // global variable so warranty data can be accessed after the function
-  var warrantyData;
+  var myData;
 
   function gotData(data) {
     // access data values
-    warrantyData = data.val();
-    console.log("Warranty DB Ref ", warrantyData);
+    myData = data.val();
+    console.log("Warranty DB Ref ", myData);
 
-    res.render('core-warranty/list-warranty', warrantyData  );
+    // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
+    res.render('core-warranty/list-warranty', myData );
   };
 });
 
