@@ -61,17 +61,8 @@ router.get('/create-core', function(req, res, next) {
   /*****************************************************************************
    * Build Employees <options> for <select> drop-down with Employee ID + Name
   *****************************************************************************/
-  /*
-  var ratingRef = firebase.database().ref("ratings/");
-
-  ratingRef.orderByValue().on("value", function(data) {
-     data.forEach(function(data) {
-        console.log("The " + data.key + " rating is " + data.val());
-     });
-  });
-  */
   // ref.on is firebase method for keeping live data, and 'value' is saying you want values
-  dbRef.child('/people/').orderByChild('PersonName').on('value', gotData);
+  dbRef.child('/people/').orderByChild('PersonName').once('value', gotData);
 
   var gotPeople = [];
 
@@ -80,9 +71,8 @@ router.get('/create-core', function(req, res, next) {
 
     data.forEach(function(data) {
       gotPeople.push(data.val());
-      console.log("The Ordered ? ",  data.val());
     });
-  // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
     res.render('core-warranty/create-core', { gotPeople: gotPeople } );
   };
