@@ -35,36 +35,3 @@
     </tr>
   </tbody>
 </table>
-
-<script>
-
-/*****************************************************************************
- * Back link in browser history
-*****************************************************************************/
-function goBack() {
-  window.history.back();
-}
-
-/*****************************************************************************
- * Retrieve core Record from Database using Record Key
-*****************************************************************************/
-// URL Parameters -- processed in this file via urlParameter.js
-// Access parameters by creating a variable equal to: getParam("xxx");
-const key = getParam("KEY"); // Get key passed to URL from 'view' link
-
-// Use "KEY" url parameter to target the core/ record
-let dbRef = firebase.database().ref().child('core/' + key);
-// Re: "once" https://firebase.google.com/docs/reference/js/firebase.database.Query#once
-dbRef.once('value', gotData);
-
-/******** Create Print Link ***********/
-var a = document.createElement('a');
-a.className += 'button';
-a.id = key;
-var linkText = document.createTextNode('Print');
-a.appendChild(linkText);
-a.href = `track-print-core.html?KEY=${key}`;
-document.getElementById("core-print-sticker").appendChild(a);
-//  console.log(firebase);
-
-</script>
