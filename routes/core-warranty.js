@@ -15,22 +15,15 @@ Date = moment().format('L'); // Format date with moment.js
 let DateTime = moment().format('h:mm:ss A');
 
 /*******************************************************************************
- * Core Warranty: All Routes
+ * Core Warranty: Navigation
  ******************************************************************************/
-// this router is for /core-warranty dir, see app.js for initializer
-/*
-router.get('/*', function(req, res, next) {
-
-var cwNav =
+var navCW =
   `<ul class="menu">
     <li><a href="/core-warranty/list-warranty">Warranty</a></li>
     <li><a href="/core-warranty/list-core">Core</a></li>
     <li><a href="/core-warranty/peoplelist">People</a></li>
   </ul>`;
 
-  res.render('*', cwNav);
-});
-*/
 /*******************************************************************************
  * Core Warranty Home
  ******************************************************************************/
@@ -39,14 +32,7 @@ router.get('/', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-  var cwNav =
-    `<ul class="menu">
-      <li><a href="/core-warranty/list-warranty">Warranty</a></li>
-      <li><a href="/core-warranty/list-core">Core</a></li>
-      <li><a href="/core-warranty/peoplelist">People</a></li>
-    </ul>`;
-
-  res.render('core-warranty/core-warranty', { isAdmin: isAdmin, cwNav: cwNav });
+  res.render('core-warranty/core-warranty', { isAdmin: isAdmin, navCW: navCW });
 });
 
 /*******************************************************************************
@@ -54,7 +40,7 @@ router.get('/', mw.userRole, function(req, res, next) {
  ******************************************************************************/
 router.get('/create-warranty', function(req, res, next) {
   var user = req.app.locals.user;
-  res.render('core-warranty/create-warranty');
+  res.render('core-warranty/create-warranty', { navCW: navCW });
 });
 
 /*******************************************************************************
@@ -94,7 +80,7 @@ router.get('/create-core', function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/create-core', { gotPeople: gotPeople } );
+    res.render('core-warranty/create-core', { gotPeople: gotPeople, navCW: navCW } );
   };
 });
 
@@ -141,7 +127,7 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
-  dbRef.once('value', gotData);
+  dbRef.child('warranty').once('value', gotData);
   // global variable so warranty data can be accessed after the function
   var templateData;
 
@@ -152,7 +138,7 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/list-warranty', templateData );
+    res.render('core-warranty/list-warranty', { warrantyData: templateData, navCW: navCW } );
   };
 });
 
@@ -177,7 +163,7 @@ router.get('/list-core', mw.userRole, function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/list-core', { isAdmin: isAdmin, coreData: templateData } );
+    res.render('core-warranty/list-core', { isAdmin: isAdmin, coreData: templateData, navCW: navCW } );
   };
 });
 
@@ -198,7 +184,7 @@ router.get('/print-core', function(req, res, next) {
     // access data values
     templateData = data.val();
 
-    res.render('core-warranty/print-core', templateData);
+    res.render('core-warranty/print-core', { templateData: templateData, navCW: navCW } );
   };
 });
 
@@ -223,7 +209,7 @@ router.get('/record-core', function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/record-core', { templateData: templateData, key: key });
+    res.render('core-warranty/record-core', { templateData: templateData, key: key, navCW: navCW });
   };
 });
 
