@@ -74,49 +74,17 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
-
   dbRef.once('value', gotData);
   // global variable so warranty data can be accessed after the function
-  var warranty = {};
+  var warrantyData;
 
   function gotData(data) {
-      // access data values
-    var warranty = data.val();
-    console.log("Warranty DB Ref ", warranty);
+    // access data values
+    warrantyData = data.val();
+    console.log("Warranty DB Ref ", warrantyData);
 
-    // pass the results to our 'index' view ...render
-    // i could bind the database query to variable which is then promise...
+    res.render('core-warranty/list-warranty', warrantyData  );
   };
-  var templateData = {
-    year: '1999',
-    article: 'whatever'
-  }
-
-  var testData =
-  {
-    users:
-       { '0fHIeLP0ZebpApMz2T5neW1mzgu2': { email: 'test@test.com', role: 'admin' },
-         '2nXzWZ8oTTf7uOJ4qcodISofI1k2': { email: 'basic@gmail.com', role: 'basic' },
-         I8olhLwiDrQbDLhxEWLjpMkQ1qg2: { email: 'admin@gmail.com', role: 'admin' },
-         uFabw5Vuldfa1ZexUjxI4WgKGwD3: { email: 'basictwo@gmail.com', role: 'basic' },
-         urWikkKSWYTcle3QzWtSbZIZqD82: { email: 'nilshendrick@gmail.com', role: 'admin' } },
-    warranty:
-    { '-KlTlm2Gaz8xWXIfoI2b':
-      { Date: '05/31/2017',
-        RO: '131584' },
-     '-KlU_4xdFbDdlwhsLNAT':
-      { Date: '05/31/2017',
-        RO: 'S-208308' }
-    }
-  }
-
-  var test = {
-    Date: '1999',
-    RO: 'whatever'
-  }
-
-  res.render('core-warranty/list-warranty', testData );
-//  console.log("From Render ", res.render.templateData);
 });
 
 
