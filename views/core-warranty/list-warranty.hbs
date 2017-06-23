@@ -6,23 +6,23 @@
 </div>
 
 <!-- Primary Content -------------------------------------------------------->
-<div id="warranty">
+<div id="table-and-search">
   <!-- Search Form -->
   <input type="text" class="search" placeholder="Search warranty records...">
 
   <!-- Records list -->
   <table class="data-table stack">
     <thead>
-      <th class="col1 sort desc" data-sort="w-date-server-turned-in">Date Turned In</th>
-      <th class="col-hidden" data-sort="w-server-time-stamp">Server Time Stamp</th>
-      <th class="col2 sort" data-sort="w-ro">RO</th>
-      <th class="col3 sort" data-sort="w-vin">VIN</th>
-      <th class="col4 sort" data-sort="w-vendor">Vendor</th>
-      <th class="col5 sort" data-sort="w-customer">Customer</th>
-      <th class="col6 sort" data-sort="w-turned-in-by">Turned In By</th>
-      <th class="col7 sort" data-sort="w-received-by">Received By</th>
-      <th class="col8 sort" data-sort="w-failed-part-number">Failed Part #</th>
-      <th class="col9 sort" data-sort="w-description">Description</th>
+      <th class="col1 sort desc" data-sort="date-server-turned-in">Date Turned In</th>
+      <th class="col-hidden" data-sort="server-time-stamp">Server Time Stamp</th>
+      <th class="col2 sort" data-sort="ro">RO</th>
+      <th class="col3 sort" data-sort="vin">VIN</th>
+      <th class="col4 sort" data-sort="vendor">Vendor</th>
+      <th class="col5 sort" data-sort="customer">Customer</th>
+      <th class="col6 sort" data-sort="turned-in-by">Turned In By</th>
+      <th class="col7 sort" data-sort="received-by">Received By</th>
+      <th class="col8 sort" data-sort="failed-part-number">Failed Part #</th>
+      <th class="col9 sort" data-sort="description">Description</th>
       <th class="col10">Qty</th>
       <th class="col11">View</th>
     </thead>
@@ -32,18 +32,18 @@
     <!--------------------------------------------------------------------------->
       {{#each warranty}}
         <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
-          <td class="w-date-turned-in">{{Date}}</td>
-          <td class="w-date-server-turned-in">{{DateTimeStampServer}}</td>
-          <td class="w-ro">{{RO}}</td>
-          <td class="w-vin">{{VIN}}</td>
-          <td class="w-vendor">{{Vendor}}</td>
-          <td class="w-customer">{{Customer}}</td>
-          <td class="w-turned-in-by">{{TurnedInBy}}</td>
-          <td class="w-received-by">{{ReceivedBy}}</td>
-          <td class="w-failed-part-number">{{FailedPartNumber}}</td>
-          <td class="w-description">{{Description}}</td>
-          <td class="w-quantity">{{Quantity}}</td>
-          <td><a class="button list-record" href="track-record-warranty.html?KEY={{@key}}">View</a></td>
+          <td class="date-turned-in">{{Date}}</td>
+          <td class="date-server-turned-in">{{DateTimeStampServer}}</td>
+          <td class="ro">{{RO}}</td>
+          <td class="vin">{{VIN}}</td>
+          <td class="vendor">{{Vendor}}</td>
+          <td class="customer">{{Customer}}</td>
+          <td class="turned-in-by">{{TurnedInBy}}</td>
+          <td class="received-by">{{ReceivedBy}}</td>
+          <td class="failed-part-number">{{FailedPartNumber}}</td>
+          <td class="description">{{Description}}</td>
+          <td class="quantity">{{Quantity}}</td>
+          <td><a class="button list-record" href="record-warranty.html?KEY={{@key}}">View</a></td>
         </tr>
       {{/each}}
     </tbody>
@@ -75,8 +75,8 @@
    * The column "Date Turned In" contains data-sort="w-date-server-turned-in"
    * that actually sorts by the DateTimeStampServer column, which is hidden. */
   var options = {
-    valueNames: [ 'w-date-server-turned-in', 'w-customer', 'w-description', 'w-failed-part-number', 'w-quantity', 'w-received-by', 'w-ro', 'w-turned-in-by', 'w-vendor', 'w-vin' ]
+    valueNames: [ 'date-server-turned-in', 'customer', 'description', 'failed-part-number', 'quantity', 'received-by', 'ro', 'turned-in-by', 'vendor', 'vin' ]
   };
-  var monkeyList = new List('warranty', options);
+  var monkeyList = new List('table-and-search', options);
 
 </script>
