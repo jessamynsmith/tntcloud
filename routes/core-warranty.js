@@ -146,7 +146,7 @@ router.post('/insert-core', function(req, res, next) {
   // update the new-key-record with the data
   var dbUpdate = req.app.locals.dbRef.update(updates);
 
-  // url redirect after post
+  // url redirect after post, include query parameter
   res.redirect('/core-warranty/print-core/?KEY=' + newCoreKey);
 });
 
@@ -202,8 +202,23 @@ router.get('/list-core', mw.userRole, function(req, res, next) {
  * Print Core
  ******************************************************************************/
 router.get('/print-core', function(req, res, next) {
+  var gotKey = req.query.KEY;
 
-  res.render('core-warranty/print-core');
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+//  let dbRef = firebase.database().ref().child('core/' + key);
+
+  dbRef.child('core/' + gotKey).once('value', gotData);
+  // global variable so warranty data can be accessed after the function
+  var templateData;
+
+  function gotData(data) {
+    // access data values
+    templateData = data.val();
+    console.log("Record Data ", templateData);
+    res.render('core-warranty/print-core', templateData);
+  };
 });
 
 module.exports = router;
