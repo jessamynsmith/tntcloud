@@ -150,7 +150,7 @@ router.get('/list-core', mw.userRole, function(req, res, next) {
   function gotData(data) {
     // access data values
     templateData = data.val();
-    console.log("Core Data", templateData);
+//    console.log("Core Data", templateData);
 
     // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
@@ -174,7 +174,7 @@ router.get('/print-core', function(req, res, next) {
   function gotData(data) {
     // access data values
     templateData = data.val();
-    console.log("Record Data ", templateData);
+//    console.log("Record Data ", templateData);
     res.render('core-warranty/print-core', templateData);
   };
 });
