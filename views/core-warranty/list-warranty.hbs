@@ -49,17 +49,34 @@
     </tbody>
   </table>
 </div>
+
+<!----------------------------------------------------------------------------->
+<!-- JavaScript --------------------------------------------------------------->
+<!----------------------------------------------------------------------------->
 <script>
 
-/***************************************
-* Sort initial table by Date
-***************************************/
-// http://jsfiddle.net/UdvDD/
-var $wrapper = $('.list');
+  /***************************************
+  * Table Sort: initial data load
+  ***************************************/
+  // http://jsfiddle.net/UdvDD/
+  var $wrapper = $('.list');
 
-$wrapper.find('.data-row').sort(function (a, b) {
-  return b.dataset.sort - a.dataset.sort;
-})
-.appendTo( $wrapper );
+  $wrapper.find('.data-row').sort(function (a, b) {
+    return b.dataset.sort - a.dataset.sort;
+  })
+  .appendTo( $wrapper );
+
+  /***************************************
+  * Search and Columns Sort: List JS
+  ***************************************/
+  // <th> 'data-sort' value and <td> 'class' value must match to work
+  /* DATE SORT required work-around:
+   * (because of Date Turned In format DD/MM/YYY, which would work properly if it was YYYY/MM/DD)
+   * The column "Date Turned In" contains data-sort="w-date-server-turned-in"
+   * that actually sorts by the DateTimeStampServer column, which is hidden. */
+  var options = {
+    valueNames: [ 'w-date-server-turned-in', 'w-customer', 'w-description', 'w-failed-part-number', 'w-quantity', 'w-received-by', 'w-ro', 'w-turned-in-by', 'w-vendor', 'w-vin' ]
+  };
+  var monkeyList = new List('warranty', options);
 
 </script>
