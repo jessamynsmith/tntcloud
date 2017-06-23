@@ -184,17 +184,18 @@ router.get('/list-core', mw.userRole, function(req, res, next) {
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
-  dbRef.once('value', gotData);
+  dbRef.child('core').once('value', gotData);
   // global variable so warranty data can be accessed after the function
   var templateData;
 
   function gotData(data) {
     // access data values
     templateData = data.val();
+    console.log("Core Data", templateData);
 
     // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
-    res.render('core-warranty/list-core', { isAdmin: isAdmin, data: templateData } );
+    res.render('core-warranty/list-core', { isAdmin: isAdmin, coreData: templateData } );
   };
 });
 
