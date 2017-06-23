@@ -28,8 +28,8 @@
         <span class="input-group-label">Turned In By</span>
         <select id="turned-in-by" class="input-group-field" name="turnedInBy" name="turnedInBy">
           <option value="">Select Name</option>
-          {{#each people}}
-            <option value="{{PersonName}}">{{PersonName}}</option>
+          {{#each this}}
+            <option value=""></option>
           {{/each}}
         </select>
       </div>
@@ -37,8 +37,8 @@
         <span class="input-group-label">Received By</span>
         <select id="received-by"  class="input-group-field" name="receivedBy">
           <option value="">Select Name</option>
-          {{#each people}}
-            <option value="{{PersonName}}">{{PersonName}}</option>
+          {{#each gotPeople}}
+            <option value="{{this}}">{{this}}</option>
           {{/each}}
         </select>
       </div>

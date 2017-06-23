@@ -71,8 +71,8 @@ router.get('/create-core', function(req, res, next) {
       var PersonName = people[k].PersonName;
 
       // gotPeople array for use after for loop, in below "Sort Option Names"
-      gotPeople.push(people[k].PersonName);
-//      console.log("Got People? ", gotPeople);
+      gotPeople.push('PersonName:' + people[k].PersonName);
+      console.log("Got People? ", gotPeople);
     } // End for loop
 
     /***************************************************************************
@@ -100,7 +100,7 @@ router.get('/create-core', function(req, res, next) {
 //    console.log("Sorted ????? ", sortMe);
     // re-assign sorted 'sortMe' to 'sortedArray'
     gotPeople = sortMe;
-    console.log("Got people sorted ? ", gotPeople);
+//    console.log("Got people sorted ? ", gotPeople);
 
     // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
