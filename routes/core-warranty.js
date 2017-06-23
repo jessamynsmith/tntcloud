@@ -221,23 +221,31 @@ router.get('/people-list', function(req, res, next) {
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
-
   // Sort people/PersonName using Firebase
 /*
-  dbRef.child('/people/').orderByValue().on('value', function(snapshot) {
-
-    snapshot.forEach(function(data) {
-      console.log("Data + Key " + data.key + data.val());
-    });
-*/
     var scoresRef = dbRef.child("/people/");
     scoresRef.orderByValue().on("value", function(snapshot) {
       snapshot.forEach(function(data) {
-//        console.log("The " + data.key + " dinosaur's score is " + data.val().PersonName);
-        console.log(data.val());
+        console.log("The " + data.key + " dinosaur's score is " + data.val().PersonName);
+//        console.log(data.val());
       });
-      res.render('core-warranty/people-list', { /* peopleData: templateData,*/ navCW: navCW } );
+      res.render('core-warranty/people-list', { navCW: navCW } );
     });
+*/
+dbRef.child('/people/').orderByChild('PersonName').on('value', gotData);
+
+function gotData(data) {
+  var gotPeople = [];
+
+  data.forEach(function(data) {
+    gotPeople.push(data.val());
+  //  console.log("Got People ", data.key, gotPeople);
+
+    console.log("The " + data.key + " dinosaur's score is " + data.val().PersonName);
+  });
+
+    res.render('core-warranty/people-list', { navCW: navCW } );
+  }
 /*
   var peopleRef = dbRef.child('/people/');
   peopleRef.orderByValue().on("value", function(snapshot) {
