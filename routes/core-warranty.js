@@ -146,14 +146,8 @@ router.post('/insert-core', function(req, res, next) {
   // update the new-key-record with the data
   var dbUpdate = req.app.locals.dbRef.update(updates);
 
-  // redirect page with url parameter containing core key
-//  window.location.href = `track-print-core.html?KEY=${newCoreKey}`;
-
-  // Use firebase from app.js and set child db node
-//  var coreRef = req.app.locals.dbRef.child('core');
-//  coreRef.push(item);
   // url redirect after post
-  res.redirect('/core-warranty/print-core');
+  res.redirect('/core-warranty/print-core/?KEY=' + newCoreKey);
 });
 
 /*******************************************************************************
