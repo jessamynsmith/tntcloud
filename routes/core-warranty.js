@@ -3,7 +3,7 @@ var router = express.Router();
 var firebase = require("firebase");
 var mw = require('../middleware');
 var dbRef = firebase.database().ref();
-
+var moment = require('moment');
 /*******************************************************************************
  * Core Warranty Home
  ******************************************************************************/
@@ -115,14 +115,14 @@ router.post('/insert-core', function(req, res, next) {
   // Server Date/Time https://firebase.google.com/docs/reference/js/firebase.database.ServerValue
   const DateTimeStampServer = firebase.database.ServerValue.TIMESTAMP;
   let Date = DateTimeStampServer;
-//  Date = moment().format('L'); // Format date with moment.js
-//  let DateTime = moment().format('h:mm:ss A');
+  Date = moment().format('L'); // Format date with moment.js
+  let DateTime = moment().format('h:mm:ss A');
 
   // get the form fields data
   var item = {
-//    DateTimeStampServer: DateTimeStampServer,
+    DateTimeStampServer: DateTimeStampServer,
     Date: Date,
-//    DateTime: DateTime,
+    DateTime: DateTime,
     Branch: req.body.branch,
     Customer: req.body.customer,
     Description: req.body.description,

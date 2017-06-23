@@ -52,6 +52,6 @@ module.exports.getRole = function() {
 
 // Export function that contains the whole firebase user
 // Need to export a function, not just a variable because I need the value to be updated
-module.exports.getUser = function () {
+module.exports.getUser = function() {
   return fbUser;
 }
