@@ -28,8 +28,8 @@
         <span class="input-group-label">Turned In By</span>
         <select id="turned-in-by" class="input-group-field" name="turnedInBy" name="turnedInBy">
           <option value="">Select Name</option>
-          {{#each this}}
-            <option value=""></option>
+          {{#each gotPeople }}
+            <option value="">{{ PersonName }}</option>
           {{/each}}
         </select>
       </div>

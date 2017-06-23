@@ -61,59 +61,30 @@ router.get('/create-core', function(req, res, next) {
   /*****************************************************************************
    * Build Employees <options> for <select> drop-down with Employee ID + Name
   *****************************************************************************/
+  /*
+  var ratingRef = firebase.database().ref("ratings/");
+
+  ratingRef.orderByValue().on("value", function(data) {
+     data.forEach(function(data) {
+        console.log("The " + data.key + " rating is " + data.val());
+     });
+  });
+  */
   // ref.on is firebase method for keeping live data, and 'value' is saying you want values
-  dbRef.child('/people/').once('value', gotData);
+  dbRef.child('/people/').orderByChild('PersonName').on('value', gotData);
 
   var gotPeople = [];
 
   function gotData(data) {
     // assign above warranty data to 'warranty'
-    var people = data.val();
-//    console.log("People ? ", people);
-    // Firebase keys/records: assign the warranty object's Firebase keys to 'keys'
-    var keys = Object.keys(people);
-//    console.log("People Keys ", keys);
-    // Loop through all the Keys/records
-    for (var i = 0; i < keys.length; i++) {
-      var k = keys[i];
-      // Extract data from each Key record
-      var PersonName = people[k].PersonName;
 
-      // gotPeople array for use after for loop, in below "Sort Option Names"
-      gotPeople.push('PersonName:' + people[k].PersonName);
-      console.log("Got People? ", gotPeople);
-    } // End for loop
-
-    /***************************************************************************
-     * Sort Option Names
-     **************************************************************************/
-    var sortMe = [];
-    gotPeople;
-//    console.log("Got people again ? ", gotPeople);
-    for (var i = 0; i < gotPeople.length; i++) {
-      var person = gotPeople[i];
-      sortMe.push(person);
-    }
-//    console.log("Sort me ? ", sortMe);
-    sortMe.sort(function(x,y){
-      var a = String(x);
-      var b = String(y);
-      if (a > b) {
-        return 1
-      } else  if (a < b) {
-          return -1
-      } else {
-          return 0;
-      }
+    data.forEach(function(data) {
+      gotPeople.push(data.val());
+      console.log("The Ordered ? ",  data.val());
     });
-//    console.log("Sorted ????? ", sortMe);
-    // re-assign sorted 'sortMe' to 'sortedArray'
-    gotPeople = sortMe;
-//    console.log("Got people sorted ? ", gotPeople);
-
-    // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+  // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
-    res.render('core-warranty/create-core', gotPeople );
+    res.render('core-warranty/create-core', { gotPeople: gotPeople } );
   };
 });
 
