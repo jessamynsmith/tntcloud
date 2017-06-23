@@ -15,6 +15,23 @@ Date = moment().format('L'); // Format date with moment.js
 let DateTime = moment().format('h:mm:ss A');
 
 /*******************************************************************************
+ * Core Warranty: All Routes
+ ******************************************************************************/
+// this router is for /core-warranty dir, see app.js for initializer
+/*
+router.get('/*', function(req, res, next) {
+
+var cwNav =
+  `<ul class="menu">
+    <li><a href="/core-warranty/list-warranty">Warranty</a></li>
+    <li><a href="/core-warranty/list-core">Core</a></li>
+    <li><a href="/core-warranty/peoplelist">People</a></li>
+  </ul>`;
+
+  res.render('*', cwNav);
+});
+*/
+/*******************************************************************************
  * Core Warranty Home
  ******************************************************************************/
 // this router is for /core-warranty dir, see app.js for initializer
@@ -22,7 +39,14 @@ router.get('/', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-  res.render('core-warranty/core-warranty', { isAdmin: isAdmin });
+  var cwNav =
+    `<ul class="menu">
+      <li><a href="/core-warranty/list-warranty">Warranty</a></li>
+      <li><a href="/core-warranty/list-core">Core</a></li>
+      <li><a href="/core-warranty/peoplelist">People</a></li>
+    </ul>`;
+
+  res.render('core-warranty/core-warranty', { isAdmin: isAdmin, cwNav: cwNav });
 });
 
 /*******************************************************************************
@@ -58,7 +82,7 @@ router.get('/create-core', function(req, res, next) {
   /*****************************************************************************
    * Build Employees <options> for <select> drop-down with Employee ID + Name
   *****************************************************************************/
-  // ref.on is firebase method for keeping live data, and 'value' is saying you want values
+  // Sort people/PersonName using Firebase
   dbRef.child('/people/').orderByChild('PersonName').on('value', gotData);
 
   function gotData(data) {

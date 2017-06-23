@@ -1,10 +1,8 @@
 <!-- Section Nav ------------------------------------------------------------>
 <div class="top-bar">
   <div class="row small-11">
-    <ul class="menu">
-      <li><a href="/core-warranty/list-warranty">Warranty</a></li>
-      <li><a href="/core-warranty/list-core">Core</a></li>
-      <li><a href="/core-warranty/peoplelist">People</a></li>
-    </ul>
+    {{#if cwNav }}
+      {{{ cwNav }}}
+    {{/if}}
   </div>
 </div>
