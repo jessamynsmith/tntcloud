@@ -3,6 +3,7 @@ var router = express.Router();
 var firebase = require("firebase");
 var mw = require('../middleware');
 var dbRef = firebase.database().ref();
+
 /*******************************************************************************
  * Core Warranty Home
  ******************************************************************************/
@@ -19,14 +20,16 @@ router.get('/', mw.userRole, function(req, res, next) {
 });
 
 /*******************************************************************************
- * Create Warranty Form
+ * Create Warranty Page
  ******************************************************************************/
 router.get('/create-warranty', function(req, res, next) {
   var user = req.app.locals.user;
   res.render('core-warranty/create-warranty');
 });
 
-// Insert Data
+/*******************************************************************************
+ * Create Warranty Page: Submit Form
+ ******************************************************************************/
 // Restrict post capability by applying the middlware from app.js
 router.post('/insert-warranty', mw.userRoleAndAdmin, function(req, res, next) {
   // get the form fields data
@@ -43,27 +46,68 @@ router.post('/insert-warranty', mw.userRoleAndAdmin, function(req, res, next) {
 });
 
 /*******************************************************************************
- * Create Core
+ * Create Core Page
  ******************************************************************************/
 router.get('/create-core', function(req, res, next) {
   /*****************************************************************************
    * Build Employees <options> for <select> drop-down with Employee ID + Name
   *****************************************************************************/
-  dbRef.once('value', gotData);
-  // global variable so warranty data can be accessed after the function
-  var templateData;
+  // ref.on is firebase method for keeping live data, and 'value' is saying you want values
+  dbRef.child('/people/').once('value', gotData);
+
+  var gotPeople = [];
 
   function gotData(data) {
-    // access data values
-    templateData = data.val();
+    // assign above warranty data to 'warranty'
+    var people = data.val();
+    console.log("People ? ", people);
+    // Firebase keys/records: assign the warranty object's Firebase keys to 'keys'
+    var keys = Object.keys(people);
+    // Loop through all the Keys/records
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i];
+      // Extract data from each Key record
+      var PersonName = people[k].PersonName;
+
+      // gotPeople array for use after for loop, in below "Sort Option Names"
+      gotPeople.push(people[k].PersonName);
+    } // End for loop
+
+    /***************************************************************************
+     * Sort Option Names
+     **************************************************************************/
+    var sortMe = [];
+    gotPeople;
+
+    for (var i = 0; i < gotPeople.length; i++) {
+      var person = gotPeople[i];
+      sortMe.push(person);
+    }
+
+    sortMe.sort(function(x,y){
+      var a = String(x);
+      var b = String(y);
+      if (a > b) {
+        return 1
+      } else  if (a < b) {
+          return -1
+      } else {
+          return 0;
+      }
+    });
+    // re-assign sorted 'sortMe' to 'sortedArray'
+    sortedArray = sortMe;
+
 
     // 1) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // 2) How to get isAdmin: isAdmin working with the additional warrantyData?  If I add it, warrantyData does not render
-    res.render('core-warranty/create-core', templateData );
+    res.render('core-warranty/create-core', sortedArray );
   };
 });
 
-// Form: Create Core Record
+/*******************************************************************************
+ * Create Core Page: Submit Form
+ ******************************************************************************/
 router.post('/insert-core', function(req, res, next) {
   // get the form fields data
   var item = {
