@@ -268,4 +268,13 @@ router.post('/insert-person', function(req, res, next) {
 });
 
 
+/*******************************************************************************
+ * Delete Person Page
+ ******************************************************************************/
+router.get('/people-delete', function(req, res, next) {
+  var user = req.app.locals.user;
+  res.render('core-warranty/people-delete', { navCW: navCW });
+});
+
+
 module.exports = router;
