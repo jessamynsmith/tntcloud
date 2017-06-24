@@ -43,24 +43,6 @@ router.get('/create-warranty', function(req, res, next) {
   res.render('core-warranty/create-warranty', { navCW: navCW });
 });
 
-/*******************************************************************************
- * Create Warranty Page: Submit Form
- ******************************************************************************/
-// Restrict post capability by applying the middlware from app.js
-router.post('/insert-warranty', mw.userRoleAndAdmin, function(req, res, next) {
-  // get the form fields data
-  var item = {
-    title: req.body.title,
-    content: req.body.content,
-    author: req.body.author
-  };
-  // Use firebase from app.js and set child db node
-  var warrantyRef = req.app.locals.dbRef.child('warranty');
-  warrantyRef.push(item);
-  // url redirect after post
-  res.redirect('/core-warranty');
-  next();
-});
 
 /*******************************************************************************
  * Create Core Page
@@ -83,6 +65,25 @@ router.get('/create-core', function(req, res, next) {
     // handlebars object: templateData: templateData === anyName: variableName
     res.render('core-warranty/create-core', { gotPeople: templateData, navCW: navCW } );
   };
+});
+
+/*******************************************************************************
+ * Create Warranty Page: Submit Form
+ ******************************************************************************/
+// Restrict post capability by applying the middlware from app.js
+router.post('/insert-warranty', mw.userRoleAndAdmin, function(req, res, next) {
+  // get the form fields data
+  var item = {
+    title: req.body.title,
+    content: req.body.content,
+    author: req.body.author
+  };
+  // Use firebase from app.js and set child db node
+  var warrantyRef = req.app.locals.dbRef.child('warranty');
+  warrantyRef.push(item);
+  // url redirect after post
+  res.redirect('/core-warranty/list-warranty');
+  next();
 });
 
 /*******************************************************************************
@@ -115,7 +116,7 @@ router.post('/insert-core', function(req, res, next) {
   var dbUpdate = req.app.locals.dbRef.update(updates);
 
   // url redirect after post, include query parameter
-  res.redirect('/core-warranty/print-core/?KEY=' + newCoreKey);
+  return res.redirect('/core-warranty/print-core/?KEY=' + newCoreKey);
   next();
 });
 
@@ -262,7 +263,7 @@ router.post('/insert-person', function(req, res, next) {
   // update the new-key-record with the data
   var dbUpdate = req.app.locals.dbRef.update(updates);
   // url redirect after post, include query parameter
-  res.redirect('/core-warranty/people-list');
+  return res.redirect('/core-warranty/people-list');
   next();
 });
 
@@ -313,7 +314,7 @@ router.post('/delete-person', function(req, res, next) {
   // remove record from database by adding 'remove()' to the dbRef
   personRef.remove();
 
-  res.redirect('/core-warranty/people-list');
+  return res.redirect('/core-warranty/people-list');
   next();
 });
 
