@@ -36,16 +36,30 @@ router.get('/', mw.userRole, function(req, res, next) {
 });
 
 /*******************************************************************************
- * Create Warranty Page
+ * Warranty: Create Record Page
  ******************************************************************************/
 router.get('/create-warranty', function(req, res, next) {
-  var user = req.app.locals.user;
-  res.render('core-warranty/create-warranty', { navCW: navCW });
+  /*****************************************************************************
+   * Build Employees <options> for <select> drop-down with Employee ID + Name
+  *****************************************************************************/
+  // Sort people/PersonName using Firebase
+  dbRef.child('/people/').orderByChild('PersonName').on('value', gotData);
+
+  function gotData(data) {
+    var templateData = [];
+
+    data.forEach(function(data) {
+      templateData.push(data.val());
+    });
+    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
+    // handlebars object: templateData: templateData === anyName: variableName
+    res.render('core-warranty/create-warranty', { gotPeople: templateData, navCW: navCW } );
+  };
 });
 
-
 /*******************************************************************************
- * Create Core Page
+ * Core: Create Record Page
  ******************************************************************************/
 router.get('/create-core', function(req, res, next) {
   /*****************************************************************************
@@ -68,26 +82,45 @@ router.get('/create-core', function(req, res, next) {
 });
 
 /*******************************************************************************
- * Create Warranty Page: Submit Form
+ * Warranty Record: Submit Form
  ******************************************************************************/
 // Restrict post capability by applying the middlware from app.js
-router.post('/insert-warranty', mw.userRoleAndAdmin, function(req, res, next) {
+router.post('/insert-warranty', function(req, res, next) {
+
   // get the form fields data
   var item = {
-    title: req.body.title,
-    content: req.body.content,
-    author: req.body.author
+    DateTimeStampServer: DateTimeStampServer,
+    Date: Date,
+    DateTime: DateTime,
+    Branch: req.body.branch,
+    Customer: req.body.customer,
+    Description: req.body.description,
+    FailedPartNumber: req.body.failedPartNumber,
+    Quantity: req.body.quantity,
+    RO: req.body.ro,
+    VIN: req.body.vin,
+    Vendor: req.body.vendor,
+    TurnedInBy: req.body.turnedInBy,
+    ReceivedBy: req.body.receivedBy
   };
-  // Use firebase from app.js and set child db node
-  var warrantyRef = req.app.locals.dbRef.child('warranty');
-  warrantyRef.push(item);
-  // url redirect after post
-  res.redirect('/core-warranty/list-warranty');
+  // Get a key for a new core Record
+  var newKey = firebase.database().ref().child('warranty').push().key;
+
+  // write the new core data to the core list
+  var updates = {};
+  updates['/warranty/' + newKey] = item;
+
+  // update the new-key-record with the data
+  var dbUpdate = req.app.locals.dbRef.update(updates);
+
+  // url redirect after post, include query parameter
+  return res.redirect('/core-warranty/list-warranty/?KEY=' + newKey);
   next();
 });
 
+
 /*******************************************************************************
- * Create Core Record Page: Submit Form
+ * Core Record: Submit Form
  ******************************************************************************/
 router.post('/insert-core', function(req, res, next) {
 
@@ -106,17 +139,17 @@ router.post('/insert-core', function(req, res, next) {
     ReceivedBy: req.body.receivedBy
   };
   // Get a key for a new core Record
-  var newCoreKey = firebase.database().ref().child('core').push().key;
+  var newKey = firebase.database().ref().child('core').push().key;
 
   // write the new core data to the core list
   var updates = {};
-  updates['/core/' + newCoreKey] = item;
+  updates['/core/' + newKey] = item;
 
   // update the new-key-record with the data
   var dbUpdate = req.app.locals.dbRef.update(updates);
 
   // url redirect after post, include query parameter
-  return res.redirect('/core-warranty/print-core/?KEY=' + newCoreKey);
+  return res.redirect('/core-warranty/print-core/?KEY=' + newKey);
   next();
 });
 

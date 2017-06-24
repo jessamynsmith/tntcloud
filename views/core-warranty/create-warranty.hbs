@@ -1,69 +1,81 @@
-<h1>Create Warranty</h1>
-<section class="insert">
-    <h3>Create Warranty</h3>
-    <form action="/create-warranty/insert-warranty" method="post">
-        <div class="input">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title">
-        </div>
-        <div class="input">
-            <label for="content">Content</label>
-            <input type="text" id="content" name="content">
-        </div>
-        <div class="input">
-            <label for="author">Author</label>
-            <input type="text" id="author" name="author">
-        </div>
-        <button type="submit">INSERT</button>
-    </form>
-</section>
 
-<!--
-<section class="get">
-    <h3>Get Data</h3>
-    <a href="/get-data">LOAD DATA</a>
-    <div>
-        {{# each items }}
-            <article class="item">
-                <div>Title: {{ this.title }}</div>
-                <div>Content: {{ this.content }}</div>
-                <div>Author: {{ this.author }}</div>
-                <div>ID: {{ this._id }}</div>
-            </article>
-        {{/each}}
+<!-- Title/Intro -------------------------------------------------------------->
+<div class="section-intro">
+  <h1>Create Warranty Record</h1>
+</div>
+
+<!-- Main --------------------------------------------------------------------->
+<div class="row expanded small-12 medium-10 large-6 columns">
+  <form action="/create-core/insert-warranty" method="post" class="input-form">
+    <div class="">
+      <div class="card">
+        <div class="card-divider">
+          <h4>Create Warranty Record</h4>
+        </div>
+      </div>
+      <div class="input-group">
+        <span class="input-group-label">Branch</span>
+        <select id="core-branch" required class="input-group-field" name="branch">
+          <option value="">Select Name</option>
+          <option value="JAX">JAX</option>
+          <option value="NFWS">NFWS</option>
+          <option value="LC">LC</option>
+          <option value="WC">WC</option>
+          <option value="440">440</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <span class="input-group-label">Turned In By</span>
+        <select id="turned-in-by" class="input-group-field" name="turnedInBy" name="turnedInBy">
+          <option value="">Select Name</option>
+          {{#each gotPeople }}
+            <option value="{{ PersonName }}">{{ PersonName }}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="input-group">
+        <span class="input-group-label">Received By</span>
+        <select id="received-by"  class="input-group-field" name="receivedBy">
+          <option value="">Select Name</option>
+          {{#each gotPeople }}
+            <option value="{{ PersonName }}">{{ PersonName }}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="input-group">
+        <span class="input-group-label">R/O</span>
+        <input type="text" id="core-ro" placeholder="R/O" required class="input-group-field" name="ro">
+      </div>
+      <div class="input-group">
+        <span class="input-group-label">VIN</span>
+        <input type="text" id="core-ro" placeholder="VIN" required class="input-group-field" name="vin">
+      </div>
+      <div class="input-group">
+        <span class="input-group-label">R/O</span>
+        <input type="text" id="core-ro" placeholder="Vendor" required class="input-group-field" name="vendor">
+      </div>
+      <div class="input-group">
+        <span class="input-group-label">Customer</span>
+        <input type="text" id="core-customer" placeholder="Customer" required class="input-group-field" name="customer">
+      </div>
+      <div class="input-group">
+        <span class="input-group-label">Failed Part Number</span>
+        <input type="text" id="core-failed-part-number" placeholder="Failed Part Number" required class="input-group-field" name="failedPartNumber">
+      </div>
+      <div class="input-group">
+        <span class="input-group-label">Quantity</span>
+        <select id="quantity" class="input-group-field" name="quantity">
+        </select>
+      </div>
+      <div>
+        <div class="input-group-label input-group-field" style="text-align: left;">Description</div>
+        <textarea id="core-description" placeholder="Description" required name="description"></textarea>
+        <input id="submit-core" type="submit" class="button primary">
+        <a href="list-core.html" class="button secondary">Cancel</a>
+      </div>
     </div>
-</section>
-<section class="update">
-    <h3>Update Data</h3>
-    <form action="/update" method="post">
-        <div class="input">
-            <label for="id">ID</label>
-            <input type="text" id="id" name="id">
-        </div>
-        <div class="input">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title">
-        </div>
-        <div class="input">
-            <label for="content">Content</label>
-            <input type="text" id="content" name="content">
-        </div>
-        <div class="input">
-            <label for="author">Author</label>
-            <input type="text" id="author" name="author">
-        </div>
-        <button type="submit">UPDATE</button>
-    </form>
-</section>
-</section>
-<section class="delete">
-    <h3>Delete Data</h3>
-    <form action="/delete" method="post">
-        <div class="input">
-            <label for="id">ID</label>
-            <input type="text" id="id" name="id">
-        </div>
-        <button type="submit">DELETE</button>
-    </form>
-</section>
--->
+  </form>
+</div>
+
+<!-- Select Options --------------------------------------------------------->
+<script src="/javascripts/core-warranty/create-option-quantity.js"></script>
