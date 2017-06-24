@@ -251,30 +251,20 @@ router.post('/insert-person', function(req, res, next) {
 
   // get the form fields data
   var item = {
-    DateTimeStampServer: DateTimeStampServer,
-    Date: Date,
-    DateTime: DateTime,
-    Branch: req.body.branch,
-    Customer: req.body.customer,
-    Description: req.body.description,
-    FailedPartNumber: req.body.failedPartNumber,
-    Quantity: req.body.quantity,
-    RO: req.body.ro,
-    TurnedInBy: req.body.turnedInBy,
-    ReceivedBy: req.body.receivedBy
+    PersonName: req.body.PersonName
   };
-  // Get a key for a new core Record
-  var newCoreKey = firebase.database().ref().child('core').push().key;
+  // Get a key for a new record
+  var newKey = firebase.database().ref().child('people').push().key;
 
   // write the new core data to the core list
   var updates = {};
-  updates['/core/' + newCoreKey] = item;
+  updates['/people/' + newKey] = item;
 
   // update the new-key-record with the data
   var dbUpdate = req.app.locals.dbRef.update(updates);
 
   // url redirect after post, include query parameter
-  res.redirect('/core-warranty/people-list/');
+  res.redirect('people-list/');
 });
 
 

@@ -6,32 +6,8 @@
 </div>
 
 <!-- Primary Content -------------------------------------------------------->
-<form onSubmit="return submitPersonForm(this);">
-  <input id="person-name" type="text" name="PersonName" placeholder="First and Last Name" required>
+<form action="/people-add/insert-person" method="post">
+  <input id="person-name" type="text" placeholder="First and Last Name" required name="PersonName">
   <input id="submit-person" type="submit" class="button primary" value="Add Person">
-  <a href="peoplelist.html" class="button secondary">Cancel</a>
+  <a href="/core-warranty/people-list" class="button secondary">Cancel</a>
 </form>
-
-<script>
-
-/*****************************************************************************
- * Post form Data to Database
-*****************************************************************************/
-// Get submitWarrantyButton
-
-function submitPersonForm(){
-  event.preventDefault();
-  // Get input field values
-  let PersonName = document.getElementById('person-name').value;
-  // Form validation - if any element is empty, do not submit the form
-  // select the database collection to which you want to push
-  const dbRef = firebase.database().ref('people');
-  // push the values to db by indicating the variables that hold the values
-  dbRef.push({ PersonName });
-
-  // redirect page with url parameter containing warranty key
-  window.location.href = `peoplelist.html`;
-}; // End submitPersonForm function
-
-
-</script>
