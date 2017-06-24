@@ -85,7 +85,7 @@ router.get('/create-core', function(req, res, next) {
 });
 
 /*******************************************************************************
- * Create Core Page: Submit Form
+ * Create Core Record Page: Submit Form
  ******************************************************************************/
 router.post('/insert-core', function(req, res, next) {
 
@@ -234,6 +234,47 @@ router.get('/people-list', function(req, res, next) {
     // handlebars object: templateData: templateData === anyName: variableName
     res.render('core-warranty/people-list', { peopleData: templateData, navCW: navCW } );
   };
+});
+
+/*******************************************************************************
+ * Create Person Page
+ ******************************************************************************/
+router.get('/people-add', function(req, res, next) {
+  var user = req.app.locals.user;
+  res.render('core-warranty/people-add', { navCW: navCW });
+});
+
+/*******************************************************************************
+ * Create Person Page: Submit Form
+ ******************************************************************************/
+router.post('/insert-person', function(req, res, next) {
+
+  // get the form fields data
+  var item = {
+    DateTimeStampServer: DateTimeStampServer,
+    Date: Date,
+    DateTime: DateTime,
+    Branch: req.body.branch,
+    Customer: req.body.customer,
+    Description: req.body.description,
+    FailedPartNumber: req.body.failedPartNumber,
+    Quantity: req.body.quantity,
+    RO: req.body.ro,
+    TurnedInBy: req.body.turnedInBy,
+    ReceivedBy: req.body.receivedBy
+  };
+  // Get a key for a new core Record
+  var newCoreKey = firebase.database().ref().child('core').push().key;
+
+  // write the new core data to the core list
+  var updates = {};
+  updates['/core/' + newCoreKey] = item;
+
+  // update the new-key-record with the data
+  var dbUpdate = req.app.locals.dbRef.update(updates);
+
+  // url redirect after post, include query parameter
+  res.redirect('/core-warranty/people-list/');
 });
 
 
