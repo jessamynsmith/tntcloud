@@ -248,10 +248,9 @@ router.get('/print-warranty', function(req, res, next) {
 });
 
 /*******************************************************************************
- * View Record Core
+ * Core Record
  ******************************************************************************/
 router.get('/record-core', function(req, res, next) {
-
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
@@ -261,13 +260,36 @@ router.get('/record-core', function(req, res, next) {
   dbRef.child('core/' + key).once('value', gotData);
 
   function gotData(data) {
-
+  console.log("Core Record ", data);
     // access data values
     templateData = data.val();
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
     res.render('core-warranty/record-core', { templateData: templateData, key: key, navCW: navCW });
+  };
+});
+
+/*******************************************************************************
+ * Warranty Record
+ ******************************************************************************/
+router.get('/record-warranty', function(req, res, next) {
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+  // get key from url query parameter '?KEY='
+  var key = req.query.KEY;
+  // get 'core' data record associated with 'key' value
+  dbRef.child('warranty/' + key).once('value', gotData);
+
+  function gotData(data) {
+    console.log("Warranty Record ", data);
+    // access data values
+    templateData = data.val();
+    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
+    // handlebars object: templateData: templateData === anyName: variableName
+    res.render('core-warranty/record-warranty', { templateData: templateData, key: key, navCW: navCW });
   };
 });
 
