@@ -271,15 +271,12 @@ router.get('/people-delete', function(req, res, next) {
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
+  // key is needed in template for the <form> that handle Delete Person (below)
   // get key from url query parameter '?KEY='
   var key = req.query.KEY;
   // get 'core' data record associated with 'key' value
   dbRef.child('people/' + key).once('value', gotData);
-
   function gotData(data) {
-    key;
-//    console.log("Key Page ", key);
-
     // access data values
     templateData = data.val();
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
@@ -298,17 +295,19 @@ router.post('/delete-person', function(req, res, next) {
   /*****************************************************************************
    * Delete Employee
   *****************************************************************************/
-//  var key = req.query.KEY;
-//  var key = { key: req.body. };
-//  console.log("Delete Key Form ", key);
+  // Key: needed in order to remove correct PersonName from database
+  // Could not figure a different way to get the key from the form post...
+  // get entire body from form submission, which is only the name={{ key}}
+  var body = req.body;
+  // Get the KEY value by accessing the Object.keys() which returns the KEY of the
+  // object: this works because the Object only has 1 item, and key is the
+  // property name, and, not that it matters, but the property value does not exist
+  // https://stackoverflow.com/a/6765917
+  var key = Object.keys(body);
 
-  var key = '-KnQ37GAWtnsmsubxj94';
-  console.log("Got Key? ", key);
-  // get key from url query parameter '?KEY='
   // select the database collection and key/record you want to remove from db
   var personRef = req.app.locals.dbRef.child('people/' + key);
   // remove record from database by adding 'remove()' to the dbRef
-  console.log("Person Ref ", personRef);
   personRef.remove();
 
   res.redirect('/core-warranty/people-list');
