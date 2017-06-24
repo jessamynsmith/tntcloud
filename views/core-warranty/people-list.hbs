@@ -19,7 +19,7 @@
   <tbody id="people-list" class="list">
     {{#each peopleData }}
       <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
-        <td>{{ PersonName }}</td>
+        <td>{{ this }}</td>
         <td><a class="button list-record" href="people-delete/?KEY={{@key}}">Delete Person</a></td>
       </tr>
     {{/each}}

@@ -232,20 +232,19 @@ router.get('/people-list', function(req, res, next) {
       res.render('core-warranty/people-list', { navCW: navCW } );
     });
 */
-dbRef.child('/people/').orderByChild('PersonName').on('value', gotData);
+dbRef.child('/people/').orderByChild('PersonName').on('value', function(snapshot) {
 
-function gotData(data) {
-  var gotPeople = [];
 
-  data.forEach(function(data) {
-    gotPeople.push(data.val());
-  //  console.log("Got People ", data.key, gotPeople);
-
-    console.log("The " + data.key + " dinosaur's score is " + data.val().PersonName);
+  var templateData = [];
+  snapshot.forEach(function(child) {
+  //  console.log("Got People ", child.key, child.val());
+    templateData = child.val();
+    console.log("templateData ", child.key, child.val().PersonName);
+//    console.log("The " + data.key + " dinosaur's score is " + data.val().PersonName);
   });
 
-    res.render('core-warranty/people-list', { navCW: navCW } );
-  }
+    res.render('core-warranty/people-list', { peopleData: templateData, navCW: navCW } );
+  });
 /*
   var peopleRef = dbRef.child('/people/');
   peopleRef.orderByValue().on("value", function(snapshot) {
