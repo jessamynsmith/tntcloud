@@ -203,7 +203,6 @@ router.get('/record-core', function(req, res, next) {
 
   function gotData(data) {
 
-//  console.log("My Key ", key);
     // access data values
     templateData = data.val();
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
@@ -248,25 +247,21 @@ router.get('/people-add', function(req, res, next) {
  * People: Create Person Page: Submit Form
  ******************************************************************************/
 router.post('/insert-person', function(req, res, next) {
-
+  var user = req.app.locals.user;
   // get the form fields data
   var item = {
     PersonName: req.body.PersonName
   };
   // Get a key for a new record
   var newKey = firebase.database().ref().child('people').push().key;
-
   // write the new core data to the core list
   var updates = {};
   updates['/people/' + newKey] = item;
-
   // update the new-key-record with the data
   var dbUpdate = req.app.locals.dbRef.update(updates);
-
   // url redirect after post, include query parameter
-  res.redirect('people-list/');
+  res.redirect('/core-warranty/people-list');
 });
-
 
 /*******************************************************************************
  * People: Delete Person Page
@@ -282,8 +277,9 @@ router.get('/people-delete', function(req, res, next) {
   dbRef.child('people/' + key).once('value', gotData);
 
   function gotData(data) {
+    key;
 
-//  console.log("My Key ", key);
+  console.log("Key Page ", key);
     // access data values
     templateData = data.val();
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
@@ -291,33 +287,27 @@ router.get('/people-delete', function(req, res, next) {
     // handlebars object: templateData: templateData === anyName: variableName
     res.render('core-warranty/people-delete', { templateData: templateData, key: key, navCW: navCW });
   };
-
 });
+
 
 /*******************************************************************************
- * View Record Core
+ * People: Delete Person Form
  ******************************************************************************/
-router.get('/record-core', function(req, res, next) {
-
+router.post('/delete-person', function(req, res, next) {
+  var user = req.app.locals.user;
   /*****************************************************************************
-   * Data for Handlebars
+   * Delete Employee
   *****************************************************************************/
-  // get key from url query parameter '?KEY='
   var key = req.query.KEY;
-  // get 'core' data record associated with 'key' value
-  dbRef.child('core/' + key).once('value', gotData);
-
-  function gotData(data) {
-
-  console.log("My Key ", key);
-    // access data values
-    templateData = data.val();
-    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
-    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
-    // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/record-core', { templateData: templateData, key: key, navCW: navCW });
-  };
+  console.log("Key Key ", key);
+  function deletePerson() {
+    // get key from url query parameter '?KEY='
+    // select the database collection and key/record you want to remove from db
+    const dbRef = firebase.database().ref('people/' + key);
+    // remove record from database by adding 'remove()' to the dbRef
+    dbRef.remove();
+  }
+    res.redirect('/core-warranty/people-list');
 });
-
 
 module.exports = router;

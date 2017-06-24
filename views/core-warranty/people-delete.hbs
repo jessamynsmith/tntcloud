@@ -18,9 +18,9 @@
         <td id="person-record-name">{{ templateData.PersonName }}</td>
         <!-- Password reset --------------------------------------------------->
         <td>
-        <form action="/password-reset" method="post">
+        <form action="/people-delete/delete-person" method="post">
           <!--Button----------------------->
-          <button class="button alert">
+          <button class="button alert" id="{{ key }}">
             Delete Person
           </button>
         </form>
