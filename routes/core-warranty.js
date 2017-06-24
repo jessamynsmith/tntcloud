@@ -221,32 +221,14 @@ router.get('/people-list', function(req, res, next) {
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
-
-  // Sort people/PersonName using Firebase
-  dbRef.child('/people/').orderByChild('PersonName').on('value', gotData);
+  dbRef.child('people').once('value', gotData);
+  // global variable so warranty data can be accessed after the function
+  var templateData;
 
   function gotData(data) {
-    var templateData = [];
-    var templateKey = [];
+    // access data values
+    templateData = data.val();
 
-    data.forEach(function(data) {
-      templateData.push(data.val());
-      templateKey.push(data.key);
-      console.log("Data + Key ", templateData, templateKey);
-    });
-
-/*
-  var peopleRef = dbRef.child('/people/');
-  peopleRef.orderByValue().on("value", function(snapshot) {
-    var templateData = [];
-    snapshot.forEach(function(data) {
-      templateData = data.val()
-      console.log(data.key + templateData);
-    });
-    res.render('core-warranty/people-list', { peopleData: templateData, navCW: navCW } );
-
-  });
-*/
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
