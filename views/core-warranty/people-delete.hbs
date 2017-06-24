@@ -15,55 +15,23 @@
     </thead>
     <tbody id="people-list">
       <tr class="data-row">
-        <td id="person-record-name"></td>
-        <td onClick="deletePerson()" id="person-record-delete"></td>
+        <td id="person-record-name">{{ templateData.PersonName }}</td>
+        <!-- Password reset --------------------------------------------------->
+        <td>
+        <form action="/password-reset" method="post">
+          <!--Button----------------------->
+          <button class="button alert">
+            Delete Person
+          </button>
+        </form>
+        </td>
+        <!-------------------------------------------------------->
         <td><a href="/core-warranty/people-list" class="button secondary">Cancel</a></td>
       </tr>
     </tbody>
   </table>
 
   <script>
-
-  /*****************************************************************************
-   * Retrieve Warranty Record from Database using Record Key
-  *****************************************************************************/
-  // URL Parameters -- processed in this file via urlParameter.js
-  // Access parameters by creating a variable equal to: getParam("xxx");
-  const key = getParam("KEY"); // Get key passed to URL from 'view' link
-
-  // Use "KEY" url parameter to target the warranty/ record
-  let dbRef = firebase.database().ref().child('people/' + key);
-  // Re: "once" https://firebase.google.com/docs/reference/js/firebase.database.Query#once
-  dbRef.once('value', gotData, errData);
-
-  /*****************************************************************************
-   * List Employee Record
-  *****************************************************************************/
-  function gotData(data) {
-    // assign above warranty data to 'warrantyRecord'
-    // data.val() returns Object; destructure to pull out individual property values
-    var personRecord = data.val();
-    // Destructure Object to individual property values
-    let { PersonName } = personRecord;
-
-    // URL Parameters -- processed in this file via urlParameter.js
-    // Access parameters by creating a variable equal to: getParam("xxx");
-    document.getElementById("person-record-name").innerHTML = PersonName;
-
-    /******** Create Delete Link ***********/
-    var a = document.createElement('a');
-    a.className += 'button alert';
-    a.id = key;
-    a.href = 'peoplelist.html';
-    var linkText = document.createTextNode('Confirm Delete');
-    a.appendChild(linkText);
-    document.getElementById("person-record-delete").appendChild(a);
-  } // End function gotData
-
-  function errData(err) {
-    console.log('Error!');
-    console.log(err);
-  } // End function errData
 
   /*****************************************************************************
    * Delete Employee

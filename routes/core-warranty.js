@@ -203,7 +203,7 @@ router.get('/record-core', function(req, res, next) {
 
   function gotData(data) {
 
-  console.log("My Key ", key);
+//  console.log("My Key ", key);
     // access data values
     templateData = data.val();
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
@@ -215,7 +215,7 @@ router.get('/record-core', function(req, res, next) {
 
 
 /*******************************************************************************
- * List People
+ * People: List
  ******************************************************************************/
 router.get('/people-list', function(req, res, next) {
   /*****************************************************************************
@@ -237,7 +237,7 @@ router.get('/people-list', function(req, res, next) {
 });
 
 /*******************************************************************************
- * Create Person Page
+ * People: Create Person Page
  ******************************************************************************/
 router.get('/people-add', function(req, res, next) {
   var user = req.app.locals.user;
@@ -245,7 +245,7 @@ router.get('/people-add', function(req, res, next) {
 });
 
 /*******************************************************************************
- * Create Person Page: Submit Form
+ * People: Create Person Page: Submit Form
  ******************************************************************************/
 router.post('/insert-person', function(req, res, next) {
 
@@ -269,11 +269,54 @@ router.post('/insert-person', function(req, res, next) {
 
 
 /*******************************************************************************
- * Delete Person Page
+ * People: Delete Person Page
  ******************************************************************************/
 router.get('/people-delete', function(req, res, next) {
   var user = req.app.locals.user;
-  res.render('core-warranty/people-delete', { navCW: navCW });
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+  // get key from url query parameter '?KEY='
+  var key = req.query.KEY;
+  // get 'core' data record associated with 'key' value
+  dbRef.child('people/' + key).once('value', gotData);
+
+  function gotData(data) {
+
+//  console.log("My Key ", key);
+    // access data values
+    templateData = data.val();
+    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
+    // handlebars object: templateData: templateData === anyName: variableName
+    res.render('core-warranty/people-delete', { templateData: templateData, key: key, navCW: navCW });
+  };
+
+});
+
+/*******************************************************************************
+ * View Record Core
+ ******************************************************************************/
+router.get('/record-core', function(req, res, next) {
+
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+  // get key from url query parameter '?KEY='
+  var key = req.query.KEY;
+  // get 'core' data record associated with 'key' value
+  dbRef.child('core/' + key).once('value', gotData);
+
+  function gotData(data) {
+
+  console.log("My Key ", key);
+    // access data values
+    templateData = data.val();
+    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
+    // handlebars object: templateData: templateData === anyName: variableName
+    res.render('core-warranty/record-core', { templateData: templateData, key: key, navCW: navCW });
+  };
 });
 
 
