@@ -302,11 +302,11 @@ router.post('/delete-person', function(req, res, next) {
 //  var key = { key: req.body. };
 //  console.log("Delete Key Form ", key);
 
-  var key = '-KnQ3pomEhVF8ijlsL_8';
+  var key = '-KnQ37GAWtnsmsubxj94';
   console.log("Got Key? ", key);
   // get key from url query parameter '?KEY='
   // select the database collection and key/record you want to remove from db
-  var personRef = req.app.locals.dbRef.child('people/' + '-KnQ3pomEhVF8ijlsL_8');
+  var personRef = req.app.locals.dbRef.child('people/' + key);
   // remove record from database by adding 'remove()' to the dbRef
   console.log("Person Ref ", personRef);
   personRef.remove();
