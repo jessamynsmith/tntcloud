@@ -278,8 +278,8 @@ router.get('/people-delete', function(req, res, next) {
 
   function gotData(data) {
     key;
+//    console.log("Key Page ", key);
 
-  console.log("Key Page ", key);
     // access data values
     templateData = data.val();
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
@@ -298,16 +298,20 @@ router.post('/delete-person', function(req, res, next) {
   /*****************************************************************************
    * Delete Employee
   *****************************************************************************/
-  var key = req.query.KEY;
-  console.log("Key Key ", key);
-  function deletePerson() {
-    // get key from url query parameter '?KEY='
-    // select the database collection and key/record you want to remove from db
-    const dbRef = firebase.database().ref('people/' + key);
-    // remove record from database by adding 'remove()' to the dbRef
-    dbRef.remove();
-  }
-    res.redirect('/core-warranty/people-list');
+//  var key = req.query.KEY;
+//  var key = { key: req.body. };
+//  console.log("Delete Key Form ", key);
+
+  var key = '-KnQ3pomEhVF8ijlsL_8';
+  console.log("Got Key? ", key);
+  // get key from url query parameter '?KEY='
+  // select the database collection and key/record you want to remove from db
+  var personRef = req.app.locals.dbRef.child('people/' + '-KnQ3pomEhVF8ijlsL_8');
+  // remove record from database by adding 'remove()' to the dbRef
+  console.log("Person Ref ", personRef);
+  personRef.remove();
+
+  res.redirect('/core-warranty/people-list');
 });
 
 module.exports = router;

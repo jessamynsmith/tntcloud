@@ -20,7 +20,7 @@
         <td>
         <form action="/people-delete/delete-person" method="post">
           <!--Button----------------------->
-          <button class="button alert" id="{{ key }}">
+          <button class="button alert" name="{{ key }}">
             Delete Person
           </button>
         </form>
@@ -36,6 +36,7 @@
   /*****************************************************************************
    * Delete Employee
   *****************************************************************************/
+
   function deletePerson() {
     // select the database collection and key/record you want to remove from db
     const dbRef = firebase.database().ref('people/' + key); // key from above "list employee"
