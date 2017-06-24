@@ -1,14 +1,15 @@
 /*******************************************************************************
  * Firebase Initialize
  ******************************************************************************/
-var firebase = require("firebase");
+ var firebase = require("firebase");
 
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyCEibpP7gfU5J5Wu0Zt4tX0gNmTBxHnz7E",
-  authDomain: "tnt-cloud-5d440.firebaseapp.com",
-  databaseURL: "https://tnt-cloud-5d440.firebaseio.com"
-};
-firebase.initializeApp(config);
+ // Initialize Firebase
+ // TODO: Replace with your project's customized code snippet
+ var config = {
+   apiKey: "AIzaSyC7ARZ2iEIz23_gMPKW3qxDSvuKmWrsXBQ",
+   authDomain: "tnt-dispatch.firebaseapp.com",
+   databaseURL: "https://tnt-dispatch.firebaseio.com",
+ };
+ firebase.initializeApp(config);
 
 module.exports = firebase;
