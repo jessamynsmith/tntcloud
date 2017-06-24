@@ -59,6 +59,7 @@ router.post('/insert-warranty', mw.userRoleAndAdmin, function(req, res, next) {
   warrantyRef.push(item);
   // url redirect after post
   res.redirect('/core-warranty');
+  next();
 });
 
 /*******************************************************************************
@@ -115,6 +116,7 @@ router.post('/insert-core', function(req, res, next) {
 
   // url redirect after post, include query parameter
   res.redirect('/core-warranty/print-core/?KEY=' + newCoreKey);
+  next();
 });
 
 /*******************************************************************************
@@ -261,6 +263,7 @@ router.post('/insert-person', function(req, res, next) {
   var dbUpdate = req.app.locals.dbRef.update(updates);
   // url redirect after post, include query parameter
   res.redirect('/core-warranty/people-list');
+  next();
 });
 
 /*******************************************************************************
@@ -311,6 +314,7 @@ router.post('/delete-person', function(req, res, next) {
   personRef.remove();
 
   res.redirect('/core-warranty/people-list');
+  next();
 });
 
 module.exports = router;
