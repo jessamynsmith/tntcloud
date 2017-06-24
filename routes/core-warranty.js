@@ -114,7 +114,7 @@ router.post('/insert-warranty', function(req, res, next) {
   var dbUpdate = req.app.locals.dbRef.update(updates);
 
   // url redirect after post, include query parameter
-  return res.redirect('/core-warranty/list-warranty/?KEY=' + newKey);
+  return res.redirect('/core-warranty/print-warranty/?KEY=' + newKey);
   next();
 });
 
@@ -213,6 +213,7 @@ router.get('/print-core', function(req, res, next) {
   *****************************************************************************/
   // get key from url query parameter '?KEY='
   var key = req.query.KEY;
+
   // get 'core' data record associated with 'key' value
   dbRef.child('core/' + key).once('value', gotData);
 
@@ -221,6 +222,28 @@ router.get('/print-core', function(req, res, next) {
     templateData = data.val();
 
     res.render('core-warranty/print-core', { templateData: templateData, navCW: navCW } );
+  };
+});
+
+/*******************************************************************************
+ * Print Warranty
+ ******************************************************************************/
+router.get('/print-warranty', function(req, res, next) {
+
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+  // get key from url query parameter '?KEY='
+  var key = req.query.KEY;
+
+  // get 'core' data record associated with 'key' value
+  dbRef.child('warranty/' + key).once('value', gotData);
+
+  function gotData(data) {
+    // access data values
+    templateData = data.val();
+
+    res.render('core-warranty/print-warranty', { templateData: templateData, navCW: navCW } );
   };
 });
 
