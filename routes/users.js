@@ -68,4 +68,12 @@ router.post('/user-create-input', function(req, res){
   res.redirect('user-create');
 });
 
+/*******************************************************************************
+ * User Edig: Page
+ ******************************************************************************/
+router.get('/user-edit', function(req, res, next) {
+  res.render('users/user-edit');
+});
+
+
 module.exports = router;

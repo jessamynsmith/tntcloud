@@ -1,6 +1,28 @@
-<h1>Users</h1>
 
-<!-- DO NOT USE <FORM> as wrapper of firebase auth input fields -->
-<div class="large-3 large-centered columns">
+<!-- Title/Intro ------------------------------------------------------------>
+<div class="section-intro">
+  <h1>Users</h2>
+  <p><a class="button hollow" href="/users/user-create">Create User</a></p>
+</div>
 
+<!-- Records list -->
+<table class="data-table stack">
+  <thead>
+    <th class="col1">User Email</th>
+    <th class="col2" data-sort="ro">User Role</th>
+    <th class="col11">Edit</th>
+  </thead>
+  <tbody id="records-list" class="list">
+  <!--------------------------------------------------------------------------->
+  <!-- Handlebars ------------------------------------------------------------->
+  <!--------------------------------------------------------------------------->
+    {{#each coreData }}
+      <tr class="data-row" id="{{@key}}">
+        <td class="">{{ email }}</td>
+        <td class="">{{ role }}</td>
+        <td><a class="button list-record" href="/users/user-edit/?KEY={{@key}}">Edit</a></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
 </div>
