@@ -109,6 +109,17 @@ router.get('/user-delete', function(req, res, next) {
 });
 
 /*******************************************************************************
+ * Delete User Success
+ ******************************************************************************/
+// this router is for /core-warranty dir, see app.js for initializer
+router.get('/delete-success', mw.userRole, function(req, res, next) {
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+
+  res.render('users/delete-success', { isAdmin: isAdmin, navUsers: navUsers });
+});
+
+/*******************************************************************************
  * User Delete: Form
  ******************************************************************************/
 router.post('/delete-user', function(req, res, next) {
@@ -122,7 +133,7 @@ router.post('/delete-user', function(req, res, next) {
   admin.auth().deleteUser(uid)
     .then(function() {
       console.log("Successfully deleted user");
-      return res.redirect('/core-warranty/people-list');
+      res.redirect('/users/delete-success');
     })
     .catch(function(error) {
       console.log("Error deleting user:", error);
