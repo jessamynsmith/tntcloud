@@ -96,16 +96,36 @@ router.get('/user-edit', function(req, res, next) {
  ******************************************************************************/
 router.get('/user-delete', function(req, res, next) {
   var uid = req.query.KEY;
-  var userEmail;
 
   admin.auth().getUser(uid)
     .then(function(userRecord) {
       userEmail = userRecord.email;
       // See the UserRecord reference doc for the contents of userRecord.
-      res.render('users/user-delete', { navUsers: navUsers, userEmail: userEmail });
+      res.render('users/user-delete', { navUsers: navUsers, userEmail: userEmail, uid: uid });
     })
     .catch(function(error) {
       console.log("Error fetching user data:", error);
+    });
+});
+
+/*******************************************************************************
+ * User Delete: Form
+ ******************************************************************************/
+router.post('/delete-user', function(req, res, next) {
+  var user = req.app.locals.user;
+  /*****************************************************************************
+   * Delete User
+  *****************************************************************************/
+  var body = req.body;
+  var uid = Object.keys(body);
+
+  admin.auth().deleteUser(uid)
+    .then(function() {
+      console.log("Successfully deleted user");
+      return res.redirect('/core-warranty/people-list');
+    })
+    .catch(function(error) {
+      console.log("Error deleting user:", error);
     });
 });
 
