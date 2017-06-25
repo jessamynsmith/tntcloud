@@ -91,4 +91,23 @@ router.get('/user-edit', function(req, res, next) {
 });
 
 
+/*******************************************************************************
+ * User Delete: Page
+ ******************************************************************************/
+router.get('/user-delete', function(req, res, next) {
+  var uid = req.query.KEY;
+
+  admin.auth().getUser(uid)
+    .then(function(userRecord) {
+      // See the UserRecord reference doc for the contents of userRecord.
+      console.log("Successfully fetched user data:", userRecord.toJSON());
+    })
+    .catch(function(error) {
+      console.log("Error fetching user data:", error);
+    });
+
+  res.render('users/user-delete', { navUsers: navUsers });
+});
+
+
 module.exports = router;

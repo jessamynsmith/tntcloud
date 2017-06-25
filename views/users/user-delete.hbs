@@ -1,0 +1,31 @@
+
+<!-- Title/Intro ------------------------------------------------------------>
+<div class="section-intro">
+  <h1>Delete User</h2>
+</div>
+
+<!-- Primary Content -------------------------------------------------------->
+<table class="data-table stack">
+  <thead>
+    <tr>
+      <th class="col2">User Email</th>
+      <th class="col3">Delete User</th>
+      <th class="col4">Cancel</th>
+    </tr>
+  </thead>
+  <tbody id="people-list">
+    <tr class="data-row">
+      <td id="person-record-name">{{ templateData.PersonName }}</td>
+      <!-- Delete Form as Button -------------------------------------------->
+      <td>
+      <form action="/user-delete/delete-user" method="post">
+        <button class="button alert" name="{{ key }}">
+          Delete Person
+        </button>
+      </form>
+      </td>
+      <!-------------------------------------------------------->
+      <td><a href="/users" class="button secondary">Cancel</a></td>
+    </tr>
+  </tbody>
+</table>
