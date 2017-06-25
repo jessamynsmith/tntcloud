@@ -142,10 +142,11 @@ router.post('/user-edit-input', function(req, res){
  * User Edit: Role Form
  ******************************************************************************/
 router.post('/user-edit-role', function(req, res){
-  var body = req.body;
-  var key = Object.keys(body);
-  console.log("Body === ", body);
-//  var personRef = req.app.locals.dbRef.child('users/' + key);
+  var role = req.body.role;
+  var uid = req.body.uid;
+
+  console.log("Body === ", role, uid);
+//  var userRef = req.app.locals.dbRef.child('users/' + key);
   // remove record from database by adding 'remove()' to the dbRef
 //  personRef.remove();
 
