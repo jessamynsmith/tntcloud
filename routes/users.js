@@ -3,23 +3,35 @@ var router = express.Router();
 // Firebase admin
 var admin = require('../firebase-admin-init')
 
-/* GET users listing. */
+/*******************************************************************************
+ * Users
+ ******************************************************************************/
 // this router is for /users dir, see app.js for initializer
 router.get('/', function(req, res, next) {
 
-  res.send('user list');
-});
-// this is a subroute of the above / .../users
-router.get('/user-create', function(req, res, next) {
-  res.render('users/user-create');
-});
-// this is a subroute of the above / .../users
-router.get('/user-create-input', function(req, res, next) {
-  res.send('yup ');
+  var uid = '0fHIeLP0ZebpApMz2T5neW1mzgu2';
+
+  admin.auth().getUser(uid)
+    .then(function(userRecord) {
+      // See the UserRecord reference doc for the contents of userRecord.
+      console.log("Successfully fetched user data:", userRecord.toJSON());
+    })
+    .catch(function(error) {
+      console.log("Error fetching user data:", error);
+    });
+
+  res.render('users/users');
 });
 
 /*******************************************************************************
- * Create New User
+ * User Create: Page
+ ******************************************************************************/
+router.get('/user-create', function(req, res, next) {
+  res.render('users/user-create');
+});
+
+/*******************************************************************************
+ * User Create: Form
  ******************************************************************************/
 router.post('/user-create-input', function(req, res){
   // get email, password, and role entered into create user form
