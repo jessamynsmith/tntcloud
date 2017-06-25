@@ -22,16 +22,16 @@
           </div>
         </div>
         <!-- User Create Form ------------------------------------------------->
-        <form action="/users/user-create-input" method="post">
+        <form action="/users/user-edit-input" method="post">
           <!--Inputs----------------------------------->
           <div class="row">
             <div class="large-12 columns">
-              <input id="email" type="email" placeholder="Email" name="email">
+              <input id="email" type="email" placeholder="New email" value="{{ email }}" name="email">
             </div>
           </div>
           <div class="row">
             <div class="large-12 columns">
-              <input id="password" type="password" placeholder="Password" name="password">
+              <input id="password" type="password" placeholder="New password" name="password">
             </div>
           </div>
           <div class="row">
