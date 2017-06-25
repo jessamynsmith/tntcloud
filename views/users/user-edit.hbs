@@ -1,58 +1,49 @@
 
-<!-- Title/Intro ------------------------------------------------------------>
+<!-- Title/Intro -------------------------------------------------------------->
 <div class="section-intro">
   <h1>Edit User</h2>
 </div>
 
-<!-- Firebase User Create ----------------------------------------------------->
+<!-- User Edit ---------------------------------------------------------------->
 <!-- https://codepen.io/johngerome/pen/pdrgk -->
-<!-- DO NOT USE <FORM> as wrapper of firebase auth input fields -->
-<div class="large-3 large-centered columns">
-  <div id="loginBox">
+<div class="row expanded small-12 medium-10 large-6 columns">
+  <div class="row">
+    <!-- Edit Email & Pass -------------------------------------------------->
     <div class="row">
-      <div class="large-12 columns">
-        <!--Error Message------------------------------>
-        <div class="row">
-          <div class="large-12 columns">
-            <div id="errorMessage">
-              {{# if error }}
-                {{ error }}
-              {{/if}}
-            </div>
-          </div>
-        </div>
-        <!-- User Create Form ------------------------------------------------->
-        <form action="/users/user-edit-input" method="post">
-          <!--Inputs----------------------------------->
-          <div class="row">
-            <div class="large-12 columns">
-              <input id="email" type="email" placeholder="New email" value="{{ email }}" name="email">
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns">
-              <input id="password" type="password" placeholder="New password" name="password">
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns">
-              <select id="role" placeholder="Role" name="role">
-                <option value="basic">Basic</option>
-                <option value="admin">Administrator</option>
-              </select>
-              <!-- Radio inputs
-                <input type="radio" name="basic">Basic<br>
-                <input type="radio" name="admin">Admin<br>
-              -->
-            </div>
-          </div>
-          <!--Button----------------------->
-          <button id="btnUserCreate" class="button">
-            Create User
-          </button>
-        </form>
-        <!-- End User Create Form --------------------------------------------->
+      <div class="large-6">
+        <p style="color: #cc4b37;"><b>{{ email }}</b></p>
       </div>
     </div>
-  </div>
-</div>
+    <h4>Change password</h4>
+    <form action="/users/user-edit-email-pass" method="post">
+      <!--Inputs----------------------------------->
+      <div class="row">
+        <div class="large-6">
+          <input id="password" type="password" placeholder="New password" name="password">
+        </div>
+      </div>
+      <!--Button----------------------->
+      <button id="btnUserCreate" class="button">
+        Upate User Password
+      </button>
+    </form>
+    <!-- End User Create Form --------------------------------------------->
+    <h4>Change user role</h4>
+    <form action="/users/user-edit-email-pass" method="post">
+      <!--Inputs----------------------------------->
+      <div class="row">
+        <div class="large-6">
+          <select id="role" placeholder="Role" name="role">
+            <option value="basic">Basic</option>
+            <option value="admin">Administrator</option>
+          </select>
+        </div>
+      </div>
+      <!--Button----------------------->
+      <button id="btnUserCreate" class="button">
+        Upate User Role
+      </button>
+    </form>
+    <!-- End User Create Form --------------------------------------------->
+  </div><!-- End <div> row ---------------------------------------------------->
+</div><!-- End <div> row expanded --------------------------------------------->
