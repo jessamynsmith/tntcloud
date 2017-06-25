@@ -14,23 +14,14 @@
         <p style="color: #cc4b37;"><b>{{ email }}</b></p>
       </div>
     </div>
-    <h4>Change password</h4>
-    <form action="/users/user-edit-email-pass" method="post">
+    <h3>Update User</h3>
+    <form action="/user-edit/update-user" method="post">
       <!--Inputs----------------------------------->
       <div class="row">
         <div class="large-6">
           <input id="password" type="password" placeholder="New password" name="password">
         </div>
       </div>
-      <!--Button----------------------->
-      <button id="btnUserCreate" class="button">
-        Upate User Password
-      </button>
-    </form>
-    <!-- End User Create Form --------------------------------------------->
-    <h4>Change user role</h4>
-    <form action="/users/user-edit-email-pass" method="post">
-      <!--Inputs----------------------------------->
       <div class="row">
         <div class="large-6">
           <select id="role" placeholder="Role" name="role">
@@ -41,7 +32,7 @@
       </div>
       <!--Button----------------------->
       <button id="btnUserCreate" class="button">
-        Upate User Role
+        Upate User
       </button>
     </form>
     <!-- End User Create Form --------------------------------------------->
