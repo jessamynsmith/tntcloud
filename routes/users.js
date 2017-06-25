@@ -96,17 +96,17 @@ router.get('/user-edit', function(req, res, next) {
  ******************************************************************************/
 router.get('/user-delete', function(req, res, next) {
   var uid = req.query.KEY;
+  var userEmail;
 
   admin.auth().getUser(uid)
     .then(function(userRecord) {
+      userEmail = userRecord.email;
       // See the UserRecord reference doc for the contents of userRecord.
-      console.log("Successfully fetched user data:", userRecord.toJSON());
+      res.render('users/user-delete', { navUsers: navUsers, userEmail: userEmail });
     })
     .catch(function(error) {
       console.log("Error fetching user data:", error);
     });
-
-  res.render('users/user-delete', { navUsers: navUsers });
 });
 
 
