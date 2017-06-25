@@ -6,7 +6,7 @@ var dbRef = firebase.database().ref();
 var admin = require('../firebase-admin-init')
 
 /*******************************************************************************
- * Core Warranty: Navigation
+ * Navigation: Users
  ******************************************************************************/
 var navUsers =
   `<ul class="menu">
@@ -93,7 +93,7 @@ router.get('/user-edit', function(req, res, next) {
   admin.auth().getUser(uid)
     .then(function(userRecord) {
       // See the UserRecord reference doc for the contents of userRecord.
-      console.log("Successfully fetched user data:", userRecord.toJSON());
+  //    console.log("Successfully fetched user data:", userRecord.toJSON());
       var email = userRecord.email;
       res.render('users/user-edit', { navUsers: navUsers, uid: uid, email: email });
     })
@@ -104,28 +104,24 @@ router.get('/user-edit', function(req, res, next) {
 });
 
 /*******************************************************************************
- * User Edit: Form
+ * User Edit: Password Form
  ******************************************************************************/
 router.post('/user-edit-input', function(req, res){
 
   // get email, password, and role entered into create user form
-  var newUser = {
+  var updateUser = {
   	email: req.body.email,
   	pass: req.body.password,
   	role: req.body.role
   };
   // Firebase auth createUser
   admin.auth().updateUser(uid, {
-    email: newUser.email,
-    emailVerified: true,
-    password: newUser.pass,
-    disabled: false,
-    role: newUser.role
+    password: updateUser.pass
   })
   .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
     // Get UID and add user id to 'item' object so it can be set as child of users collection
-    var newId = userRecord.uid;
+    var updateUId = userRecord.uid;
     var usersRef = req.app.locals.dbRef.child('users');
     // Create new child to a specific path for the uid - use 'set' instead of 'push'
     // https://firebase.google.com/docs/database/admin/save-data
@@ -138,6 +134,36 @@ router.post('/user-edit-input', function(req, res){
   .catch(function(error) {
     console.log("Error editing user:", error);
   });
+  // url redirect after post
+  res.redirect('/users');
+});
+
+/*******************************************************************************
+ * User Edit: Role Form
+ ******************************************************************************/
+router.post('/user-edit-role', function(req, res){
+  var body = req.body;
+  var key = Object.keys(body);
+  console.log("Body === ", body);
+//  var personRef = req.app.locals.dbRef.child('users/' + key);
+  // remove record from database by adding 'remove()' to the dbRef
+//  personRef.remove();
+
+/*
+  // get email, password, and role entered into create user form
+  var updateUser = {
+  	role: req.body.role
+  };
+  // Get a key for a new core Record
+  var newKey = firebase.database().ref().child('warranty').push().key;
+
+  // write the new core data to the core list
+  var updates = {};
+  updates['/warranty/' + newKey] = item;
+
+  // update the new-key-record with the data
+  var dbUpdate = req.app.locals.dbRef.update(updates);
+*/
   // url redirect after post
   res.redirect('/users');
 });

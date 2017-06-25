@@ -15,7 +15,7 @@
       </div>
     </div>
     <h4>Change password</h4>
-    <form action="/users/user-edit-email-pass" method="post">
+    <form action="/users/user-edit-pass" method="post">
       <!--Inputs----------------------------------->
       <div class="row">
         <div class="large-6">
@@ -29,7 +29,7 @@
     </form>
     <!-- End User Create Form --------------------------------------------->
     <h4>Change user role</h4>
-    <form action="/users/user-edit-email-pass" method="post">
+    <form action="/users/user-edit-role" method="post">
       <!--Inputs----------------------------------->
       <div class="row">
         <div class="large-6">
@@ -40,7 +40,8 @@
         </div>
       </div>
       <!--Button----------------------->
-      <button id="btnUserCreate" class="button">
+<!--      <input type="submit" class="button" value="Update User Role" name="uid[{{ uid }}]"> -->
+      <button id="btnUserCreate" class="button" name="uid" value={{ uid }}>
         Upate User Role
       </button>
     </form>
