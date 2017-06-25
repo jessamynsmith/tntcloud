@@ -60,6 +60,9 @@ app.use('/people-delete', /*mw.loggedIn,*/ coreWarranty);
 app.use('/users', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
 app.use('/user-create', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
 app.use('/user-create-input', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
+app.use('/user-edit', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
+app.use('/user-edit-password', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
+app.use('/delete-success', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

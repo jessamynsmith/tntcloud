@@ -63,23 +63,23 @@ router.post('/user-create-input', function(req, res){
     disabled: false,
     role: newUser.role
   })
-  .then(function(userRecord) {
-    // See the UserRecord reference doc for the contents of userRecord.
-    // Get UID and add user id to 'item' object so it can be set as child of users collection
-    var newId = userRecord.uid;
-    var usersRef = req.app.locals.dbRef.child('users');
-    // Create new child to a specific path for the uid - use 'set' instead of 'push'
-    // https://firebase.google.com/docs/database/admin/save-data
-    usersRef.child(newId).set({
-      email: newUser.email,
-      role: newUser.role
+    .then(function(userRecord) {
+      // See the UserRecord reference doc for the contents of userRecord.
+      // Get UID and add user id to 'item' object so it can be set as child of users collection
+      var newId = userRecord.uid;
+      var usersRef = req.app.locals.dbRef.child('users');
+      // Create new child to a specific path for the uid - use 'set' instead of 'push'
+      // https://firebase.google.com/docs/database/admin/save-data
+      usersRef.child(newId).set({
+        email: newUser.email,
+        role: newUser.role
+      });
+      console.log("Successfully created new user:", userRecord.uid);
+    })
+    .catch(function(error) {
+      console.log("Error creating new user:", error);
     });
-    console.log("Successfully created new user:", userRecord.uid);
-  })
-  .catch(function(error) {
-    console.log("Error creating new user:", error);
-  });
-  // url redirect after post
+    // url redirect after post
   res.redirect('user-create');
 });
 
@@ -106,36 +106,35 @@ router.get('/user-edit', function(req, res, next) {
 /*******************************************************************************
  * User Edit: Password Form
  ******************************************************************************/
-router.post('/user-edit-input', function(req, res){
+router.post('/user-edit-password', function(req, res){
 
   // get email, password, and role entered into create user form
-  var updateUser = {
-  	email: req.body.email,
-  	pass: req.body.password,
-  	role: req.body.role
-  };
+  var newPassword = req.body.password;
+
   // Firebase auth createUser
   admin.auth().updateUser(uid, {
-    password: updateUser.pass
+    password: newPassword
   })
-  .then(function(userRecord) {
-    // See the UserRecord reference doc for the contents of userRecord.
-    // Get UID and add user id to 'item' object so it can be set as child of users collection
-    var updateUId = userRecord.uid;
-    var usersRef = req.app.locals.dbRef.child('users');
-    // Create new child to a specific path for the uid - use 'set' instead of 'push'
-    // https://firebase.google.com/docs/database/admin/save-data
-    usersRef.child(newId).set({
-      email: newUser.email,
-      role: newUser.role
+    .then(function(userRecord) {
+      // See the UserRecord reference doc for the contents of userRecord.
+      // Get UID and add user id to 'item' object so it can be set as child of users collection
+  /*
+      var updateUId = userRecord.uid;
+      var usersRef = req.app.locals.dbRef.child('users');
+      // Create new child to a specific path for the uid - use 'set' instead of 'push'
+      // https://firebase.google.com/docs/database/admin/save-data
+      usersRef.child(newId).set({
+        email: newUser.email,
+        role: newUser.role
+      });
+    */
+      console.log("Successfully Edited user password:", password);
+    })
+    .catch(function(error) {
+      console.log("Error editing user:", error);
     });
-    console.log("Successfully Edited new user:", userRecord.uid);
-  })
-  .catch(function(error) {
-    console.log("Error editing user:", error);
-  });
   // url redirect after post
-  res.redirect('/users');
+//  res.redirect('users/users');
 });
 
 /*******************************************************************************
@@ -184,6 +183,17 @@ router.get('/user-delete', function(req, res, next) {
     .catch(function(error) {
       console.log("Error fetching user data:", error);
     });
+});
+
+/*******************************************************************************
+ * User Password Change Success
+ ******************************************************************************/
+// this router is for /core-warranty dir, see app.js for initializer
+router.get('/password-success', mw.userRole, function(req, res, next) {
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+
+  res.render('users/password-success', { isAdmin: isAdmin, navUsers: navUsers });
 });
 
 /*******************************************************************************
