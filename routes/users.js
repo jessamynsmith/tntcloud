@@ -100,7 +100,6 @@ router.get('/user-edit', function(req, res, next) {
     .catch(function(error) {
       console.log("Error fetching user data:", error);
     });
-
 });
 
 /*******************************************************************************
@@ -109,6 +108,7 @@ router.get('/user-edit', function(req, res, next) {
 router.post('/user-edit-password', function(req, res){
 
   // get email, password, and role entered into create user form
+  var uid = req.body.uid;
   var newPassword = req.body.password;
 
   // Firebase auth createUser
@@ -116,25 +116,11 @@ router.post('/user-edit-password', function(req, res){
     password: newPassword
   })
     .then(function(userRecord) {
-      // See the UserRecord reference doc for the contents of userRecord.
-      // Get UID and add user id to 'item' object so it can be set as child of users collection
-  /*
-      var updateUId = userRecord.uid;
-      var usersRef = req.app.locals.dbRef.child('users');
-      // Create new child to a specific path for the uid - use 'set' instead of 'push'
-      // https://firebase.google.com/docs/database/admin/save-data
-      usersRef.child(newId).set({
-        email: newUser.email,
-        role: newUser.role
-      });
-    */
-      console.log("Successfully Edited user password:", password);
+      res.redirect('/users');
     })
     .catch(function(error) {
       console.log("Error editing user:", error);
     });
-  // url redirect after post
-//  res.redirect('users/users');
 });
 
 /*******************************************************************************
