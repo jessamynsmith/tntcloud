@@ -338,33 +338,11 @@ router.get('/people-add', function(req, res, next) {
  ******************************************************************************/
 router.post('/insert-person', function(req, res, next) {
   console.log("insert person 1");
-//  var user = req.app.locals.user;
+  var user = req.app.locals.user;
   // get the form fields data
   var item = {
     PersonName: req.body.PersonName
   };
-
-  console.log("insert person 2");
-  var postsRef = req.app.locals.dbRef.child("people");
-
-  console.log("insert person 3");
-  var newPostRef = postsRef.push();
-
-  console.log("insert person 4");
-  newPostRef.set(item)
-  .then(function(){
-    console.log("insert person 5");
-    res.redirect('/core-warranty/people-list');
-  })
-  .catch(function(error) {
-    console.log("insert person 6");
-    console.log("error", error);
-  });
-
-
-
- // console.log("insert person 7");
-/*
   // Get a key for a new record
   var newKey = firebase.database().ref().child('people').push().key;
 
@@ -384,7 +362,6 @@ router.post('/insert-person', function(req, res, next) {
   .catch(function(error) {
     console.log("error", error);
   });
-*/
 });
 
 /*******************************************************************************
