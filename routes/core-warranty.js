@@ -178,7 +178,6 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
   function gotData(data) {
     // access data values
     templateData = data.val();
-
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
@@ -203,7 +202,6 @@ router.get('/list-core', mw.userRole, function(req, res, next) {
   function gotData(data) {
     // access data values
     templateData = data.val();
-
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
