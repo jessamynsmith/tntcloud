@@ -1,5 +1,4 @@
-idea/
-.idea/
-node_modules/
+.idea
+node_modules
 *.zip
 .DS_Store
