@@ -16,7 +16,7 @@ app.locals.firebase = require("./firebase");
 app.locals.dbRef = app.locals.firebase.database().ref();
 
 // Middleware must be required after ./firebase because middleware uses it
-// var mw = require('./middleware');
+var mw = require('./middleware');
 
 // import route files
 var index = require('./routes/index');
@@ -49,8 +49,8 @@ app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false})
 // define routes and route resource files -see @routes files
 app.use('/', index);
 app.use('/dispatch', /*mw.loggedIn,*/ dispatch);
-app.use('/dispatch-requests', /*mw.loggedIn,*/ dispatch);
-app.use('/dispatching', /*mw.loggedIn,*/ dispatch);
+// app.use('/dispatch-requests', /*mw.loggedIn,*/ dispatch);
+// app.use('/dispatching', /*mw.loggedIn,*/ dispatch);
 app.use('/core-warranty', /*mw.loggedIn,*/ coreWarranty);
 //app.use('/create-warranty', /*mw.loggedIn,*/ coreWarranty);
 //app.use('/create-core', /*mw.loggedIn,*/ coreWarranty);
@@ -58,9 +58,9 @@ app.use('/core-warranty', /*mw.loggedIn,*/ coreWarranty);
 //app.use('/people-add', /*mw.loggedIn,*/ coreWarranty);
 //app.use('/people-delete', /*mw.loggedIn,*/ coreWarranty);
 app.use('/users', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
-app.use('/user-create', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
-app.use('/user-create-input', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
-/*
+// app.use('/user-create', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
+// app.use('/user-create-input', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   console.log("app error 1");
@@ -81,5 +81,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
 //  res.render('error');
 });
-*/
+
 module.exports = app;

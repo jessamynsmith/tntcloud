@@ -43,7 +43,7 @@ router.get('/create-warranty', function(req, res, next) {
    * Build Employees <options> for <select> drop-down with Employee ID + Name
   *****************************************************************************/
   // Sort people/PersonName using Firebase
-  dbRef.child('/people/').orderByChild('PersonName').on('value', gotData);
+  dbRef.child('/people/').orderByChild('PersonName').once('value', gotData);
 
   function gotData(data) {
     var templateData = [];
@@ -66,7 +66,7 @@ router.get('/create-core', function(req, res, next) {
    * Build Employees <options> for <select> drop-down with Employee ID + Name
   *****************************************************************************/
   // Sort people/PersonName using Firebase
-  dbRef.child('/people/').orderByChild('PersonName').on('value', gotData);
+  dbRef.child('/people/').orderByChild('PersonName').once('value', gotData);
 
   function gotData(data) {
     var templateData = [];
@@ -159,7 +159,6 @@ router.post('/insert-core', function(req, res, next) {
   .catch(function(error) {
     console.log("error", error);
   });
-
 });
 
 /*******************************************************************************
@@ -269,7 +268,6 @@ router.get('/record-core', function(req, res, next) {
   dbRef.child('core/' + key).once('value', gotData);
 
   function gotData(data) {
-  console.log("Core Record ", data);
     // access data values
     templateData = data.val();
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
@@ -292,7 +290,6 @@ router.get('/record-warranty', function(req, res, next) {
   dbRef.child('warranty/' + key).once('value', gotData);
 
   function gotData(data) {
-    console.log("Warranty Record ", data);
     // access data values
     templateData = data.val();
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
@@ -317,7 +314,6 @@ router.get('/people-list', function(req, res, next) {
   function gotData(data) {
     // access data values
     templateData = data.val();
-
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
@@ -337,36 +333,13 @@ router.get('/people-add', function(req, res, next) {
  * People: Create Person Page: Submit Form
  ******************************************************************************/
 router.post('/insert-person', function(req, res, next) {
-  console.log("insert person 1");
-//  var user = req.app.locals.user;
   // get the form fields data
   var item = {
     PersonName: req.body.PersonName
   };
 
-  console.log("insert person 2");
-  var postsRef = req.app.locals.dbRef.child("people");
-
-  console.log("insert person 3");
-  var newPostRef = postsRef.push();
-
-  console.log("insert person 4");
-  newPostRef.set(item)
-  .then(function(){
-    console.log("insert person 5");
-    res.redirect('/core-warranty/people-list');
-  })
-  .catch(function(error) {
-    console.log("insert person 6");
-    console.log("error", error);
-  });
-
-
-
- // console.log("insert person 7");
-/*
   // Get a key for a new record
-  var newKey = firebase.database().ref().child('people').push().key;
+  var newKey = req.app.locals.dbRef.child('people').push().key;
 
   // write the new core data to the core list
   var updates = {};
@@ -374,17 +347,13 @@ router.post('/insert-person', function(req, res, next) {
   // update the new-key-record with the data
   var dbUpdate = req.app.locals.dbRef.update(updates);
 
-  console.log("insert person 2");
-  dbUpdate.then(function(data) {
-
-    console.log("insert person 3");
+  dbUpdate.then(function() {
     // url redirect after post, include query parameter
     res.redirect('/core-warranty/people-list');
   })
   .catch(function(error) {
     console.log("error", error);
   });
-*/
 });
 
 /*******************************************************************************
