@@ -18,8 +18,8 @@
       <td id="user-email">{{ userEmail }}</td>
       <!-- Delete Form as Button -------------------------------------------->
       <td>
-      <form action="/user-delete/delete-user" method="post">
-        <button class="button alert" name="{{ uid }}">
+      <form action="/users/user-delete" method="post">
+        <button class="button alert" name="uid" value="{{ uid }}">
           Delete Person
         </button>
       </form>

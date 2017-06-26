@@ -185,43 +185,21 @@ router.get('/user-delete', function(req, res, next) {
     });
 });
 
-/*******************************************************************************
- * User Password Change Success
- ******************************************************************************/
-// this router is for /core-warranty dir, see app.js for initializer
-router.get('/password-success', mw.userRole, function(req, res, next) {
-  // works as boolean, if conditional is true, then true, conditional is false, then false
-  var isAdmin = req.app.locals.userRole === 'admin';
-
-  res.render('users/password-success', { isAdmin: isAdmin, navUsers: navUsers });
-});
-
-/*******************************************************************************
- * Delete User Success
- ******************************************************************************/
-// this router is for /core-warranty dir, see app.js for initializer
-router.get('/delete-success', mw.userRole, function(req, res, next) {
-  // works as boolean, if conditional is true, then true, conditional is false, then false
-  var isAdmin = req.app.locals.userRole === 'admin';
-
-  res.render('users/delete-success', { isAdmin: isAdmin, navUsers: navUsers });
-});
 
 /*******************************************************************************
  * User Delete: Form
  ******************************************************************************/
-router.post('/delete-user', function(req, res, next) {
+router.post('/user-delete', function(req, res, next) {
   var user = req.app.locals.user;
   /*****************************************************************************
    * Delete User
   *****************************************************************************/
-  var body = req.body;
-  var uid = Object.keys(body);
+  var uid = req.body.uid;
 
   admin.auth().deleteUser(uid)
     .then(function() {
       console.log("Successfully deleted user");
-      res.redirect('/users/delete-success');
+      res.redirect('/users');
     })
     .catch(function(error) {
       console.log("Error deleting user:", error);
