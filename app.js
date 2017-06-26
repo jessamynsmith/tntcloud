@@ -49,8 +49,9 @@ app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false})
 // define routes and route resource files -see @routes files
 app.use('/', index);
 app.use('/dispatch', /*mw.loggedIn,*/ dispatch);
-app.use('/dispatch-requests', /*mw.loggedIn,*/ dispatch);
 app.use('/dispatching', /*mw.loggedIn,*/ dispatch);
+app.use('/dispatch-history', /*mw.loggedIn,*/ dispatch);
+app.use('/create-request', /*mw.loggedIn,*/ dispatch);
 app.use('/core-warranty', /*mw.loggedIn,*/ coreWarranty);
 app.use('/create-warranty', /*mw.loggedIn,*/ coreWarranty);
 app.use('/create-core', /*mw.loggedIn,*/ coreWarranty);
