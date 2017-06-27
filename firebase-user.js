@@ -1,10 +1,12 @@
 var firebase = require("firebase");
 var promise = require("promise");
+var admin = require("firebase-admin")
 
 // Set empty variable so it's available globally
 var fbUser = {};
 var dbRef = firebase.database().ref();
 var userRole = '';
+var authToken = null;
 /*******************************************************************************
  * Auth State Changed: Get Firebase UID
  ******************************************************************************/
@@ -15,6 +17,21 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
     userRole = '';
   }
+
+  if (user) {
+
+    var uid = fbUser.uid;
+
+    admin.auth().createCustomToken(uid)
+      .then(function(customToken) {
+        // Send token back to client
+        authToken = customToken;
+      })
+      .catch(function(error) {
+        console.log("Error creating custom token:", error);
+      });
+  }
+
 });
 
 /*******************************************************************************
@@ -54,4 +71,7 @@ module.exports.getRole = function() {
 // Need to export a function, not just a variable because I need the value to be updated
 module.exports.getUser = function() {
   return fbUser;
+}
+module.exports.getAuthToken = function() {
+  return authToken;
 }

@@ -3,6 +3,8 @@ var router = express.Router();
 var firebase = require("firebase");
 var mw = require('../middleware');
 
+var firebaseUser = require("../firebase-user");
+
 /*******************************************************************************
  * Core Warranty: Navigation
  ******************************************************************************/
@@ -22,7 +24,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-// this is a subroute of the above / .../users
+// this is a subroute
 router.get('/history', function(req, res, next) {
   var user = req.app.locals.user;
 
@@ -30,7 +32,7 @@ router.get('/history', function(req, res, next) {
 });
 
 
-// this is a subroute of the above / .../users
+// this is a subroute
 router.get('/dispatching', function(req, res, next) {
   var user = req.app.locals.user;
 
@@ -38,9 +40,13 @@ router.get('/dispatching', function(req, res, next) {
 });
 
 
-// this is a subroute of the above / .../users
+// this is a subroute
 router.get('/create-request', function(req, res, next) {
   var user = req.app.locals.user;
+
+  var authToken = firebaseUser.getAuthToken();
+  console.log("Dispatch token ", authToken);
+  res.cookie('fb-auth-token', authToken, { httpOnly: false });
 
   res.render('dispatch/create-request', { navDispatch: navDispatch });
 });
