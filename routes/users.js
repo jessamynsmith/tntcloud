@@ -63,24 +63,24 @@ router.post('/user-create-input', function(req, res){
     disabled: false,
     role: newUser.role
   })
-    .then(function(userRecord) {
-      // See the UserRecord reference doc for the contents of userRecord.
-      // Get UID and add user id to 'item' object so it can be set as child of users collection
-      var newId = userRecord.uid;
-      var usersRef = req.app.locals.dbRef.child('users');
-      // Create new child to a specific path for the uid - use 'set' instead of 'push'
-      // https://firebase.google.com/docs/database/admin/save-data
-      usersRef.child(newId).set({
-        email: newUser.email,
-        role: newUser.role
-      });
-      console.log("Successfully created new user:", userRecord.uid);
-    })
-    .catch(function(error) {
-      console.log("Error creating new user:", error);
+  .then(function(userRecord) {
+    // See the UserRecord reference doc for the contents of userRecord.
+    // Get UID and add user id to 'item' object so it can be set as child of users collection
+    var newId = userRecord.uid;
+    var usersRef = req.app.locals.dbRef.child('users');
+    // Create new child to a specific path for the uid - use 'set' instead of 'push'
+    // https://firebase.google.com/docs/database/admin/save-data
+    usersRef.child(newId).set({
+      email: newUser.email,
+      role: newUser.role
     });
+    console.log("Successfully created new user:", userRecord.uid);
     // url redirect after post
-  res.redirect('user-create');
+    res.redirect('/users');
+  })
+  .catch(function(error) {
+    console.log("Error creating new user:", error);
+  });
 });
 
 /*******************************************************************************
