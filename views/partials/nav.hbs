@@ -1,8 +1,34 @@
-<!-- Section Nav ------------------------------------------------------------>
-<div class="top-bar">
-  <div class="row small-11">
-    {{#if navCW }}
-      {{{ navCW }}}
-    {{/if}}
+
+<!-- Dispatch Nav Section ----------------------------------------------------->
+{{#if navDispatch }}
+  <div class="top-bar">
+    <div class="row small-11">
+    <!-- Dispatch -->
+        {{{ navDispatch }}}
+    <!-- End Dispatch -->
+    </div>
   </div>
-</div>
+{{/if}}
+
+<!-- Core Warranty Nav Section ------------------------------------------------>
+{{#if navCW }}
+  <div class="top-bar">
+    <div class="row small-11">
+    <!-- Core Warranty -->
+        {{{ navCW }}}
+    <!-- End Core Warranty -->
+    </div>
+  </div>
+{{/if}}
+
+
+<!-- Users Nav Section ------------------------------------------------>
+{{#if navUsers }}
+  <div class="top-bar">
+    <div class="row small-11">
+    <!-- Users -->
+        {{{ navUsers }}}
+    <!-- End Users -->
+    </div>
+  </div>
+{{/if}}

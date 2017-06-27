@@ -1,54 +1,44 @@
-<h1>Create User</h1>
+
+<!-- Title/Intro ------------------------------------------------------------>
+<div class="section-intro">
+  <h1>Create User</h2>
+</div>
 
 <!-- Firebase User Create ----------------------------------------------------->
 <!-- https://codepen.io/johngerome/pen/pdrgk -->
 <!-- DO NOT USE <FORM> as wrapper of firebase auth input fields -->
-<div class="large-3 large-centered columns">
-  <div id="loginBox">
-    <div class="row">
-      <div class="large-12 columns">
-        <!--Error Message------------------------------>
-        <div class="row">
-          <div class="large-12 columns">
-            <div id="errorMessage">
-              {{# if error }}
-                {{ error }}
-              {{/if}}
-            </div>
-          </div>
+<div class="row expanded small-12 medium-10 large-6 columns">
+  <div class="row">
+    <!-- User Create Form ------------------------------------------------->
+    <form action="/users/user-create-input" method="post">
+      <!--Inputs----------------------------------->
+      <div class="row">
+        <div class="large-6">
+          <input id="email" type="email" required placeholder="Email" name="email">
         </div>
-        <!-- User Create Form ------------------------------------------------->
-        <form action="/users/user-create-input" method="post">
-          <!--Inputs----------------------------------->
-          <div class="row">
-            <div class="large-12 columns">
-              <input id="email" type="email" placeholder="Email" name="email">
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns">
-              <input id="password" type="password" placeholder="Password" name="password">
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-12 columns">
-              <select id="role" placeholder="Role" name="role">
-                <option value="basic">Basic</option>
-                <option value="admin">Administrator</option>
-              </select>
-              <!-- Radio inputs
-                <input type="radio" name="basic">Basic<br>
-                <input type="radio" name="admin">Admin<br>
-              -->
-            </div>
-          </div>
-          <!--Button----------------------->
-          <button id="btnUserCreate" class="button">
-            Create User
-          </button>
-        </form>
-        <!-- End User Create Form --------------------------------------------->
       </div>
-    </div>
+      <div class="row">
+        <div class="large-6">
+          <input id="password" type="password" required placeholder="Password" name="password">
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-6">
+          <select id="role" placeholder="Role" name="role">
+            <option value="basic">Basic</option>
+            <option value="admin">Administrator</option>
+          </select>
+          <!-- Radio inputs
+            <input type="radio" name="basic">Basic<br>
+            <input type="radio" name="admin">Admin<br>
+          -->
+        </div>
+      </div>
+      <!--Button----------------------->
+      <button id="btnUserCreate" class="button">
+        Create User
+      </button>
+    </form>
+    <!-- End User Create Form --------------------------------------------->
   </div>
 </div>

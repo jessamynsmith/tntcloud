@@ -1,0 +1,50 @@
+
+<!-- Title/Intro -------------------------------------------------------------->
+<div class="section-intro">
+  <h1>Edit User</h2>
+</div>
+
+<!-- User Edit ---------------------------------------------------------------->
+<!-- https://codepen.io/johngerome/pen/pdrgk -->
+<div class="row expanded small-12 medium-10 large-6 columns">
+  <div class="row">
+    <!-- Edit Password Form --------------------------------------------------->
+    <div class="row">
+      <div class="large-6">
+        <p style="color: #cc4b37;"><b>{{ email }}</b></p>
+      </div>
+    </div>
+    <h4>Change password</h4>
+    <form action="/users/user-edit-password" method="post">
+      <!--Inputs----------------------------------->
+      <div class="row">
+        <div class="large-6">
+          <input id="password" type="password" placeholder="New password" name="password">
+        </div>
+      </div>
+      <!--Button----------------------->
+      <button class="button" name="uid" value={{ uid }}>
+        Update User Password
+      </button>
+    </form>
+    <!-- End Edit Password Form ----------------------------------------------->
+    <!-- Edit User Role Form -------------------------------------------------->
+    <h4>Change user role</h4>
+    <form action="/users/user-edit-role" method="post">
+      <!--Inputs----------------------------------->
+      <div class="row">
+        <div class="large-6">
+          <select id="role" placeholder="Role" name="role">
+            <option value="basic">Basic</option>
+            <option value="admin">Administrator</option>
+          </select>
+        </div>
+      </div>
+      <!--Button----------------------->
+      <button class="button" name="uid" value="{{ uid }}">
+        Upate User Role
+      </button>
+    </form>
+    <!-- End Edit User Role Form ---------------------------------------------->
+  </div><!-- End <div> row ---------------------------------------------------->
+</div><!-- End <div> row expanded --------------------------------------------->

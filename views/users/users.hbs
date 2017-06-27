@@ -1,0 +1,30 @@
+
+<!-- Title/Intro ------------------------------------------------------------>
+<div class="section-intro">
+  <h1>Users</h2>
+  <p><a class="button hollow" href="/users/user-create">Create User</a></p>
+</div>
+
+<!-- Records list -->
+<table class="data-table stack">
+  <thead>
+    <th class="col1">User Email</th>
+    <th class="col2" data-sort="ro">User Role</th>
+    <th class="col11">Edit User</th>
+    <th class="col11">Delete User</th>
+  </thead>
+  <tbody id="records-list" class="list">
+  <!--------------------------------------------------------------------------->
+  <!-- Handlebars ------------------------------------------------------------->
+  <!--------------------------------------------------------------------------->
+    {{#each userData }}
+      <tr class="data-row" id="{{@key}}">
+        <td class="">{{ email }}</td>
+        <td class="">{{ role }}</td>
+        <td><a class="button list-record" href="/users/user-edit/?KEY={{@key}}">Edit User</a></td>
+        <td><a class="button list-record" href="/users/user-delete/?KEY={{@key}}">Delete User</a></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
