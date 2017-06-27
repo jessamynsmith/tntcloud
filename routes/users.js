@@ -167,11 +167,20 @@ router.get('/user-delete', function(req, res, next) {
  ******************************************************************************/
 router.post('/user-delete', function(req, res, next) {
   var user = req.app.locals.user;
-  /*****************************************************************************
-   * Delete User
-  *****************************************************************************/
+  // uid of user to delete
   var uid = req.body.uid;
 
+  /*****************************************************************************
+   * Delete User: Realtime Database
+  *****************************************************************************/
+  // select the database collection and key/record you want to remove from db
+  var personRef = req.app.locals.dbRef.child('users/' + uid);
+  // remove record from database by adding 'remove()' to the dbRef
+  var dbUpdate = personRef.remove();
+
+  /*****************************************************************************
+   * Delete User: Firebase
+  *****************************************************************************/
   admin.auth().deleteUser(uid)
     .then(function() {
       console.log("Successfully deleted user");
