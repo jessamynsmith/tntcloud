@@ -128,21 +128,12 @@ router.post('/user-edit-password', function(req, res){
  ******************************************************************************/
 router.post('/user-edit-role', function(req, res){
   // get email, password, and role entered into create user form
-  var uid = req.body.uid;
-  var role = req.body.role;
-
   var item = {
+    uid: req.body.uid,
   	role: req.body.role
   };
   // Select the user from the database that you want to edit
-//  var userRef = req.app.locals.dbRef.child('users/' + uid);
-
-//  var updates = {};
-  // this line adds new child role and sets name value to role: "..."
-  // updates['/users/' + uid + '/role'] = item;
-//  updates['/users/' + uid '/role'] = item;
-  // update the uid with the data
-  var dbUpdate = req.app.locals.dbRef.child('users/').update({'/vHvUnQ1SF8VIyMHMzyVC73tV8ID3/role': role});
+  var dbUpdate = req.app.locals.dbRef.child('users/' + item.uid).update({ 'role': item.role });
 
   dbUpdate.then(function() {
     // url redirect after post, include query parameter
