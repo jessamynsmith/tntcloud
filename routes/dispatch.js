@@ -44,9 +44,11 @@ router.get('/dispatching', function(req, res, next) {
 router.get('/create-request', function(req, res, next) {
   var user = req.app.locals.user;
 
+  // Should be moved to middleware
   var authToken = firebaseUser.getAuthToken();
   console.log("Dispatch token ", authToken);
   res.cookie('fb-auth-token', authToken, { httpOnly: false });
+
 
   res.render('dispatch/create-request', { navDispatch: navDispatch });
 });

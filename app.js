@@ -46,20 +46,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // by default express Session uses 'memory storage' which is not good for production, use another module for storage
 app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
 
+//app.use(middlewareName);  // Where middlewareName is the name of a middleware you want on all routes
+
 // define routes and route resource files -see @routes files
 app.use('/', index);
 app.use('/dispatch', /*mw.loggedIn,*/ dispatch);
-// app.use('/dispatch-requests', /*mw.loggedIn,*/ dispatch);
-// app.use('/dispatching', /*mw.loggedIn,*/ dispatch);
 app.use('/core-warranty', /*mw.loggedIn,*/ coreWarranty);
-//app.use('/create-warranty', /*mw.loggedIn,*/ coreWarranty);
-//app.use('/create-core', /*mw.loggedIn,*/ coreWarranty);
-//app.use('/people-list', /*mw.loggedIn,*/ coreWarranty);
-//app.use('/people-add', /*mw.loggedIn,*/ coreWarranty);
-//app.use('/people-delete', /*mw.loggedIn,*/ coreWarranty);
 app.use('/users', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
-// app.use('/user-create', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
-// app.use('/user-create-input', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
