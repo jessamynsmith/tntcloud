@@ -8,7 +8,7 @@
 <!-- https://codepen.io/johngerome/pen/pdrgk -->
 <div class="row expanded small-12 medium-10 large-6 columns">
   <div class="row">
-    <!-- Edit Email & Pass -------------------------------------------------->
+    <!-- Edit Password Form --------------------------------------------------->
     <div class="row">
       <div class="large-6">
         <p style="color: #cc4b37;"><b>{{ email }}</b></p>
@@ -24,10 +24,11 @@
       </div>
       <!--Button----------------------->
       <button class="button" name="uid" value={{ uid }}>
-        Upate User Password
+        Update User Password
       </button>
     </form>
-    <!-- End User Create Form --------------------------------------------->
+    <!-- End Edit Password Form ----------------------------------------------->
+    <!-- Edit User Role Form -------------------------------------------------->
     <h4>Change user role</h4>
     <form action="/users/user-edit-role" method="post">
       <!--Inputs----------------------------------->
@@ -44,6 +45,6 @@
         Upate User Role
       </button>
     </form>
-    <!-- End User Create Form --------------------------------------------->
+    <!-- End Edit User Role Form ---------------------------------------------->
   </div><!-- End <div> row ---------------------------------------------------->
 </div><!-- End <div> row expanded --------------------------------------------->

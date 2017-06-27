@@ -127,31 +127,28 @@ router.post('/user-edit-password', function(req, res){
  * User Edit: Role Form
  ******************************************************************************/
 router.post('/user-edit-role', function(req, res){
-  var role = req.body.role;
-  var uid = req.body.uid;
-
-  console.log("Body === ", role, uid);
-//  var userRef = req.app.locals.dbRef.child('users/' + key);
-  // remove record from database by adding 'remove()' to the dbRef
-//  personRef.remove();
-
-/*
   // get email, password, and role entered into create user form
-  var updateUser = {
+  var uid = req.body.uid;
+  var item = {
   	role: req.body.role
   };
-  // Get a key for a new core Record
-  var newKey = firebase.database().ref().child('warranty').push().key;
+  // Select the user from the database that you want to edit
+//  var userRef = req.app.locals.dbRef.child('users/' + uid);
 
-  // write the new core data to the core list
   var updates = {};
-  updates['/warranty/' + newKey] = item;
-
-  // update the new-key-record with the data
+  // this line adds new child role and sets name value to role: "..."
+  // updates['/users/' + uid + '/role'] = item;
+  updates['/users/' + uid] = item;
+  // update the uid with the data
   var dbUpdate = req.app.locals.dbRef.update(updates);
-*/
-  // url redirect after post
-  res.redirect('/users');
+
+  dbUpdate.then(function() {
+    // url redirect after post, include query parameter
+    res.redirect('/users');
+  })
+  .catch(function(error) {
+    console.log("error", error);
+  });
 });
 
 /*******************************************************************************

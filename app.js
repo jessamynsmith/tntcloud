@@ -63,7 +63,7 @@ app.use('/users', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  console.log("app error 1");
+//  console.log("app error 1");
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -72,7 +72,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
 
-  console.log("app error 2");
+//  console.log("app error 2");
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

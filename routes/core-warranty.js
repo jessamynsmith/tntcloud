@@ -403,7 +403,7 @@ router.post('/delete-person', function(req, res, next) {
   // remove record from database by adding 'remove()' to the dbRef
   var dbUpdate = personRef.remove();
 
-  dbUpdate.then(function(data) {
+  dbUpdate.then(function() {
     // url redirect after post, include query parameter
     res.redirect('/core-warranty/people-list');
   })
