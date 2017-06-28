@@ -19,7 +19,9 @@ router.post('/login', function(req, res){
   // Sign in
   firebase.auth().signInWithEmailAndPassword(email, pass)
   .then(function() {
-    console.log("index.js logged in ");
+    /***************************************************************************
+    * Redirect
+    ***************************************************************************/
     res.redirect('/core-warranty');
   })
   .catch(function(error) {

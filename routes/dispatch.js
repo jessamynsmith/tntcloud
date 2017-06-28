@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var firebase = require("firebase");
 var mw = require('../middleware');
-
+// firebaseUser required for authToken 
 var firebaseUser = require("../firebase-user");
 
 /*******************************************************************************
@@ -15,10 +15,18 @@ var navDispatch =
     <a href="/dispatch/create-request" class="button alert" style="margin: .5rem .75rem;">Create Request</a>
   </div>`;
 
-/* GET users listing. */
+/* Root Route */
 // this router is for /dispatch dir, see app.js for initializer
 router.get('/', function(req, res, next) {
   var user = req.app.locals.user;
+
+  /*****************************************************************************
+  * authToken: send to front-end client for front-end authentication
+  * (should be moved to middleware)
+  *****************************************************************************/
+  var authToken = firebaseUser.getAuthToken();
+  res.cookie('fb-auth-token', authToken, { httpOnly: false });
+  /* end authToken ************************************************************/
 
   res.render('dispatch/dispatch', { navDispatch: navDispatch });
 });
@@ -44,10 +52,6 @@ router.get('/dispatching', function(req, res, next) {
 router.get('/create-request', function(req, res, next) {
   var user = req.app.locals.user;
 
-  // Should be moved to middleware
-  var authToken = firebaseUser.getAuthToken();
-  // console.log("Dispatch token ", authToken);
-  res.cookie('fb-auth-token', authToken, { httpOnly: false });
 
   res.render('dispatch/create-request', { navDispatch: navDispatch });
 });
