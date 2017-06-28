@@ -1,3 +1,5 @@
+<script language="javascript" type="text/javascript" src="/javascripts/p5/p5.min.js"></script>
+<script language="javascript" src="/javascripts/p5/p5.dom.min.js"></script>
 
 <!-- Title/Intro ------------------------------------------------------------>
 <div class="section-intro">
@@ -38,17 +40,22 @@
 
 <div id="youtube-firebase"></div>
 
+<ol id="scorelist"></ol>
 
 <script>
 
-const divObject = document.getElementById('youtube-firebase');
+function setup() {
 
-const dbRefObject = firebase.database().ref().child('dispatch');
+}
 
-// Sync Object Changes
-dbRefObject.on('value', snap => {
-  divObject.innerText = JSON.stringify(snap.val(), null, 3);
-});
+  const divObject = document.getElementById('youtube-firebase');
+
+  const dbRefObject = firebase.database().ref().child('dispatch');
+
+  // Sync Object Changes
+  dbRefObject.on('value', snap => {
+    divObject.innerText = JSON.stringify(snap.val(), null, 3);
+  });
 /** Firebase Vid 2 ************************************************************/
 /*
 var ulList = document.getElementById('new-records');
@@ -70,7 +77,7 @@ var ref = firebase.database().ref().child('dispatch');
 // ref.on is firebase method for keeping live data, and 'value' is saying you want values
 ref.on('value', gotData => {
 
-  var scorelistings = document.getElementsByClassName('scorelisting');
+  var scorelistings = selectAll('.scorelisting');
   for (var i = 0; i < scorelistings.length; i++) {
     scorelistings[i].remove();
   }
@@ -80,25 +87,24 @@ ref.on('value', gotData => {
   // Firebase keys/records: assign the core object's Firebase keys to 'keys'
   var keys = Object.keys(core);
   // Loop through all the Keys/records
-  var Customer, FailedPartNumber, RO;
   for (var i = 0; i < keys.length; i++) {
     var k = keys[i];
     // Extract value from each Key record
 
     var Customer = core[k].Customer.toUpperCase();
-    var FailedPartNumber = core[k].FailedPartNumber.toUpperCase();
+//    var FailedPartNumber = core[k].FailedPartNumber.toUpperCase();
     var RO = core[k].RO.toUpperCase();
 
-    var li = document.createElement('li');
-    li.className += 'scorelisting';
-    var liRo = document.createTextNode(RO);
-    li.appendChild(liRo);
-    document.getElementById("new-ul").appendChild(li);
+    var li = createElement('li', RO + ': ' + Customer);
+    li.class('scorelisting');
+    li.parent('scorelist');
+
+/*
 
     var myRows = tr;
     console.log("TR OUTPUT ", myRows);
     var getThis = document.getElementById("records-list").appendChild(myRows);
-
+*/
   } // End for Loop
 
 }); // End gotData(data)
