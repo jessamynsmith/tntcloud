@@ -7,8 +7,9 @@ var fbUser = {};
 var dbRef = firebase.database().ref();
 var userRole = '';
 var authToken = null;
+
 /*******************************************************************************
- * Auth State Changed: Get Firebase UID
+ * Firebase UID: Get via Auth State Changed
  ******************************************************************************/
 firebase.auth().onAuthStateChanged(function(user) {
   // Get 'user' from onAuthStateChanged and set to above fbUser
@@ -17,14 +18,19 @@ firebase.auth().onAuthStateChanged(function(user) {
   if (!user) {
     userRole = '';
   }
-
+  // If there is a user...
   if (user) {
-
     var uid = fbUser.uid;
-
+    /***************************************************************************
+     * Token Auth Generate
+     **************************************************************************/
+    // Generate Custom Token for Client-Side Login so front-end user activity
+    // can be passed to firebase database. Custom Token is exported as function
+    // getAuthToken and variable authToken, and in the Routes files can be passed
+    // to the handlebars templates for use in front-end client.
     admin.auth().createCustomToken(uid)
       .then(function(customToken) {
-        // Send token back to client
+        // Send token back to client (exported from this file as function + variable)
         authToken = customToken;
         console.log("Token onAuthStateChanged ", authToken);
       })
@@ -34,9 +40,32 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+/*******************************************************************************
+ * Token Auth Generate: Re-Authenticate Firebase Front-end every 50 Minutes
+ ******************************************************************************/
+function generateAuthToken() {
+    user = firebase.auth().currentUser;
+    // Get 'user' from onAuthStateChanged and set to above fbUser
+    if (user) {
+      var uid = fbUser.uid;
+
+      admin.auth().createCustomToken(uid)
+        .then(function(customToken) {
+          // Send token back to client
+          authToken = customToken;
+          console.log("Token generateAuthToken ", authToken);
+        })
+        .catch(function(error) {
+          console.log("Error creating custom token:", error);
+        });
+    }
+}
+// Call Function every Three-million milliseconds = 50 minutes (setInterval = Node timer)
+// https://nodejs.org/api/timers.html
+setInterval(generateAuthToken, 3000000);
 
 /*******************************************************************************
- * Get User Role Realtime Database User Role Value
+ * User Role Value: Get from Realtime Database
  ******************************************************************************/
 module.exports.getRole = function() {
   return new promise(function (resolve, reject) {
@@ -51,13 +80,12 @@ module.exports.getRole = function() {
     if (!fbUser) {
       fbUser = firebase.auth().currentUser;
     }
-
     // If there is still no user (could be not logged in or still initializing)
     if (!fbUser) {
       userRole = '';
       resolve(userRole);
     }
-
+    // Get User Role Value with Firebase UID key that was saved into /users/
     dbRef.child('/users/' + fbUser.uid + '/role').once('value').then(function(snapshot) {
       userRole = snapshot.val();
       resolve(userRole);
@@ -76,24 +104,3 @@ module.exports.getUser = function() {
 module.exports.getAuthToken = function() {
   return authToken;
 }
-
-/******************************************************************************/
-function generateAuthToken() {
-    user = firebase.auth().currentUser;
-    // Get 'user' from onAuthStateChanged and set to above fbUser
-    if (user) {
-      var uid = fbUser.uid;
-
-      admin.auth().createCustomToken(uid)
-        .then(function(customToken) {
-          // Send token back to client
-          authToken = customToken;
-          console.log("Token generateAuthToken ", authToken);
-        })
-        .catch(function(error) {
-          console.log("Error creating custom token:", error);
-        });
-    }
-}
-
-setInterval(generateAuthToken, 3000000);
