@@ -37,6 +37,14 @@ router.get('/', function(req, res, next) {
 router.get('/history', function(req, res, next) {
 //  var user = req.app.locals.user;
 
+  /*****************************************************************************
+  * authToken: send to front-end client for front-end authentication
+  * (should be moved to middleware)
+  *****************************************************************************/
+  var authToken = firebaseUser.getAuthToken();
+  res.cookie('fb-auth-token', authToken, { httpOnly: false });
+  /* end authToken ************************************************************/
+
   res.render('dispatch/history', { navDispatch: navDispatch });
 });
 
@@ -53,10 +61,19 @@ router.get('/dispatching', function(req, res, next) {
   res.cookie('fb-auth-token', authToken, { httpOnly: false });
   /* end authToken ************************************************************/
 
+/*
+  var dispatchRef = dbRef.child('dispatch');
+//  dispatchRef.on('child_added', snap => console.log(snap.val()));
+  dispatchRef.on('value', gotDataOn);
+  function gotDataOn(data) {
+    console.log("ON data ", data.val());
+  }
+*/
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
-  dbRef.child('dispatch').on('value', gotData);
+
+  dbRef.child('dispatch').once('value', gotData);
   // global variable so warranty data can be accessed after the function
   var templateData;
 
@@ -68,9 +85,10 @@ router.get('/dispatching', function(req, res, next) {
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
 
-
     res.render('dispatch/dispatching', { dispatchData: templateData, navDispatch: navDispatch });
   };
+
+//  res.render('dispatch/dispatching', { /*dispatchData: templateData,*/ navDispatch: navDispatch });
 });
 
 

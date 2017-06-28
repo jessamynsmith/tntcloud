@@ -29,13 +29,64 @@
   </table>
 </div>
 
+<div id="records-list"></div>
+
 <script>
 
-  var dispatchRef = firebase.database().ref().child('dispatch');
-//  dispatchRef.on('child_added', snap => console.log(snap.val()));
-  dispatchRef.on('value', gotDataOn);
-  function gotDataOn(data) {
-    console.log("ON data ", data.val());
-  }
+/*****************************************************************************
+ * Retrieve core Records from Database
+*****************************************************************************/
+var ref = firebase.database().ref().child('dispatch');
+// ref.on is firebase method for keeping live data, and 'value' is saying you want values
+ref.once('value', gotData);
+
+function gotData(data) {
+  console.log(data);
+  // assign above core data to 'core'
+  var core = data.val();
+  // Firebase keys/records: assign the core object's Firebase keys to 'keys'
+  var keys = Object.keys(core);
+  // Loop through all the Keys/records
+  var Customer, FailedPartNumber, RO;
+  for (var i = 0; i < keys.length; i++) {
+    var k = keys[i];
+    // Extract value from each Key record
+
+    var Customer = core[k].Customer.toUpperCase();
+    var FailedPartNumber = core[k].FailedPartNumber.toUpperCase();
+    var RO = core[k].RO.toUpperCase();
+
+    // Build Table Rows from Data Values
+
+    // create <td>
+    var tdCustomer = document.createElement('td');
+    tdCustomer.className += 'c-customer';
+    var tCustomer = document.createTextNode(Customer);
+    tdCustomer.appendChild(tCustomer);
+    // create <td>
+    var tdFailedPartNumber = document.createElement('td');
+    tdFailedPartNumber.className += 'c-failed-part-number';
+    var tFailedPartNumber = document.createTextNode(FailedPartNumber);
+    tdFailedPartNumber.appendChild(tFailedPartNumber);
+    // create <td>
+    var tdRo = document.createElement('td');
+    tdRo.className += 'c-ro';
+    var tRo = document.createTextNode(RO);
+    tdRo.appendChild(tRo);
+
+    // Build <tr>
+    var tr = document.createElement('tr');
+    tr.className += 'data-row';
+    tr.id += k; // Add Firebase Record Key as ID
+    // add <td>'s as children of a <tr>
+
+    tr.appendChild(tdRo);
+    tr.appendChild(tdCustomer);
+    tr.appendChild(tdFailedPartNumber);
+    document.getElementById("records-list").appendChild(tr);
+
+  } // End for Loop
+
+} // End gotData(data)
 
 </script>
