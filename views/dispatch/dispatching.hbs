@@ -69,7 +69,7 @@ dbRefList.on('child_added', snap => {
   li.id = snap.key;
   ulList.appendChild(li);
 });
-
+/*
 dbRefList.on('child_changed', snap => {
   var liChanged = document.getElementById(snap.key);
   liChanged.innerText = snap.val();
@@ -79,6 +79,32 @@ dbRefList.on('child_removed', snap => {
   var liToRemove = document.getElementById(snap.key);
   liToRemove.remove();
 });
+*/
+
+
+/*****************************************************************************
+ * Official Firebase Example App: "Database"
+*****************************************************************************/
+/*
+// Listen for Items
+var commentsRef = firebase.database().ref('post-comments/' + postId);
+commentsRef.on('child_added', function(data) {
+  addCommentElement(postElement, data.key, data.val().text, data.val().author);
+});
+
+// Creates a comment element and adds it to the given postElement.
+function addCommentElement(postElement, id, text, author) {
+  var comment = document.createElement('div');
+  comment.classList.add('comment-' + id);
+  comment.innerHTML = '<span class="username"></span><span class="comment"></span>';
+  comment.getElementsByClassName('comment')[0].innerText = text;
+  comment.getElementsByClassName('username')[0].innerText = author || 'Anonymous';
+
+  var commentsContainer = postElement.getElementsByClassName('comments-container')[0];
+  commentsContainer.appendChild(comment);
+}
+*/
+
 
 /*****************************************************************************
  * Retrieve core Records from Database
@@ -112,6 +138,7 @@ dbRef.on('value', gotData => {
       <td>${FailedPartNumber}</td>
     `);
     tr.class('data-row');
+    tr.id(k);
     tr.parent('records-list');
 
   } // End for Loop
