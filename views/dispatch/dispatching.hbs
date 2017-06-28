@@ -18,6 +18,7 @@
     <!--------------------------------------------------------------------------->
     <!-- Handlebars ------------------------------------------------------------->
     <!--------------------------------------------------------------------------->
+<!--
       {{#each dispatchData }}
         <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
           <td class="ro">{{RO}}</td>
@@ -25,20 +26,34 @@
           <td class="failed-part-number">{{FailedPartNumber}}</td>
         </tr>
       {{/each}}
+-->
     </tbody>
   </table>
 </div>
 
-<div id="records-list"></div>
+<hr>
+
+<div id="youtube-firebase"></div>
 
 <script>
+
+const divObject = document.getElementById('youtube-firebase');
+
+const dbRefObject = firebase.database().ref().child('dispatch');
+
+// Sync Object Changes
+dbRefObject.on('value', snap => {
+  divObject.innerText = JSON.stringify(snap.val(), null, 3);
+});
+
 
 /*****************************************************************************
  * Retrieve core Records from Database
 *****************************************************************************/
+/*
 var ref = firebase.database().ref().child('dispatch');
 // ref.on is firebase method for keeping live data, and 'value' is saying you want values
-ref.once('value', gotData);
+ref.on('value', gotData);
 
 function gotData(data) {
   console.log(data);
@@ -88,5 +103,5 @@ function gotData(data) {
   } // End for Loop
 
 } // End gotData(data)
-
+*/
 </script>
