@@ -19,7 +19,7 @@ var navDispatch =
 /* Root Route */
 // this router is for /dispatch dir, see app.js for initializer
 router.get('/', function(req, res, next) {
-  var user = req.app.locals.user;
+//  var user = req.app.locals.user;
 
   /*****************************************************************************
   * authToken: send to front-end client for front-end authentication
@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
 
 // Subroute
 router.get('/history', function(req, res, next) {
-  var user = req.app.locals.user;
+//  var user = req.app.locals.user;
 
   res.render('dispatch/history', { navDispatch: navDispatch });
 });
@@ -43,7 +43,7 @@ router.get('/history', function(req, res, next) {
 
 // Subroute
 router.get('/dispatching', function(req, res, next) {
-  var user = req.app.locals.user;
+//  var user = req.app.locals.user;
 
   /*****************************************************************************
   * authToken: send to front-end client for front-end authentication
@@ -53,6 +53,9 @@ router.get('/dispatching', function(req, res, next) {
   res.cookie('fb-auth-token', authToken, { httpOnly: false });
   /* end authToken ************************************************************/
 
+    var dispatchRef = dbRef.child('dispatch');
+
+    dispatchRef.on('child_added', snap => console.log(snap.val()));
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
@@ -60,12 +63,15 @@ router.get('/dispatching', function(req, res, next) {
   // global variable so warranty data can be accessed after the function
   var templateData;
 
+
   function gotData(data) {
     // access data values
     templateData = data.val();
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
+
+
     res.render('dispatch/dispatching', { dispatchData: templateData, navDispatch: navDispatch });
   };
 });
@@ -73,7 +79,7 @@ router.get('/dispatching', function(req, res, next) {
 
 // Subroute
 router.get('/create-request', function(req, res, next) {
-  var user = req.app.locals.user;
+//  var user = req.app.locals.user;
 
   /*****************************************************************************
   * authToken: send to front-end client for front-end authentication
