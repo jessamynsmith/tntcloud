@@ -75,13 +75,13 @@ ref.on('child_added', snap => {
  * Retrieve core Records from Database
 *****************************************************************************/
 
-var ref = firebase.database().ref().child('dispatch');
-// ref.on is firebase method for keeping live data, and 'value' is saying you want values
-ref.on('value', gotData => {
+var dbRef = firebase.database().ref().child('dispatch');
 
-  var scorelistings = selectAll('.scorelisting');
-  for (var i = 0; i < scorelistings.length; i++) {
-    scorelistings[i].remove();
+dbRef.on('value', gotData => {
+
+  var dataRows = selectAll('.data-row');
+  for (var i = 0; i < dataRows.length; i++) {
+    dataRows[i].remove();
   }
 
   // assign above core data to 'core'
@@ -91,8 +91,8 @@ ref.on('value', gotData => {
   // Loop through all the Keys/records
   for (var i = 0; i < keys.length; i++) {
     var k = keys[i];
-    // Extract value from each Key record
 
+    // Extract value from each Key record
     var Customer = core[k].Customer.toUpperCase();
     var FailedPartNumber = core[k].FailedPartNumber.toUpperCase();
     var RO = core[k].RO.toUpperCase();
@@ -102,7 +102,7 @@ ref.on('value', gotData => {
       <td>${Customer}</td>
       <td>${FailedPartNumber}</td>
     `);
-    tr.class('scorelisting');
+    tr.class('data-row');
     tr.parent('records-list');
 
   } // End for Loop
