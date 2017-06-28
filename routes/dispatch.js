@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var firebase = require("firebase");
 var mw = require('../middleware');
-// firebaseUser required for authToken 
+// firebaseUser required for authToken
 var firebaseUser = require("../firebase-user");
 
 /*******************************************************************************
@@ -44,6 +44,14 @@ router.get('/history', function(req, res, next) {
 router.get('/dispatching', function(req, res, next) {
   var user = req.app.locals.user;
 
+  /*****************************************************************************
+  * authToken: send to front-end client for front-end authentication
+  * (should be moved to middleware)
+  *****************************************************************************/
+  var authToken = firebaseUser.getAuthToken();
+  res.cookie('fb-auth-token', authToken, { httpOnly: false });
+  /* end authToken ************************************************************/
+
   res.render('dispatch/dispatching', { navDispatch: navDispatch });
 });
 
@@ -52,6 +60,13 @@ router.get('/dispatching', function(req, res, next) {
 router.get('/create-request', function(req, res, next) {
   var user = req.app.locals.user;
 
+  /*****************************************************************************
+  * authToken: send to front-end client for front-end authentication
+  * (should be moved to middleware)
+  *****************************************************************************/
+  var authToken = firebaseUser.getAuthToken();
+  res.cookie('fb-auth-token', authToken, { httpOnly: false });
+  /* end authToken ************************************************************/
 
   res.render('dispatch/create-request', { navDispatch: navDispatch });
 });
