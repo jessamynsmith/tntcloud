@@ -75,6 +75,11 @@ dbRefList.on('child_changed', snap => {
   liChanged.innerText = snap.val();
 });
 
+dbRefList.on('child_removed', snap => {
+  var liToRemove = document.getElementById(snap.key);
+  liToRemove.remove();
+});
+
 /*****************************************************************************
  * Retrieve core Records from Database
 *****************************************************************************/
