@@ -50,15 +50,13 @@ dbRefObject.on('value', snap => {
 /*****************************************************************************
  * Retrieve core Records from Database
 *****************************************************************************/
-/*
+
 var ref = firebase.database().ref().child('dispatch');
 // ref.on is firebase method for keeping live data, and 'value' is saying you want values
-ref.on('value', gotData);
+ref.on('value', gotData => {
 
-function gotData(data) {
-  console.log(data);
   // assign above core data to 'core'
-  var core = data.val();
+  var core = gotData.val();
   // Firebase keys/records: assign the core object's Firebase keys to 'keys'
   var keys = Object.keys(core);
   // Loop through all the Keys/records
@@ -98,10 +96,12 @@ function gotData(data) {
     tr.appendChild(tdRo);
     tr.appendChild(tdCustomer);
     tr.appendChild(tdFailedPartNumber);
-    document.getElementById("records-list").appendChild(tr);
-
+    var myRows = tr;
+    console.log("TR OUTPUT ", tr);
+    var getID = document.getElementById("records-list");
+    getID.innerHTML = myRows;
   } // End for Loop
 
-} // End gotData(data)
-*/
+}); // End gotData(data)
+
 </script>
