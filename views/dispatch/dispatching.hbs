@@ -6,21 +6,19 @@
 
 <!-- Primary Content -------------------------------------------------------->
 <div id="table-and-search">
-  <!-- Search Form -->
-  <input type="text" class="search" placeholder="Search core records...">
 
   <!-- Records list -->
   <table class="data-table stack">
     <thead>
-      <th class="col2 sort" data-sort="ro">RO</th>
-      <th class="col5 sort" data-sort="customer">Customer</th>
-      <th class="col8 sort" data-sort="failed-part-number">Failed Part #</th>
+      <th class="col2">RO</th>
+      <th class="col5">Customer</th>
+      <th class="col8">Failed Part #</th>
     </thead>
     <tbody id="records-list" class="list">
     <!--------------------------------------------------------------------------->
     <!-- Handlebars ------------------------------------------------------------->
     <!--------------------------------------------------------------------------->
-      {{#each coreData }}
+      {{#each dispatchData }}
         <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
           <td class="ro">{{RO}}</td>
           <td class="customer">{{Customer}}</td>
