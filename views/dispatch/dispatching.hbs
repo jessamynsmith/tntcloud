@@ -35,27 +35,30 @@
 
 <hr>
 
+<ol id="scorelist"></ol>
 
 <ul id="new-ul"></ul>
 
 <div id="youtube-firebase"></div>
 
-<ol id="scorelist"></ol>
 
 <script>
 
-function setup() {
 
-}
+/*********************************
+* p5 JS Library Initializer
+*********************************/
+function setup() {}
 
-  const divObject = document.getElementById('youtube-firebase');
 
-  const dbRefObject = firebase.database().ref().child('dispatch');
+const divObject = document.getElementById('youtube-firebase');
 
-  // Sync Object Changes
-  dbRefObject.on('value', snap => {
-    divObject.innerText = JSON.stringify(snap.val(), null, 3);
-  });
+const dbRefObject = firebase.database().ref().child('dispatch');
+
+// Sync Object Changes
+dbRefObject.on('value', snap => {
+  divObject.innerText = JSON.stringify(snap.val(), null, 3);
+});
 /** Firebase Vid 2 ************************************************************/
 /*
 var ulList = document.getElementById('new-records');
@@ -94,10 +97,22 @@ ref.on('value', gotData => {
     var Customer = core[k].Customer.toUpperCase();
 //    var FailedPartNumber = core[k].FailedPartNumber.toUpperCase();
     var RO = core[k].RO.toUpperCase();
-
-    var li = createElement('li', RO + ': ' + Customer);
-    li.class('scorelisting');
-    li.parent('scorelist');
+/*
+    // create <td>
+    var tdCustomer = document.createElement('td');
+    tdCustomer.className += 'c-customer';
+    var tCustomer = document.createTextNode(Customer);
+    tdCustomer.appendChild(tCustomer);
+    // create <td>
+    var tdRo = document.createElement('td');
+    tdRo.className += 'c-ro';
+    var tRo = document.createTextNode(RO);
+    tdRo.appendChild(tRo);
+    console.log("Customer + RO ", tdCustomer, tdRo);
+*/
+    var tr = createElement('tr', `<td class="scorelisting">${RO}</td>`);
+    tr.class('scorelisting');
+    tr.parent('records-list');
 
 /*
 
