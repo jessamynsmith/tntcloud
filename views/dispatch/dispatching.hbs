@@ -33,7 +33,11 @@
 
 <hr>
 
+
+<ul id="new-ul"></ul>
+
 <div id="youtube-firebase"></div>
+
 
 <script>
 
@@ -45,7 +49,18 @@ const dbRefObject = firebase.database().ref().child('dispatch');
 dbRefObject.on('value', snap => {
   divObject.innerText = JSON.stringify(snap.val(), null, 3);
 });
+/** Firebase Vid 2 ************************************************************/
+/*
+var ulList = document.getElementById('new-records');
 
+var ref = firebase.database().ref().child('dispatch');
+
+ref.on('child_added', snap => {
+  var li = document.createElement('li');
+  li.innerText = snap.val();
+  ulList.appendChild(li);
+});
+*/
 
 /*****************************************************************************
  * Retrieve core Records from Database
@@ -54,6 +69,11 @@ dbRefObject.on('value', snap => {
 var ref = firebase.database().ref().child('dispatch');
 // ref.on is firebase method for keeping live data, and 'value' is saying you want values
 ref.on('value', gotData => {
+
+  var scorelistings = document.getElementsByClassName('scorelisting');
+  for (var i = 0; i < scorelistings.length; i++) {
+    scorelistings[i].remove();
+  }
 
   // assign above core data to 'core'
   var core = gotData.val();
@@ -69,37 +89,16 @@ ref.on('value', gotData => {
     var FailedPartNumber = core[k].FailedPartNumber.toUpperCase();
     var RO = core[k].RO.toUpperCase();
 
-    // Build Table Rows from Data Values
+    var li = document.createElement('li');
+    li.className += 'scorelisting';
+    var liRo = document.createTextNode(RO);
+    li.appendChild(liRo);
+    document.getElementById("new-ul").appendChild(li);
 
-    // create <td>
-    var tdCustomer = document.createElement('td');
-    tdCustomer.className += 'c-customer';
-    var tCustomer = document.createTextNode(Customer);
-    tdCustomer.appendChild(tCustomer);
-    // create <td>
-    var tdFailedPartNumber = document.createElement('td');
-    tdFailedPartNumber.className += 'c-failed-part-number';
-    var tFailedPartNumber = document.createTextNode(FailedPartNumber);
-    tdFailedPartNumber.appendChild(tFailedPartNumber);
-    // create <td>
-    var tdRo = document.createElement('td');
-    tdRo.className += 'c-ro';
-    var tRo = document.createTextNode(RO);
-    tdRo.appendChild(tRo);
-
-    // Build <tr>
-    var tr = document.createElement('tr');
-    tr.className += 'data-row';
-    tr.id += k; // Add Firebase Record Key as ID
-    // add <td>'s as children of a <tr>
-
-    tr.appendChild(tdRo);
-    tr.appendChild(tdCustomer);
-    tr.appendChild(tdFailedPartNumber);
     var myRows = tr;
-    console.log("TR OUTPUT ", tr);
-    var getID = document.getElementById("records-list");
-    getID.innerHTML = myRows;
+    console.log("TR OUTPUT ", myRows);
+    var getThis = document.getElementById("records-list").appendChild(myRows);
+
   } // End for Loop
 
 }); // End gotData(data)
