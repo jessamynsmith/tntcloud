@@ -46,7 +46,7 @@ router.get('/create-request', function(req, res, next) {
 
   // Should be moved to middleware
   var authToken = firebaseUser.getAuthToken();
-  console.log("Dispatch token ", authToken);
+//  console.log("Dispatch token ", authToken);
   res.cookie('fb-auth-token', authToken, { httpOnly: false });
 
 

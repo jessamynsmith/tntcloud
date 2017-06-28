@@ -26,13 +26,14 @@ firebase.auth().onAuthStateChanged(function(user) {
       .then(function(customToken) {
         // Send token back to client
         authToken = customToken;
+        console.log("Token onAuthStateChanged ", authToken);
       })
       .catch(function(error) {
         console.log("Error creating custom token:", error);
       });
   }
-
 });
+
 
 /*******************************************************************************
  * Get User Role Realtime Database User Role Value
@@ -75,3 +76,24 @@ module.exports.getUser = function() {
 module.exports.getAuthToken = function() {
   return authToken;
 }
+
+/******************************************************************************/
+function generateAuthToken() {
+    user = firebase.auth().currentUser;
+    // Get 'user' from onAuthStateChanged and set to above fbUser
+    if (user) {
+      var uid = fbUser.uid;
+
+      admin.auth().createCustomToken(uid)
+        .then(function(customToken) {
+          // Send token back to client
+          authToken = customToken;
+          console.log("Token generateAuthToken ", authToken);
+        })
+        .catch(function(error) {
+          console.log("Error creating custom token:", error);
+        });
+    }
+}
+
+setInterval(generateAuthToken, 3000000);
