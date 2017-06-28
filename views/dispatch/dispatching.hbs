@@ -1,36 +1,32 @@
 
-<!-- JavaScript Public -------------------------------------------------------->
-<script src="/javascripts/dispatch/dispatching.js"></script>
-
 <!-- Title/Intro ------------------------------------------------------------>
 <div class="section-intro">
   <h1>Dispatching</h2>
 </div>
 
 <!-- Primary Content -------------------------------------------------------->
-<div class="row expanded small-12 medium-10 large-6 columns">
-  <form id="core-input-form" class="input-form" onSubmit="return submitCoreForm(this)">
-    <div class="">
-      <div class="card">
-        <div class="card-divider">
-          <h4>Create Core Record</h4>
-        </div>
-      </div>
-      <div class="input-group">
-        <span class="input-group-label">R/O or Invoice#</span>
-        <input type="text" id="core-ro" placeholder="R/O" class="input-group-field">
-      </div>
-      <div class="input-group">
-        <span class="input-group-label">Customer</span>
-        <input type="text" id="core-customer" placeholder="Customer"  class="input-group-field"/>
-      </div>
-      <div class="input-group">
-        <span class="input-group-label">Failed Part Number</span>
-        <input type="text" id="core-failed-part-number" placeholder="Failed Part Number"  class="input-group-field"/>
-      </div>
-      <div>
-        <input id="submit-core" type="submit" class="button primary">
-      </div>
-    </div>
-  </form>
+<div id="table-and-search">
+  <!-- Search Form -->
+  <input type="text" class="search" placeholder="Search core records...">
+
+  <!-- Records list -->
+  <table class="data-table stack">
+    <thead>
+      <th class="col2 sort" data-sort="ro">RO</th>
+      <th class="col5 sort" data-sort="customer">Customer</th>
+      <th class="col8 sort" data-sort="failed-part-number">Failed Part #</th>
+    </thead>
+    <tbody id="records-list" class="list">
+    <!--------------------------------------------------------------------------->
+    <!-- Handlebars ------------------------------------------------------------->
+    <!--------------------------------------------------------------------------->
+      {{#each coreData }}
+        <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
+          <td class="ro">{{RO}}</td>
+          <td class="customer">{{Customer}}</td>
+          <td class="failed-part-number">{{FailedPartNumber}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </div>

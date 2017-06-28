@@ -3,7 +3,7 @@
  * Post form Data to Database
 *******************************************************************************/
 
-function submitCoreForm(){
+function submitForm(){
   event.preventDefault();
 
   var authToken = Cookies.get('fb-auth-token');
@@ -23,8 +23,8 @@ function submitCoreForm(){
     let Customer = document.getElementById('core-customer').value;
     let FailedPartNumber = document.getElementById('core-failed-part-number').value;
 
-    // A core entry
-    var coreData = {
+    // Data to submit to database
+    var submitData = {
       DateTimeStampServer,
       Date,
       DateTime,
@@ -34,11 +34,11 @@ function submitCoreForm(){
     }
 
     // Get a key for a new core Record
-    var newCoreKey = firebase.database().ref().child('core').push().key;
+    var newKey = firebase.database().ref().child('dispatch').push().key;
 
     // write the new core data to the core list
     var updates = {};
-    updates['/core/' + newCoreKey] = coreData;
+    updates['/dispatch/' + newKey] = submitData;
 
     // update the new-key-record with the data
     var dbUpdate = firebase.database().ref().update(updates);
