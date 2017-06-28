@@ -35,11 +35,9 @@
 
 <hr>
 
-<ol id="scorelist"></ol>
-
-<ul id="new-ul"></ul>
-
-<div id="youtube-firebase"></div>
+<ul id="youtubeFB2"></ul>
+<hr>
+<div id="youtubeFB1"></div>
 
 
 <script>
@@ -50,7 +48,7 @@
 function setup() {}
 /********************************/
 
-const divObject = document.getElementById('youtube-firebase');
+const divObject = document.getElementById('youtubeFB1');
 
 const dbRefObject = firebase.database().ref().child('dispatch');
 
@@ -59,17 +57,18 @@ dbRefObject.on('value', snap => {
   divObject.innerText = JSON.stringify(snap.val(), null, 3);
 });
 /** Firebase Vid 2 ************************************************************/
-/*
-var ulList = document.getElementById('new-records');
 
-var ref = firebase.database().ref().child('dispatch');
+var ulList = document.getElementById('youtubeFB2');
 
-ref.on('child_added', snap => {
+var dbRefDispatch = firebase.database().ref().child('dispatch');
+var dbRefList = dbRefDispatch.child('hobbies');
+
+dbRefList.on('child_added', snap => {
   var li = document.createElement('li');
   li.innerText = snap.val();
   ulList.appendChild(li);
 });
-*/
+
 
 /*****************************************************************************
  * Retrieve core Records from Database
@@ -93,9 +92,9 @@ dbRef.on('value', gotData => {
     var k = keys[i];
 
     // Extract value from each Key record
-    var Customer = dataVal[k].Customer.toUpperCase();
-    var FailedPartNumber = dataVal[k].FailedPartNumber.toUpperCase();
-    var RO = dataVal[k].RO.toUpperCase();
+    var Customer = dataVal[k].Customer;
+    var FailedPartNumber = dataVal[k].FailedPartNumber;
+    var RO = dataVal[k].RO;
 
     var tr = createElement('tr',
      `<td>${RO}</td>
