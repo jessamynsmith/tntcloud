@@ -53,13 +53,10 @@ router.get('/dispatching', function(req, res, next) {
   res.cookie('fb-auth-token', authToken, { httpOnly: false });
   /* end authToken ************************************************************/
 
-    var dispatchRef = dbRef.child('dispatch');
-
-    dispatchRef.on('child_added', snap => console.log(snap.val()));
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
-  dbRef.child('dispatch').once('value', gotData);
+  dbRef.child('dispatch').on('value', gotData);
   // global variable so warranty data can be accessed after the function
   var templateData;
 

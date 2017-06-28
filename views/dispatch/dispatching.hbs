@@ -28,3 +28,14 @@
     </tbody>
   </table>
 </div>
+
+<script>
+
+  var dispatchRef = firebase.database().ref().child('dispatch');
+//  dispatchRef.on('child_added', snap => console.log(snap.val()));
+  dispatchRef.on('value', gotDataOn);
+  function gotDataOn(data) {
+    console.log("ON data ", data.val());
+  }
+
+</script>
