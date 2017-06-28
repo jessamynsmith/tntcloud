@@ -84,18 +84,18 @@ dbRef.on('value', gotData => {
     dataRows[i].remove();
   }
 
-  // assign above core data to 'core'
-  var core = gotData.val();
+  // assign above core data to 'data'
+  var dataVal = gotData.val();
   // Firebase keys/records: assign the core object's Firebase keys to 'keys'
-  var keys = Object.keys(core);
+  var keys = Object.keys(dataVal);
   // Loop through all the Keys/records
   for (var i = 0; i < keys.length; i++) {
     var k = keys[i];
 
     // Extract value from each Key record
-    var Customer = core[k].Customer.toUpperCase();
-    var FailedPartNumber = core[k].FailedPartNumber.toUpperCase();
-    var RO = core[k].RO.toUpperCase();
+    var Customer = dataVal[k].Customer.toUpperCase();
+    var FailedPartNumber = dataVal[k].FailedPartNumber.toUpperCase();
+    var RO = dataVal[k].RO.toUpperCase();
 
     var tr = createElement('tr',
      `<td>${RO}</td>
