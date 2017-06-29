@@ -58,7 +58,7 @@ dbRefObject.on('value', snap => {
 });
 */
 /** Firebase Vid 2 ************************************************************/
-
+/*
 var getTable = document.getElementById('getTable');
 var ulList = document.getElementById('youtubeFB2');
 
@@ -89,15 +89,15 @@ dbRefDispatch.on('child_added', function(data) {
 
   getTable.appendChild(tr);
 });
-/*
-dbRefList.on('child_changed', snap => {
-  var liChanged = document.getElementById(snap.key);
-  liChanged.innerText = snap.val();
+
+dbRefDispatch.on('child_changed', snap => {
+  var trChanged = document.getElementById(snap.key);
+  trChanged.innerText = snap.val();
 });
 
 dbRefList.on('child_removed', snap => {
-  var liToRemove = document.getElementById(snap.key);
-  liToRemove.remove();
+  var trToRemove = document.getElementById(snap.key);
+  trToRemove.remove();
 });
 */
 
