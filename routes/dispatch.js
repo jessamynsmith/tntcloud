@@ -50,9 +50,9 @@ router.get('/history', function(req, res, next) {
 
 
 // Dispatching
-router.get('/dispatching', function(req, res, next) {
+router.get('/dispatching', mw.userRole, function(req, res, next) {
   var user = req.app.locals.user;
-
+  var isAdmin = req.app.locals.userRole === 'admin';
   /*****************************************************************************
   * authToken: send to front-end client for front-end authentication
   * (should be moved to middleware)
@@ -61,7 +61,7 @@ router.get('/dispatching', function(req, res, next) {
   res.cookie('fb-auth-token', authToken, { httpOnly: false });
   /* end authToken ************************************************************/
 
-  res.render('dispatch/dispatching', { navDispatch: navDispatch });
+  res.render('dispatch/dispatching', { isAdmin: isAdmin, navDispatch: navDispatch });
 });
 
 
