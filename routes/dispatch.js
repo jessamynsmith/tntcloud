@@ -16,7 +16,7 @@ var navDispatch =
     <a href="/dispatch/create-request" class="button alert" style="margin: .5rem .75rem;">Create Request</a>
   </div>`;
 
-// Dispatch Rot
+// Dispatch root 
 // this router is for /dispatch dir, see app.js for initializer
 router.get('/', function(req, res, next) {
   var user = req.app.locals.user;
@@ -54,17 +54,14 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
   var user = req.app.locals.user;
   var isAdmin = req.app.locals.userRole === 'admin';
   /*****************************************************************************
-  * authToken: send to front-end client for front-end authentication
-  * (should be moved to middleware)
+  * Cookies
   *****************************************************************************/
+  // authToken cookie: send to front-end client for front-end authentication
   var authToken = firebaseUser.getAuthToken();
   res.cookie('fb-auth-token', authToken, { httpOnly: false });
-  /* end authToken ************************************************************/
-
-
+  // userRole cookie: send to front-end for userRole restrictions on public javascripts
   res.cookie('userRole', req.app.locals.userRole, { httpOnly: false });
-
-
+  /** End Cookies *************************************************************/
 
   res.render('dispatch/dispatching', { isAdmin: isAdmin, navDispatch: navDispatch });
 });
