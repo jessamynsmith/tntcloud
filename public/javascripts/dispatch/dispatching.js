@@ -1,18 +1,10 @@
 
-/*********************************
-* p5 JS Library Initializer
-*********************************/
-function setup() {}
-/********************************/
 
 /*****************************************************************************
  * Dispatch Status = 'Dispatched'
 *****************************************************************************/
 // Listen for Child Events: https://firebase.google.com/docs/database/web/lists-of-data#listen_for_child_events
 // Query data https://firebase.google.com/docs/reference/js/firebase.database.Query
-
-// var dbRefRequested = firebase.database().ref().child('dispatch').orderByChild('Status').equalTo('requested');
-// var dbRef = firebase.database().ref().child('dispatch');
 
 // Cookie/Token authentication
 var userRole = Cookies.get('userRole');
@@ -51,41 +43,32 @@ var rawTemplate =
 // Node.js is needed if I want to pre-compile templates
 var compiledTemplate = Handlebars.compile(rawTemplate);
 
+function handleData(parentSelector, gotData) {
+  var parentDiv = $(parentSelector);
+
+  // clear the records so when value is updated new records are displayed (see bottom of code)
+  parentDiv.empty();
+
+  // assign above core data to 'data'
+  var dataVal = gotData.val();
+
+  // pass the array data values
+  var data = { isAdmin: isAdmin, dispatch: dataVal };
+  var html = compiledTemplate(data);
+
+  parentDiv.append(html);
+}
 
 // var dbRef = firebase.database().ref().child('dispatch');
 
 var dbRefRequested = firebase.database().ref().child('dispatch').orderByChild('Status').equalTo('requested');
 
 dbRefRequested.on('value', gotData => {
-  // clear the records so when value is updated new records are displayed (see bottom of code)
-  $('#requested').empty();
-
-  // assign above core data to 'data'
-  var dataVal = gotData.val();
-
-  // pass the array data values
-  var data = { isAdmin: isAdmin, dispatch: dataVal };
-  var html = compiledTemplate(data);
-
-  // add html output to ID
-  document.getElementById('requested').innerHTML += html;
-
+  handleData('#requested', gotData);
 }); // End gotData(data)
 
 var dbRefDispatched = firebase.database().ref().child('dispatch').orderByChild('Status').equalTo('dispatched');
 
 dbRefDispatched.on('value', gotData => {
-  // clear the records so when value is updated new records are displayed (see bottom of code)
-  $('#dispatched').empty();
-
-  // assign above core data to 'data'
-  var dataVal = gotData.val();
-
-  // pass the array data values
-  var data = { isAdmin: isAdmin, dispatch: dataVal };
-  var html = compiledTemplate(data);
-
-  // add html output to ID
-  document.getElementById('dispatched').innerHTML += html;
-
+  handleData('#dispatched', gotData);
 }); // End gotData(data)
