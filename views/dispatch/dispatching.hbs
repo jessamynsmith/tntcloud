@@ -31,68 +31,6 @@
 function setup() {}
 /********************************/
 
-
-/*****************************************************************************
- * Dispatch Status = 'Requested'
-*****************************************************************************/
-
-var dbRefRequested = firebase.database().ref().child('dispatch').orderByChild('Status').equalTo('open');
-
-dbRefRequested.on('value', gotData => {
-
-  var dataRows = selectAll('.data-row');
-  for (var i = 0; i < dataRows.length; i++) {
-    dataRows[i].remove();
-  }
-
-  // assign above core data to 'data'
-  var dataVal = gotData.val();
-  // Firebase keys/records: assign the core object's Firebase keys to 'keys'
-  var keys = Object.keys(dataVal);
-  // Loop through all the Keys/records
-  for (var i = 0; i < keys.length; i++) {
-    var k = keys[i];
-
-    // Extract value from each Key record
-    var BranchFrom = dataVal[k].BranchFrom;
-    var BranchTo = dataVal[k].BranchTo;
-    var Date = dataVal[k].Date;
-    var DateTime = dataVal[k].DateTime;
-    var Driver = dataVal[k].Driver;
-    var Instructions = dataVal[k].Instructions;
-    var Reference = dataVal[k].Reference;
-    var Urgency = dataVal[k].Urgency;
-    var Vendor = dataVal[k].Vendor;
-
-    var div = createElement('div',
-      `
-        <div class="row expanded small-12 medium-6 large-6 columns tnt-card-output">
-          <div class="">
-             <div class="card-divider">
-               <div>${Vendor}</div>
-               <div>${Date}&nbsp;&nbsp;@&nbsp;&nbsp;${DateTime}</div>
-             </div>
-          </div>
-          <div class="body">
-            <div>From:&nbsp;${BranchFrom}&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;${BranchTo}</div>
-            <div>Reference:&nbsp;${Reference}</div>
-            <div>Instructions:&nbsp;${Instructions}</div>
-            <div>Driver:&nbsp;${Driver}</div>
-          </div>
-          <div class="footer">
-            <div style="float: left;">Edit</div>
-            <div style="float: right;">Delete</div>
-          </div>
-        </div>
-      `
-    );
-    div.class('data-row');
-    div.id(k);
-    div.parent('requested');
-
-  } // End for Loop
-}); // End gotData(data)
-
 /*****************************************************************************
  * Dispatch Status = 'Dispatched'
 *****************************************************************************/
