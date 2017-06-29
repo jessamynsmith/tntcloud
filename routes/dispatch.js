@@ -16,7 +16,7 @@ var navDispatch =
     <a href="/dispatch/create-request" class="button alert" style="margin: .5rem .75rem;">Create Request</a>
   </div>`;
 
-/* Root Route */
+// Dispatch Rot
 // this router is for /dispatch dir, see app.js for initializer
 router.get('/', function(req, res, next) {
   var user = req.app.locals.user;
@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-// Subroute
+// History
 router.get('/history', function(req, res, next) {
   var user = req.app.locals.user;
 
@@ -49,7 +49,7 @@ router.get('/history', function(req, res, next) {
 });
 
 
-// Subroute
+// Dispatching
 router.get('/dispatching', function(req, res, next) {
   var user = req.app.locals.user;
 
@@ -65,7 +65,7 @@ router.get('/dispatching', function(req, res, next) {
 });
 
 
-// Subroute
+// Create Request
 router.get('/create-request', function(req, res, next) {
   var user = req.app.locals.user;
 

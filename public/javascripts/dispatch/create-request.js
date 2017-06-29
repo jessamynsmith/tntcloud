@@ -6,6 +6,7 @@
 function submitForm(){
   event.preventDefault();
 
+  // Cookie/Token authentication
   var authToken = Cookies.get('fb-auth-token');
   console.log("create-request.hbs auth token ", authToken);
   firebase.auth().signInWithCustomToken(authToken)
