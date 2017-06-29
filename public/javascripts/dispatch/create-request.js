@@ -29,9 +29,9 @@ function submitForm(){
     let Driver = document.getElementById('driver').value;
     // Status of Dispatch Request
       if (Driver === "") {
-        var Status = "open";
+        var Status = "requested";
       } else {
-        Status = "assigned";
+        Status = "dispatched";
       }
 
     // Data to submit to database
