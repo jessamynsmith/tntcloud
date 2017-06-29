@@ -47,7 +47,7 @@
 *********************************/
 function setup() {}
 /********************************/
-
+/*
 const divObject = document.getElementById('youtubeFB1');
 
 const dbRefObject = firebase.database().ref().child('dispatch');
@@ -56,17 +56,19 @@ const dbRefObject = firebase.database().ref().child('dispatch');
 dbRefObject.on('value', snap => {
   divObject.innerText = JSON.stringify(snap.val(), null, 3);
 });
+*/
 /** Firebase Vid 2 ************************************************************/
 
 var ulList = document.getElementById('youtubeFB2');
 
 var dbRefDispatch = firebase.database().ref().child('dispatch');
-var dbRefList = dbRefDispatch.child('hobbies');
+// var dbRefList = dbRefDispatch.child('hobbies');
 
-dbRefList.on('child_added', snap => {
+dbRefDispatch.on('child_added', function(data) {
+// dbRefList.on('child_added', function(data) {
   var li = document.createElement('li');
-  li.innerText = snap.val();
-  li.id = snap.key;
+  li.innerText = data.val().RO;
+  li.id = data.key;
   ulList.appendChild(li);
 });
 /*
@@ -87,7 +89,7 @@ dbRefList.on('child_removed', snap => {
 *****************************************************************************/
 /*
 // Listen for Items
-var commentsRef = firebase.database().ref('post-comments/' + postId);
+var commentsRef = firebase.database().ref('post-comments/' + key);
 commentsRef.on('child_added', function(data) {
   addCommentElement(postElement, data.key, data.val().text, data.val().author);
 });
