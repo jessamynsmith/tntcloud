@@ -61,6 +61,11 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
   res.cookie('fb-auth-token', authToken, { httpOnly: false });
   /* end authToken ************************************************************/
 
+
+  res.cookie('userRole', req.app.locals.userRole, { httpOnly: false });
+
+
+
   res.render('dispatch/dispatching', { isAdmin: isAdmin, navDispatch: navDispatch });
 });
 

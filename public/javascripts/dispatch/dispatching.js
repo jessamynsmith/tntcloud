@@ -14,9 +14,15 @@ function setup() {}
 // var dbRefRequested = firebase.database().ref().child('dispatch').orderByChild('Status').equalTo('requested');
 // var dbRef = firebase.database().ref().child('dispatch');
 
+// Cookie/Token authentication
+var userRole = Cookies.get('userRole');
+console.log("User Role Cookie ", userRole);
+var isAdmin = userRole === 'admin';
+console.log("User Role ", isAdmin);
+
 var dbRef = firebase.database().ref().child('dispatch');
+
 dbRef.on('value', gotData => {
-console.log("Got Values? ");
   // clear the records so when value is updated new records are displayed (see bottom of code)
   var dataRows = selectAll('.data-row');
   for (var i = 0; i < dataRows.length; i++) {
@@ -29,7 +35,8 @@ console.log("Got Values? ");
   /***************************************
   * Handlebars
   ***************************************/
-//  var rawTemplate = document.getElementById("rowsTemplate").innerHTML;
+  //  var rawTemplate = document.getElementById("rowsTemplate").innerHTML;
+  // Handlebars #if ../isAdmin :: https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop
   var rawTemplate =
   `{{#each dispatch}}
     <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output">
@@ -45,17 +52,19 @@ console.log("Got Values? ");
         <div>Instructions:&nbsp;{{Instructions}}</div>
         <div>Driver:&nbsp;{{Driver}}</div>
       </div>
-      <div class="footer">
-        <div style="float: left;">Edit</div>
-        <div style="float: right;">Delete</div>
-      </div>
+      {{#if ../isAdmin }}
+        <div class="footer">
+          <div style="float: left;">Edit</div>
+          <div style="float: right;">Delete</div>
+        </div>
+      {{/if}}
     </div>
   {{/each}}`;
   // Node.js is needed if I want to pre-compile templates
   var compiledTemplate = Handlebars.compile(rawTemplate);
 
   // pass the array data values
-  var data = { dispatch: dataVal };
+  var data = { isAdmin: isAdmin, dispatch: dataVal };
   var html = compiledTemplate(data);
 
   // add html output to ID
