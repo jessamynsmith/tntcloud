@@ -27,6 +27,12 @@ function submitForm(){
     let Reference = document.getElementById('reference').value;
     let Instructions = document.getElementById('instructions').value;
     let Driver = document.getElementById('driver').value;
+    // Status of Dispatch Request
+      if (Driver === "") {
+        var Status = "open";
+      } else {
+        Status = "assigned";
+      }
 
     // Data to submit to database
     var submitData = {
@@ -39,7 +45,8 @@ function submitForm(){
       Urgency,
       Reference,
       Instructions,
-      Driver
+      Driver,
+      Status
     }
 
     // Get a key for a new core Record

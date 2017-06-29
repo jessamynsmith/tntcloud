@@ -122,20 +122,21 @@ body {
   max-width: 100%;
 }
 
-.two-column .small-6 {
+/** Two Columns ***************************************************************/
+.two-column .dispatching .small-6 {
   width: 47.5%;
 }
-.two-column .col1,
+.two-column .dispatching .col1,
 .two-column .col2 {
-  display: inline-block;
+  float: left;
 }
-
-.two-column .col1 {
+.two-column .dispatching .col1 {
   margin-right: 2%;
 }
-.two-column .col2 {
+.two-column .dispatching .col2 {
   margin-left: 2%;
 }
+
 
 /*******************************************************************************
  * Section Intro
@@ -167,11 +168,35 @@ body {
 }
 
 /*******************************************************************************
+ * Card TNT
+ ******************************************************************************/
+.tnt-card-output {
+  border: 3px solid #e6e6e6;
+  margin: 2rem;
+}
+.tnt-card-output .card-divider {
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: left;
+  padding: .5rem;
+}
+
+.tnt-card-output .body {
+  padding: .5rem;
+}
+
+.tnt-card-output .footer {
+  padding: .5rem;
+}
+
+/*******************************************************************************
  * Hover Form
  ******************************************************************************/
 .hover-form input::placeholder { /* WebKit, Blink, Edge */
   color: #666;
 }
+
 /*******************************************************************************
  * Output Form & Print Area
  ******************************************************************************/

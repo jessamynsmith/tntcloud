@@ -7,32 +7,18 @@
 </div>
 
 <!-- Two Columns -------------------------------------------------------------->
-<div class="grid-x two-column">
-  <!-- Column 1 --------------------------------------------------------------->
-  <div class="small-6 cell col1">
-    <h2>Requested</h2>
-    <table class="data-table stack">
-      <thead>
-        <th class="col2">RO</th>
-        <th class="col5">Customer</th>
-        <th class="col8">Failed Part #</th>
-      </thead>
-      <tbody id="records-list" class="list">
-      </tbody>
-    </table>
-  </div>
-  <!-- Column 2 --------------------------------------------------------------->
-  <div class="small-6 cell col2">
-    <h2>Dispatched</h2>
-    <table class="data-table stack">
-      <thead>
-        <th class="col2">RO</th>
-        <th class="col5">Customer</th>
-        <th class="col8">Failed Part #</th>
-      </thead>
-      <tbody id="records-list" class="list">
-      </tbody>
-    </table>
+<div class="grid-x two-column dispatching">
+  <div class="dispatching">
+    <!-- Column 1 --------------------------------------------------------------->
+    <div class="small-6 cell col1">
+      <h2>Requested</h2>
+        <div id="requested" class="list"></div>
+    </div>
+    <!-- Column 2 --------------------------------------------------------------->
+    <div class="small-6 cell col1">
+      <h2>Dispatched</h2>
+        <div id="dispatched" class="list"></div>
+    </div>
   </div>
 </div>
 
@@ -68,18 +54,41 @@ dbRef.on('value', gotData => {
     var k = keys[i];
 
     // Extract value from each Key record
-    var Customer = dataVal[k].Customer;
-    var FailedPartNumber = dataVal[k].FailedPartNumber;
-    var RO = dataVal[k].RO;
+    var BranchFrom = dataVal[k].BranchFrom;
+    var BranchTo = dataVal[k].BranchTo;
+    var Date = dataVal[k].Date;
+    var DateTime = dataVal[k].DateTime;
+    var Driver = dataVal[k].Driver;
+    var Instructions = dataVal[k].Instructions;
+    var Reference = dataVal[k].Reference;
+    var Urgency = dataVal[k].Urgency;
+    var Vendor = dataVal[k].Vendor;
 
-    var tr = createElement('tr',
-     `<td>${RO}</td>
-      <td>${Customer}</td>
-      <td>${FailedPartNumber}</td>
-    `);
-    tr.class('data-row');
-    tr.id(k);
-    tr.parent('records-list');
+    var div = createElement('div',
+      `
+        <div class="row expanded small-12 medium-6 large-6 columns tnt-card-output">
+          <div class="">
+             <div class="card-divider">
+               <div>${Vendor}</div>
+               <div>${Date}&nbsp;&nbsp;@&nbsp;&nbsp;${DateTime}</div>
+             </div>
+          </div>
+          <div class="body">
+            <div>From:&nbsp;${BranchFrom}&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;${BranchTo}</div>
+            <div>Reference:&nbsp;${Reference}</div>
+            <div>Instructions:&nbsp;${Instructions}</div>
+            <div>Driver:&nbsp;${Driver}</div>
+          </div>
+          <div class="footer">
+            <div style="float: left;">Edit</div>
+            <div style="float: right;">Delete</div>
+          </div>
+        </div>
+      `
+    );
+    div.class('data-row');
+    div.id(k);
+    div.parent('requested');
 
   } // End for Loop
 }); // End gotData(data)
