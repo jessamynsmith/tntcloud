@@ -2,43 +2,40 @@
 <script language="javascript" src="/javascripts/p5/p5.dom.min.js"></script>
 
 <!-- Title/Intro ------------------------------------------------------------>
-<div class="section-intro">
-  <h1>Dispatching</h2>
+<div class="section-intro dispatch">
+<!--  <h1>Dispatching</h2> -->
 </div>
 
-<!-- Primary Content -------------------------------------------------------->
-<div id="table-and-search">
-
-  <!-- Records list -->
-  <table class="data-table stack">
-    <thead>
-      <th class="col2">RO</th>
-      <th class="col5">Customer</th>
-      <th class="col8">Failed Part #</th>
-    </thead>
-    <tbody id="records-list" class="list">
-    <!--------------------------------------------------------------------------->
-    <!-- Handlebars ------------------------------------------------------------->
-    <!--------------------------------------------------------------------------->
-<!--
-      {{#each dispatchData }}
-        <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
-          <td class="ro">{{RO}}</td>
-          <td class="customer">{{Customer}}</td>
-          <td class="failed-part-number">{{FailedPartNumber}}</td>
-        </tr>
-      {{/each}}
--->
-    </tbody>
-    <tfoot id="getTable"></tfoot>
-  </table>
+<!-- Two Columns -------------------------------------------------------------->
+<div class="grid-x two-column">
+  <!-- Column 1 --------------------------------------------------------------->
+  <div class="small-6 cell col1">
+    <h2>Requested</h2>
+    <table class="data-table stack">
+      <thead>
+        <th class="col2">RO</th>
+        <th class="col5">Customer</th>
+        <th class="col8">Failed Part #</th>
+      </thead>
+      <tbody id="records-list" class="list">
+      </tbody>
+    </table>
+  </div>
+  <!-- Column 2 --------------------------------------------------------------->
+  <div class="small-6 cell col2">
+    <h2>Dispatched</h2>
+    <table class="data-table stack">
+      <thead>
+        <th class="col2">RO</th>
+        <th class="col5">Customer</th>
+        <th class="col8">Failed Part #</th>
+      </thead>
+      <tbody id="records-list" class="list">
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<hr>
-
-<ul id="youtubeFB2"></ul>
-<hr>
-<div id="youtubeFB1"></div>
 
 <script>
 
@@ -47,83 +44,6 @@
 *********************************/
 function setup() {}
 /********************************/
-/*
-const divObject = document.getElementById('youtubeFB1');
-
-const dbRefObject = firebase.database().ref().child('dispatch');
-
-// Sync Object Changes
-dbRefObject.on('value', snap => {
-  divObject.innerText = JSON.stringify(snap.val(), null, 3);
-});
-*/
-/** Firebase Vid 2 ************************************************************/
-/*
-var getTable = document.getElementById('getTable');
-var ulList = document.getElementById('youtubeFB2');
-
-var dbRefDispatch = firebase.database().ref().child('dispatch');
-// var dbRefList = dbRefDispatch.child('hobbies');
-
-dbRefDispatch.on('child_added', function(data) {
-// dbRefList.on('child_added', function(data) {
-
-  RO = data.val().RO;
-  Customer = data.val().Customer;
-
-  // create <td>
-  var tdRo = document.createElement('td');
-  tdRo.className += 'c-ro';
-  var tRo = document.createTextNode(RO);
-  tdRo.appendChild(tRo);
-  // create <td>
-  var tdCustomer = document.createElement('td');
-  tdCustomer.className += 'c-customer';
-  var tCustomer = document.createTextNode(Customer);
-  tdCustomer.appendChild(tCustomer);
-
-  var tr = document.createElement('tr');
-  tr.appendChild(tdRo);
-  tr.appendChild(tdCustomer);
-  tr.id = data.key;
-
-  getTable.appendChild(tr);
-});
-
-dbRefDispatch.on('child_changed', snap => {
-  var trChanged = document.getElementById(snap.key);
-  trChanged.innerText = snap.val();
-});
-
-dbRefList.on('child_removed', snap => {
-  var trToRemove = document.getElementById(snap.key);
-  trToRemove.remove();
-});
-*/
-
-
-/*****************************************************************************
- * Official Firebase Example App: "Database"
-*****************************************************************************/
-/*
-// Listen for Items
-var commentsRef = firebase.database().ref('post-comments/' + key);
-commentsRef.on('child_added', function(data) {
-  addCommentElement(postElement, data.key, data.val().text, data.val().author);
-});
-
-// Creates a comment element and adds it to the given postElement.
-function addCommentElement(postElement, id, text, author) {
-  var comment = document.createElement('div');
-  comment.classList.add('comment-' + id);
-  comment.innerHTML = '<span class="username"></span><span class="comment"></span>';
-  comment.getElementsByClassName('comment')[0].innerText = text;
-  comment.getElementsByClassName('username')[0].innerText = author || 'Anonymous';
-
-  var commentsContainer = postElement.getElementsByClassName('comments-container')[0];
-  commentsContainer.appendChild(comment);
-}
-*/
 
 
 /*****************************************************************************

@@ -10,7 +10,7 @@ var dbRef = firebase.database().ref();
  * Core Warranty: Navigation
  ******************************************************************************/
 var navDispatch =
-  `<div class="">
+  `<div class="section-nav dispatch">
     <a href="/dispatch/history" class="button" style="margin: .5rem .75rem .5rem .5rem;">History</a>
     <a href="/dispatch/dispatching" class="button" style="margin: .5rem .75rem;">Dispatching</a>
     <a href="/dispatch/create-request" class="button alert" style="margin: .5rem .75rem;">Create Request</a>
