@@ -30,6 +30,7 @@
       {{/each}}
 -->
     </tbody>
+    <tfoot id="getTable"></tfoot>
   </table>
 </div>
 
@@ -38,7 +39,6 @@
 <ul id="youtubeFB2"></ul>
 <hr>
 <div id="youtubeFB1"></div>
-
 
 <script>
 
@@ -59,6 +59,7 @@ dbRefObject.on('value', snap => {
 */
 /** Firebase Vid 2 ************************************************************/
 
+var getTable = document.getElementById('getTable');
 var ulList = document.getElementById('youtubeFB2');
 
 var dbRefDispatch = firebase.database().ref().child('dispatch');
@@ -66,10 +67,27 @@ var dbRefDispatch = firebase.database().ref().child('dispatch');
 
 dbRefDispatch.on('child_added', function(data) {
 // dbRefList.on('child_added', function(data) {
-  var li = document.createElement('li');
-  li.innerText = data.val().RO;
-  li.id = data.key;
-  ulList.appendChild(li);
+
+  RO = data.val().RO;
+  Customer = data.val().Customer;
+
+  // create <td>
+  var tdRo = document.createElement('td');
+  tdRo.className += 'c-ro';
+  var tRo = document.createTextNode(RO);
+  tdRo.appendChild(tRo);
+  // create <td>
+  var tdCustomer = document.createElement('td');
+  tdCustomer.className += 'c-customer';
+  var tCustomer = document.createTextNode(Customer);
+  tdCustomer.appendChild(tCustomer);
+
+  var tr = document.createElement('tr');
+  tr.appendChild(tdRo);
+  tr.appendChild(tdCustomer);
+  tr.id = data.key;
+
+  getTable.appendChild(tr);
 });
 /*
 dbRefList.on('child_changed', snap => {
