@@ -20,7 +20,9 @@ console.log("User Role Cookie ", userRole);
 var isAdmin = userRole === 'admin';
 console.log("User Role ", isAdmin);
 
-var dbRef = firebase.database().ref().child('dispatch');
+// var dbRef = firebase.database().ref().child('dispatch');
+
+var dbRef = firebase.database().ref().child('dispatch').orderByChild('Status').equalTo('requested');
 
 dbRef.on('value', gotData => {
   // clear the records so when value is updated new records are displayed (see bottom of code)
