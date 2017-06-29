@@ -97,6 +97,7 @@ dbRefRequested.on('value', gotData => {
  * Dispatch Status = 'Dispatched'
 *****************************************************************************/
 // Listen for Child Events: https://firebase.google.com/docs/database/web/lists-of-data#listen_for_child_events
+// Query data https://firebase.google.com/docs/reference/js/firebase.database.Query
 
 // var dbRefRequested = firebase.database().ref().child('dispatch').orderByChild('Status').equalTo('requested');
 var dbRef = firebase.database().ref().child('dispatch');
