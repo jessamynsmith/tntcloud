@@ -20,18 +20,26 @@ function submitForm(){
     /***************************************************************************
      * Form Element Options and Values
     ***************************************************************************/
-    let RO = document.getElementById('core-ro').value;
-    let Customer = document.getElementById('core-customer').value;
-    let FailedPartNumber = document.getElementById('core-failed-part-number').value;
+    let Vendor = document.getElementById('vendor').value;
+    let BranchFrom = document.getElementById('branch-from').value;
+    let BranchTo = document.getElementById('branch-to').value;
+    let Urgency = document.getElementById('urgency').value;
+    let Reference = document.getElementById('reference').value;
+    let Instructions = document.getElementById('instructions').value;
+    let Driver = document.getElementById('driver').value;
 
     // Data to submit to database
     var submitData = {
       DateTimeStampServer,
       Date,
       DateTime,
-      RO,
-      Customer,
-      FailedPartNumber
+      Vendor,
+      BranchFrom,
+      BranchTo,
+      Urgency,
+      Reference,
+      Instructions,
+      Driver
     }
 
     // Get a key for a new core Record

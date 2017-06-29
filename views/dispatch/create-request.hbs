@@ -18,13 +18,13 @@
       </div>
       <!-- Vendor ------------------------------------------------------------->
       <div class="input-group">
-        <input type="text" id="core-ro" placeholder="Vendor" class="input-group-field" name="vendor">
+        <input type="text" id="vendor" placeholder="Vendor" class="input-group-field" name="vendor">
       </div>
       <!-- Branch From -------------------------------------------------------->
       <div class="input-group">
         <span class="input-group-label">From</span>
         <select id="branch-from"  class="input-group-field" name="branch-from">
-          <option value="">Select Branch</option>
+          <!-- <option value="">Select Branch</option> -->
           <option value="JAX">JAX</option>
           <option value="NFWS">NFWS</option>
           <option value="LC">LC</option>
@@ -35,8 +35,8 @@
       <!-- Branch To ---------------------------------------------------------->
       <div class="input-group">
         <span class="input-group-label">To</span>
-        <select id="branch-from"  class="input-group-field" name="branch-from">
-          <option value="">Select Branch</option>
+        <select id="branch-to"  class="input-group-field" name="branch-to">
+          <!-- <option value="">Select Branch</option> -->
           <option value="JAX">JAX</option>
           <option value="NFWS">NFWS</option>
           <option value="LC">LC</option>
@@ -47,7 +47,7 @@
       <!-- Priority ---------------------------------------------------------->
       <div class="input-group">
         <span class="input-group-label">Urgency</span>
-        <select id="branch-from"  class="input-group-field" name="urgency">
+        <select id="urgency"  class="input-group-field" name="urgency">
           <option value="normal">Normal</option>
           <option value="low">Low</option>
           <option value="high">High</option>
@@ -56,19 +56,19 @@
       </div>
       <!-- Reference ---------------------------------------------------------->
       <div class="input-group">
-        <input type="text" id="core-customer" placeholder="Reference"  class="input-group-field" name="reference"/>
+        <input type="text" id="reference" placeholder="Reference"  class="input-group-field" name="reference"/>
       </div>
       <!-- Instructions ------------------------------------------------------->
       <div class="input-group">
-        <input type="text" id="core-failed-part-number" placeholder="Instructions"  class="input-group-field" name="instructions"/>
+        <input type="text" id="instructions" placeholder="Instructions"  class="input-group-field" name="instructions"/>
       </div>
       <!-- Driver ------------------------------------------------------->
       <div class="input-group">
-        <input type="text" id="core-failed-part-number" placeholder="Driver"  class="input-group-field" name="driver"/>
+        <input type="text" id="driver" placeholder="Driver"  class="input-group-field" name="driver"/>
       </div>
       <!-- Submit Button ------------------------------------------------------>
       <div>
-        <input id="submit-core" type="submit" class="button primary">
+        <input id="submit-dispatch-request" type="submit" class="button primary">
       </div>
     </div>
   </form>
