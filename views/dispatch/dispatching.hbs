@@ -36,7 +36,7 @@ function setup() {}
  * Retrieve core Records from Database
 *****************************************************************************/
 
-var dbRef = firebase.database().ref().child('dispatch');
+var dbRef = firebase.database().ref().child('dispatch').orderByChild('Status').equalTo('open');
 
 dbRef.on('value', gotData => {
 
