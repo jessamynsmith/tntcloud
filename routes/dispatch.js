@@ -13,6 +13,11 @@ var navDispatch =
   `<div class="section-nav dispatch">
     <a href="/dispatch/history" class="button" style="margin: .5rem .75rem .5rem .5rem;">History</a>
     <a href="/dispatch/dispatching" class="button" style="margin: .5rem .75rem;">Dispatching</a>
+  </div>`;
+var navDispatchCreateRequest =
+  `<div class="section-nav dispatch">
+    <a href="/dispatch/history" class="button" style="margin: .5rem .75rem .5rem .5rem;">History</a>
+    <a href="/dispatch/dispatching" class="button" style="margin: .5rem .75rem;">Dispatching</a>
     <button class="button alert" data-open="requestCreate" style="margin: .5rem .75rem;">Create Request</button>
   </div>`;
 
@@ -63,7 +68,7 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
   res.cookie('userRole', req.app.locals.userRole, { httpOnly: false });
   /** End Cookies *************************************************************/
 
-  res.render('dispatch/dispatching', { isAdmin: isAdmin, navDispatch: navDispatch });
+  res.render('dispatch/dispatching', { isAdmin: isAdmin, navDispatch: navDispatchCreateRequest });
 });
 
 
@@ -79,7 +84,7 @@ router.get('/create-request', function(req, res, next) {
   res.cookie('fb-auth-token', authToken, { httpOnly: false });
   /* end authToken ************************************************************/
 
-  res.render('dispatch/create-request', { navDispatch: navDispatch });
+  res.render('dispatch/create-request', { navDispatch: navDispatchCreateRequest });
 });
 
 
