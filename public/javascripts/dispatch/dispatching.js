@@ -11,7 +11,7 @@ console.log("User Role ", isAdmin);
 // Handlebars #if ../isAdmin :: https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop
 var rawTemplate =
 `{{#each dispatch}}
-  <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output">
+  <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output" id="{{@key}}">
     <div class="">
        <div class="card-divider">
          <div>{{ Vendor }}</div>
@@ -26,12 +26,30 @@ var rawTemplate =
     </div>
     {{#if ../isAdmin }}
       <div class="footer">
-        <div style="float: left;">Edit</div>
+        <div style="float: left;" onclick="myFunction()">Edit</div>
         <div style="float: right;">Delete</div>
       </div>
     {{/if}}
   </div>
 {{/each}}`;
+
+/*****************************************************************************
+ * Form Popup
+*****************************************************************************/
+function myFunction() {
+    var txt;
+    var person = prompt("Please enter your name:", "Harry Potter");
+    if (person == null || person == "") {
+        txt = "User cancelled the prompt.";
+    } else {
+        txt = "Hello " + person + "! How are you today?";
+    }
+    document.getElementById("demo").innerHTML = txt;
+}
+
+/*****************************************************************************
+ * Handlebars Compile + Render
+*****************************************************************************/
 // FYI - Node.js is needed if I want to pre-compile templates
 var compiledTemplate = Handlebars.compile(rawTemplate);
 
