@@ -21,3 +21,81 @@
     </div>
   </div>
 </div>
+
+<p><button class="button" data-reveal-id="exampleModal1">Click me for a modal</button></p>
+
+<div class="reveal" id="exampleModal1" data-reveal>
+  <h1>Awesome. I Have It.</h1>
+  <p class="lead">Your couch. It is mine.</p>
+  <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<!-- Dispatch Form ------------------------------------------------------------>
+<div class="reveal" id="dispatch-form" data-reveal>
+  <form class="input-form" data-reveal onSubmit="return submitForm(this)">
+    <div class="hover-form">
+      <div class="card">
+        <div class="card-divider">
+          <h4>Create Pickup Request</h4>
+        </div>
+      </div>
+      <!-- Vendor ------------------------------------------------------------->
+      <div class="input-group">
+        <input type="text" id="vendor" placeholder="Vendor" class="input-group-field" name="vendor">
+      </div>
+      <!-- Branch From -------------------------------------------------------->
+      <div class="input-group">
+        <span class="input-group-label">From</span>
+        <select id="branch-from"  class="input-group-field" name="branch-from">
+          <!-- <option value="">Select Branch</option> -->
+          <option value="JAX">JAX</option>
+          <option value="NFWS">NFWS</option>
+          <option value="LC">LC</option>
+          <option value="WC">WC</option>
+          <option value="440">440</option>
+        </select>
+      </div>
+      <!-- Branch To ---------------------------------------------------------->
+      <div class="input-group">
+        <span class="input-group-label">To</span>
+        <select id="branch-to"  class="input-group-field" name="branch-to">
+          <!-- <option value="">Select Branch</option> -->
+          <option value="JAX">JAX</option>
+          <option value="NFWS">NFWS</option>
+          <option value="LC">LC</option>
+          <option value="WC">WC</option>
+          <option value="440">440</option>
+        </select>
+      </div>
+      <!-- Priority ---------------------------------------------------------->
+      <div class="input-group">
+        <span class="input-group-label">Urgency</span>
+        <select id="urgency"  class="input-group-field" name="urgency">
+          <option value="normal">Normal</option>
+          <option value="low">Low</option>
+          <option value="high">High</option>
+          <option value="urgent">Urgent</option>
+        </select>
+      </div>
+      <!-- Reference ---------------------------------------------------------->
+      <div class="input-group">
+        <input type="text" id="reference" placeholder="Reference"  class="input-group-field" name="reference"/>
+      </div>
+      <!-- Instructions ------------------------------------------------------->
+      <div class="input-group">
+        <input type="text" id="instructions" placeholder="Instructions"  class="input-group-field" name="instructions"/>
+      </div>
+      <!-- Driver ------------------------------------------------------->
+      <div class="input-group">
+        <input type="text" id="driver" placeholder="Driver"  class="input-group-field" name="driver"/>
+      </div>
+      <!-- Submit Button ------------------------------------------------------>
+      <div>
+        <input id="submit-dispatch-request" type="submit" class="button primary">
+      </div>
+    </div>
+  </form>
+</div>

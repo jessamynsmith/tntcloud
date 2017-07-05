@@ -26,7 +26,7 @@ var rawTemplate =
     </div>
     {{#if ../isAdmin }}
       <div class="footer">
-        <div style="float: left;" onclick="myFunction()">Edit</div>
+        <div style="float: left;"><a data-open="dispatch-form">Edit</a></div>
         <div style="float: right;">Delete</div>
       </div>
     {{/if}}
