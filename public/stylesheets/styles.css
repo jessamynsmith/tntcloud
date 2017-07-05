@@ -163,6 +163,9 @@ body {
   border: 1px solid #e6e6e6;
   padding: .5rem;
 }
+.card-divider h4 {
+  margin-bottom: 0;
+}
 
 /*******************************************************************************
  * Card TNT
@@ -191,6 +194,7 @@ body {
  * Foundation Popup 'Reveal' Modal
  ******************************************************************************/
 .close-button {
+  top: .35rem;
   right: 2rem;
 }
 
