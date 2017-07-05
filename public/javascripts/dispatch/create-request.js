@@ -60,8 +60,8 @@ function submitForm(){
     var dbUpdate = firebase.database().ref().update(updates);
 
     // redirect page with url parameter containing core key
-    // window.location.href = `/dispatch`;
-
+    // window.location.href = `/dispatch/dispatching`;
+    $('#requestCreate').foundation('close');
   })
   .catch(function(error) {
     // Handle Errors here.
