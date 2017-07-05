@@ -1,43 +1,20 @@
 <script src="/javascripts/handlebars/4.0.10/handlebars-v4.0.10.js"></script>
 <script language="javascript" src="/javascripts/dispatch/dispatching.js"></script>
+<script src="/javascripts/dispatch/create-request.js"></script>
 
 <!-- Title/Intro ------------------------------------------------------------>
 <div class="section-intro dispatch">
 <!--  <h1>Dispatching</h2> -->
 </div>
 
+<!-- Create Request Form ------------------------------------------------------>
 <!-- Foundation Example Modal ------------------------------------------------->
 <!-- http://foundation.zurb.com/sites/docs/reveal.html ------------------------>
-<p><button class="button" data-open="exampleModal1">Click me for a modal</button></p>
+<!-- popup activation placed into navigation bar's 'Create Request' button -->
+<!--  <p><button class="button alert" data-open="requestCreate">Create Request</button></p>  -->
 
-<div class="reveal" id="exampleModal1" data-reveal>
-  <h1>Awesome. I Have It.</h1>
-  <p class="lead">Your couch. It is mine.</p>
-  <p>I'm a cool paragraph that lives inside of an even cooler modal. Wins!</p>
-  <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-
-<!-- Two Columns -------------------------------------------------------------->
-<div class="grid-x two-column dispatching">
-  <div class="dispatching">
-    <!-- Column 1 --------------------------------------------------------------->
-    <div class="small-6 cell col1">
-      <h2>Requested</h2>
-        <div id="requested" class="list"></div>
-    </div>
-    <!-- Column 2 --------------------------------------------------------------->
-    <div class="small-6 cell col1">
-      <h2>Dispatched</h2>
-        <div id="dispatched" class="list"></div>
-    </div>
-  </div>
-</div>
-
-<!-- Dispatch Form ------------------------------------------------------------>
-<div class="reveal" id="dispatch-form" data-reveal>
-  <form class="input-form" data-reveal onSubmit="return submitForm(this)">
+<div class="row expanded small-12 medium-6 large-3 columns reveal" id="requestCreate" data-reveal>
+  <form id="dispatch-input-form" class="input-form" onSubmit="return submitForm(this)">
     <div class="hover-form">
       <div class="card">
         <div class="card-divider">
@@ -100,4 +77,21 @@
       </div>
     </div>
   </form>
+</div>
+
+
+<!-- Two Columns -------------------------------------------------------------->
+<div class="grid-x two-column dispatching">
+  <div class="dispatching">
+    <!-- Column 1 --------------------------------------------------------------->
+    <div class="small-6 cell col1">
+      <h2>Requested</h2>
+        <div id="requested" class="list"></div>
+    </div>
+    <!-- Column 2 --------------------------------------------------------------->
+    <div class="small-6 cell col1">
+      <h2>Dispatched</h2>
+        <div id="dispatched" class="list"></div>
+    </div>
+  </div>
 </div>

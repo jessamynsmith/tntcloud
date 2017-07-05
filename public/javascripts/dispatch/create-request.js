@@ -60,7 +60,7 @@ function submitForm(){
     var dbUpdate = firebase.database().ref().update(updates);
 
     // redirect page with url parameter containing core key
-    window.location.href = `/dispatch`;
+    // window.location.href = `/dispatch`;
 
   })
   .catch(function(error) {

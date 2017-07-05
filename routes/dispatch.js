@@ -13,7 +13,7 @@ var navDispatch =
   `<div class="section-nav dispatch">
     <a href="/dispatch/history" class="button" style="margin: .5rem .75rem .5rem .5rem;">History</a>
     <a href="/dispatch/dispatching" class="button" style="margin: .5rem .75rem;">Dispatching</a>
-    <a href="/dispatch/create-request" class="button alert" style="margin: .5rem .75rem;">Create Request</a>
+    <button class="button alert" data-open="requestCreate" style="margin: .5rem .75rem;">Create Request</button>
   </div>`;
 
 // Dispatch root
