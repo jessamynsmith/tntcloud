@@ -2,7 +2,7 @@
 // Middleware
 // https://stackoverflow.com/questions/11691376/expressjs-how-to-share-route-middleware-accross-routes
 
-var firebaseUser = require("./firebase-user");
+var firebaseUser = require("./private/firebase/firebase-user");
 
 /*******************************************************************************
  * Redirect to homepage if visitor not logged in (Middleware)

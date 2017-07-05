@@ -11,7 +11,7 @@ var expressSession = require('express-session');
 var app = express();
 
 // Import firebase initializer
-app.locals.firebase = require("./firebase");
+app.locals.firebase = require("./private/firebase/firebase");
 // Global dbRef ... so firebase connection available everywhere without import
 app.locals.dbRef = app.locals.firebase.database().ref();
 

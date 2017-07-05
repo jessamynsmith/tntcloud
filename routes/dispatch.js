@@ -3,7 +3,7 @@ var router = express.Router();
 var firebase = require("firebase");
 var mw = require('../middleware');
 // firebaseUser required for authToken
-var firebaseUser = require("../firebase-user");
+var firebaseUser = require("../private/firebase/firebase-user");
 var dbRef = firebase.database().ref();
 
 /*******************************************************************************
@@ -16,7 +16,7 @@ var navDispatch =
     <a href="/dispatch/create-request" class="button alert" style="margin: .5rem .75rem;">Create Request</a>
   </div>`;
 
-// Dispatch root 
+// Dispatch root
 // this router is for /dispatch dir, see app.js for initializer
 router.get('/', function(req, res, next) {
   var user = req.app.locals.user;

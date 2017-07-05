@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var firebase = require("../firebase");
+var firebase = require("../private/firebase/firebase");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
