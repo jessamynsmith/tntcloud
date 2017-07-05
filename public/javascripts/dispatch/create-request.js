@@ -59,9 +59,10 @@ function submitForm(){
     // update the new-key-record with the data
     var dbUpdate = firebase.database().ref().update(updates);
 
-    // redirect page with url parameter containing core key
-    // window.location.href = `/dispatch/dispatching`;
+    // Close Reveal Modal (Foundation)
+    // http://foundation.zurb.com/sites/docs/reveal.html
     $('#requestCreate').foundation('close');
+    
   })
   .catch(function(error) {
     // Handle Errors here.
