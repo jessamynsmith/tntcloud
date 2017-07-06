@@ -1,19 +1,15 @@
-var keyOne;
-getId();
+var editKey;
 
-function getId(clicked_id) {
-  keyOne = clicked_id;
-  console.log("Inside ", keyOne);
+function getIdKey(clicked_id) {
+  editKey = clicked_id;
 }
-// console.log("Outside ", keyOne);
-console.log("Get ID Func ", keyOne);
 
 //////////////////////////////////////////////////////////////////////////////
 // Retrieve Dispatch Request Record
 //////////////////////////////////////////////////////////////////////////////
 
 function requestEditFormDataLoad(clicked_id) {
-  key = $('#' + clicked_id).data('key');
+  var key = clicked_id;
   // var key = clicked_id; // Get key passed to URL from 'view' link
   console.log("Got Key? 111 ", key);
   // Use "KEY" url parameter to target the core/ record
@@ -50,8 +46,7 @@ function requestEditFormDataLoad(clicked_id) {
 
 function submitRequestEditForm(){
   event.preventDefault();
-  var key = keyOne;
-  console.log("Edit Key ", key);
+  var key = editKey;
   // Cookie/Token authentication
   var authToken = Cookies.get('fb-auth-token');
 //  console.log("edit-request.hbs auth token ", authToken);
