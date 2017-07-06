@@ -9,7 +9,7 @@ console.log("User Role ", isAdmin);
 * Handlebars
 ***************************************/
 // Handlebars #if ../isAdmin :: https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop
-var rawTemplate =
+var rawTemplateRequestList =
 `{{#each dispatch}}
   <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output" id="{{@key}}">
     <div class="">
@@ -37,7 +37,7 @@ var rawTemplate =
  * Handlebars Compile + Render
 *****************************************************************************/
 // FYI - Node.js is needed if I want to pre-compile templates
-var compiledTemplate = Handlebars.compile(rawTemplate);
+var compiledTemplate = Handlebars.compile(rawTemplateRequestList);
 
 function handleData(parentSelector, gotData) {
   var parentDiv = $(parentSelector);
