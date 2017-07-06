@@ -4,12 +4,42 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 // Function triggered by 'Create Request' button and 'Edit' link of any active request
-function requestFormLoad(clicked_id) {
-  if (clicked_id === "actionRequestCreate") {
+// https://stackoverflow.com/a/4825325 (get ID value of clicked element)
+function requestFormLoad(clicked_title, clicked_id) {
+  if (clicked_id) {
+    var keyTitle = `<h6>${clicked_id}</h6>`;
+  } else {
+    keyTitle = "";
+  }
+  if (clicked_title === "actionRequestCreate") {
     requestCardTitle = `<h4>Create Pickup Request</h4>`;
-  } else if (clicked_id === "actionRequestEdit") {
+  } else if (clicked_title === "actionRequestEdit") {
     requestCardTitle = `<h4>Edit Pickup Request</h4>`;
   }
+/*
+  //////////////////////////////////////////////////////////////////////////////
+  // Retrieve Dispatch Request Record
+  //////////////////////////////////////////////////////////////////////////////
+  const key = clicked_id; // Get key passed to URL from 'view' link
+  // Use "KEY" url parameter to target the core/ record
+  let dbRefEdit = firebase.database().ref().child('dispatch/' + key);
+  // Re: "once" https://firebase.google.com/docs/reference/js/firebase.database.Query#once
+  dbRefEdit.once('value', gotData);
+  console.log("got value? ", dbRefEdit);
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Request Data
+  //////////////////////////////////////////////////////////////////////////////
+  function gotData(data) {
+    // assign above core data to 'coreRecord'
+    // data.val() returns Object; destructure to pull out individual property values
+    var editRecord = data.val();
+    // Destructure Object to individual property values
+    let { BranchFrom, BranchTo, Driver, Instructions, Reference, Status, Urgency, Vendor } = editRecord;
+    console.log("Values??? ", BranchFrom, BranchTo, Driver, Instructions);
+    // Assign core Data to Table <div>'s
+  } // End function gotData
+*/
   /***************************************
   * Request Input Form
   ***************************************/
@@ -18,6 +48,7 @@ function requestFormLoad(clicked_id) {
     <div class="card">
       <div class="card-divider">
         ${requestCardTitle}
+        ${keyTitle}
         <button class="close-button" data-close aria-label="Close modal" type="button">
           <span aria-hidden="true">&times;</span>
         </button>

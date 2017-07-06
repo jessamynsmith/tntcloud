@@ -11,7 +11,7 @@ console.log("User Role ", isAdmin);
 // Handlebars #if ../isAdmin :: https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop
 var rawTemplateRequestList =
 `{{#each dispatch}}
-  <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output" id="{{@key}}">
+  <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output">
     <div class="">
        <div class="card-divider">
          <div>{{ Vendor }}</div>
@@ -28,7 +28,7 @@ var rawTemplateRequestList =
     {{/if}}
       <div class="footer">
         <div style="float: left;">
-          <a data-open="requestEdit" title="actionRequestEdit" onClick="return requestFormLoad(this.title)">Edit</a>
+          <a data-open="requestEdit" title="actionRequestEdit" onClick="return requestFormLoad(this.title, this.id)" id="{{@key}}">Edit</a>
         </div>
         <div style="float: right;">Delete</div>
       </div>
