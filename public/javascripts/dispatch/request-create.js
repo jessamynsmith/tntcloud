@@ -21,7 +21,6 @@ function submitRequestCreateForm(){
      * Form Element Options and Values
     ***************************************************************************/
     let Vendor = document.getElementById('createVendor').value;
-    console.log("Got Value? ", Vendor);
     let BranchFrom = document.getElementById('createBranchFrom').value;
     let BranchTo = document.getElementById('createBranchTo').value;
     let Urgency = document.getElementById('createUrgency').value;

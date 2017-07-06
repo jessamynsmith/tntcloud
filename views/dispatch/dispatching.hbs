@@ -1,4 +1,6 @@
 <script src="/javascripts/handlebars/4.0.10/handlebars-v4.0.10.js"></script>
+<script src="/javascripts/dispatch/request-edit.js"></script>
+
 <script language="javascript" src="/javascripts/dispatch/dispatching.js"></script>
 
 
@@ -6,6 +8,24 @@
 <div class="section-intro dispatch">
 <!--  <h1>Dispatching</h2> -->
 </div>
+
+
+<!-- Two Columns -------------------------------------------------------------->
+<div class="grid-x two-column dispatching">
+  <div class="dispatching">
+    <!-- Column 1 ------------------------------------------------------------->
+    <div class="small-6 cell col1">
+      <h2>Requested</h2>
+        <div id="requested" class="list"></div>
+    </div>
+    <!-- Column 2 ------------------------------------------------------------->
+    <div class="small-6 cell col1">
+      <h2>Dispatched</h2>
+        <div id="dispatched" class="list"></div>
+    </div>
+  </div>
+</div>
+
 
 <!-- Request Create Form ------------------------------------------------------>
 <!-- Foundation Example Reveal/Popup Modal ------------------------------------>
@@ -16,7 +36,7 @@
     <div class="hover-form">
       <div class="card">
         <div class="card-divider">
-          ${requestCardTitle}
+          <h4>Create Pickup Request</h4>
           <button class="close-button" data-close aria-label="Close modal" type="button">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -93,7 +113,7 @@
     <div class="hover-form">
       <div class="card">
         <div class="card-divider">
-          ${requestCardTitle}
+          <h4>Edit Pickup Request</h4>
           <button class="close-button" data-close aria-label="Close modal" type="button">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -162,25 +182,6 @@
 </div>
 
 
-<!-- Two Columns -------------------------------------------------------------->
-<div class="grid-x two-column dispatching">
-  <div class="dispatching">
-    <!-- Column 1 ------------------------------------------------------------->
-    <div class="small-6 cell col1">
-      <h2>Requested</h2>
-        <div id="requested" class="list"></div>
-    </div>
-    <!-- Column 2 ------------------------------------------------------------->
-    <div class="small-6 cell col1">
-      <h2>Dispatched</h2>
-        <div id="dispatched" class="list"></div>
-    </div>
-  </div>
-</div>
-
-
-
 <!-- Request Card Forms, Input Fields, and Processing Code  ------------------->
 <!--  <script src="/javascripts/dispatch/request-form.js"></script> -->
 <script src="/javascripts/dispatch/request-create.js"></script>
-<script src="/javascripts/dispatch/request-edit.js"></script>
