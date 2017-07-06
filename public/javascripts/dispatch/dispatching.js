@@ -28,7 +28,7 @@ var rawTemplateRequestList =
     {{/if}}
       <div class="footer">
         <div style="float: left;">
-          <a data-open="requestEdit" id="actionRequestEdit" onClick="return requestFormTitle(this.id)">Edit</a>
+          <a data-open="requestEdit" id="actionRequestEdit" onClick="return requestFormLoad(this.id)">Edit</a>
         </div>
         <div style="float: right;">Delete</div>
       </div>

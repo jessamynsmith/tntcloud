@@ -1,28 +1,16 @@
-var requestCardTitle = "";
 
-function requestFormTitle(clicked_id) {
+function requestFormLoad(clicked_id) {
   if (clicked_id === "actionRequestCreate") {
     requestCardTitle = `<h4>Create Pickup Request</h4>`;
   } else if (clicked_id === "actionRequestEdit") {
     requestCardTitle = `<h4>Edit Pickup Request</h4>`;
   }
   console.log("Function ", requestCardTitle);
-}
-//console.log("Variable outside function ", requestCardTitle);
-/*******************************************************************************
- * Request Form Add to DOM
-*******************************************************************************/
-// Request Create
-var parentDivRequestCreate = document.getElementById("requestCreateForm");
 
-// Request Edit
-var parentDivRequestEdit = document.getElementById("requestEditForm");
-
-
-/***************************************
-* Request Input Form
-***************************************/
-var requestInputForm =
+  /***************************************
+  * Request Input Form
+  ***************************************/
+  var requestInputForm =
   `<div class="hover-form">
     <div class="card">
       <div class="card-divider">
@@ -92,12 +80,14 @@ var requestInputForm =
     </div>
   </div>
   `
+  /*******************************************************************************
+   * Request Form Add to DOM
+  *******************************************************************************/
+  // Request Create
+  var parentDivRequestCreate = document.getElementById("requestCreateForm");
+  parentDivRequestCreate.innerHTML = requestInputForm;
 
-/*******************************************************************************
- * Request Form Add to DOM
-*******************************************************************************/
-// Request Create
-parentDivRequestCreate.innerHTML += requestInputForm;
-
-// Request Edit
-parentDivRequestEdit.innerHTML += requestInputForm;
+  // Request Edit
+  var parentDivRequestEdit = document.getElementById("requestEditForm");
+  parentDivRequestEdit.innerHTML = requestInputForm;
+}

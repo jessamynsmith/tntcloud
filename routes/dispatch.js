@@ -18,7 +18,7 @@ var navDispatchCreateRequest =
   `<div class="section-nav dispatch">
     <a href="/dispatch/history" class="button" style="margin: .5rem .75rem .5rem .5rem;">History</a>
     <a href="/dispatch/dispatching" class="button" style="margin: .5rem .75rem;">Dispatching</a>
-    <button id="actionRequestCreate" onClick="return requestFormTitle(this.id)" class="button alert" data-open="requestCreate" style="margin: .5rem .75rem;">Create Request</button>
+    <button id="actionRequestCreate" onClick="return requestFormLoad(this.id)" class="button alert" data-open="requestCreate" style="margin: .5rem .75rem;">Create Request</button>
   </div>`;
 
 // Dispatch root
