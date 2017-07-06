@@ -6,26 +6,26 @@
 // Function triggered by 'Create Request' button and 'Edit' link of any active request
 // https://stackoverflow.com/a/4825325 (get ID value of clicked element)
 function requestFormLoad(clicked_title, clicked_id) {
-  if (clicked_id) {
-    var keyTitle = `<h6>${clicked_id}</h6>`;
-  } else {
-    keyTitle = "";
-  }
   if (clicked_title === "actionRequestCreate") {
     requestCardTitle = `<h4>Create Pickup Request</h4>`;
   } else if (clicked_title === "actionRequestEdit") {
     requestCardTitle = `<h4>Edit Pickup Request</h4>`;
   }
-/*
+
   //////////////////////////////////////////////////////////////////////////////
   // Retrieve Dispatch Request Record
   //////////////////////////////////////////////////////////////////////////////
+  if (clicked_id) {
+    var keyTitle = `<h6>${clicked_id}</h6>`;
+  } else {
+    keyTitle = "";
+  }
+
   const key = clicked_id; // Get key passed to URL from 'view' link
   // Use "KEY" url parameter to target the core/ record
   let dbRefEdit = firebase.database().ref().child('dispatch/' + key);
   // Re: "once" https://firebase.google.com/docs/reference/js/firebase.database.Query#once
   dbRefEdit.once('value', gotData);
-  console.log("got value? ", dbRefEdit);
 
   //////////////////////////////////////////////////////////////////////////////
   // Request Data
@@ -36,10 +36,9 @@ function requestFormLoad(clicked_title, clicked_id) {
     var editRecord = data.val();
     // Destructure Object to individual property values
     let { BranchFrom, BranchTo, Driver, Instructions, Reference, Status, Urgency, Vendor } = editRecord;
-    console.log("Values??? ", BranchFrom, BranchTo, Driver, Instructions);
+    console.log("Vendor? ", Vendor);
     // Assign core Data to Table <div>'s
-  } // End function gotData
-*/
+
   /***************************************
   * Request Input Form
   ***************************************/
@@ -57,12 +56,12 @@ function requestFormLoad(clicked_title, clicked_id) {
     <!-- Vendor ------------------------------------------------------------->
     <div class="input-group">
       <span class="input-group-label">Vendor</span>
-      <input type="text" id="vendor" placeholder="Vendor" class="input-group-field" name="vendor">
+      <input type="text" id="vendor" placeholder="Vendor" class="input-group-field" name="vendor" value="${Vendor}">
     </div>
     <!-- Branch From -------------------------------------------------------->
     <div class="input-group">
       <span class="input-group-label">From</span>
-      <select id="branch-from"  class="input-group-field" name="branch-from">
+      <select id="branch-from"  class="input-group-field" name="branch-from" value="${BranchFrom}">
         <!-- <option value="">Select Branch</option> -->
         <option value="JAX">JAX</option>
         <option value="NFWS">NFWS</option>
@@ -74,7 +73,7 @@ function requestFormLoad(clicked_title, clicked_id) {
     <!-- Branch To ---------------------------------------------------------->
     <div class="input-group">
       <span class="input-group-label">To</span>
-      <select id="branch-to"  class="input-group-field" name="branch-to">
+      <select id="branch-to"  class="input-group-field" name="branch-to" value="${BranchTo}">
         <!-- <option value="">Select Branch</option> -->
         <option value="JAX">JAX</option>
         <option value="NFWS">NFWS</option>
@@ -86,7 +85,7 @@ function requestFormLoad(clicked_title, clicked_id) {
     <!-- Priority ---------------------------------------------------------->
     <div class="input-group">
       <span class="input-group-label">Urgency</span>
-      <select id="urgency"  class="input-group-field" name="urgency">
+      <select id="urgency"  class="input-group-field" name="urgency" value="${Urgency}">
         <option value="normal">Normal</option>
         <option value="low">Low</option>
         <option value="high">High</option>
@@ -96,17 +95,17 @@ function requestFormLoad(clicked_title, clicked_id) {
     <!-- Reference ---------------------------------------------------------->
     <div class="input-group">
       <span class="input-group-label">Reference</span>
-      <input type="text" id="reference" placeholder="Reference"  class="input-group-field" name="reference"/>
+      <input type="text" id="reference" placeholder="Reference"  class="input-group-field" name="reference" value="${Reference}"/>
     </div>
     <!-- Instructions ------------------------------------------------------->
     <div class="input-group">
       <span class="input-group-label">Instructions</span>
-      <input type="text" id="instructions" placeholder="Instructions"  class="input-group-field" name="instructions"/>
+      <input type="text" id="instructions" placeholder="Instructions"  class="input-group-field" name="instructions" value="${Instructions}"/>
     </div>
     <!-- Driver ------------------------------------------------------->
     <div class="input-group">
       <span class="input-group-label">Driver</span>
-      <input type="text" id="driver" placeholder="Driver"  class="input-group-field" name="driver"/>
+      <input type="text" id="driver" placeholder="Driver"  class="input-group-field" name="driver" value="${Driver}"/>
     </div>
     <!-- Submit Button ------------------------------------------------------>
     <div>
@@ -124,4 +123,6 @@ function requestFormLoad(clicked_title, clicked_id) {
   // Request Edit
   var parentDivRequestEdit = document.getElementById("requestEditForm");
   parentDivRequestEdit.innerHTML = requestInputForm;
+
+  } // End function gotData
 }
