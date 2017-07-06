@@ -72,20 +72,4 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
 });
 
 
-// Create Request
-router.get('/create-request', function(req, res, next) {
-  var user = req.app.locals.user;
-
-  /*****************************************************************************
-  * authToken: send to front-end client for front-end authentication
-  * (should be moved to middleware)
-  *****************************************************************************/
-  var authToken = firebaseUser.getAuthToken();
-  res.cookie('fb-auth-token', authToken, { httpOnly: false });
-  /* end authToken ************************************************************/
-
-  res.render('dispatch/create-request', { navDispatch: navDispatchCreateRequest });
-});
-
-
 module.exports = router;
