@@ -29,72 +29,7 @@ function requestEditFormDataLoad(clicked_id) {
     document.getElementById("Urgency").value = Urgency;
     document.getElementById("Vendor").value = Vendor;
   } // End function gotData
-/*
-  //////////////////////////////////////////////////////////////////////////////
-  // Request Data
-  //////////////////////////////////////////////////////////////////////////////
-  function gotData(data) {
-    // assign above core data to 'coreRecord'
-    // data.val() returns Object; destructure to pull out individual property values
-    var editRecord = data.val();
-    // Destructure Object to individual property values
-    var { BranchFrom, BranchTo, Driver, Instructions, Reference, Status, Urgency, Vendor } = "";
-    if (key) {
-      var keyTitle = `<h6>${clicked_id}</h6>`;
-      var { BranchFrom, BranchTo, Driver, Instructions, Reference, Status, Urgency, Vendor } = editRecord;
-      console.log("Edit Record ", editRecord);
-    } else {
-      keyTitle = ""; BranchFrom = ""; BranchTo = ""; Driver = ""; Instructions = ""; Reference = "", Status = "", Urgency = "", Vendor = "";
-    }
-
-    console.log("Vendor? ", Vendor);
-    // Assign core Data to Table <div>'s
-  } // End function gotData
-*/
 }
-/*****************************************************************************
- * Retrieve core Record from Database using Record Key
-*****************************************************************************/
-/*
-// URL Parameters -- processed in this file via urlParameter.js
-// Access parameters by creating a variable equal to: getParam("xxx");
-const key = getParam("KEY"); // Get key passed to URL from 'view' link
-
-// Use "KEY" url parameter to target the core/ record
-let dbRef = firebase.database().ref().child('core/' + key);
-// Re: "once" https://firebase.google.com/docs/reference/js/firebase.database.Query#once
-dbRef.once('value', gotData);
-
-////////////////////////////////////////////////////////////////////////////////
-// core Data to Table
-////////////////////////////////////////////////////////////////////////////////
-function gotData(data) {
-  // assign above core data to 'coreRecord'
-  // data.val() returns Object; destructure to pull out individual property values
-  var coreRecord = data.val();
-  // Destructure Object to individual property values
-  let { Branch, Customer, Date, DateTime, Description, FailedPartNumber, Quantity, RO, ReceivedBy, TurnedInBy } = coreRecord;
-
-  // Assign core Data to Table <div>'s
-  document.getElementById("core-customer").innerHTML = Customer;
-  document.getElementById("core-date-turned-in").innerHTML = Date + ' ' + DateTime;
-  document.getElementById("core-description").innerHTML = Description;
-  document.getElementById("core-failed-part-number").innerHTML = FailedPartNumber;
-  document.getElementById("core-quantity").innerHTML = Quantity;
-  document.getElementById("core-received-by").innerHTML = ReceivedBy;
-  document.getElementById("core-ro").innerHTML = RO;
-  document.getElementById("core-turned-in-by").innerHTML = TurnedInBy;
-
-} // End function gotData
-
-function errData(err) {
-  console.log('Error!');
-  console.log(err);
-}
-*/
-
-
-
 
 /*******************************************************************************
  * Post form Data to Database
