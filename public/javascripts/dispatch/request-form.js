@@ -15,11 +15,6 @@ function requestFormLoad(clicked_title, clicked_id) {
   //////////////////////////////////////////////////////////////////////////////
   // Retrieve Dispatch Request Record
   //////////////////////////////////////////////////////////////////////////////
-  if (clicked_id) {
-    var keyTitle = `<h6>${clicked_id}</h6>`;
-  } else {
-    keyTitle = "";
-  }
 
   const key = clicked_id; // Get key passed to URL from 'view' link
   // Use "KEY" url parameter to target the core/ record
@@ -35,7 +30,15 @@ function requestFormLoad(clicked_title, clicked_id) {
     // data.val() returns Object; destructure to pull out individual property values
     var editRecord = data.val();
     // Destructure Object to individual property values
-    let { BranchFrom, BranchTo, Driver, Instructions, Reference, Status, Urgency, Vendor } = editRecord;
+    var { BranchFrom, BranchTo, Driver, Instructions, Reference, Status, Urgency, Vendor } = "";
+    if (key) {
+      var keyTitle = `<h6>${clicked_id}</h6>`;
+      var { BranchFrom, BranchTo, Driver, Instructions, Reference, Status, Urgency, Vendor } = editRecord;
+    } else {
+      keyTitle = "";
+      var { BranchFrom, BranchTo, Driver, Instructions, Reference, Status, Urgency, Vendor } = "";
+    }
+
     console.log("Vendor? ", Vendor);
     // Assign core Data to Table <div>'s
 
