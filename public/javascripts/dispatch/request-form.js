@@ -1,9 +1,14 @@
 var requestCardTitle = "";
 
-function requestCreateFormTitle() {
-  requestCardTitle = `<h4>Create Pickup Request</h4>`;
+function requestFormTitle(clicked_id) {
+  if (clicked_id === "actionRequestCreate") {
+    requestCardTitle = `<h4>Create Pickup Request</h4>`;
+  } else if (clicked_id === "actionRequestEdit") {
+    requestCardTitle = `<h4>Edit Pickup Request</h4>`;
+  }
   console.log("Function ", requestCardTitle);
 }
+//console.log("Variable outside function ", requestCardTitle);
 /*******************************************************************************
  * Request Form Add to DOM
 *******************************************************************************/
