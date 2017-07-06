@@ -1,12 +1,15 @@
 
+///////////////////////////////////////////////////////////////////////////////
+// Request Form Load includes Dynamic Title
+///////////////////////////////////////////////////////////////////////////////
+
+// Function triggered by 'Create Request' button and 'Edit' link of any active request
 function requestFormLoad(clicked_id) {
   if (clicked_id === "actionRequestCreate") {
     requestCardTitle = `<h4>Create Pickup Request</h4>`;
   } else if (clicked_id === "actionRequestEdit") {
     requestCardTitle = `<h4>Edit Pickup Request</h4>`;
   }
-  console.log("Function ", requestCardTitle);
-
   /***************************************
   * Request Input Form
   ***************************************/
