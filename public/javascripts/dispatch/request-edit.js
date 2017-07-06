@@ -1,4 +1,57 @@
 
+//////////////////////////////////////////////////////////////////////////////
+// Retrieve Dispatch Request Record
+//////////////////////////////////////////////////////////////////////////////
+function requestEditFormDataLoad(clicked_id) {
+  var key = clicked_id; // Get key passed to URL from 'view' link
+  // Use "KEY" url parameter to target the core/ record
+  var dbRefEdit = firebase.database().ref().child('dispatch/' + key);
+  // Re: "once" https://firebase.google.com/docs/reference/js/firebase.database.Query#once
+  dbRefEdit.once('value', gotData);
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // Request Record Data to Edit Form
+  ////////////////////////////////////////////////////////////////////////////////
+  function gotData(data) {
+    // assign above core data to 'coreRecord'
+    // data.val() returns Object; destructure to pull out individual property values
+    var dispatchRecord = data.val();
+
+    // Destructure Object to individual property values
+    var { BranchFrom, BranchTo, Driver, Instructions, Reference, Urgency, Vendor } = dispatchRecord;
+    if (Driver !== "") {
+      document.getElementById("Driver").value = Driver;
+    }
+    document.getElementById("BranchFrom").value = BranchFrom;
+    document.getElementById("BranchTo").value = BranchTo;
+    document.getElementById("Instructions").value = Instructions;
+    document.getElementById("Reference").value = Reference;
+    document.getElementById("Urgency").value = Urgency;
+    document.getElementById("Vendor").value = Vendor;
+  } // End function gotData
+/*
+  //////////////////////////////////////////////////////////////////////////////
+  // Request Data
+  //////////////////////////////////////////////////////////////////////////////
+  function gotData(data) {
+    // assign above core data to 'coreRecord'
+    // data.val() returns Object; destructure to pull out individual property values
+    var editRecord = data.val();
+    // Destructure Object to individual property values
+    var { BranchFrom, BranchTo, Driver, Instructions, Reference, Status, Urgency, Vendor } = "";
+    if (key) {
+      var keyTitle = `<h6>${clicked_id}</h6>`;
+      var { BranchFrom, BranchTo, Driver, Instructions, Reference, Status, Urgency, Vendor } = editRecord;
+      console.log("Edit Record ", editRecord);
+    } else {
+      keyTitle = ""; BranchFrom = ""; BranchTo = ""; Driver = ""; Instructions = ""; Reference = "", Status = "", Urgency = "", Vendor = "";
+    }
+
+    console.log("Vendor? ", Vendor);
+    // Assign core Data to Table <div>'s
+  } // End function gotData
+*/
+}
 /*****************************************************************************
  * Retrieve core Record from Database using Record Key
 *****************************************************************************/
