@@ -6,7 +6,8 @@ var requestInputForm =
   `<div class="hover-form">
     <div class="card">
       <div class="card-divider">
-        <h4>Create Pickup Request</h4>
+        ${requestCreateCardTitle}
+        ${requestEditCardTitle}
         <button class="close-button" data-close aria-label="Close modal" type="button">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -73,13 +74,15 @@ var requestInputForm =
   </div>
   `
 
-/*****************************************************************************
+/*******************************************************************************
  * Request Form Add to DOM
-*****************************************************************************/
+*******************************************************************************/
 // Request Create
-var parentDiv = document.getElementById("requestCreateForm");
-parentDiv.innerHTML += requestInputForm;
+var parentDivRequestCreate = document.getElementById("requestCreateForm");
+var requestCreateCardTitle = `<h4>Create Pickup Request`;
+parentDivRequestCreate.innerHTML += requestInputForm;
 
 // Request Edit
-var parentDiv = document.getElementById("requestEditForm");
-parentDiv.innerHTML += requestInputForm;
+var parentDivRequestEdit = document.getElementById("requestEditForm");
+var requestEditCardTitle = `<h4>Edit Pickup Request`;
+parentDivRequestEdit.innerHTML += requestInputForm;

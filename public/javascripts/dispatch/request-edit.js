@@ -1,84 +1,54 @@
 
-/***************************************
-* Handlebars
-***************************************/
-// Handlebars #if ../isAdmin :: https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop
-var rawTemplateRequestEdit =
-`<div class="hover-form">
-  <div class="card">
-    <div class="card-divider">
-      <h4>Create Pickup Request</h4>
-      <button class="close-button" data-close aria-label="Close modal" type="button">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  </div>
-  <!-- Vendor ------------------------------------------------------------->
-  <div class="input-group">
-    <span class="input-group-label">Vendor</span>
-    <input type="text" id="vendor" placeholder="Vendor" class="input-group-field" name="vendor">
-  </div>
-  <!-- Branch From -------------------------------------------------------->
-  <div class="input-group">
-    <span class="input-group-label">From</span>
-    <select id="branch-from"  class="input-group-field" name="branch-from">
-      <!-- <option value="">Select Branch</option> -->
-      <option value="JAX">JAX</option>
-      <option value="NFWS">NFWS</option>
-      <option value="LC">LC</option>
-      <option value="WC">WC</option>
-      <option value="440">440</option>
-    </select>
-  </div>
-  <!-- Branch To ---------------------------------------------------------->
-  <div class="input-group">
-    <span class="input-group-label">To</span>
-    <select id="branch-to"  class="input-group-field" name="branch-to">
-      <!-- <option value="">Select Branch</option> -->
-      <option value="JAX">JAX</option>
-      <option value="NFWS">NFWS</option>
-      <option value="LC">LC</option>
-      <option value="WC">WC</option>
-      <option value="440">440</option>
-    </select>
-  </div>
-  <!-- Priority ---------------------------------------------------------->
-  <div class="input-group">
-    <span class="input-group-label">Urgency</span>
-    <select id="urgency"  class="input-group-field" name="urgency">
-      <option value="normal">Normal</option>
-      <option value="low">Low</option>
-      <option value="high">High</option>
-      <option value="urgent">Urgent</option>
-    </select>
-  </div>
-  <!-- Reference ---------------------------------------------------------->
-  <div class="input-group">
-    <span class="input-group-label">Reference</span>
-    <input type="text" id="reference" placeholder="Reference"  class="input-group-field" name="reference"/>
-  </div>
-  <!-- Instructions ------------------------------------------------------->
-  <div class="input-group">
-    <span class="input-group-label">Instructions</span>
-    <input type="text" id="instructions" placeholder="Instructions"  class="input-group-field" name="instructions"/>
-  </div>
-  <!-- Driver ------------------------------------------------------->
-  <div class="input-group">
-    <span class="input-group-label">Driver</span>
-    <input type="text" id="driver" placeholder="Driver"  class="input-group-field" name="driver"/>
-  </div>
-  <!-- Submit Button ------------------------------------------------------>
-  <div>
-    <input id="submit-dispatch-request" type="submit" class="button primary">
-  </div>
-</div>
-`
+/*****************************************************************************
+ * Retrieve core Record from Database using Record Key
+*****************************************************************************/
+// URL Parameters -- processed in this file via urlParameter.js
+// Access parameters by creating a variable equal to: getParam("xxx");
+const key = getParam("KEY"); // Get key passed to URL from 'view' link
+
+// Use "KEY" url parameter to target the core/ record
+let dbRef = firebase.database().ref().child('core/' + key);
+// Re: "once" https://firebase.google.com/docs/reference/js/firebase.database.Query#once
+dbRef.once('value', gotData);
+
+/*****************************************************************************
+ * core Data to Table
+*****************************************************************************/
+function gotData(data) {
+  // assign above core data to 'coreRecord'
+  // data.val() returns Object; destructure to pull out individual property values
+  var coreRecord = data.val();
+  // Destructure Object to individual property values
+  let { Branch, Customer, Date, DateTime, Description, FailedPartNumber, Quantity, RO, ReceivedBy, TurnedInBy } = coreRecord;
+
+  // Assign core Data to Table <div>'s
+  document.getElementById("core-customer").innerHTML = Customer;
+  document.getElementById("core-date-turned-in").innerHTML = Date + ' ' + DateTime;
+  document.getElementById("core-description").innerHTML = Description;
+  document.getElementById("core-failed-part-number").innerHTML = FailedPartNumber;
+  document.getElementById("core-quantity").innerHTML = Quantity;
+  document.getElementById("core-received-by").innerHTML = ReceivedBy;
+  document.getElementById("core-ro").innerHTML = RO;
+  document.getElementById("core-turned-in-by").innerHTML = TurnedInBy;
+
+} // End function gotData
+
+function errData(err) {
+  console.log('Error!');
+  console.log(err);
+}
+
+
+
+
+
+
 
 /*******************************************************************************
  * Post form Data to Database
 *******************************************************************************/
-
-function submitForm(){
+/*
+function submitRequestEditForm(){
   event.preventDefault();
 
   // Cookie/Token authentication
@@ -147,3 +117,4 @@ function submitForm(){
     console.log(errorMessage);
   });
 }; // End submitCoreForm Function
+*/
