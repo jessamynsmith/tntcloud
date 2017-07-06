@@ -2,6 +2,7 @@
 /*****************************************************************************
  * Retrieve core Record from Database using Record Key
 *****************************************************************************/
+/*
 // URL Parameters -- processed in this file via urlParameter.js
 // Access parameters by creating a variable equal to: getParam("xxx");
 const key = getParam("KEY"); // Get key passed to URL from 'view' link
@@ -11,9 +12,9 @@ let dbRef = firebase.database().ref().child('core/' + key);
 // Re: "once" https://firebase.google.com/docs/reference/js/firebase.database.Query#once
 dbRef.once('value', gotData);
 
-/*****************************************************************************
- * core Data to Table
-*****************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
+// core Data to Table
+////////////////////////////////////////////////////////////////////////////////
 function gotData(data) {
   // assign above core data to 'coreRecord'
   // data.val() returns Object; destructure to pull out individual property values
@@ -37,9 +38,7 @@ function errData(err) {
   console.log('Error!');
   console.log(err);
 }
-
-
-
+*/
 
 
 

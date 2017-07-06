@@ -1,3 +1,18 @@
+var requestCardTitle = "";
+
+function requestCreateFormTitle() {
+  requestCardTitle = `<h4>Create Pickup Request</h4>`;
+  console.log("Function ", requestCardTitle);
+}
+/*******************************************************************************
+ * Request Form Add to DOM
+*******************************************************************************/
+// Request Create
+var parentDivRequestCreate = document.getElementById("requestCreateForm");
+
+// Request Edit
+var parentDivRequestEdit = document.getElementById("requestEditForm");
+
 
 /***************************************
 * Request Input Form
@@ -6,8 +21,7 @@ var requestInputForm =
   `<div class="hover-form">
     <div class="card">
       <div class="card-divider">
-        ${requestCreateCardTitle}
-        ${requestEditCardTitle}
+        ${requestCardTitle}
         <button class="close-button" data-close aria-label="Close modal" type="button">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -78,11 +92,7 @@ var requestInputForm =
  * Request Form Add to DOM
 *******************************************************************************/
 // Request Create
-var parentDivRequestCreate = document.getElementById("requestCreateForm");
-var requestCreateCardTitle = `<h4>Create Pickup Request`;
 parentDivRequestCreate.innerHTML += requestInputForm;
 
 // Request Edit
-var parentDivRequestEdit = document.getElementById("requestEditForm");
-var requestEditCardTitle = `<h4>Edit Pickup Request`;
 parentDivRequestEdit.innerHTML += requestInputForm;
