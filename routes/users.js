@@ -65,6 +65,8 @@ router.post('/user-create-input', function(req, res){
   })
   .then(function(userRecord) {
     // See the UserRecord reference doc for the contents of userRecord.
+    // https://firebase.google.com/docs/reference/admin/node/admin.auth.UserRecord
+    // https://firebase.google.com/docs/auth/admin/manage-users#retrieve_user_data
     // Get UID and add user id to 'item' object so it can be set as child of users collection
     var newId = userRecord.uid;
     var usersRef = req.app.locals.dbRef.child('users');
