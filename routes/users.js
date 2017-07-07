@@ -111,17 +111,56 @@ router.get('/user-edit', function(req, res, next) {
 });
 
 /*******************************************************************************
+ * User Edit: Display Name
+ ******************************************************************************/
+router.post('/user-edit-display-name', function(req, res){
+  // get uid from form button, get display name from form input
+  var item = {
+    uid: req.body.uid,
+    newDisplayName: req.body.displayName
+  }
+  /*****************************************************************************
+  * Firebase User Display Name
+  *****************************************************************************/
+  // Firebase auth update user
+  admin.auth().updateUser(item.uid, {
+    displayName: item.newDisplayName
+  })
+    .then(function(userRecord) {
+      res.redirect('/users');
+    })
+    .catch(function(error) {
+      console.log("Error editing user:", error);
+    });
+  /*****************************************************************************
+  * Realtime DB Display Name
+  *****************************************************************************/
+  // Select the user from the database that you want to edit
+  var dbUpdate = req.app.locals.dbRef.child('users/' + item.uid).update({ 'displayName': item.newDisplayName });
+
+  dbUpdate.then(function() {
+    // url redirect after post, include query parameter
+    res.redirect('/users');
+  })
+  .catch(function(error) {
+    console.log("error", error);
+  });
+});
+
+/*******************************************************************************
  * User Edit: Password Form
  ******************************************************************************/
 router.post('/user-edit-password', function(req, res){
 
-  // get email, password, and role entered into create user form
-  var uid = req.body.uid;
-  var newPassword = req.body.password;
+  // get uid from form button, get password from form input
+  var item = {
+    uid: req.body.uid,
+    newPassword: req.body.password
+  }
 
-  // Firebase auth createUser
-  admin.auth().updateUser(uid, {
-    password: newPassword
+  // Firebase auth update user
+  admin.auth().updateUser(item.uid, {
+    password: item.newPassword
   })
     .then(function(userRecord) {
       res.redirect('/users');
