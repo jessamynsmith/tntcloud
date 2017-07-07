@@ -21,7 +21,9 @@ var navDispatchCreateRequest =
     <button title="actionRequestCreate" onClick="return requestFormLoad(this.title)" class="button alert" data-open="requestCreate" style="margin: .5rem .75rem;">Create Request</button>
   </div>`;
 
-// Dispatch root
+/*******************************************************************************
+ * Root path
+ ******************************************************************************/
 // this router is for /dispatch dir, see app.js for initializer
 router.get('/', function(req, res, next) {
   var user = req.app.locals.user;
@@ -38,7 +40,9 @@ router.get('/', function(req, res, next) {
 });
 
 
-// History
+/*******************************************************************************
+ * History Page
+ ******************************************************************************/
 router.get('/history', function(req, res, next) {
   var user = req.app.locals.user;
 
@@ -54,9 +58,13 @@ router.get('/history', function(req, res, next) {
 });
 
 
-// Dispatching
+/*******************************************************************************
+ * Dispatching Page
+ ******************************************************************************/
 router.get('/dispatching', mw.userRole, function(req, res, next) {
   var user = req.app.locals.user;
+  var displayName = req.app.locals.user.displayName;
+  console.log("Display Name? ", displayName);
   var isAdmin = req.app.locals.userRole === 'admin';
   /*****************************************************************************
   * Cookies
@@ -68,7 +76,7 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
   res.cookie('userRole', req.app.locals.userRole, { httpOnly: false });
   /** End Cookies *************************************************************/
 
-  res.render('dispatch/dispatching', { isAdmin: isAdmin, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatchCreateRequest });
 });
 
 
