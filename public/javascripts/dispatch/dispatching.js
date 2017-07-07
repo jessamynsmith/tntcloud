@@ -13,7 +13,7 @@ var rawTemplateRequestList =
 `{{#each dispatch}}
   <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output">
     <div class="">
-       <div class="card-divider">
+       <div class="card-divider urgency-{{Urgency}}">
          <div>{{ Vendor }}</div>
          <div>{{Date}}&nbsp;&nbsp;@&nbsp;&nbsp;{{DateTime}}</div>
        </div>

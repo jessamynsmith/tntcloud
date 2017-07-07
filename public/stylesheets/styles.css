@@ -156,7 +156,6 @@ body {
  * Card
  ******************************************************************************/
 .card-divider {
-  color: black;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
@@ -166,7 +165,24 @@ body {
 .card-divider h4 {
   margin-bottom: 0;
 }
-
+.card-divider.urgency-low {
+  color: black;
+  background: #e6e6e6;
+}
+.card-divider.urgency-normal {
+  color: white;
+  background: #99e8ff;
+}
+.card-divider.urgency-high {
+  color: black;
+  background: gold;
+}
+.card-divider.urgency-urgent {
+  background: #cc4b37;
+}
+.card-divider.urgency-urgent div {
+  color: white;
+}
 /*******************************************************************************
  * Card TNT
  ******************************************************************************/
