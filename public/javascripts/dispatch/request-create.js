@@ -3,7 +3,7 @@
  * Post form Data to Database
 *******************************************************************************/
 
-function submitRequestCreateForm(){
+function dispatchCreateFormDataRecord(){
   event.preventDefault();
 
   // Cookie/Token authentication

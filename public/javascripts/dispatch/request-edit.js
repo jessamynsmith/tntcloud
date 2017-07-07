@@ -3,6 +3,7 @@
 // Add Edit Record ID(Key) to Global Variable for Use in dispatchEditFormDataUpdate
 ////////////////////////////////////////////////////////////////////////////////
 var editKey;
+// function called onclick in dispatching.js
 function getIdKey(clicked_id) {
   editKey = clicked_id;
 }
@@ -10,7 +11,7 @@ function getIdKey(clicked_id) {
 ////////////////////////////////////////////////////////////////////////////////
 // Retrieve Dispatch Request Record
 ////////////////////////////////////////////////////////////////////////////////
-
+// function called onclick in dispatching.js
 function dispatchEditFormDataLoad(clicked_id) {
   // fyi - for some reason, above global variable 'editKey' is not available in this function
   var key = clicked_id;
@@ -42,10 +43,10 @@ function dispatchEditFormDataLoad(clicked_id) {
 /*******************************************************************************
  * Update Data for Dispatch Record
 *******************************************************************************/
-
+// function called in dispatching.hbs onSubmit 'Request Edit Form'
 function dispatchEditFormDataUpdate(){
   event.preventDefault();
-
+  // get Key value from this file's global variable 'editKey'
   var key = editKey;
 
   // Cookie/Token authentication
