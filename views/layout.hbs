@@ -42,8 +42,10 @@
       <li><a href="/core-warranty">Core/Warranty</a></li>
       <li><a href="/users">Users</a></li>
       <li>{{ displayNameThing }}</li>
-      <li>{{ displayNameGotIt }}</li>
     </ul>
+    {{#if displayName }}
+      <p>{{ displayName }}</p>
+    {{/if}}
     <form action="/logout" method="post">
       <input id="sign-out-button" class="button" type="submit" value="Sign Out" name="logout">
     </form>

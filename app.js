@@ -18,8 +18,11 @@ app.locals.displayNameThing = "I want it to show up";
 
 // Middleware must be required after ./firebase because middleware uses it
 var mw = require('./middleware');
-app.locals.displayNameGotIt = mw.gotDisplayName;
-console.log("App.js Display Name ", app.locals.displayNameGotIt);
+
+//app.locals.displayNameGotIt = app.locals.displayName;
+// app.locals.displayNameGotIt = mw.getDisplayName;
+// console.log("App.js Display Name ", app.locals.displayNameGotIt);
+
 // import route files
 var index = require('./routes/index');
 var dispatch = require('./routes/dispatch');
@@ -52,7 +55,7 @@ app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false})
 
 // define routes and route resource files -see @routes files
 app.use('/', index);
-app.use('/dispatch', /*mw.loggedIn,*/ mw.getDisplayName, mw.userRole, dispatch);
+app.use('/dispatch', mw.loggedIn, mw.getDisplayName, mw.userRole, dispatch);
 app.use('/core-warranty', /*mw.loggedIn,*/ coreWarranty);
 app.use('/users', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
 

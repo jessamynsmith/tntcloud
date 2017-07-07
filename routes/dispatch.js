@@ -27,6 +27,7 @@ var navDispatchCreateRequest =
 // this router is for /dispatch dir, see app.js for initializer
 router.get('/', function(req, res, next) {
   var user = req.app.locals.user;
+  var displayName = req.app.locals.displayName; // mw 'loggedIn'
 
   /*****************************************************************************
   * authToken: send to front-end client for front-end authentication
@@ -36,7 +37,7 @@ router.get('/', function(req, res, next) {
   res.cookie('fb-auth-token', authToken, { httpOnly: false });
   /* end authToken ************************************************************/
 
-  res.render('dispatch/dispatch', { navDispatch: navDispatch });
+  res.render('dispatch/dispatch', { displayName: displayName, navDispatch: navDispatch });
 });
 
 
@@ -64,8 +65,7 @@ router.get('/history', function(req, res, next) {
 router.get('/dispatching', mw.userRole, function(req, res, next) {
   // global user variables from middleware
   var user = req.app.locals.user; // mw 'loggedIn'
-  var displayName = req.app.locals.displayName; // mw 'loggedIn'
-  console.log("Dispatching Display Name? ", displayName);
+
   var isAdmin = req.app.locals.userRole === 'admin'; // mw 'userRole'
   /*****************************************************************************
   * Cookies
@@ -77,7 +77,7 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
   res.cookie('userRole', req.app.locals.userRole, { httpOnly: false });
   /** End Cookies *************************************************************/
 
-  res.render('dispatch/dispatching', { displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { isAdmin: isAdmin, navDispatch: navDispatchCreateRequest });
 });
 
 

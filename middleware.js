@@ -29,10 +29,11 @@ module.exports.loggedIn = function(req, res, next) {
 module.exports.getDisplayName = function(req, res, next) {
   // Global use of user: make user available in any route
   req.app.locals.user = firebaseUser.getUser();
-  req.app.locals.displayName = req.app.locals.user.displayName;
+//  req.app.locals.displayName = req.app.locals.user.displayName;
+
   // If user logged in then continue, otherwise redirect to / root
-  if (req.app.locals.user.uid) {
-    req.app.locals.uid = req.app.locals.user.uid;
+  if (req.app.locals.user.displayName) {
+    req.app.locals.displayName = req.app.locals.user.displayName;
     next();
   } else {
     res.redirect('/');
