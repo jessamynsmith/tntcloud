@@ -49,10 +49,11 @@ router.get('/user-create', function(req, res, next) {
  * User Create: Form
  ******************************************************************************/
 router.post('/user-create-input', function(req, res){
-  // get email, password, and role entered into create user form
+  // get email, password, displayName, and role entered into create user form
   var newUser = {
   	email: req.body.email,
   	pass: req.body.password,
+  	displayName: req.body.displayName,
   	role: req.body.role
   };
   // Firebase auth createUser
@@ -60,6 +61,7 @@ router.post('/user-create-input', function(req, res){
     email: newUser.email,
     emailVerified: true,
     password: newUser.pass,
+    displayName: newUser.displayName,
     disabled: false,
     role: newUser.role
   })
@@ -74,6 +76,7 @@ router.post('/user-create-input', function(req, res){
     // https://firebase.google.com/docs/database/admin/save-data
     usersRef.child(newId).set({
       email: newUser.email,
+      displayName: newUser.displayName,
       role: newUser.role
     });
     console.log("Successfully created new user:", userRecord.uid);
