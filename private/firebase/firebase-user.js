@@ -4,7 +4,6 @@ var admin = require("firebase-admin")
 
 // Set empty variable so it's available globally
 var fbUser = {};
-var fbUserDisplayName = {};
 var dbRef = firebase.database().ref();
 var userRole = '';
 var authToken = null;
@@ -22,8 +21,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   // If there is a user...
   if (user) {
     var uid = fbUser.uid;
-    var displayName = fbUser.displayName;
-    console.log("Display Name? ", displayName);
     /***************************************************************************
      * Token Auth Generate
      **************************************************************************/

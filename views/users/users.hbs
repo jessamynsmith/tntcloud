@@ -8,6 +8,7 @@
 <!-- Records list -->
 <table class="data-table stack">
   <thead>
+    <th class="col1">User Display Name</th>
     <th class="col1">User Email</th>
     <th class="col2" data-sort="ro">User Role</th>
     <th class="col11">Edit User</th>
@@ -19,6 +20,7 @@
   <!--------------------------------------------------------------------------->
     {{#each userData }}
       <tr class="data-row" id="{{@key}}">
+        <td class="">{{ displayName }}</td>
         <td class="">{{ email }}</td>
         <td class="">{{ role }}</td>
         <td><a class="button list-record" href="/users/user-edit/?KEY={{@key}}">Edit User</a></td>
