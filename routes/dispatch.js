@@ -62,10 +62,11 @@ router.get('/history', function(req, res, next) {
  * Dispatching Page
  ******************************************************************************/
 router.get('/dispatching', mw.userRole, function(req, res, next) {
-  var user = req.app.locals.user;
-  var displayName = req.app.locals.user.displayName;
-  console.log("Display Name? ", displayName);
-  var isAdmin = req.app.locals.userRole === 'admin';
+  // global user variables from middleware
+  var user = req.app.locals.user; // mw 'loggedIn'
+  var displayName = req.app.locals.user.displayName; // mw 'loggedIn'
+//  console.log("Display Name? ", displayName);
+  var isAdmin = req.app.locals.userRole === 'admin'; // mw 'userRole'
   /*****************************************************************************
   * Cookies
   *****************************************************************************/

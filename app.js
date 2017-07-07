@@ -14,6 +14,7 @@ var app = express();
 app.locals.firebase = require("./private/firebase/firebase");
 // Global dbRef ... so firebase connection available everywhere without import
 app.locals.dbRef = app.locals.firebase.database().ref();
+app.locals.displayNameThing = "I want it to show up";
 
 // Middleware must be required after ./firebase because middleware uses it
 var mw = require('./middleware');

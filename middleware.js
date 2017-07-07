@@ -37,7 +37,6 @@ module.exports.userRole = function(req, res, next) {
 /** End User Role Get (Middleware) ********************************************/
 
 
-
 /*******************************************************************************
  * User Role Check if Admin (Middleware)
  ******************************************************************************/
@@ -51,21 +50,6 @@ module.exports.roleAdmin = function(req, res, next) {
   }
 }
 /** End User Role Check if Admin (Middleware) *********************************/
-
-
-/*******************************************************************************
- * User Display Name (Middleware)
- ******************************************************************************/
-// Example Usage: use in app.js to create functions specifically identifying user type
-module.exports.fbUserDisplayName = function(req, res, next) {
-  firebaseUser.getUser().then(function(fbUser) {
-    // Store fbUserDisplayName as Global variable
-    req.app.locals.fbUserDisplayName = fbUser.displayName;
-    // if i didn't have next(); then no pages that use the userRole would be executed
-    next();
-  });
-}
-/** End Display Name Get (Middleware) *****************************************/
 
 
 module.exports.userRoleAndAdmin = [module.exports.userRole, module.exports.roleAdmin];
