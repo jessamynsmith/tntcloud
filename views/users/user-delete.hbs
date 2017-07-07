@@ -8,13 +8,15 @@
 <table class="data-table stack">
   <thead>
     <tr>
-      <th class="col2">User Email</th>
+      <th class="col2">Display Name</th>
+      <th class="col2">Email</th>
       <th class="col3">Delete User</th>
       <th class="col4">Cancel</th>
     </tr>
   </thead>
   <tbody id="people-list">
     <tr class="data-row">
+      <td id="user-email">{{ userDisplayName }}</td>
       <td id="user-email">{{ userEmail }}</td>
       <!-- Delete Form as Button -------------------------------------------->
       <td>

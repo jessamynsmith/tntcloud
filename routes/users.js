@@ -200,8 +200,9 @@ router.get('/user-delete', function(req, res, next) {
   admin.auth().getUser(uid)
     .then(function(userRecord) {
       userEmail = userRecord.email;
+      userDisplayName = userRecord.displayName;
       // See the UserRecord reference doc for the contents of userRecord.
-      res.render('users/user-delete', { navUsers: navUsers, userEmail: userEmail, uid: uid });
+      res.render('users/user-delete', { navUsers: navUsers, uid: uid, userEmail: userEmail, userDisplayName: userDisplayName });
     })
     .catch(function(error) {
       console.log("Error fetching user data:", error);
