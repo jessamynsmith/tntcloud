@@ -27,6 +27,7 @@ var navDispatchCreateRequest =
 // this router is for /dispatch dir, see app.js for initializer
 router.get('/', function(req, res, next) {
   var user = req.app.locals.user;
+  // display name only needs to be added to the first route they hit after login, stays in variable thereafter
   var displayName = req.app.locals.displayName; // mw 'loggedIn'
 
   /*****************************************************************************

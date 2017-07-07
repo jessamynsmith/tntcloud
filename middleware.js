@@ -32,7 +32,7 @@ module.exports.getDisplayName = function(req, res, next) {
 //  req.app.locals.displayName = req.app.locals.user.displayName;
 
   // If user logged in then continue, otherwise redirect to / root
-  if (req.app.locals.user.displayName) {
+  if (req.app.locals.user.displayName !== "") {
     req.app.locals.displayName = req.app.locals.user.displayName;
     next();
   } else {

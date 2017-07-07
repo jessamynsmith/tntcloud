@@ -55,7 +55,7 @@ app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false})
 
 // define routes and route resource files -see @routes files
 app.use('/', index);
-app.use('/dispatch', mw.loggedIn, mw.getDisplayName, mw.userRole, dispatch);
+app.use('/dispatch', /*mw.loggedIn,*/ mw.getDisplayName, mw.userRole, dispatch);
 app.use('/core-warranty', /*mw.loggedIn,*/ coreWarranty);
 app.use('/users', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
 
