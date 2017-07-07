@@ -4,9 +4,9 @@ function getIdKey(clicked_id) {
   editKey = clicked_id;
 }
 
-//////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 // Retrieve Dispatch Request Record
-//////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 function requestEditFormDataLoad(clicked_id) {
   var key = clicked_id;
@@ -17,15 +17,15 @@ function requestEditFormDataLoad(clicked_id) {
   // Re: "once" https://firebase.google.com/docs/reference/js/firebase.database.Query#once
   dbRefEdit.once('value', gotData);
 
-  ////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
   // Request Record Data to Edit Form
-  ////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
   function gotData(data) {
     // assign above core data to 'coreRecord'
     // data.val() returns Object; destructure to pull out individual property values
     var dispatchRecord = data.val();
     // Destructure Object to individual property values
-    var { BranchFrom, BranchTo, Driver, Instructions, Reference, Urgency, Vendor } = dispatchRecord;
+    var { Date, DateTimeStampServer, DateTime, BranchFrom, BranchTo, Driver, Instructions, Reference, Urgency, Vendor } = dispatchRecord;
 
     if (Driver !== "") {
       document.getElementById("editDriver").value = Driver;
@@ -82,12 +82,13 @@ function submitRequestEditForm(){
       Status
     }
 
-    // write the new core data to the core list
-    var updates = {};
-    updates['/dispatch/' + key] = submitData;
-
-    // update the new-key-record with the data
-    var dbUpdate = firebase.database().ref().update(updates);
+    ////////////////////////////////////////////////////////////////////////////
+    // Update existing-record without overwriting or altering date values
+    ////////////////////////////////////////////////////////////////////////////
+    // locate the record to update 
+    var dbRefUpdate = firebase.database().ref().child('dispatch/' + key);
+    // update data
+    dbRefUpdate.update(submitData);
 
     // Close Reveal Modal (Foundation)
     // http://foundation.zurb.com/sites/docs/reveal.html
