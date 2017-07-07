@@ -64,8 +64,8 @@ router.get('/history', function(req, res, next) {
 router.get('/dispatching', mw.userRole, function(req, res, next) {
   // global user variables from middleware
   var user = req.app.locals.user; // mw 'loggedIn'
-  var displayName = req.app.locals.user.displayName; // mw 'loggedIn'
-//  console.log("Display Name? ", displayName);
+  var displayName = req.app.locals.displayName; // mw 'loggedIn'
+  console.log("Dispatching Display Name? ", displayName);
   var isAdmin = req.app.locals.userRole === 'admin'; // mw 'userRole'
   /*****************************************************************************
   * Cookies

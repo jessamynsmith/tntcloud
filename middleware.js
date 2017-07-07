@@ -23,6 +23,25 @@ module.exports.loggedIn = function(req, res, next) {
 
 
 /*******************************************************************************
+ * User Display Name
+ ******************************************************************************/
+// https://stackoverflow.com/questions/18739725/how-to-know-if-user-is-logged-in-with-passport-js/18739922#18739922
+module.exports.getDisplayName = function(req, res, next) {
+  // Global use of user: make user available in any route
+  req.app.locals.user = firebaseUser.getUser();
+  req.app.locals.displayName = req.app.locals.user.displayName;
+  // If user logged in then continue, otherwise redirect to / root
+  if (req.app.locals.user.uid) {
+    req.app.locals.uid = req.app.locals.user.uid;
+    next();
+  } else {
+    res.redirect('/');
+  }
+}
+/** End Redirect to homepage if visitor not logged in *************************/
+
+
+/*******************************************************************************
  * User Role Get (Middleware)
  ******************************************************************************/
 // Example Usage: use in app.js to create functions specifically identifying user type
