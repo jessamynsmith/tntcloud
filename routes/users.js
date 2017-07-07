@@ -92,19 +92,22 @@ router.post('/user-create-input', function(req, res){
  * User Edit: Page
  ******************************************************************************/
 router.get('/user-edit', function(req, res, next) {
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+  // key is needed in template for the <form> that handle Delete Person (below)
   // get key from url query parameter '?KEY='
   var uid = req.query.KEY;
+  // get 'core' data record associated with 'key' value
+  dbRef.child('users/' + uid).once('value', gotData);
+  // global variable so warranty data can be accessed after the function
+  var templateData;
 
-  admin.auth().getUser(uid)
-    .then(function(userRecord) {
-      // See the UserRecord reference doc for the contents of userRecord.
-  //    console.log("Successfully fetched user data:", userRecord.toJSON());
-      var email = userRecord.email;
-      res.render('users/user-edit', { navUsers: navUsers, uid: uid, email: email });
-    })
-    .catch(function(error) {
-      console.log("Error fetching user data:", error);
-    });
+  function gotData(data) {
+    // access data values
+    templateData = data.val();
+    res.render('users/user-edit', { uid: uid, templateData: templateData, navUsers: navUsers });
+  };
 });
 
 /*******************************************************************************

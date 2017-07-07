@@ -8,28 +8,33 @@
 <!-- https://codepen.io/johngerome/pen/pdrgk -->
 <div class="row expanded small-12 medium-10 large-6 columns">
   <div class="row">
-    <!-- Edit Password Form --------------------------------------------------->
+    <!-- User Email ----------------------------------------------------------->
     <div class="row">
       <div class="large-6">
-        <p style="color: #cc4b37;"><b>{{ email }}</b></p>
+        <h5 style="color: #cc4b37;"><b>{{ templateData.email }}</b></h5>
       </div>
     </div>
-    <h4>Change password</h4>
-    <form action="/users/user-edit-password" method="post">
+    <br>
+    <!-- Edit Display Name Form ----------------------------------------------->
+    <h4>Change display name</h4>
+    <form action="/users/user-edit-display-name" method="post">
       <!--Inputs----------------------------------->
       <div class="row">
         <div class="large-6">
-          <input id="password" type="password" placeholder="New password" name="password">
+          <h5 style="color: #cc4b37;"><b>{{ templateData.displayName }}</b></h5>
+          <input id="displayName" type="text" placeholder="New display name" name="displayName">
         </div>
       </div>
       <!--Button----------------------->
       <button class="button" name="uid" value={{ uid }}>
-        Update User Password
+        Update Display Name
       </button>
     </form>
-    <!-- End Edit Password Form ----------------------------------------------->
-    <!-- Edit User Role Form -------------------------------------------------->
+    <br><br>
+    <!-- End Edit Display Name Form ------------------------------------------->
+    <!-- Edit Role Form ------------------------------------------------------->
     <h4>Change user role</h4>
+    <h5><b style="color: #cc4b37;">{{ templateData.role }}</b>&nbsp;(current role)</h5>
     <form action="/users/user-edit-role" method="post">
       <!--Inputs----------------------------------->
       <div class="row">
@@ -42,9 +47,26 @@
       </div>
       <!--Button----------------------->
       <button class="button" name="uid" value="{{ uid }}">
-        Upate User Role
+        Upate Role
       </button>
     </form>
-    <!-- End Edit User Role Form ---------------------------------------------->
+    <br><br>
+    <!-- End Edit Role Form --------------------------------------------------->
+    <!-- Edit Password Form --------------------------------------------------->
+    <h4>Change password</h4>
+    <form action="/users/user-edit-password" method="post">
+      <!--Inputs----------------------------------->
+      <div class="row">
+        <div class="large-6">
+          <input id="password" type="password" placeholder="New password" name="password">
+        </div>
+      </div>
+      <!--Button----------------------->
+      <button class="button" name="uid" value={{ uid }}>
+        Update Password
+      </button>
+    </form>
+    <br><br>
+    <!-- End Edit Password Form ----------------------------------------------->
   </div><!-- End <div> row ---------------------------------------------------->
 </div><!-- End <div> row expanded --------------------------------------------->
