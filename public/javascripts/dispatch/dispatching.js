@@ -31,7 +31,7 @@ var rawTemplateRequestList =
           <a data-open="requestEdit" title="actionRequestEdit" onClick="dispatchEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}">Edit</a>
         </div>
         <div style="float: right;">
-          <a data-open="requestDelete" title="actionRequestDelete" onClick="dispatchDelete(this.id);" id="{{@key}}">Delete</a>
+          <a data-open="requestDelete" title="actionRequestDelete" onClick="dispatchDeleteLoadConfirmForm(this.id);" id="{{@key}}">Delete</a>
         </div>
       </div>
   </div>
