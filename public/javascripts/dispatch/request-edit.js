@@ -1,5 +1,8 @@
-var editKey;
 
+////////////////////////////////////////////////////////////////////////////////
+// Add Edit Record ID(Key) to Global Variable for Use in dispatchEditFormDataUpdate
+////////////////////////////////////////////////////////////////////////////////
+var editKey;
 function getIdKey(clicked_id) {
   editKey = clicked_id;
 }
@@ -8,48 +11,45 @@ function getIdKey(clicked_id) {
 // Retrieve Dispatch Request Record
 ////////////////////////////////////////////////////////////////////////////////
 
-function requestEditFormDataLoad(clicked_id) {
+function dispatchEditFormDataLoad(clicked_id) {
+  // fyi - for some reason, above global variable 'editKey' is not available in this function
   var key = clicked_id;
-  // var key = clicked_id; // Get key passed to URL from 'view' link
-  console.log("Got Key? 111 ", key);
-  // Use "KEY" url parameter to target the core/ record
+  // Use "key" value to target the dispatch record
   var dbRefEdit = firebase.database().ref().child('dispatch/' + key);
   // Re: "once" https://firebase.google.com/docs/reference/js/firebase.database.Query#once
   dbRefEdit.once('value', gotData);
 
   //////////////////////////////////////////////////////////////////////////////
-  // Request Record Data to Edit Form
+  // Dispay Data on Edit Form
   //////////////////////////////////////////////////////////////////////////////
   function gotData(data) {
     // assign above core data to 'coreRecord'
     // data.val() returns Object; destructure to pull out individual property values
     var dispatchRecord = data.val();
     // Destructure Object to individual property values
-    var { Date, DateTimeStampServer, DateTime, BranchFrom, BranchTo, Driver, Instructions, Reference, Urgency, Vendor } = dispatchRecord;
+    var { BranchFrom, BranchTo, Driver, Instructions, Reference, Urgency, Vendor } = dispatchRecord;
 
-    if (Driver !== "") {
-      document.getElementById("editDriver").value = Driver;
-    }
+    document.getElementById("editVendor").value = Vendor;
     document.getElementById("editBranchFrom").value = BranchFrom;
     document.getElementById("editBranchTo").value = BranchTo;
-    document.getElementById("editInstructions").value = Instructions;
-    document.getElementById("editReference").value = Reference;
     document.getElementById("editUrgency").value = Urgency;
-    document.getElementById("editVendor").value = Vendor;
-  } // End function gotData
+    document.getElementById("editReference").value = Reference;
+    document.getElementById("editInstructions").value = Instructions;
+    document.getElementById("editDriver").value = Driver;
+  } // End function dispatchEditFormDataLoad
 }
-//console.log("Got Key? 222 ", key);
 
 /*******************************************************************************
- * Update form Data to Database
+ * Update Data for Dispatch Record
 *******************************************************************************/
 
-function submitRequestEditForm(){
+function dispatchEditFormDataUpdate(){
   event.preventDefault();
+
   var key = editKey;
+
   // Cookie/Token authentication
   var authToken = Cookies.get('fb-auth-token');
-//  console.log("edit-request.hbs auth token ", authToken);
   firebase.auth().signInWithCustomToken(authToken)
   .then(function() {
 
@@ -85,7 +85,7 @@ function submitRequestEditForm(){
     ////////////////////////////////////////////////////////////////////////////
     // Update existing-record without overwriting or altering date values
     ////////////////////////////////////////////////////////////////////////////
-    // locate the record to update 
+    // locate the record to update
     var dbRefUpdate = firebase.database().ref().child('dispatch/' + key);
     // update data
     dbRefUpdate.update(submitData);
@@ -102,4 +102,4 @@ function submitRequestEditForm(){
     var errorMessage = error.message;
     console.log(errorMessage);
   });
-}; // End submitCoreForm Function
+}; // End dispatchEditFormDataUpdate Function

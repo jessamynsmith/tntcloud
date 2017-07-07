@@ -5,9 +5,9 @@ console.log("User Role Cookie ", userRole);
 var isAdmin = userRole === 'admin';
 console.log("User Role ", isAdmin);
 
-/***************************************
+/*******************************************************************************
 * Handlebars
-***************************************/
+*******************************************************************************/
 // Handlebars #if ../isAdmin :: https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop
 var rawTemplateRequestList =
 `{{#each dispatch}}
@@ -28,16 +28,16 @@ var rawTemplateRequestList =
     {{/if}}
       <div class="footer">
         <div style="float: left;">
-          <a data-open="requestEdit" title="actionRequestEdit" onClick="requestEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}" data-key="{{@key}}">Edit</a>
+          <a data-open="requestEdit" title="actionRequestEdit" onClick="dispatchEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}">Edit</a>
         </div>
         <div style="float: right;">Delete</div>
       </div>
   </div>
 {{/each}}`;
 
-/*****************************************************************************
+/*******************************************************************************
  * Handlebars Compile + Render
-*****************************************************************************/
+*******************************************************************************/
 // FYI - Node.js is needed if I want to pre-compile templates
 var compiledTemplate = Handlebars.compile(rawTemplateRequestList);
 
@@ -54,9 +54,9 @@ function handleData(parentSelector, gotData) {
   parentDiv.append(html);
 }
 
-/*****************************************************************************
+/*******************************************************************************
  * Dispatch Data
-*****************************************************************************/
+*******************************************************************************/
 // Listen for Child Events: https://firebase.google.com/docs/database/web/lists-of-data#listen_for_child_events
 // Query data https://firebase.google.com/docs/reference/js/firebase.database.Query
 

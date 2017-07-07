@@ -1,6 +1,4 @@
 <script src="/javascripts/handlebars/4.0.10/handlebars-v4.0.10.js"></script>
-<script src="/javascripts/dispatch/request-edit.js"></script>
-
 <script language="javascript" src="/javascripts/dispatch/dispatching.js"></script>
 
 
@@ -109,7 +107,7 @@
 <!-- http://foundation.zurb.com/sites/docs/reveal.html ------------------------>
 <!-- popup activation placed into navigation bar's 'Create Request' button ---->
 <div class="row expanded small-12 medium-6 large-3 columns reveal"  id="requestEdit" data-reveal data-reset-on-close="true" data-close-on-click="true">
-  <form id="requestEditForm" class="input-form" onSubmit="return submitRequestEditForm(this)">
+  <form id="requestEditForm" class="input-form" onSubmit="return dispatchEditFormDataUpdate(this)">
     <div class="hover-form">
       <div class="card">
         <div class="card-divider">
@@ -185,3 +183,4 @@
 <!-- Request Card Forms, Input Fields, and Processing Code  ------------------->
 <!--  <script src="/javascripts/dispatch/request-form.js"></script> -->
 <script src="/javascripts/dispatch/request-create.js"></script>
+<script src="/javascripts/dispatch/request-edit.js"></script>
