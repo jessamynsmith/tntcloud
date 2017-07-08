@@ -11,6 +11,7 @@ var passport = require('passport');
 var Strategy = require('passport-local').Strategy;
 var FirebaseStore = require('connect-session-firebase')(expressSession);
 var ensureLogin = require('connect-ensure-login');
+var flash = require('connect-flash');
 
 var app = express();
 
@@ -37,7 +38,7 @@ passport.use(new Strategy(
       })
       .catch(function(error) {
         console.log("error: ", error);
-        return cb(null, false);
+        return cb(null, false, {message: error.message});
       });
 
   }));
@@ -98,6 +99,7 @@ app.use(expressSession({
 // session.
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 //app.use(middlewareName);  // Where middlewareName is the name of a middleware you want on all routes
 
