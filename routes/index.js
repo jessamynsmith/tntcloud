@@ -5,43 +5,16 @@ var firebase = require("../private/firebase/firebase");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
   req.session.errors = null;
+  res.render('index', {error: req.flash('error')});
 });
 
 /*******************************************************************************
  * Login
  ******************************************************************************/
 
-router.post('/login', passport.authenticate('local', { failureRedirect: '/' }), function(req, res) {
-//
-// 	var email = req.body.email;
-// 	var pass = req.body.password;
-//
-//   // Sign in
-//   firebase.auth().signInWithEmailAndPassword(email, pass)
-//   .then(function() {
-//     /***************************************************************************
-//     * Redirect
-//     ***************************************************************************/
+router.post('/login', passport.authenticate('local', { failureRedirect: '/', failureFlash: true }), function(req, res) {
     res.redirect('/core-warranty');
-    // TODO restore error handling on login failure
-//   })
-//   .catch(function(error) {
-//     // Handle Errors here.
-//     var errorCode = error.code;
-//     var errorMessage = error.message;
-//     // [START_EXCLUDE]
-//     console.log("index.js err ", errorCode, errorMessage);
-//     if (errorCode === 'auth/wrong-password') {
-//       var err = "Wrong password.";
-//       // console.log(err);
-//     } else {
-//       var err = errorMessage;
-//     }
-//     res.render('index', { error: err});
-//     // [END_EXCLUDE]
-//   });
 });
 /** Login End ****************************************************************/
 
