@@ -28,11 +28,10 @@ var navCW =
  * Core Warranty Home
  ******************************************************************************/
 // this router is for /core-warranty dir, see app.js for initializer
-router.get('/', mw.loggedIn, mw.getDisplayName, mw.userRole, function(req, res, next) {
+router.get('/', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
-  // display name only needs to be added to the first route they hit after login, stays in variable thereafter
-  var displayName = req.app.locals.displayName; // mw 'loggedIn'
+  var displayName = req.user.displayName;
 
   res.render('core-warranty/core-warranty', { displayName: displayName, isAdmin: isAdmin, navCW: navCW });
 });

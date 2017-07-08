@@ -4,57 +4,29 @@
 
 var firebaseUser = require("./private/firebase/firebase-user");
 
-/*******************************************************************************
- * Redirect to homepage if visitor not logged in (Middleware)
- ******************************************************************************/
-// https://stackoverflow.com/questions/18739725/how-to-know-if-user-is-logged-in-with-passport-js/18739922#18739922
-module.exports.loggedIn = function(req, res, next) {
-  // Global use of user: make user available in any route
-  req.app.locals.user = firebaseUser.getUser();
-  // If user logged in then continue, otherwise redirect to / root
-  if (req.app.locals.user.uid) {
-    req.app.locals.uid = req.app.locals.user.uid;
-    next();
-  } else {
-    res.redirect('/');
-  }
-}
-/** End Redirect to homepage if visitor not logged in *************************/
-
-
-/*******************************************************************************
- * User Display Name
- ******************************************************************************/
-// https://stackoverflow.com/questions/18739725/how-to-know-if-user-is-logged-in-with-passport-js/18739922#18739922
-module.exports.getDisplayName = function(req, res, next) {
-  // Global use of user: make user available in any route
-  req.app.locals.user = firebaseUser.getUser();
-//  req.app.locals.displayName = req.app.locals.user.displayName;
-
-  // If user logged in then continue, otherwise redirect to / root
-  if (req.app.locals.user.displayName !== "") {
-    req.app.locals.displayName = req.app.locals.user.displayName;
-    next();
-  } else {
-    res.redirect('/');
-  }
-}
-/** End Redirect to homepage if visitor not logged in *************************/
-
 
 /*******************************************************************************
  * User Role Get (Middleware)
  ******************************************************************************/
 // Example Usage: use in app.js to create functions specifically identifying user type
 module.exports.userRole = function(req, res, next) {
-  firebaseUser.getRole().then(function(userRole) {
+  firebaseUser.getRole(req.user).then(function(userRole) {
     // Store userRole as Global variable
     req.app.locals.userRole = userRole;
-    // if i didn't have next(); then no pages that use the userRole would be executed
+    res.cookie('userRole', req.app.locals.userRole, { httpOnly: false });
+    // if I didn't have next(); then no pages that use the userRole would be executed
     next();
   });
-}
+};
 /** End User Role Get (Middleware) ********************************************/
+
+
+module.exports.authToken = function(req, res, next) {
+  firebaseUser.getAuthToken(req.user).then(function(authToken) {
+    res.cookie('fb-auth-token', authToken, { httpOnly: false });
+    next();
+  });
+};
 
 
 /*******************************************************************************
@@ -68,7 +40,7 @@ module.exports.roleAdmin = function(req, res, next) {
   } else {
     res.redirect('/core-warranty');
   }
-}
+};
 /** End User Role Check if Admin (Middleware) *********************************/
 
 

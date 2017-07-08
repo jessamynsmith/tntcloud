@@ -3,7 +3,7 @@ var router = express.Router();
 var firebase = require("firebase");
 var mw = require('../middleware');
 var dbRef = firebase.database().ref();
-var admin = require('../private/firebase/firebase-admin-init')
+var admin = require('../private/firebase/firebase-admin-init');
 
 /*******************************************************************************
  * Navigation: Users
