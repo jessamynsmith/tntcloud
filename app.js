@@ -7,11 +7,16 @@ var bodyParser = require('body-parser');
 var hbs = require('express-handlebars');
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
+var passport = require('passport');
+var Strategy = require('passport-local').Strategy;
+var FirebaseStore = require('connect-session-firebase')(expressSession);
+var ensureLogin = require('connect-ensure-login');
 
 var app = express();
 
 // Import firebase initializer
 app.locals.firebase = require("./private/firebase/firebase");
+var firebaseAdmin = require('./private/firebase/firebase-admin-init');
 // Global dbRef ... so firebase connection available everywhere without import
 app.locals.dbRef = app.locals.firebase.database().ref();
 app.locals.displayNameThing = "I want it to show up";
@@ -20,8 +25,39 @@ app.locals.displayNameThing = "I want it to show up";
 var mw = require('./middleware');
 
 //app.locals.displayNameGotIt = app.locals.displayName;
-// app.locals.displayNameGotIt = mw.getDisplayName;
 // console.log("App.js Display Name ", app.locals.displayNameGotIt);
+
+passport.use(new Strategy(
+  function(email, password, cb) {
+    console.log('authenticating user: ', email);
+    app.locals.firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(function(user) {
+        console.log("user: ", user.toJSON());
+        cb(null, user);
+      })
+      .catch(function(error) {
+        console.log("error: ", error);
+        return cb(null, false);
+      });
+
+  }));
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user.uid);
+});
+
+passport.deserializeUser(function(uid, cb) {
+  firebaseAdmin.auth().getUser(uid)
+    .then(function(user) {
+      // See the UserRecord reference doc for the contents of userRecord.
+      console.log("Deserialized user:", user.toJSON());
+      cb(null, user);
+    })
+    .catch(function(error) {
+      console.log("Error fetching user data:", error);
+      return cb(error);
+    });
+});
 
 // import route files
 var index = require('./routes/index');
@@ -49,15 +85,28 @@ app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // by default express Session uses 'memory storage' which is not good for production, use another module for storage
-app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
+app.use(expressSession({
+    store: new FirebaseStore({
+      database: firebaseAdmin.database()
+    }),
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+  }));
+
+// Initialize Passport and restore authentication state, if any, from the
+// session.
+app.use(passport.initialize());
+app.use(passport.session());
 
 //app.use(middlewareName);  // Where middlewareName is the name of a middleware you want on all routes
 
 // define routes and route resource files -see @routes files
+var ensureLoggedIn = ensureLogin.ensureLoggedIn('/');
 app.use('/', index);
-app.use('/dispatch', /*mw.loggedIn,*/ mw.getDisplayName, mw.userRole, dispatch);
-app.use('/core-warranty', /*mw.loggedIn,*/ coreWarranty);
-app.use('/users', /*mw.loggedIn, mw.userRoleAndAdmin,*/ users);
+app.use('/dispatch', ensureLoggedIn, mw.authToken, mw.userRole, dispatch);
+app.use('/core-warranty', ensureLoggedIn, coreWarranty);
+app.use('/users', ensureLoggedIn, /*mw.userRoleAndAdmin,*/ users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
