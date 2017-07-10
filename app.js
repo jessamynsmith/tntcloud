@@ -44,7 +44,7 @@ passport.use(new Strategy(
       .then(function(user) {
         console.log("user:", user.uid);
         // Add user to list of logged-in users (used for refreshing auth tokens).
-        loggedInUsers.push(user.uid);
+        app.locals.loggedInUsers.push(user.uid);
         cb(null, user);
       })
       .catch(function(error) {
