@@ -45,10 +45,10 @@
     </ul>
     <br>
     {{#if displayName }}
-    <p style="color: gray;">Logged in as<br> {{ displayName }}</p>
+    <div style="color: gray;">Logged in<br> {{ displayName }}</div>
     {{/if}}
     <form action="/logout" method="post">
-      <input id="sign-out-button" class="button" type="submit" value="Sign Out" name="logout">
+      <button id="sign-out-button" class="" style="color: #1779ba;" type="submit" value="Sign Out" name="logout">Sign Out</button>
     </form>
   </nav>
 
