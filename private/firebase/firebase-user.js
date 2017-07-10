@@ -8,26 +8,21 @@ var dbRef = firebase.database().ref();
 /*******************************************************************************
  * Token Auth Generate: Re-Authenticate Firebase Front-end every 50 Minutes
  ******************************************************************************/
-// TODO how to handle this with sessions? Maybe regen for every logged-in user?
-function generateAuthToken() {
-    var user = firebase.auth().currentUser;
-    // Get 'user' from onAuthStateChanged and set to above fbUser
-    if (user) {
-      var uid = user.uid;
+module.exports.refreshAuthTokens = function(uids) {
+  console.log('Refreshing auth tokens');
+  for (var i = 0; i < uids.length; i++) {
+    var uid = uids[i];
 
-      admin.auth().createCustomToken(uid)
-        .then(function(customToken) {
-          // Send token back to client
-          console.log("Token generateAuthToken ", customToken);
-        })
-        .catch(function(error) {
-          console.log("Error creating custom token:", error);
-        });
-    }
-}
-// Call Function every Three-million milliseconds = 50 minutes (setInterval = Node timer)
-// https://nodejs.org/api/timers.html
-setInterval(generateAuthToken, 3000000);
+    admin.auth().createCustomToken(uid)
+      .then(function(customToken) {
+        // Send token back to client
+        console.log("Token generateAuthToken ", customToken);
+      })
+      .catch(function(error) {
+        console.log("Error creating custom token:", error);
+      });
+  }
+};
 
 /*******************************************************************************
  * User Role Value: Get from Realtime Database
@@ -48,8 +43,7 @@ module.exports.getRole = function(user) {
   });
 };
 
-// Export function that contains the whole firebase user
-// Need to export a function, not just a variable because I need the value to be updated
+// Get an auth token for a user
 module.exports.getAuthToken = function(user) {
   return new promise(function (resolve, reject) {
     admin.auth().createCustomToken(user.uid)

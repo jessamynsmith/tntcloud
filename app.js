@@ -15,12 +15,21 @@ var flash = require('connect-flash');
 
 var app = express();
 
+app.locals.loggedInUsers = [];
+
 // Import firebase initializer
 app.locals.firebase = require("./private/firebase/firebase");
 var firebaseAdmin = require('./private/firebase/firebase-admin-init');
 // Global dbRef ... so firebase connection available everywhere without import
 app.locals.dbRef = app.locals.firebase.database().ref();
 app.locals.displayNameThing = "I want it to show up";
+var firebaseUser = require("./private/firebase/firebase-user");
+
+// Call Function every Three-million milliseconds = 50 minutes (setInterval = Node timer)
+// https://nodejs.org/api/timers.html
+setInterval(function() {
+  firebaseUser.refreshAuthTokens(app.locals.loggedInUsers);
+}, 3000000);
 
 // Middleware must be required after ./firebase because middleware uses it
 var mw = require('./middleware');
@@ -33,7 +42,9 @@ passport.use(new Strategy(
     console.log('authenticating user: ', email);
     app.locals.firebase.auth().signInWithEmailAndPassword(email, password)
       .then(function(user) {
-        console.log("user: ", user.toJSON());
+        console.log("user:", user.uid);
+        // Add user to list of logged-in users (used for refreshing auth tokens).
+        loggedInUsers.push(user.uid);
         cb(null, user);
       })
       .catch(function(error) {
@@ -50,8 +61,6 @@ passport.serializeUser(function(user, cb) {
 passport.deserializeUser(function(uid, cb) {
   firebaseAdmin.auth().getUser(uid)
     .then(function(user) {
-      // See the UserRecord reference doc for the contents of userRecord.
-      console.log("Deserialized user:", user.toJSON());
       cb(null, user);
     })
     .catch(function(error) {

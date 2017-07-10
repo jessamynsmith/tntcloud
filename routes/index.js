@@ -22,7 +22,13 @@ router.post('/login', passport.authenticate('local', { failureRedirect: '/', fai
 /*******************************************************************************
  * Logout
  ******************************************************************************/
-router.post('/logout', function(req, res){
+router.post('/logout', function(req, res) {
+  // Remove user from list of logged-in users (used for refreshing auth tokens).
+  // Would be nice if this could be done directly from the sessions.
+  var userIndex = req.app.locals.loggedInUsers.indexOf(req.user.uid);
+  if (userIndex > -1) {
+    req.app.locals.loggedInUsers.splice(userIndex, 1);
+  }
   firebase.auth().signOut();
   req.logout();
 

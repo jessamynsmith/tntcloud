@@ -1,10 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var firebase = require("firebase");
 var mw = require('../middleware');
-// firebaseUser required for authToken
-var firebaseUser = require("../private/firebase/firebase-user");
-var dbRef = firebase.database().ref();
 
 /*******************************************************************************
  * Core Warranty: Navigation
