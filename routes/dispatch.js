@@ -14,7 +14,7 @@ var navDispatchCreateRequest =
   `<div class="section-nav dispatch">
     <a href="/dispatch/history" class="button" style="margin: .5rem .75rem .5rem .5rem;">History</a>
     <a href="/dispatch/dispatching" class="button" style="margin: .5rem .75rem;">Dispatching</a>
-    <button title="actionRequestCreate" onClick="return requestFormLoad(this.title)" class="button alert" data-open="requestCreate" style="margin: .5rem .75rem;">Create Request</button>
+    <button title="actionRequestCreate" class="button alert" data-open="requestCreate" style="margin: .5rem .75rem;">Create Request</button>
   </div>`;
 
 /*******************************************************************************
