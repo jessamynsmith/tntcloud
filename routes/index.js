@@ -3,24 +3,25 @@ var router = express.Router();
 var passport = require("passport");
 var firebase = require("../private/firebase/firebase");
 
-/* GET home page. */
+/*******************************************************************************
+ * Home Page
+ ******************************************************************************/
 router.get('/', function(req, res, next) {
   req.session.errors = null;
-  res.render('index', {error: req.flash('error')});
+
+  res.render('index', { error: req.flash('error'), isFrontPage: true });
 });
 
 /*******************************************************************************
- * Login
+ * Login Form
  ******************************************************************************/
-
 router.post('/login', passport.authenticate('local', { failureRedirect: '/', failureFlash: true }), function(req, res) {
     res.redirect('/core-warranty');
 });
-/** Login End ****************************************************************/
 
 
 /*******************************************************************************
- * Logout
+ * Logout Form
  ******************************************************************************/
 router.post('/logout', function(req, res) {
   // Remove user from list of logged-in users (used for refreshing auth tokens).
@@ -34,11 +35,10 @@ router.post('/logout', function(req, res) {
 
   res.redirect('/');
 });
-/** Logout End ****************************************************************/
 
 
 /*******************************************************************************
- * Password Reset
+ * Password Reset Form
  ******************************************************************************/
 router.post('/password-reset', function(req, res){
     var email = req.body.emailPasswordReset;
@@ -64,7 +64,6 @@ router.post('/password-reset', function(req, res){
 
     res.redirect('/');
 });
-/** Password Reset End ********************************************************/
 
 
 module.exports = router;
