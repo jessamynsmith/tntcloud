@@ -42,8 +42,9 @@
       <li><a href="/core-warranty">Core/Warranty</a></li>
       <li><a href="/users">Users</a></li>
     </ul>
+    <br>
     {{#if displayName }}
-    <p>Logged in as<br> {{ displayName }}</p>
+    <p style="color: gray;">Logged in as<br> {{ displayName }}</p>
     {{/if}}
     <form action="/logout" method="post">
       <input id="sign-out-button" class="button" type="submit" value="Sign Out" name="logout">
