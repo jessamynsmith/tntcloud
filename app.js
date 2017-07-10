@@ -20,14 +20,11 @@ app.locals.firebase = require("./private/firebase/firebase");
 var firebaseAdmin = require('./private/firebase/firebase-admin-init');
 // Global dbRef ... so firebase connection available everywhere without import
 app.locals.dbRef = app.locals.firebase.database().ref();
-app.locals.displayNameThing = "I want it to show up";
 
 // Middleware must be required after ./firebase because middleware uses it
 var mw = require('./middleware');
 
-//app.locals.displayNameGotIt = app.locals.displayName;
-// console.log("App.js Display Name ", app.locals.displayNameGotIt);
-
+// Passport
 passport.use(new Strategy(
   function(email, password, cb) {
     console.log('authenticating user: ', email);
