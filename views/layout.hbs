@@ -36,31 +36,14 @@
   <!-- All Site Wrap ---------------------------------------------------------->
   <div class="all-site-wrap">
 
-  <!-- Main Nav --------------------------------------------------------------->
-  {{#if isFrontPage }}
-    <br>
-  {{ else }}
-    <nav class="main-nav" id="main-Nav">
-      <ul class="vertical menu">
-        <li><a href="/dispatch/dispatching">Dispatch</a></li>
-        <li><a href="/core-warranty">Core/Warranty</a></li>
-        <li><a href="/users">Users</a></li>
-      </ul>
-      <br>
-      {{#if displayName }}
-      <div style="color: gray;">Logged in<br> {{ displayName }}</div>
-      {{/if}}
-      <form action="/logout" method="post">
-        <button id="sign-out-button" class="" style="color: #1779ba;" type="submit" value="Sign Out" name="logout">Sign Out</button>
-      </form>
-    </nav>
-  {{/if}}
+  <!-- Main Nav: Sidebar Nav = See 'Template Partial' navMain.hbs ------------->
+  {{> navMain }}
 
   <!-- Page Wrap -------------------------------------------------------------->
   <div class="page-wrap">
 
-  <!-- Nav: Horizontal Top Bar = See 'Template Partial' for Nav by Section ---->
-  {{> nav }}
+  <!-- Nav: Horizontal Top Bar = See 'Template Partial' navSections.hbs ------->
+  {{> navSections }}
 
   <!-- End Nav Template Partial ----------------------------------------------->
 
