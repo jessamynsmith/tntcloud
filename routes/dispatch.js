@@ -22,11 +22,11 @@ var navDispatchCreateRequest =
   </div>`;
 
 /*******************************************************************************
- * Root path
+ * Dispatch Root Page
  ******************************************************************************/
 // this router is for /dispatch dir, see app.js for initializer
 router.get('/', function(req, res, next) {
-  var displayName = req.app.user.displayName;
+  var displayName = req.user.displayName;
 
   res.render('dispatch/dispatch', { displayName: displayName, navDispatch: navDispatch });
 });
@@ -36,7 +36,9 @@ router.get('/', function(req, res, next) {
  * History Page
  ******************************************************************************/
 router.get('/history', function(req, res, next) {
-  res.render('dispatch/history', { navDispatch: navDispatch });
+  var displayName = req.user.displayName;
+
+  res.render('dispatch/history', { displayName: displayName, navDispatch: navDispatch });
 });
 
 
@@ -44,8 +46,10 @@ router.get('/history', function(req, res, next) {
  * Dispatching Page
  ******************************************************************************/
 router.get('/dispatching', mw.userRole, function(req, res, next) {
+  var displayName = req.user.displayName;
   var isAdmin = req.app.locals.userRole === 'admin'; // mw 'userRole'
-  res.render('dispatch/dispatching', { isAdmin: isAdmin, navDispatch: navDispatchCreateRequest });
+
+  res.render('dispatch/dispatching', { displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatchCreateRequest });
 });
 
 
