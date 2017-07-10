@@ -45,11 +45,11 @@ router.get('/history', function(req, res, next) {
 /*******************************************************************************
  * Dispatching Page
  ******************************************************************************/
-router.get('/dispatching', mw.userRole, function(req, res, next) {
+router.get('/dispatching', /* mw.userRole, */ function(req, res, next) {
   var displayName = req.user.displayName;
-  var isAdmin = req.app.locals.userRole === 'admin'; // mw 'userRole'
+//  var isAdmin = req.app.locals.userRole === 'admin'; // mw 'userRole'
 
-  res.render('dispatch/dispatching', { displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { displayName: displayName, /* isAdmin: isAdmin, */ navDispatch: navDispatchCreateRequest });
 });
 
 
