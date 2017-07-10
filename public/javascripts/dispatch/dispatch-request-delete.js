@@ -25,7 +25,7 @@ function dispatchDelete(clicked_id) {
   // fyi - for some reason, above global variable 'editKey' is not available in this function
   var key = clicked_id;
 
-  // Cookie/Token authentication
+  // Cookie/Token Authentication: Sign In with Auth Token so can pull Firebase Data from Front-end
   var authToken = Cookies.get('fb-auth-token');
   firebase.auth().signInWithCustomToken(authToken)
   .then(function() {

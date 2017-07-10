@@ -6,9 +6,8 @@
 function dispatchCreateFormDataRecord(){
   event.preventDefault();
 
-  // Cookie/Token authentication
+  // Cookie/Token Authentication: Sign In with Auth Token so can pull Firebase Data from Front-end
   var authToken = Cookies.get('fb-auth-token');
-//  console.log("create-request.hbs auth token ", authToken);
   firebase.auth().signInWithCustomToken(authToken)
   .then(function() {
 

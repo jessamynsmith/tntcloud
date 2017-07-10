@@ -49,7 +49,7 @@ function dispatchEditFormDataUpdate(){
   // get Key value from this file's global variable 'editKey'
   var key = editKey;
 
-  // Cookie/Token authentication
+  // Cookie/Token Authentication: Sign In with Auth Token so can pull Firebase Data from Front-end
   var authToken = Cookies.get('fb-auth-token');
   firebase.auth().signInWithCustomToken(authToken)
   .then(function() {

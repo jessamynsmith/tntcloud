@@ -1,5 +1,5 @@
 
-// Cookie/Token authentication
+// User Role Cookie + Role
 var userRole = Cookies.get('userRole');
 console.log("User Role Cookie ", userRole);
 var isAdmin = userRole === 'admin';
@@ -62,16 +62,25 @@ function handleData(parentSelector, gotData) {
 // Listen for Child Events: https://firebase.google.com/docs/database/web/lists-of-data#listen_for_child_events
 // Query data https://firebase.google.com/docs/reference/js/firebase.database.Query
 
-// Requested Dispatch Items
-var dbRefRequested = firebase.database().ref().child('dispatch').orderByChild('Status').equalTo('requested');
+// Cookie/Token Authentication: Sign In with Auth Token so can pull Firebase Data from Front-end
+var authToken = Cookies.get('fb-auth-token');
+firebase.auth().signInWithCustomToken(authToken)
+.then(function() {
+  // Cookie/Token authentication
+  var authToken = Cookies.get('fb-auth-token');
 
-dbRefRequested.on('value', gotData => {
-  handleData('#requested', gotData);
-});
+  // Requested Dispatch Items
+  var dbRefRequested = firebase.database().ref().child('dispatch').orderByChild('Status').equalTo('requested');
 
-// Dispatched Dispatch Items
-var dbRefDispatched = firebase.database().ref().child('dispatch').orderByChild('Status').equalTo('dispatched');
+  dbRefRequested.on('value', gotData => {
+    handleData('#requested', gotData);
+  });
 
-dbRefDispatched.on('value', gotData => {
-  handleData('#dispatched', gotData);
+  // Dispatched Dispatch Items
+  var dbRefDispatched = firebase.database().ref().child('dispatch').orderByChild('Status').equalTo('dispatched');
+
+  dbRefDispatched.on('value', gotData => {
+    handleData('#dispatched', gotData);
+  });
+
 });
