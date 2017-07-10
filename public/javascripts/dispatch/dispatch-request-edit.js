@@ -56,10 +56,10 @@ function dispatchEditFormDataUpdate(){
 
     // For this to work correctly, all template form field names must match the field
     // names in firebase.
-    let submitData = $("#requestCreateForm").serializeJSON();
+    let submitData = $("#requestEditForm").serializeJSON();
 
     // Status of Dispatch Request
-    if (submitData.driver === "") {
+    if (submitData.Driver === "") {
       submitData.Status = "requested";
     } else {
       submitData.Status = "dispatched";

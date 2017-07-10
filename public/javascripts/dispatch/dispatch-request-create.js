@@ -22,7 +22,7 @@ function dispatchCreateFormDataRecord(){
     let submitData = $("#requestCreateForm").serializeJSON();
 
     // Status of Dispatch Request
-    if (submitData.driver === "") {
+    if (submitData.Driver === "") {
       submitData.Status = "requested";
     } else {
       submitData.Status = "dispatched";
