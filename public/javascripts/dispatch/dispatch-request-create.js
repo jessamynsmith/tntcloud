@@ -16,37 +16,23 @@ function dispatchCreateFormDataRecord(){
     let Date = DateTimeStampServer;
     Date = moment().format('L'); // Format date with moment.js
     let DateTime = moment().format('h:mm:ss A');
-    /***************************************************************************
-     * Form Element Options and Values
-    ***************************************************************************/
-    let Vendor = document.getElementById('createVendor').value;
-    let BranchFrom = document.getElementById('createBranchFrom').value;
-    let BranchTo = document.getElementById('createBranchTo').value;
-    let Urgency = document.getElementById('createUrgency').value;
-    let Reference = document.getElementById('createReference').value;
-    let Instructions = document.getElementById('createInstructions').value;
-    let Driver = document.getElementById('createDriver').value;
-    // Status of Dispatch Request
-      if (Driver === "") {
-        var Status = "requested";
-      } else {
-        Status = "dispatched";
-      }
 
-    // Data to submit to database
-    var submitData = {
-      DateTimeStampServer,
-      Date,
-      DateTime,
-      Vendor,
-      BranchFrom,
-      BranchTo,
-      Urgency,
-      Reference,
-      Instructions,
-      Driver,
-      Status
+    // For this to work correctly, all template form field names must match the field
+    // names in firebase.
+    let submitData = $("#requestCreateForm").serializeJSON();
+
+    // Status of Dispatch Request
+    if (submitData.driver === "") {
+      submitData.Status = "requested";
+    } else {
+      submitData.Status = "dispatched";
     }
+
+    submitData.Date = Date;
+    submitData.DateTime = DateTime;
+    submitData.DateTimeStampServer = DateTimeStampServer;
+
+    console.log(submitData);
 
     // Get a key for a new core Record
     var newKey = firebase.database().ref().child('dispatch').push().key;

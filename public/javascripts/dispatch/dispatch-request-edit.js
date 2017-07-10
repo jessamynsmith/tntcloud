@@ -54,34 +54,18 @@ function dispatchEditFormDataUpdate(){
   firebase.auth().signInWithCustomToken(authToken)
   .then(function() {
 
-    ////////////////////////////////////////////////////////////////////////////
-    // Form Element Options and Values
-    ////////////////////////////////////////////////////////////////////////////
-    let Vendor = document.getElementById('editVendor').value;
-    let BranchFrom = document.getElementById('editBranchFrom').value;
-    let BranchTo = document.getElementById('editBranchTo').value;
-    let Urgency = document.getElementById('editUrgency').value;
-    let Reference = document.getElementById('editReference').value;
-    let Instructions = document.getElementById('editInstructions').value;
-    let Driver = document.getElementById('editDriver').value;
-    // Status of Dispatch Request
-      if (Driver === "") {
-        var Status = "requested";
-      } else {
-        Status = "dispatched";
-      }
+    // For this to work correctly, all template form field names must match the field
+    // names in firebase.
+    let submitData = $("#requestCreateForm").serializeJSON();
 
-    // Data to submit to database
-    var submitData = {
-      Vendor,
-      BranchFrom,
-      BranchTo,
-      Urgency,
-      Reference,
-      Instructions,
-      Driver,
-      Status
+    // Status of Dispatch Request
+    if (submitData.driver === "") {
+      submitData.Status = "requested";
+    } else {
+      submitData.Status = "dispatched";
     }
+
+    console.log(submitData);
 
     ////////////////////////////////////////////////////////////////////////////
     // Update existing-record without overwriting or altering date values
