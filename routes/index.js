@@ -30,7 +30,10 @@ router.post('/logout', function(req, res) {
   if (userIndex > -1) {
     req.app.locals.loggedInUsers.splice(userIndex, 1);
   }
-  firebase.auth().signOut();
+  // Disable ...signOut() because firebase's most recent logged in user is the
+  // current-user, regardless of number of users... 
+  //  firebase.auth().signOut();
+
   req.logout();
 
   res.redirect('/');
