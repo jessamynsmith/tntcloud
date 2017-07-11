@@ -17,7 +17,7 @@ var navUsers =
  * Users Page
  ******************************************************************************/
 // this router is for /users dir, see app.js for initializer
-router.get('/', function(req, res, next) {
+router.get('/', mw.userRole, function(req, res, next) {
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
@@ -35,7 +35,9 @@ router.get('/', function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('users/users', { displayName: displayName, userData: templateData, navUsers: navUsers } );
+    if (isAdmin) {
+      res.render('users/users', { isAdmin: isAdmin, displayName: displayName, userData: templateData, navUsers: navUsers } );
+    } 
   };
 });
 

@@ -7,7 +7,9 @@
     <ul class="vertical menu">
       <li><a href="/dispatch/dispatching">Dispatch</a></li>
       <li><a href="/core-warranty">Core/Warranty</a></li>
-      <li><a href="/users">Users</a></li>
+      {{#if isAdmin }}
+        <li><a href="/users">Users</a></li>
+      {{/if}}
     </ul>
     <br>
     {{#if displayName }}
