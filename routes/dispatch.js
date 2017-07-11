@@ -48,8 +48,16 @@ router.get('/history', mw.userRole, function(req, res, next) {
 router.get('/dispatching', mw.userRole, function(req, res, next) {
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
-  var isAdmin = req.app.locals.userRole === 'admin';
 
+  var isAdmin = req.app.locals.userRole === 'admin';
+  console.log("isAdmin dispatch.js ", isAdmin);
+/*
+  var showDelete = false;
+  if (req.app.locals.userRole === 'admin') {
+    showDelete = true;
+  }
+  console.log("showDelete dispatch.js ", showDelete);
+*/
   res.render('dispatch/dispatching', { displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatchCreateRequest });
 });
 
