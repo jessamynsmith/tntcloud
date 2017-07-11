@@ -56,7 +56,7 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
     showDriverInput = true;
   }
 
-  res.render('dispatch/dispatching', { displayName: displayName, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
 });
 
 

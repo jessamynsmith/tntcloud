@@ -5,6 +5,11 @@ console.log("User Role Cookie ", userRole);
 var isAdmin = userRole === 'admin';
 console.log("User Role ", isAdmin);
 
+var showDelete = false;
+if (isAdmin) {
+  showDelete = true;
+}
+
 /*******************************************************************************
 * Handlebars
 *******************************************************************************/
@@ -24,15 +29,15 @@ var rawTemplateRequestList =
       <div>Instructions:&nbsp;{{Instructions}}</div>
       <div>Driver:&nbsp;{{Driver}}</div>
     </div>
-    {{#if ../isAdmin }}
-    {{/if}}
-      <div class="footer">
+        <div class="footer">
         <div style="float: left;">
           <a data-open="requestEdit" title="actionRequestEdit" onClick="dispatchEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}">Edit</a>
         </div>
-        <div style="float: right;">
-          <a data-open="requestDelete" title="actionRequestDelete" onClick="dispatchDeleteLoadConfirmForm(this.id);" id="{{@key}}">Delete</a>
-        </div>
+        {{#if ../showDeleteLink }}
+          <div style="float: right;">
+            <a data-open="requestDelete" title="actionRequestDelete" onClick="dispatchDeleteLoadConfirmForm(this.id);" id="{{@key}}">Delete</a>
+          </div>
+        {{/if}}
       </div>
   </div>
 {{/each}}`;
@@ -50,7 +55,10 @@ function handleData(parentSelector, gotData) {
   // assign above data to 'dataVal'
   var dataVal = gotData.val();
   // pass the data to the handlebars template (up above)
-  var data = { isAdmin: isAdmin, dispatch: dataVal };
+  // about the '../' in the above {{# if ../ }}
+  // required when using handlebars template in separate .js file outside of .hbs node express
+  // 'showDelete' is coming from top of this file, not the dispatch.js route file
+  var data = { showDeleteLink: showDelete, dispatch: dataVal };
   var html = compiledTemplate(data);
 
   parentDiv.append(html);
