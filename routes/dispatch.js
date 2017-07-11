@@ -21,31 +21,36 @@ var navDispatchCreateRequest =
  * Dispatch Root Page
  ******************************************************************************/
 // this router is for /dispatch dir, see app.js for initializer
-router.get('/', function(req, res, next) {
+router.get('/', mw.userRole, function(req, res, next) {
   var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
 
-  res.render('dispatch/dispatch', { displayName: displayName, navDispatch: navDispatch });
+  res.render('dispatch/dispatch', { displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatch });
 });
 
 
 /*******************************************************************************
  * History Page
  ******************************************************************************/
-router.get('/history', function(req, res, next) {
+router.get('/history', mw.userRole, function(req, res, next) {
   var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
 
-  res.render('dispatch/history', { displayName: displayName, navDispatch: navDispatch });
+  res.render('dispatch/history', { displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatch });
 });
 
 
 /*******************************************************************************
  * Dispatching Page
  ******************************************************************************/
-router.get('/dispatching', /* mw.userRole, */ function(req, res, next) {
+router.get('/dispatching', mw.userRole, function(req, res, next) {
   var displayName = req.user.displayName;
-//  var isAdmin = req.app.locals.userRole === 'admin'; // mw 'userRole'
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
 
-  res.render('dispatch/dispatching', { displayName: displayName, /* isAdmin: isAdmin, */ navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatchCreateRequest });
 });
 
 

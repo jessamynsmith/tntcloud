@@ -29,9 +29,9 @@ var navCW =
  ******************************************************************************/
 // this router is for /core-warranty dir, see app.js for initializer
 router.get('/', mw.userRole, function(req, res, next) {
+  var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
-  var displayName = req.user.displayName;
 
   res.render('core-warranty/core-warranty', { displayName: displayName, isAdmin: isAdmin, navCW: navCW });
 });
@@ -39,8 +39,11 @@ router.get('/', mw.userRole, function(req, res, next) {
 /*******************************************************************************
  * Warranty: Create Record Page
  ******************************************************************************/
-router.get('/create-warranty', function(req, res, next) {
+router.get('/create-warranty', mw.userRole, function(req, res, next) {
   var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+
   /*****************************************************************************
    * Build Employees <options> for <select> drop-down with Employee ID + Name
   *****************************************************************************/
@@ -56,15 +59,18 @@ router.get('/create-warranty', function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/create-warranty', { displayName: displayName, gotPeople: templateData, navCW: navCW } );
+    res.render('core-warranty/create-warranty', { displayName: displayName, isAdmin: isAdmin, gotPeople: templateData, navCW: navCW } );
   };
 });
 
 /*******************************************************************************
  * Core: Create Record Page
  ******************************************************************************/
-router.get('/create-core', function(req, res, next) {
+router.get('/create-core', mw.userRole, function(req, res, next) {
   var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+
   /*****************************************************************************
    * Build Employees <options> for <select> drop-down with Employee ID + Name
   *****************************************************************************/
@@ -80,7 +86,7 @@ router.get('/create-core', function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/create-core', { displayName: displayName, gotPeople: templateData, navCW: navCW } );
+    res.render('core-warranty/create-core', { displayName: displayName, isAdmin: isAdmin, gotPeople: templateData, navCW: navCW } );
   };
 });
 
@@ -185,7 +191,7 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/list-warranty', { displayName: displayName, warrantyData: templateData, navCW: navCW } );
+    res.render('core-warranty/list-warranty', { displayName: displayName, isAdmin: isAdmin, warrantyData: templateData, navCW: navCW } );
   };
 });
 
@@ -193,9 +199,10 @@ router.get('/list-warranty', mw.userRole, function(req, res, next) {
  * List Core Page
  ******************************************************************************/
 router.get('/list-core', mw.userRole, function(req, res, next) {
+  var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
-  var displayName = req.user.displayName;
+
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
@@ -209,15 +216,18 @@ router.get('/list-core', mw.userRole, function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/list-core', { displayName: displayName, isAdmin: isAdmin, coreData: templateData, navCW: navCW } );
+    res.render('core-warranty/list-core', { displayName: displayName, isAdmin: isAdmin, isAdmin: isAdmin, coreData: templateData, navCW: navCW } );
   };
 });
 
 /*******************************************************************************
  * Print Core Page
  ******************************************************************************/
-router.get('/print-core', function(req, res, next) {
+router.get('/print-core', mw.userRole, function(req, res, next) {
   var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
@@ -231,15 +241,18 @@ router.get('/print-core', function(req, res, next) {
     // access data values
     templateData = data.val();
 
-    res.render('core-warranty/print-core', { displayName: displayName, templateData: templateData, navCW: navCW } );
+    res.render('core-warranty/print-core', { displayName: displayName, isAdmin: isAdmin, templateData: templateData, navCW: navCW } );
   };
 });
 
 /*******************************************************************************
  * Print Warranty Page
  ******************************************************************************/
-router.get('/print-warranty', function(req, res, next) {
+router.get('/print-warranty', mw.userRole, function(req, res, next) {
   var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
@@ -253,15 +266,18 @@ router.get('/print-warranty', function(req, res, next) {
     // access data values
     templateData = data.val();
 
-    res.render('core-warranty/print-warranty', { displayName: displayName, templateData: templateData, navCW: navCW } );
+    res.render('core-warranty/print-warranty', { displayName: displayName, isAdmin: isAdmin, templateData: templateData, navCW: navCW } );
   };
 });
 
 /*******************************************************************************
  * Core Record Page
  ******************************************************************************/
-router.get('/record-core', function(req, res, next) {
+router.get('/record-core', mw.userRole, function(req, res, next) {
   var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
@@ -276,15 +292,18 @@ router.get('/record-core', function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/record-core', { displayName: displayName, templateData: templateData, key: key, navCW: navCW });
+    res.render('core-warranty/record-core', { displayName: displayName, isAdmin: isAdmin, templateData: templateData, key: key, navCW: navCW });
   };
 });
 
 /*******************************************************************************
  * Warranty Record Page
  ******************************************************************************/
-router.get('/record-warranty', function(req, res, next) {
+router.get('/record-warranty', mw.userRole, function(req, res, next) {
   var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
@@ -299,7 +318,7 @@ router.get('/record-warranty', function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/record-warranty', { displayName: displayName, templateData: templateData, key: key, navCW: navCW });
+    res.render('core-warranty/record-warranty', { displayName: displayName, isAdmin: isAdmin, templateData: templateData, key: key, navCW: navCW });
   };
 });
 
@@ -307,8 +326,11 @@ router.get('/record-warranty', function(req, res, next) {
 /*******************************************************************************
  * People: List Page
  ******************************************************************************/
-router.get('/people-list', function(req, res, next) {
+router.get('/people-list', mw.userRole, function(req, res, next) {
   var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
@@ -322,18 +344,20 @@ router.get('/people-list', function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/people-list', { displayName: displayName, peopleData: templateData, navCW: navCW } );
+    res.render('core-warranty/people-list', { displayName: displayName, isAdmin: isAdmin, peopleData: templateData, navCW: navCW } );
   };
 });
 
 /*******************************************************************************
  * People: Create Person Page
  ******************************************************************************/
-router.get('/people-add', function(req, res, next) {
+router.get('/people-add', mw.userRole, function(req, res, next) {
   var user = req.app.locals.user;
   var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
 
-  res.render('core-warranty/people-add', { displayName: displayName, navCW: navCW });
+  res.render('core-warranty/people-add', { displayName: displayName, isAdmin: isAdmin, navCW: navCW });
 });
 
 /*******************************************************************************
@@ -366,9 +390,12 @@ router.post('/insert-person', function(req, res, next) {
 /*******************************************************************************
  * People: Delete Person Page
  ******************************************************************************/
-router.get('/people-delete', function(req, res, next) {
+router.get('/people-delete', mw.userRole, function(req, res, next) {
   var user = req.app.locals.user;
   var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
@@ -383,7 +410,7 @@ router.get('/people-delete', function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('core-warranty/people-delete', { displayName: displayName, templateData: templateData, key: key, navCW: navCW });
+    res.render('core-warranty/people-delete', { displayName: displayName, isAdmin: isAdmin, templateData: templateData, key: key, navCW: navCW });
   };
 });
 

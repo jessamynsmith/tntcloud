@@ -36,7 +36,7 @@ router.get('/', mw.userRole, function(req, res, next) {
       // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
       // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
       // handlebars object: templateData: templateData === anyName: variableName
-      res.render('users/users', { isAdmin: isAdmin, displayName: displayName, userData: templateData, navUsers: navUsers } );
+      res.render('users/users', { displayName: displayName, isAdmin: isAdmin, userData: templateData, navUsers: navUsers } );
     };
   } else {
     res.redirect('/access-denied');
@@ -53,7 +53,7 @@ router.get('/user-create', function(req, res, next) {
   console.log("users.js + user create page ", isAdmin);
 
   if (isAdmin) {
-    res.render('users/user-create', { isAdmin: isAdmin, displayName: displayName, navUsers: navUsers });
+    res.render('users/user-create', { displayName: displayName, isAdmin: isAdmin, navUsers: navUsers });
   } else {
     res.redirect('/access-denied');
   }
@@ -125,7 +125,7 @@ router.get('/user-edit', function(req, res, next) {
     function gotData(data) {
       // access data values
       templateData = data.val();
-        res.render('users/user-edit', { isAdmin: isAdmin, displayName: displayName, uid: uid, templateData: templateData, navUsers: navUsers });
+        res.render('users/user-edit', { displayName: displayName, isAdmin: isAdmin, uid: uid, templateData: templateData, navUsers: navUsers });
       }
   } else {
     res.redirect('/access-denied');
@@ -234,7 +234,7 @@ router.get('/user-delete', function(req, res, next) {
         userEmail = userRecord.email;
         userDisplayName = userRecord.displayName;
         // See the UserRecord reference doc for the contents of userRecord.
-        res.render('users/user-delete', { isAdmin: isAdmin, displayName: displayName, navUsers: navUsers, uid: uid, userEmail: userEmail, userDisplayName: userDisplayName });
+        res.render('users/user-delete', { displayName: displayName, isAdmin: isAdmin, navUsers: navUsers, uid: uid, userEmail: userEmail, userDisplayName: userDisplayName });
       })
       .catch(function(error) {
         console.log("Error fetching user data:", error);
