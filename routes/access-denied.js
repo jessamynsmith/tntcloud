@@ -6,8 +6,9 @@ var router = express.Router();
  ******************************************************************************/
 // this route for /access-denied dir, see app.js for initializer
 router.get('/', function(req, res, next) {
+  var displayName = req.user.displayName;
 
-  res.render('access-denied');
+  res.render('access-denied', { displayName: displayName });
 });
 
 
