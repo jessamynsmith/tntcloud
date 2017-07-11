@@ -40,6 +40,11 @@
           </button>
         </div>
       </div>
+      <!-- UID ---------------------------------------------------------------->
+      <div class="input-group">
+        <span class="input-group-label">Vendor</span>
+        <input type="text" id="createUID" placeholder="Vendor" class="input-group-field" value="${uid}" name="uid">
+      </div>
       <!-- Vendor ------------------------------------------------------------->
       <div class="input-group">
         <span class="input-group-label">Vendor</span>
@@ -187,31 +192,32 @@
 </div>
 
 
+{{#if isAdmin}}
 <!-- Dispatch Delete Form ----------------------------------------------------->
 <!-- Foundation Example Reveal/Popup Modal ------------------------------------>
 <!-- http://foundation.zurb.com/sites/docs/reveal.html ------------------------>
 <!-- popup activation placed into navigation bar's 'Create Request' button ---->
-<div class="row expanded small-12 medium-6 large-3 columns reveal"  id="requestDelete" data-reveal data-reset-on-close="true" data-close-on-click="false">
-  <form id="requestDeleteForm" class="input-form" onSubmit="return dispatchEditFormDataUpdate(this)">
-    <div class="hover-form">
-      <div class="card">
-        <div class="card-divider">
-          <h4>Confirm Delete</h4>
-          <h5>Do you really want to delete this dispatch record?</h5>
-          <!-- Big 'X' close form button -->
-          <button class="close-button" data-close aria-label="Close modal" type="button">
-            <span aria-hidden="true">&times;</span>
-          </button>
+  <div class="row expanded small-12 medium-6 large-3 columns reveal"  id="requestDelete" data-reveal data-reset-on-close="true" data-close-on-click="false">
+    <form id="requestDeleteForm" class="input-form" onSubmit="return dispatchEditFormDataUpdate(this)">
+      <div class="hover-form">
+        <div class="card">
+          <div class="card-divider">
+            <h4>Confirm Delete</h4>
+            <h5>Do you really want to delete this dispatch record?</h5>
+            <!-- Big 'X' close form button -->
+            <button class="close-button" data-close aria-label="Close modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         </div>
+        <!-- Submit Button ------------------------------------------------------>
+        <div id="deleteButtonParent"></div>
       </div>
-      <!-- Submit Button ------------------------------------------------------>
-      <div id="deleteButtonParent"></div>
-    </div>
-  </form>
-</div>
-
+    </form>
+  </div>
+<script src="/javascripts/dispatch/dispatch-request-delete.js"></script>
+{{/if}}
 
 <!-- Request Card Forms, Input Fields, and Processing Code  ------------------->
 <script src="/javascripts/dispatch/dispatch-request-create.js"></script>
 <script src="/javascripts/dispatch/dispatch-request-edit.js"></script>
-<script src="/javascripts/dispatch/dispatch-request-delete.js"></script>
