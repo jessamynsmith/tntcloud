@@ -170,10 +170,12 @@
         <input type="text" id="editInstructions" placeholder="Instructions"  class="input-group-field" name="Instructions"/>
       </div>
       <!-- Driver ------------------------------------------------------->
+      {{#if showDriverInput }}
       <div class="input-group">
         <span class="input-group-label">Driver</span>
         <input type="text" id="editDriver" placeholder="Driver"  class="input-group-field" name="Driver"/>
       </div>
+      {{/if}}
       <!-- Submit Button ------------------------------------------------------>
       <div>
         <input id="submit-dispatch-request" type="submit" class="button primary">
