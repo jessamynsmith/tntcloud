@@ -37,7 +37,9 @@ router.get('/', mw.userRole, function(req, res, next) {
     // handlebars object: templateData: templateData === anyName: variableName
     if (isAdmin) {
       res.render('users/users', { isAdmin: isAdmin, displayName: displayName, userData: templateData, navUsers: navUsers } );
-    } 
+    } else {
+      res.redirect('/access-denied');
+    }
   };
 });
 

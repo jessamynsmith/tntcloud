@@ -72,6 +72,7 @@ var index = require('./routes/index');
 var dispatch = require('./routes/dispatch');
 var coreWarranty = require('./routes/core-warranty');
 var users = require('./routes/users');
+var accessDenied = require('./routes/access-denied');
 
 // view engine setup
 app.engine('hbs', hbs({
@@ -116,6 +117,7 @@ app.use('/', index);
 app.use('/dispatch', ensureLoggedIn, mw.authToken, mw.userRole, dispatch);
 app.use('/core-warranty', ensureLoggedIn, coreWarranty);
 app.use('/users', ensureLoggedIn, /*mw.userRoleAndAdmin,*/ users);
+app.use('/access-denied', ensureLoggedIn, accessDenied);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
