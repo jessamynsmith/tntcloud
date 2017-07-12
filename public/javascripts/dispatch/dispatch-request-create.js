@@ -12,6 +12,7 @@ function dispatchCreateFormDataRecord(){
   .then(function() {
 
     // Server Date/Time https://firebase.google.com/docs/reference/js/firebase.database.ServerValue
+    var CreatedByUID = firebase.auth().currentUser.uid;
     const DateTimeStampServer = firebase.database.ServerValue.TIMESTAMP;
     let Date = DateTimeStampServer;
     Date = moment().format('L'); // Format date with moment.js
@@ -28,6 +29,7 @@ function dispatchCreateFormDataRecord(){
       submitData.Status = "dispatched";
     }
 
+    submitData.CreatedByUID = CreatedByUID;
     submitData.Date = Date;
     submitData.DateTime = DateTime;
     submitData.DateTimeStampServer = DateTimeStampServer;

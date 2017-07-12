@@ -51,6 +51,9 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
   var isAdmin = req.app.locals.userRole === 'admin';
   var isBasic = req.app.locals.userRole === 'basic';
 
+  var userUID = req.user.uid;
+  console.log("dispatch.js UID ", userUID);
+
   var showDriverInput = false;
   if (isAdmin) {
     showDriverInput = true;
