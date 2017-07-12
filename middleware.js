@@ -13,6 +13,7 @@ module.exports.userRole = function(req, res, next) {
   firebaseUser.getRole(req.user).then(function(userRole) {
     // Store userRole as Global variable
     req.app.locals.userRole = userRole;
+    console.log("Middleware User Role ", req.app.locals.userRole);
     res.cookie('userRole', req.app.locals.userRole, { httpOnly: false });
     // if I didn't have next(); then no pages that use the userRole would be executed
     next();
