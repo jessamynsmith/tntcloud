@@ -1,4 +1,9 @@
 
+// User Role Cookie + Role
+var userRole = Cookies.get('userRole');
+var isAdmin = userRole === 'admin';
+var isBasic = userRole === 'basic';
+
 ////////////////////////////////////////////////////////////////////////////////
 // Add Edit Record ID(Key) to Global Variable for Use in dispatchEditFormDataUpdate
 ////////////////////////////////////////////////////////////////////////////////
@@ -59,13 +64,13 @@ function dispatchEditFormDataUpdate(){
     let submitData = $("#requestEditForm").serializeJSON();
 
     // Status of Dispatch Request
-    if (submitData.Driver === "") {
+    if (submitData.Driver === "" || isBasic) {
       submitData.Status = "requested";
+    } else if (isBasic) {
+      submitData.Driver = "";
     } else {
       submitData.Status = "dispatched";
     }
-
-    console.log(submitData);
 
     ////////////////////////////////////////////////////////////////////////////
     // Update existing-record without overwriting or altering date values
