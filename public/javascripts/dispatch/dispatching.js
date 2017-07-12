@@ -4,8 +4,11 @@ var userRole = Cookies.get('userRole');
 console.log("User Role Cookie ", userRole);
 var isAdmin = userRole === 'admin';
 console.log("User Role ", isAdmin);
+var isBasic = userRole === 'basic';
+console.log("User Role ", isBasic);
 
 var showDelete = false;
+var showEdit = false;
 if (isAdmin) {
   showDelete = true;
 }
@@ -28,11 +31,10 @@ var rawTemplateRequestList =
       <div>Reference:&nbsp;{{Reference}}</div>
       <div>Instructions:&nbsp;{{Instructions}}</div>
       <div>Driver:&nbsp;{{Driver}}</div>
-      <div class="createdByUID">{{ CreatedByUID }}</div>
     </div>
         <div class="footer">
-        <div style="float: left;">
-          <a data-open="requestEdit" title="actionRequestEdit" onClick="dispatchEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}">Edit</a>
+        <div style="float: left;" class="created-by-uid" title="{{ CreatedByUID }}" data-status="{{ Status }}">
+          <a class="editLink" data-open="requestEdit" title="actionRequestEdit" onClick="dispatchEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}">Edit</a>
         </div>
         {{#if ../showDeleteLink }}
           <div style="float: right;">
@@ -94,15 +96,28 @@ function handleData(parentSelector, gotData) {
   parentDiv.append(html);
 
 
-  var currentUID = firebase.auth().currentUser.uid;
-  console.log("currentUID dispatching.js Here! ", currentUID);
 
-  var recordUID = document.getElementsByClassName("createdByUID");
-  console.log("Got recordUID array? ", recordUID);
-  for (var i = 0; i < recordUID.length; i++) {
-    if (currentUID !== recordUID[i].innerText) {
-      recordUID[i].className += " hide";
-      console.log("array for output ", recordUID[i].className);
+  //////////////////////////////////////////////////////////////////////////////
+  // Hide 'Edit' link if Not Admin and currentUID is-not-equal-to CreatedByUID
+  //////////////////////////////////////////////////////////////////////////////
+  // get currentUID
+  var currentUID = firebase.auth().currentUser.uid;
+
+  if (!isAdmin) {
+    // get record 'created-by-uid' from the surrounding <div> title
+    var requestCreatedByUIDs = document.getElementsByClassName("created-by-uid");
+    for (var i = 0; i < requestCreatedByUIDs.length; i++) {
+      if (currentUID !== requestCreatedByUIDs[i].title) {
+        requestCreatedByUIDs[i].className += " hide";
+      }
+    }
+  }
+  if (isBasic) {
+  // if Basic user, hide 'edit' link on all 'Dispatched' records
+    var gotDispatched = $("div[data-status='dispatched']");
+    console.log("Got Dispatched? ", gotDispatched);
+    for (var i = 0; i < gotDispatched.length; i++) {
+      gotDispatched[i].className += " hide";
     }
   }
 }
