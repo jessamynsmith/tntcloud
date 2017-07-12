@@ -27,7 +27,7 @@ var rawTemplateRequestList =
        </div>
     </div>
     <div class="body">
-      <div>From:&nbsp;{{BranchFrom}}&nbsp;&nbsp;&nbsp;&nbsp;To:&nbsp;{{BranchTo}}</div>
+      <div>{{BranchFrom}}&nbsp;&mdash;>&nbsp;{{BranchTo}}</div>
       <div>Reference:&nbsp;{{Reference}}</div>
       <div>Instructions:&nbsp;{{Instructions}}</div>
       <div>Driver:&nbsp;{{Driver}}</div>
