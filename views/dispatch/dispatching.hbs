@@ -1,5 +1,3 @@
-<script src="/javascripts/handlebars/4.0.10/handlebars-v4.0.10.js"></script>
-<script language="javascript" src="/javascripts/dispatch/dispatching.js"></script>
 
 <!-- Title/Intro -------------------------------------------------------------->
 <div class="section-intro dispatch">
@@ -8,9 +6,9 @@
 
 <!-- Branch Selector ---------------------------------------------------------->
 <div class="input-group">
-  <span class="input-group-label">Select Branch</span>
+  <span class="input-group-label">Branch view</span>
   <select id="selectBranch"  class="input-group-field" name="selectBranch">
-    <option value="">All Branches</option>
+    <option value="allBranches">All Branches</option>
     <option value="JAX">JAX</option>
     <option value="NFWS">NFWS</option>
     <option value="LC">LC</option>
@@ -18,6 +16,11 @@
     <option value="440">440</option>
   </select>
 </div>
+
+<!-- Import After Branch Selector, dispatching.js needs to run after markup --->
+<script src="/javascripts/handlebars/4.0.10/handlebars-v4.0.10.js"></script>
+<script language="javascript" src="/javascripts/dispatch/dispatching.js"></script>
+
 
 <!-- Two Columns -------------------------------------------------------------->
 <div class="grid-x two-column dispatching">

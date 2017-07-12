@@ -19,7 +19,7 @@ if (isAdmin) {
 // #if ../isAdmin === https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop
 var rawTemplateRequestList =
 `{{#each dispatch}}
-  <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output">
+  <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output" data-card-from="{{ BranchFrom }}" data-card-to="{{ BranchTo }}">
     <div class="">
        <div class="card-divider urgency-{{Urgency}}">
          <div>{{ Vendor }}</div>
@@ -96,8 +96,6 @@ function handleData(parentSelector, gotData) {
 
   parentDiv.append(html);
 
-
-
   //////////////////////////////////////////////////////////////////////////////
   // Hide 'Edit' link if Not Admin and currentUID is-not-equal-to CreatedByUID
   //////////////////////////////////////////////////////////////////////////////
@@ -114,11 +112,33 @@ function handleData(parentSelector, gotData) {
     }
   }
   if (isBasic) {
-  // if Basic user, hide 'edit' link on all 'Dispatched' records
+    // if Basic user, hide 'edit' link on all 'Dispatched' records
     var gotDispatched = $("div[data-status='dispatched']");
     console.log("Got Dispatched? ", gotDispatched);
     for (var i = 0; i < gotDispatched.length; i++) {
       gotDispatched[i].className += " hide";
     }
   }
+
+  var fromJax = document.querySelectorAll('[data-card-from="JAX"]');
+  console.log("Got JAX From? ", fromJax);
+  var toJax = document.querySelectorAll('[data-card-to="JAX"]');
+  console.log("Got JAX To? ", toJax);
+
+
+  var selectBranch = document.getElementById("selectBranch");
+
+  selectBranch.addEventListener("change", function() {
+      if(selectBranch.value == "allBranches") {
+        alert("All Branches");
+      } else if (selectBranch.value == "JAX") {
+        alert("JAX");
+      }
+  });
 }
+
+/*
+  for (var i = 0; i < gotDispatched.length; i++) {
+    gotDispatched[i].className += " hide";
+  }
+*/
