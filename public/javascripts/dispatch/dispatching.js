@@ -121,9 +121,7 @@ function handleData(parentSelector, gotData) {
   }
 
   var fromJax = document.querySelectorAll('[data-card-from="JAX"]');
-  console.log("Got JAX From? ", fromJax);
   var toJax = document.querySelectorAll('[data-card-to="JAX"]');
-  console.log("Got JAX To? ", toJax);
 
 
   var selectBranch = document.getElementById("selectBranch");
@@ -132,7 +130,15 @@ function handleData(parentSelector, gotData) {
       if(selectBranch.value == "allBranches") {
         alert("All Branches");
       } else if (selectBranch.value == "JAX") {
-        alert("JAX");
+        // alert("JAX");
+        console.log("Got JAX From? ", fromJax);
+        console.log("Got JAX To? ", toJax);
+        for (var i = 0; i < fromJax.length; i++) {
+          fromJax[i].className += " hide";
+        }
+        for (var i = 0; i < fromJax.length; i++) {
+          toJax[i].className += " hide";
+        }
       }
   });
 }
