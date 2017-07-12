@@ -1,4 +1,9 @@
 
+// User Role Cookie + Role
+var userRole = Cookies.get('userRole');
+var isAdmin = userRole === 'admin';
+var isBasic = userRole === 'basic';
+
 /*******************************************************************************
  * Post form Data to Database
 *******************************************************************************/
@@ -23,10 +28,10 @@ function dispatchCreateFormDataRecord(){
     let submitData = $("#requestCreateForm").serializeJSON();
 
     // Status of Dispatch Request
-    if (submitData.Driver === "") {
+    if (submitData.Driver === "" || isBasic) {
       submitData.Status = "requested";
-    } else {
-      submitData.Status = "dispatched";
+    } if (isBasic) {
+      submitData.Driver = "";
     }
 
     submitData.CreatedByUID = CreatedByUID;
