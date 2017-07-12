@@ -17,30 +17,26 @@ var navUsers =
  * Users Page
  ******************************************************************************/
 // this router is for /users dir, see app.js for initializer
-router.get('/', mw.userRole, function(req, res, next) {
+router.get('/', function(req, res, next) {
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-  if (isAdmin) {
-    /*****************************************************************************
-     * Data for Handlebars
-    *****************************************************************************/
-    dbRef.child('users').once('value', gotData);
-    // global variable so warranty data can be accessed after the function
-    var templateData;
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+  dbRef.child('users').once('value', gotData);
+  // global variable so warranty data can be accessed after the function
+  var templateData;
 
-    function gotData(data) {
-      // access data values
-      templateData = data.val();
-      // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
-      // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
-      // handlebars object: templateData: templateData === anyName: variableName
-      res.render('users/users', { displayName: displayName, isAdmin: isAdmin, userData: templateData, navUsers: navUsers } );
-    };
-  } else {
-    res.redirect('/access-denied');
-  }
+  function gotData(data) {
+    // access data values
+    templateData = data.val();
+    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
+    // handlebars object: templateData: templateData === anyName: variableName
+    res.render('users/users', { displayName: displayName, isAdmin: isAdmin, userData: templateData, navUsers: navUsers } );
+  };
 });
 
 /*******************************************************************************
@@ -50,13 +46,8 @@ router.get('/user-create', function(req, res, next) {
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
-  console.log("users.js + user create page ", isAdmin);
 
-  if (isAdmin) {
-    res.render('users/user-create', { displayName: displayName, isAdmin: isAdmin, navUsers: navUsers });
-  } else {
-    res.redirect('/access-denied');
-  }
+  res.render('users/user-create', { displayName: displayName, isAdmin: isAdmin, navUsers: navUsers });
 });
 
 /*******************************************************************************
@@ -110,25 +101,21 @@ router.get('/user-edit', function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-  if (isAdmin) {
-    /*****************************************************************************
-     * Data for Handlebars
-    *****************************************************************************/
-    // key is needed in template for the <form> that handle Delete Person (below)
-    // get key from url query parameter '?KEY='
-    var uid = req.query.KEY;
-    // get 'core' data record associated with 'key' value
-    dbRef.child('users/' + uid).once('value', gotData);
-    // global variable so warranty data can be accessed after the function
-    var templateData;
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+  // key is needed in template for the <form> that handle Delete Person (below)
+  // get key from url query parameter '?KEY='
+  var uid = req.query.KEY;
+  // get 'core' data record associated with 'key' value
+  dbRef.child('users/' + uid).once('value', gotData);
+  // global variable so warranty data can be accessed after the function
+  var templateData;
 
-    function gotData(data) {
-      // access data values
-      templateData = data.val();
-        res.render('users/user-edit', { displayName: displayName, isAdmin: isAdmin, uid: uid, templateData: templateData, navUsers: navUsers });
-      }
-  } else {
-    res.redirect('/access-denied');
+  function gotData(data) {
+    // access data values
+    templateData = data.val();
+      res.render('users/user-edit', { displayName: displayName, isAdmin: isAdmin, uid: uid, templateData: templateData, navUsers: navUsers });
   }
 });
 
@@ -220,28 +207,24 @@ router.get('/user-delete', function(req, res, next) {
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
-  console.log("isAdmin users.js + user-delete page ", isAdmin);
-  if (isAdmin) {
-    /*****************************************************************************
-     * Data for Handlebars
-    *****************************************************************************/
-    // key is needed in template for the <form> that handle Delete Person (below)
-    // get key from url query parameter '?KEY='
-    var uid = req.query.KEY;
 
-    admin.auth().getUser(uid)
-      .then(function(userRecord) {
-        userEmail = userRecord.email;
-        userDisplayName = userRecord.displayName;
-        // See the UserRecord reference doc for the contents of userRecord.
-        res.render('users/user-delete', { displayName: displayName, isAdmin: isAdmin, navUsers: navUsers, uid: uid, userEmail: userEmail, userDisplayName: userDisplayName });
-      })
-      .catch(function(error) {
-        console.log("Error fetching user data:", error);
-      });
-  } else {
-    res.redirect('/access-denied');
-  }
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+  // key is needed in template for the <form> that handle Delete Person (below)
+  // get key from url query parameter '?KEY='
+  var uid = req.query.KEY;
+
+  admin.auth().getUser(uid)
+    .then(function(userRecord) {
+      userEmail = userRecord.email;
+      userDisplayName = userRecord.displayName;
+      // See the UserRecord reference doc for the contents of userRecord.
+      res.render('users/user-delete', { displayName: displayName, isAdmin: isAdmin, uid: uid, userEmail: userEmail, userDisplayName: userDisplayName, navUsers: navUsers });
+    })
+    .catch(function(error) {
+      console.log("Error fetching user data:", error);
+    });
 });
 
 

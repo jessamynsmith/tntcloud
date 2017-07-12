@@ -116,7 +116,7 @@ var ensureLoggedIn = ensureLogin.ensureLoggedIn('/');
 app.use('/', index);
 app.use('/dispatch', ensureLoggedIn, mw.authToken, mw.userRole, dispatch);
 app.use('/core-warranty', ensureLoggedIn, coreWarranty);
-app.use('/users', ensureLoggedIn, /*mw.userRoleAndAdmin,*/ users);
+app.use('/users', ensureLoggedIn, mw.userRoleAndAdmin, users);
 app.use('/access-denied', ensureLoggedIn, accessDenied);
 
 // catch 404 and forward to error handler
