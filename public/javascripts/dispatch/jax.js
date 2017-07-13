@@ -120,6 +120,14 @@ function handleData(parentSelector, gotData) {
     }
   }
 
+  // Select Branch set to "JAX"
+  $(document).ready(function() {
+    function SelectElement(valueToSelect) {
+      var element = document.getElementById('selectBranch');
+      element.value = valueToSelect;
+    }
+    SelectElement("JAX");
+  });
   //////////////////////////////////////////////////////////////////////////////
   // Branch Dropdown Selector: Show/Hide by Branch To/From
   //////////////////////////////////////////////////////////////////////////////
