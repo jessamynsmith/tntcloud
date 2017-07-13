@@ -124,7 +124,6 @@ function handleData(parentSelector, gotData) {
   // Branch Dropdown Selector: Show/Hide by Branch To/From
   //////////////////////////////////////////////////////////////////////////////
   // get the select branch element and add event listener
-
   var selectBranch = document.getElementById("selectBranch");
   selectBranch.addEventListener("change", function() {
     switch(selectBranch.value) {
