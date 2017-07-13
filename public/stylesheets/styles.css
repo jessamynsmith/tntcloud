@@ -185,16 +185,17 @@ body {
   display: block;
 }
 /* 440 */
-.dispatching.branch440 .tnt-card-output {
+/* Digital CSS Selectors can be targeted with Unicode Characters
+ * https://codepen.io/bodigiti/pen/QgYYYo
+ * https://en.wikipedia.org/wiki/List_of_Unicode_characters
+ */
+.dispatching.\34 \34 0 .tnt-card-output {
   display: none;
 }
-.dispatching.branch440 .tnt-card-output.branch440 {
+.dispatching.\34 \34 0 .tnt-card-output.\34 \34 0 {
   display: block;
 }
 
-[class="440"] {
-  background: red;
-}
 
 /*******************************************************************************
  * Firebase Login
