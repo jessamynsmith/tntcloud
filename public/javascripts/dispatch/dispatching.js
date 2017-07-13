@@ -1,11 +1,11 @@
 
 // User Role Cookie + Role
 var userRole = Cookies.get('userRole');
-console.log("User Role Cookie ", userRole);
+//console.log("User Role Cookie ", userRole);
 var isAdmin = userRole === 'admin';
-console.log("User Role ", isAdmin);
+//console.log("User Role ", isAdmin);
 var isBasic = userRole === 'basic';
-console.log("User Role ", isBasic);
+//console.log("User Role ", isBasic);
 
 var showDelete = false;
 var showEdit = false;
@@ -114,7 +114,7 @@ function handleData(parentSelector, gotData) {
   if (isBasic) {
     // if Basic user, hide 'edit' link on all 'Dispatched' records
     var gotDispatched = $("div[data-status='dispatched']");
-    console.log("Got Dispatched? ", gotDispatched);
+    //console.log("Got Dispatched? ", gotDispatched);
     for (var i = 0; i < gotDispatched.length; i++) {
       gotDispatched[i].className += " hide";
     }

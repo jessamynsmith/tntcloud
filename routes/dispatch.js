@@ -99,4 +99,25 @@ router.get('/dispatching/jax', mw.userRole, function(req, res, next) {
 });
 
 
+/*******************************************************************************
+ * Dispatching Page: NFWS
+ ******************************************************************************/
+router.get('/dispatching/nfws', mw.userRole, function(req, res, next) {
+  var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+  var isBasic = req.app.locals.userRole === 'basic';
+
+  var userUID = req.user.uid;
+  console.log("dispatch.js UID ", userUID);
+
+  var showDriverInput = false;
+  if (isAdmin) {
+    showDriverInput = true;
+  }
+
+  res.render('dispatch/nfws', { displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+});
+
+
 module.exports = router;

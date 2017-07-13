@@ -43,7 +43,7 @@ function dispatchCreateFormDataRecord(){
     submitData.DateTime = DateTime;
     submitData.DateTimeStampServer = DateTimeStampServer;
 
-    console.log(submitData);
+    //console.log(submitData);
 
     // Get a key for a new core Record
     var newKey = firebase.database().ref().child('dispatch').push().key;
