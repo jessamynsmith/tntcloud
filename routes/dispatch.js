@@ -5,15 +5,30 @@ var mw = require('../middleware');
 /*******************************************************************************
  * Core Warranty: Navigation
  ******************************************************************************/
+var branchSelector =
+    `<div class="input-group" style="width: auto; display:inline-block;">
+      <select id="selectBranch" class="input-group-field" style="width: auto; display:inline-block;" name="selectBranch">
+        <option value="allBranches">All Branches</option>
+        <option value="JAX">JAX</option>
+        <option value="NFWS">NFWS</option>
+        <option value="LC">LC</option>
+        <option value="WC">WC</option>
+        <option value="440">440</option>
+      </select>
+    </div>`;
+
 var navDispatch =
   `<div class="section-nav dispatch">
     <a href="/dispatch/history" class="button" style="margin: .5rem .75rem .5rem .5rem;">History</a>
     <a href="/dispatch/dispatching" class="button" style="margin: .5rem .75rem;">Dispatching</a>
+    ${branchSelector}
   </div>`;
+
 var navDispatchCreateRequest =
   `<div class="section-nav dispatch">
     <a href="/dispatch/history" class="button" style="margin: .5rem .75rem .5rem .5rem;">History</a>
     <a href="/dispatch/dispatching" class="button" style="margin: .5rem .75rem;">Dispatching</a>
+    ${branchSelector}
     <button title="actionRequestCreate" class="button alert" data-open="requestCreate" style="margin: .5rem .75rem;">Create Request</button>
   </div>`;
 
