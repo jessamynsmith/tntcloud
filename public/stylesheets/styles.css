@@ -157,20 +157,40 @@ body {
   margin-top: 32px;
 }
 /* JAX */
-.dispatching-jax .tnt-card-output {
+.dispatching.JAX .tnt-card-output {
   display: none;
 }
-.dispatching-jax .tnt-card-output.JAX {
+.dispatching.JAX .tnt-card-output.JAX {
   display: block;
 }
 /* NFWS */
-.dispatching-nfws .tnt-card-output {
+.dispatching.NFWS .tnt-card-output {
   display: none;
 }
-.dispatching-nfws .tnt-card-output.NFWS {
+.dispatching.NFWS .tnt-card-output.NFWS {
   display: block;
 }
-
+/* LC */
+.dispatching.LC .tnt-card-output {
+  display: none;
+}
+.dispatching.LC .tnt-card-output.LC {
+  display: block;
+}
+/* WC */
+.dispatching.WC .tnt-card-output {
+  display: none;
+}
+.dispatching.WC .tnt-card-output.WC {
+  display: block;
+}
+/* 440 */
+.dispatching.440 .tnt-card-output {
+  display: none;
+}
+.dispatching.440 .tnt-card-output.440 {
+  display: block;
+}
 
 /*******************************************************************************
  * Firebase Login

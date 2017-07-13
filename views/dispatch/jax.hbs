@@ -2,7 +2,8 @@
 <!-- Import After Branch Selector Markup dispatching.js needs to run after it --->
 <!-- If Branch Selector in Navigation, dispatching.js can be @ top of this file -->
 <script src="/javascripts/handlebars/4.0.10/handlebars-v4.0.10.js"></script>
-<script language="javascript" src="/javascripts/dispatch/jax.js"></script>
+<script language="javascript" src="/javascripts/dispatch/dispatching.js"></script>
+<script language="javascript" src="/javascripts/dispatch/branch-jax.js"></script>
 
 <!-- Title/Intro -------------------------------------------------------------->
 <div class="section-intro dispatch">
@@ -11,7 +12,7 @@
 
 
 <!-- Two Columns -------------------------------------------------------------->
-<div class="grid-x two-column dispatching dispatching-jax">
+<div id="dispatchRecords" class="grid-x two-column dispatching">
   <div class="dispatching">
     <!-- Column 1 ------------------------------------------------------------->
     <div class="small-6 cell col1">
