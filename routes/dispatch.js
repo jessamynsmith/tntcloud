@@ -86,6 +86,8 @@ router.get('/dispatching/jax', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
   var isBasic = req.app.locals.userRole === 'basic';
+  // isBranch for conditionally loading javascript branch file
+  var isJAX = true;
 
   var userUID = req.user.uid;
   console.log("dispatch.js UID ", userUID);
@@ -95,7 +97,7 @@ router.get('/dispatching/jax', mw.userRole, function(req, res, next) {
     showDriverInput = true;
   }
 
-  res.render('dispatch/jax', { displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { isJAX: isJAX, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
 });
 
 
@@ -107,6 +109,8 @@ router.get('/dispatching/nfws', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
   var isBasic = req.app.locals.userRole === 'basic';
+  // isBranch for conditionally loading javascript branch file
+  var isNFWS = true;
 
   var userUID = req.user.uid;
   console.log("dispatch.js UID ", userUID);
@@ -116,7 +120,7 @@ router.get('/dispatching/nfws', mw.userRole, function(req, res, next) {
     showDriverInput = true;
   }
 
-  res.render('dispatch/nfws', { displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { isNFWS: isNFWS, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
 });
 
 
