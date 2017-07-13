@@ -19,7 +19,7 @@ if (isAdmin) {
 // #if ../isAdmin === https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop
 var rawTemplateRequestList =
 `{{#each dispatch}}
-  <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output" data-card-from="{{ BranchFrom }}" data-card-to="{{ BranchTo }}">
+  <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output hide" data-card-from="{{ BranchFrom }}" data-card-to="{{ BranchTo }}">
     <div class="">
        <div class="card-divider urgency-{{Urgency}}">
          <div>{{ Vendor }}</div>
@@ -120,31 +120,74 @@ function handleData(parentSelector, gotData) {
     }
   }
 
-  var fromJax = document.querySelectorAll('[data-card-from="JAX"]');
-  var toJax = document.querySelectorAll('[data-card-to="JAX"]');
-
-
-  var selectBranch = document.getElementById("selectBranch");
-
-  selectBranch.addEventListener("change", function() {
-      if(selectBranch.value == "allBranches") {
-        alert("All Branches");
-      } else if (selectBranch.value == "JAX") {
-        // alert("JAX");
-        console.log("Got JAX From? ", fromJax);
-        console.log("Got JAX To? ", toJax);
-        for (var i = 0; i < fromJax.length; i++) {
-          fromJax[i].className += " hide";
-        }
-        for (var i = 0; i < fromJax.length; i++) {
-          toJax[i].className += " hide";
-        }
-      }
+  //////////////////////////////////////////////////////////////////////////////
+  // Branch Dropdown Selector: Show/Hide by Branch To/From
+  //////////////////////////////////////////////////////////////////////////////
+  var allDispatchRecords = document.getElementsByClassName('tnt-card-output');
+  // remove class 'hide' from all dispatch requests
+  $(document).ready(function() {
+    $('.tnt-card-output').removeClass('hide');
   });
+  // get the select branch element and add event listener
+  var selectBranch = document.getElementById("selectBranch");
+  selectBranch.addEventListener("change", function() {
+    switch(selectBranch.value) {
+      // show all records
+      case "allBranches" :
+        $.each(allDispatchRecords, function() {
+          this.classList.remove("hide");
+        });
+        break;
+      // show JAX records
+      case "JAX" :
+        $.each(allDispatchRecords, function() {
+            this.classList.add("hide");
+          });
+        $("[data-card-from='JAX'], [data-card-to='JAX']").each(function() {
+          this.classList.remove("hide");
+        });
+        break;
+      // show NFWS records
+      case "NFWS" :
+        $.each(allDispatchRecords, function() {
+            this.classList.add("hide");
+          });
+        $("[data-card-from='NFWS'], [data-card-to='NFWS']").each(function() {
+          this.classList.remove("hide");
+        });
+        break;
+      // show LC records
+      case "LC" :
+        $.each(allDispatchRecords, function() {
+            this.classList.add("hide");
+          });
+        $("[data-card-from='LC'], [data-card-to='LC']").each(function() {
+          this.classList.remove("hide");
+        });
+        break;
+      // show WC records
+      case "WC" :
+        $.each(allDispatchRecords, function() {
+            this.classList.add("hide");
+          });
+        $("[data-card-from='WC'], [data-card-to='WC']").each(function() {
+          this.classList.remove("hide");
+        });
+        break;
+      // show 440 records
+      case "440" :
+        $.each(allDispatchRecords, function() {
+            this.classList.add("hide");
+          });
+        $("[data-card-from='440'], [data-card-to='440']").each(function() {
+          this.classList.remove("hide");
+        });
+        break;
+      // show all records by default
+      default :
+      $.each(allDispatchRecords, function() {
+        this.classList.remove("hide");
+      });
+    } // end switch
+  }); // end selectBranch.addEventListener
 }
-
-/*
-  for (var i = 0; i < gotDispatched.length; i++) {
-    gotDispatched[i].className += " hide";
-  }
-*/
