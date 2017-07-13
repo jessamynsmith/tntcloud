@@ -124,4 +124,73 @@ router.get('/dispatching/nfws', mw.userRole, function(req, res, next) {
 });
 
 
+/*******************************************************************************
+ * Dispatching Page: LC
+ ******************************************************************************/
+router.get('/dispatching/lc', mw.userRole, function(req, res, next) {
+  var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+  var isBasic = req.app.locals.userRole === 'basic';
+  // isBranch for conditionally loading javascript branch file
+  var isLC = true;
+
+  var userUID = req.user.uid;
+  console.log("dispatch.js UID ", userUID);
+
+  var showDriverInput = false;
+  if (isAdmin) {
+    showDriverInput = true;
+  }
+
+  res.render('dispatch/dispatching', { isLC: isLC, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+});
+
+
+/*******************************************************************************
+ * Dispatching Page: WC
+ ******************************************************************************/
+router.get('/dispatching/wc', mw.userRole, function(req, res, next) {
+  var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+  var isBasic = req.app.locals.userRole === 'basic';
+  // isBranch for conditionally loading javascript branch file
+  var isWC = true;
+
+  var userUID = req.user.uid;
+  console.log("dispatch.js UID ", userUID);
+
+  var showDriverInput = false;
+  if (isAdmin) {
+    showDriverInput = true;
+  }
+
+  res.render('dispatch/dispatching', { isWC: isWC, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+});
+
+
+/*******************************************************************************
+ * Dispatching Page: 440
+ ******************************************************************************/
+router.get('/dispatching/440', mw.userRole, function(req, res, next) {
+  var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+  var isBasic = req.app.locals.userRole === 'basic';
+  // isBranch for conditionally loading javascript branch file
+  var is440 = true;
+
+  var userUID = req.user.uid;
+  console.log("dispatch.js UID ", userUID);
+
+  var showDriverInput = false;
+  if (isAdmin) {
+    showDriverInput = true;
+  }
+
+  res.render('dispatch/dispatching', { is440: is440, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+});
+
+
 module.exports = router;

@@ -19,7 +19,7 @@ if (isAdmin) {
 // #if ../isAdmin === https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop
 var rawTemplateRequestList =
 `{{#each dispatch}}
-  <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output {{ BranchFrom }} {{ BranchTo }}" data-card-from="{{ BranchFrom }}" data-card-to="{{ BranchTo }}">
+  <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output {{ BranchFrom }} {{ BranchTo }}" >
     <div class="">
        <div class="card-divider urgency-{{Urgency}}">
          <div>{{ Vendor }}</div>

@@ -11,5 +11,5 @@ $(document).ready(function() {
     var parentDIV = document.getElementById("dispatchRecords");
     parentDIV.className += " " + valueToSelect;
   }
-  SelectElement("NFWS");
+  SelectElement("WC");
 });

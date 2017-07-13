@@ -185,11 +185,15 @@ body {
   display: block;
 }
 /* 440 */
-.dispatching.440 .tnt-card-output {
+.dispatching.branch440 .tnt-card-output {
   display: none;
 }
-.dispatching.440 .tnt-card-output.440 {
+.dispatching.branch440 .tnt-card-output.branch440 {
   display: block;
+}
+
+[class="440"] {
+  background: red;
 }
 
 /*******************************************************************************
