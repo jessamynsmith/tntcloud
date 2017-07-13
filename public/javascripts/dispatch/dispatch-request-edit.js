@@ -66,9 +66,9 @@ function dispatchEditFormDataUpdate(){
     // Status of Dispatch Request
     if (submitData.Driver === "" || isBasic) {
       submitData.Status = "requested";
-    } else if (isBasic) {
+    } if (isBasic) {
       submitData.Driver = "";
-    } else {
+    } if (submitData.Driver !== "") {
       submitData.Status = "dispatched";
     }
 

@@ -133,7 +133,11 @@ body {
   max-width: 100%;
 }
 
-/** Two Columns ***************************************************************/
+
+/*******************************************************************************
+ * Dispatching
+ ******************************************************************************/
+/* Columns */
 .two-column .dispatching .small-6 {
   width: 47.5%;
 }
@@ -148,13 +152,25 @@ body {
   margin-left: 2%;
 }
 
-
-/*******************************************************************************
- * Section Intro
- ******************************************************************************/
+/* Section Intro */
 .section-intro.dispatch {
   margin-top: 32px;
 }
+/* JAX */
+.dispatching-jax .tnt-card-output {
+  display: none;
+}
+.dispatching-jax .tnt-card-output.JAX {
+  display: block;
+}
+/* NFWS */
+.dispatching-nfws .tnt-card-output {
+  display: none;
+}
+.dispatching-nfws .tnt-card-output.NFWS {
+  display: block;
+}
+
 
 /*******************************************************************************
  * Firebase Login

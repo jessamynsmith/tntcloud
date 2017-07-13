@@ -19,7 +19,7 @@ if (isAdmin) {
 // #if ../isAdmin === https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop
 var rawTemplateRequestList =
 `{{#each dispatch}}
-  <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output" data-card-from="{{ BranchFrom }}" data-card-to="{{ BranchTo }}">
+  <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output {{BranchFrom}} {{BranchTo}}" data-card-from="{{ BranchFrom }}" data-card-to="{{ BranchTo }}">
     <div class="">
        <div class="card-divider urgency-{{Urgency}}">
          <div>{{ Vendor }}</div>
@@ -128,12 +128,34 @@ function handleData(parentSelector, gotData) {
     }
     SelectElement("JAX");
   });
+
+  var allRecords = document.getElementsByClassName("tnt-card-output");
+  console.log("allRecords", allRecords);
+
+  $("allRecords[class!='JAX']");
+
+  console.log("allRecords 2", allRecords);
+/*
+  $.each(allRecords, function() {
+      this.classList.add("hide");
+    });
+
+/*
+  $("[data-card-from='440'], [data-card-to='440']").each(function() {
+    this.classList.remove("hide");
+  });
+*/
+
   //////////////////////////////////////////////////////////////////////////////
   // Branch Dropdown Selector: Show/Hide by Branch To/From
   //////////////////////////////////////////////////////////////////////////////
   // get the select branch element and add event listener
   var selectBranch = document.getElementById("selectBranch");
   selectBranch.addEventListener("change", function() {
+    function SelectElement(valueToSelect) {
+      var element = document.getElementById('selectBranch');
+      element.value = valueToSelect;
+    }
     switch(selectBranch.value) {
       // show all records
       case "allBranches" :
@@ -142,47 +164,27 @@ function handleData(parentSelector, gotData) {
       // show JAX records
       case "JAX" :
         window.location.href = `/dispatch/dispatching/jax`;
-        function SelectElement(valueToSelect) {
-          var element = document.getElementById('selectBranch');
-          element.value = valueToSelect;
-        }
         SelectElement("JAX");
         break;
       // show NFWS records
       case "NFWS" :
-        $.each(allDispatchRecords, function() {
-            this.classList.add("hide");
-          });
-        $("[data-card-from='NFWS'], [data-card-to='NFWS']").each(function() {
-          this.classList.remove("hide");
-        });
+        window.location.href = `/dispatch/dispatching/NFWS`;
+        SelectElement("NFWS");
         break;
       // show LC records
       case "LC" :
-        $.each(allDispatchRecords, function() {
-            this.classList.add("hide");
-          });
-        $("[data-card-from='LC'], [data-card-to='LC']").each(function() {
-          this.classList.remove("hide");
-        });
+        window.location.href = `/dispatch/dispatching/LC`;
+        SelectElement("LC");
         break;
       // show WC records
       case "WC" :
-        $.each(allDispatchRecords, function() {
-            this.classList.add("hide");
-          });
-        $("[data-card-from='WC'], [data-card-to='WC']").each(function() {
-          this.classList.remove("hide");
-        });
+        window.location.href = `/dispatch/dispatching/WC`;
+        SelectElement("WC");
         break;
       // show 440 records
       case "440" :
-        $.each(allDispatchRecords, function() {
-            this.classList.add("hide");
-          });
-        $("[data-card-from='440'], [data-card-to='440']").each(function() {
-          this.classList.remove("hide");
-        });
+        window.location.href = `/dispatch/dispatching/440`;
+        SelectElement("440");
         break;
       // show all records by default
       default :

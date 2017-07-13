@@ -33,6 +33,8 @@ function dispatchCreateFormDataRecord(){
       submitData.Status = "requested";
     } if (isBasic) {
       submitData.Driver = "";
+    } if (submitData.Driver !== "") {
+      submitData.Status = "dispatched";
     }
 
     submitData.CreatedByUID = CreatedByUID;
