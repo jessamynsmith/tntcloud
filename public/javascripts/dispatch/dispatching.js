@@ -37,7 +37,7 @@ var rawTemplateRequestList =
       <div>Driver:&nbsp;{{Driver}}</div>
     </div>
     <div class="footer">
-      <div class="edit-link" title="{{ CreatedByUID }}" data-status="{{ Status }}">
+      <div class="created-by-uid" title="{{ CreatedByUID }}" data-status="{{ Status }}">
         <a class="editLink" data-open="requestEdit" title="actionRequestEdit" onClick="dispatchEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}">Edit</a>
       </div>
       {{#if ../showReceivedLink }}
