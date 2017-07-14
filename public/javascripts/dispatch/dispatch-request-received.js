@@ -3,16 +3,17 @@
 // Delete Confirm Form Load
 ////////////////////////////////////////////////////////////////////////////////
 // function called onclick in dispatching.js
-function dispatchDeleteLoadConfirmForm(clicked_id) {
+// parameter 'clicked_id' comes from onClick function call which includes (this.id)
+function dispatchReceivedLoadConfirmForm(clicked_id) {
   // fyi - for some reason, above global variable 'editKey' is not available in this function
   var key = clicked_id;
 
   var buttonHTML =
   `<button
-      onClick="dispatchDelete(this.id);" id="${key}" class="button alert" type="button">Confirm Delete
+      onClick="dispatchReceived(this.id);" id="${key}" class="button alert" type="button">Confirm Received
   </button>`;
   // get div id deleteButtonParent and add buttonHTML as innerHTML
-  var parentDiv = document.getElementById("deleteButtonParent");
+  var parentDiv = document.getElementById("receivedButtonParent");
   parentDiv.innerHTML = buttonHTML;
 }
 
@@ -21,7 +22,7 @@ function dispatchDeleteLoadConfirmForm(clicked_id) {
 // Delete Record
 ////////////////////////////////////////////////////////////////////////////////
 // function called onclick in dispatching.hbs via -> buttonHTML in above function dispatchDeleteLoadConfirmForm
-function dispatchDelete(clicked_id) {
+function dispatchReceived(clicked_id) {
   // fyi - for some reason, above global variable 'editKey' is not available in this function
   var key = clicked_id;
 
