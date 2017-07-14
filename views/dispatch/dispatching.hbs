@@ -106,7 +106,7 @@
       {{/if}}
       <!-- Submit Button ------------------------------------------------------>
       <div>
-        <input id="submit-dispatch-request" type="submit" class="button primary">
+        <input id="submit-dispatch-request" type="submit" class="button success">
       </div>
     </div>
   </form>
@@ -186,9 +186,17 @@
           <input type="text" id="editDriver" placeholder="Driver"  class="input-group-field" name="Driver" disabled />
         {{/if}}
       </div>
+      <!-- Received ----------------------------------------------------------->
+      <div class="input-group">
+        <span class="input-group-label" style="background: #cc4b37; color: white;">Received</span>
+        <select id="editReceived"  class="input-group-field" name="Status">
+          <option value="dispatched">No</option>
+          <option value="received">Yes</option>
+        </select>
+      </div>
       <!-- Submit Button ------------------------------------------------------>
       <div>
-        <input id="submit-dispatch-request" type="submit" class="button primary">
+        <input id="submit-dispatch-request" type="submit" class="button success">
       </div>
     </div>
   </form>
