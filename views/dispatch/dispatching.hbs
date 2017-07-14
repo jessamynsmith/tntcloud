@@ -186,15 +186,6 @@
           <input type="text" id="editDriver" placeholder="Driver"  class="input-group-field" name="Driver" disabled />
         {{/if}}
       </div>
-      <!-- Received ----------------------------------------------------------->
-      <div>Once submitted as received 'Yes' this cannot be undone.</div>
-      <div class="input-group">
-        <span class="input-group-label" style="background: #cc4b37; color: white;">Received</span>
-        <select id="editReceived"  class="input-group-field" name="Status">
-          <option value="dispatched">No</option>
-          <option value="received">Yes</option>
-        </select>
-      </div>
       <!-- Submit Button ------------------------------------------------------>
       <div>
         <input id="submit-dispatch-request" type="submit" class="button success">
@@ -230,6 +221,35 @@
 <!-- Delete Dispatch Request: Only import if isAdmin = true ------------------->
 <script src="/javascripts/dispatch/dispatch-request-delete.js"></script>
 {{/if}}
+
+
+{{#if isAdmin}}
+<!-- Dispatch Received Form --------------------------------------------------->
+<!-- Foundation Example Reveal/Popup Modal ------------------------------------>
+<!-- http://foundation.zurb.com/sites/docs/reveal.html ------------------------>
+<!-- popup activation placed into navigation bar's 'Create Request' button ---->
+  <div class="row expanded small-12 medium-6 large-3 columns reveal"  id="requestReceived" data-reveal data-reset-on-close="true" data-close-on-click="false">
+    <form id="requestReceivedForm" class="input-form" onSubmit="return dispatchReceivedFormDataUpdate(this)">
+      <div class="hover-form">
+        <div class="card">
+          <div class="card-divider">
+            <h4>Confirm Received</h4>
+            <h5>Once submitted as received this cannot be undone.</h5>
+            <!-- Big 'X' close form button -->
+            <button class="close-button" data-close aria-label="Close modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <!-- Submit Button ---------------------------------------------------->
+        <div id="receivedButtonParent"></div>
+      </div>
+    </form>
+  </div>
+<!-- Received Dispatch Request: Only import if isAdmin = true ----------------->
+<!--  <script src="/javascripts/dispatch/dispatch-request-received.js"></script> -->
+{{/if}}
+
 
 <!-- Request Card Forms, Input Fields, and Processing Code  ------------------->
 <script src="/javascripts/dispatch/dispatch-request-create.js"></script>

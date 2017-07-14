@@ -35,11 +35,14 @@ var rawTemplateRequestList =
       <div>Driver:&nbsp;{{Driver}}</div>
     </div>
     <div class="footer">
-      <div style="float: left;" class="created-by-uid" title="{{ CreatedByUID }}" data-status="{{ Status }}">
+      <div style="float: left; width: 33%;" class="created-by-uid" title="{{ CreatedByUID }}" data-status="{{ Status }}">
         <a class="editLink" data-open="requestEdit" title="actionRequestEdit" onClick="dispatchEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}">Edit</a>
       </div>
+      <div style="float: left; width: 33%; text-align: center;">
+        <a data-open="requestReceived" title="actionRequestReceived" onClick="dispatchReceivedLoadConfirmForm(this.id);" id="{{@key}}" class="" style="color: #3adb76; font-weight: bold; padding: .5rem 1rem; margin-bottom: .5rem;">RECEIVED</a>
+      </div>
       {{#if ../showDeleteLink }}
-      <div style="float: right;">
+      <div style="float: right; width: 33%; text-align: right;">
         <a data-open="requestDelete" title="actionRequestDelete" onClick="dispatchDeleteLoadConfirmForm(this.id);" id="{{@key}}">Delete</a>
       </div>
       {{/if}}
@@ -104,7 +107,7 @@ function handleData(parentSelector, gotData) {
   var currentUID = firebase.auth().currentUser.uid;
 
   if (!isAdmin) {
-    // get record 'created-by-uid' from the surrounding <div> title
+    // get record's 'created-by-uid' from the edit link's <div> title attribute
     var requestCreatedByUIDs = document.getElementsByClassName("created-by-uid");
     for (var i = 0; i < requestCreatedByUIDs.length; i++) {
       if (currentUID !== requestCreatedByUIDs[i].title) {
