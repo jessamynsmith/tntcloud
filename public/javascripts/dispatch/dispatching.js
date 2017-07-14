@@ -7,6 +7,7 @@ var isAdmin = userRole === 'admin';
 var isBasic = userRole === 'basic';
 //console.log("User Role ", isBasic);
 
+var showEdit = false;
 var showDelete = false;
 var showReceived = false;
 if (isAdmin) {
