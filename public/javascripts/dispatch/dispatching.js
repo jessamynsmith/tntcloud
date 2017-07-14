@@ -16,11 +16,12 @@ if (isAdmin) {
 /*******************************************************************************
 * Handlebars
 *******************************************************************************/
-// #if ../isAdmin === https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop
+// #if ../isAdmin, #if ../showDelete
+// https://stackoverflow.com/questions/13645084/access-a-variable-outside-the-scope-of-a-handlebars-js-each-loop
 var rawTemplateRequestList =
 `{{#each dispatch}}
   <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output {{ BranchFrom }} {{ BranchTo }}" >
-    <div class="">
+    <div class="card-header">
        <div class="card-divider urgency-{{Urgency}}">
          <div>{{ Vendor }}</div>
          <div>{{Date}}&nbsp;&nbsp;@&nbsp;&nbsp;{{DateTime}}</div>
@@ -33,16 +34,16 @@ var rawTemplateRequestList =
       <div>Instructions:&nbsp;{{Instructions}}</div>
       <div>Driver:&nbsp;{{Driver}}</div>
     </div>
-        <div class="footer">
-        <div style="float: left;" class="created-by-uid" title="{{ CreatedByUID }}" data-status="{{ Status }}">
-          <a class="editLink" data-open="requestEdit" title="actionRequestEdit" onClick="dispatchEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}">Edit</a>
-        </div>
-        {{#if ../showDeleteLink }}
-          <div style="float: right;">
-            <a data-open="requestDelete" title="actionRequestDelete" onClick="dispatchDeleteLoadConfirmForm(this.id);" id="{{@key}}">Delete</a>
-          </div>
-        {{/if}}
+    <div class="footer">
+      <div style="float: left;" class="created-by-uid" title="{{ CreatedByUID }}" data-status="{{ Status }}">
+        <a class="editLink" data-open="requestEdit" title="actionRequestEdit" onClick="dispatchEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}">Edit</a>
       </div>
+      {{#if ../showDeleteLink }}
+      <div style="float: right;">
+        <a data-open="requestDelete" title="actionRequestDelete" onClick="dispatchDeleteLoadConfirmForm(this.id);" id="{{@key}}">Delete</a>
+      </div>
+      {{/if}}
+    </div>
   </div>
 {{/each}}`;
 
