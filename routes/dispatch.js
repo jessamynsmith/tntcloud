@@ -6,7 +6,7 @@ var mw = require('../middleware');
  * Core Warranty: Navigation
  ******************************************************************************/
 var branchSelector =
-    `<div class="input-group" style="width: auto; display:inline-block;">
+    `<div class="input-group" style="width: auto; display:inline-block; margin-bottom: 0;">
       <select id="selectBranch" class="input-group-field" style="width: auto; display:inline-block;" name="selectBranch">
         <option value="allBranches">All Branches</option>
         <option value="JAX">JAX</option>
@@ -18,16 +18,16 @@ var branchSelector =
     </div>`;
 
 var navDispatch =
-  `<div class="section-nav dispatch">
-    <a href="/dispatch/dispatching" class="button" style="margin: .5rem .75rem;">Dispatching</a>
-    <a href="/dispatch/history" class="button" style="margin: .5rem .75rem .5rem .5rem;">History</a>
+  `<div class="section-nav dispatch" style="padding: .5rem 0;">
+    <a href="/dispatch/dispatching" class="" style="margin: .5rem .75rem;">Dispatching</a>
+    <a href="/dispatch/history" class="" style="margin: .5rem .75rem .5rem .5rem;">History</a>
     ${branchSelector}
   </div>`;
 
 var navDispatchCreateRequest =
   `<div class="section-nav dispatch">
-    <a href="/dispatch/dispatching" class="button" style="margin: .5rem .75rem;">Dispatching</a>
-    <a href="/dispatch/history" class="button" style="margin: .5rem .75rem .5rem .5rem;">History</a>
+    <a href="/dispatch/dispatching" class="" style="margin: .5rem .75rem;">Dispatching</a>
+    <a href="/dispatch/history" class="" style="margin: .5rem .75rem .5rem .5rem;">History</a>
     ${branchSelector}
     <button title="actionRequestCreate" class="button alert" data-open="requestCreate" style="margin: .5rem .75rem;">Create Request</button>
   </div>`;

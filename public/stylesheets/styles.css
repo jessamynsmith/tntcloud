@@ -154,7 +154,7 @@ body {
 
 /* Section Intro */
 .section-intro.dispatch {
-  margin-top: 32px;
+  margin-top: 1rem;
 }
 /* JAX */
 .dispatching.JAX .tnt-card-output {
