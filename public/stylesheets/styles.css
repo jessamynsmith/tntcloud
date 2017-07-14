@@ -137,7 +137,9 @@ body {
 /*******************************************************************************
  * Dispatching
  ******************************************************************************/
-/* Columns */
+/*********************************
+ * Columns (Dispatching)
+ ********************************/
 .two-column .dispatching .small-6 {
   width: 47.5%;
 }
@@ -152,39 +154,70 @@ body {
   margin-left: 2%;
 }
 
-/* Section Intro */
+/*********************************
+ * Section Intro (Dispatching)
+ ********************************/
 .section-intro.dispatch {
   margin-top: 1rem;
 }
-/* JAX */
+/*********************************
+ * Card Footer Links (Dispatching)
+ ********************************/
+.dispatching .edit-link {
+  float: left;
+  width: 33%;
+}
+.dispatching .received-link {
+  float: left;
+  width: 33%;
+  text-align: center;
+}
+.dispatching .received-link a {
+ color: #3adb76;
+ font-weight: bold;
+ padding: .5rem 1rem;
+ margin-bottom: .5rem;
+}
+.dispatching .delete-link {
+  float: right;
+  width: 33%;
+  text-align: right;
+}
+.dispatching #requested .received-link {
+  display: none;
+}
+/*********************************
+ * Show/Hide Records by Branch (Dispatching)
+ ********************************/
+/* JAX Branch show/hide */
 .dispatching.JAX .tnt-card-output {
   display: none;
 }
 .dispatching.JAX .tnt-card-output.JAX {
   display: block;
 }
-/* NFWS */
+/* NFWS Branch show/hide */
 .dispatching.NFWS .tnt-card-output {
   display: none;
 }
 .dispatching.NFWS .tnt-card-output.NFWS {
   display: block;
 }
-/* LC */
+/* LC Branch show/hide */
 .dispatching.LC .tnt-card-output {
   display: none;
 }
 .dispatching.LC .tnt-card-output.LC {
   display: block;
 }
-/* WC */
+/* WC Branch show/hide */
 .dispatching.WC .tnt-card-output {
   display: none;
 }
 .dispatching.WC .tnt-card-output.WC {
   display: block;
 }
-/* 440 */
+/* 440 Branch show/hide */
 /* Digital CSS Selectors can be targeted with Unicode Characters
  * https://codepen.io/bodigiti/pen/QgYYYo
  * https://en.wikipedia.org/wiki/List_of_Unicode_characters

@@ -8,9 +8,10 @@ var isBasic = userRole === 'basic';
 //console.log("User Role ", isBasic);
 
 var showDelete = false;
-var showEdit = false;
+var showReceived = false;
 if (isAdmin) {
   showDelete = true;
+  showReceived = true;
 }
 
 /*******************************************************************************
@@ -35,14 +36,16 @@ var rawTemplateRequestList =
       <div>Driver:&nbsp;{{Driver}}</div>
     </div>
     <div class="footer">
-      <div style="float: left; width: 33%;" class="created-by-uid" title="{{ CreatedByUID }}" data-status="{{ Status }}">
+      <div class="edit-link" title="{{ CreatedByUID }}" data-status="{{ Status }}">
         <a class="editLink" data-open="requestEdit" title="actionRequestEdit" onClick="dispatchEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}">Edit</a>
       </div>
-      <div style="float: left; width: 33%; text-align: center;">
-        <a data-open="requestReceived" title="actionRequestReceived" onClick="dispatchReceivedLoadConfirmForm(this.id);" id="{{@key}}" class="" style="color: #3adb76; font-weight: bold; padding: .5rem 1rem; margin-bottom: .5rem;">RECEIVED</a>
+      {{#if ../showReceivedLink }}
+      <div class="received-link">
+        <a data-open="requestReceived" title="actionRequestReceived" onClick="dispatchReceivedLoadConfirmForm(this.id);" id="{{@key}}">RECEIVED</a>
       </div>
+      {{/if}}
       {{#if ../showDeleteLink }}
-      <div style="float: right; width: 33%; text-align: right;">
+      <div class="delete-link">
         <a data-open="requestDelete" title="actionRequestDelete" onClick="dispatchDeleteLoadConfirmForm(this.id);" id="{{@key}}">Delete</a>
       </div>
       {{/if}}
@@ -95,7 +98,7 @@ function handleData(parentSelector, gotData) {
   // about the '../' in the above {{# if ../ }}
   // required when using handlebars template in separate .js file outside of .hbs node express
   // 'showDelete' is coming from top of this file, not the dispatch.js route file
-  var data = { showDeleteLink: showDelete, dispatch: dataVal };
+  var data = { showDeleteLink: showDelete, showReceivedLink: showReceived, dispatch: dataVal };
   var html = compiledTemplate(data);
 
   parentDiv.append(html);
