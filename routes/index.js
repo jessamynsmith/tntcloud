@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
  * Login Form
  ******************************************************************************/
 router.post('/login', passport.authenticate('local', { failureRedirect: '/', failureFlash: true }), function(req, res) {
-    res.redirect('/core-warranty');
+    res.redirect('/main');
 });
 
 
@@ -31,7 +31,7 @@ router.post('/logout', function(req, res) {
     req.app.locals.loggedInUsers.splice(userIndex, 1);
   }
   // Disable ...signOut() because firebase's most recent logged in user is the
-  // current-user, regardless of number of users... 
+  // current-user, regardless of number of users...
   //  firebase.auth().signOut();
 
   req.logout();

@@ -39,7 +39,7 @@ module.exports.roleAdmin = function(req, res, next) {
   if (req.app.locals.userRole == 'admin') {
     next();
   } else {
-    res.redirect('/core-warranty');
+    res.redirect('/main');
   }
 };
 /** End User Role Check if Admin (Middleware) *********************************/

@@ -22,7 +22,6 @@ app.locals.firebase = require("./private/firebase/firebase");
 var firebaseAdmin = require('./private/firebase/firebase-admin-init');
 // Global dbRef ... so firebase connection available everywhere without import
 app.locals.dbRef = app.locals.firebase.database().ref();
-app.locals.displayNameThing = "I want it to show up";
 var firebaseUser = require("./private/firebase/firebase-user");
 
 // Call Function every Three-million milliseconds = 50 minutes (setInterval = Node timer)
@@ -69,10 +68,10 @@ passport.deserializeUser(function(uid, cb) {
 
 // import route files
 var index = require('./routes/index');
+var main = require('./routes/main');
 var dispatch = require('./routes/dispatch');
 var coreWarranty = require('./routes/core-warranty');
 var users = require('./routes/users');
-var accessDenied = require('./routes/access-denied');
 
 // view engine setup
 app.engine('hbs', hbs({
@@ -114,10 +113,10 @@ app.use(flash());
 // define routes and route resource files -see @routes files
 var ensureLoggedIn = ensureLogin.ensureLoggedIn('/');
 app.use('/', index);
+app.use('/main', ensureLoggedIn, main);
 app.use('/dispatch', ensureLoggedIn, mw.authToken, mw.userRole, dispatch);
 app.use('/core-warranty', ensureLoggedIn, coreWarranty);
 app.use('/users', ensureLoggedIn, mw.userRoleAndAdmin, users);
-app.use('/access-denied', ensureLoggedIn, accessDenied);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
