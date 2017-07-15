@@ -173,7 +173,11 @@ body {
   /* apply to entire card, and overflow + text-overflow is applied lower level */
   white-space: nowrap;
   width: 45%;
+  float: left;
+  margin: 0 5% 2rem 0;
 }
+
+/*
 #requested .tnt-card-output:nth-child(odd),
 #dispatched .tnt-card-output:nth-child(odd) {
   margin: 0 2.5% 2rem 0;
@@ -184,7 +188,7 @@ body {
   margin: 0 0 2rem 2.5%;
   float: right;
 }
-
+*/
 .tnt-card-output .data-item {
   /* see parent style of white-space: nowrap; in primary tnt-card-output */
   overflow: hidden;
