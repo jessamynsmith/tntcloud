@@ -163,6 +163,8 @@ body {
 .dispatching .col .title {
   text-align: center;
   margin-bottom: 1.5rem;
+  /* remove 5% of title width to exactly center above display cards */
+  width: 95%;
 }
 
 /*********************************
