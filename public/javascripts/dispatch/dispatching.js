@@ -39,14 +39,14 @@ var rawTemplateRequestList =
       <div class="created-by-uid edit-link" title="{{ CreatedByUID }}" data-status="{{ Status }}">
         <a class="editLink" data-open="requestEdit" title="actionRequestEdit" onClick="dispatchEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}">Edit</a>
       </div>
-      {{#if ../showReceivedLink }}
-      <div class="created-by-uid received-link">
-        <a data-open="requestReceived" title="actionRequestReceived" onClick="dispatchReceivedLoadConfirmForm(this.id);" id="{{@key}}">RECEIVED</a>
-      </div>
-      {{/if}}
       {{#if ../showDeleteLink }}
       <div class="created-by-uid delete-link">
         <a data-open="requestDelete" title="actionRequestDelete" onClick="dispatchDeleteLoadConfirmForm(this.id);" id="{{@key}}">Delete</a>
+      </div>
+      {{/if}}
+      {{#if ../showReceivedLink }}
+      <div class="created-by-uid received-link">
+        <a data-open="requestReceived" title="actionRequestReceived" onClick="dispatchReceivedLoadConfirmForm(this.id);" id="{{@key}}">RECEIVED</a>
       </div>
       {{/if}}
     </div>
