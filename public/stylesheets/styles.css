@@ -153,7 +153,10 @@ body {
 .two-column .dispatching .col2 {
   margin-left: 2%;
 }
-
+.dispatching .col .title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
 /*********************************
  * Section Intro (Dispatching)
  ********************************/
@@ -165,10 +168,12 @@ body {
  * Card - TNT Card Output
  ********************************/
 .tnt-card-output {
-  border: 3px solid #e6e6e6;
-  margin: 2rem;
+  border: 2px solid #e6e6e6;
   /* apply to entire card, and overflow + text-overflow is applied lower level */
   white-space: nowrap;
+  float: left;
+  width: 45%;
+  margin: 0 2rem 2rem 0;
 }
 .tnt-card-output .data-item {
   /* see parent style of white-space: nowrap; in primary tnt-card-output */
@@ -188,7 +193,9 @@ body {
 }
 
 .tnt-card-output .footer {
-  padding: .5rem;
+  /* Footer height (including padding top/bottom) must be set so all cards same height */
+  padding: 0 .5rem;
+  height: 1.5rem;
 }
 
 /*********************************
