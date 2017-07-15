@@ -160,6 +160,37 @@ body {
 .section-intro.dispatch {
   margin-top: 1rem;
 }
+
+/*********************************
+ * Card - TNT Card Output
+ ********************************/
+.tnt-card-output {
+  border: 3px solid #e6e6e6;
+  margin: 2rem;
+  /* apply to entire card, and overflow + text-overflow is applied lower level */
+  white-space: nowrap;
+}
+.tnt-card-output .data-item {
+  /* see parent style of white-space: nowrap; in primary tnt-card-output */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tnt-card-output .card-divider {
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: left;
+  padding: .5rem;
+}
+
+.tnt-card-output .body {
+  padding: .5rem;
+}
+
+.tnt-card-output .footer {
+  padding: .5rem;
+}
+
 /*********************************
  * Card Footer Links (Dispatching)
  ********************************/
@@ -251,15 +282,12 @@ body {
   margin-bottom: 0;
 }
 .card-divider.urgency-low {
-  color: black;
   background: #e6e6e6;
 }
 .card-divider.urgency-normal {
-  color: white;
   background: #99e8ff;
 }
 .card-divider.urgency-high {
-  color: black;
   background: gold;
 }
 .card-divider.urgency-urgent {
@@ -267,28 +295,6 @@ body {
 }
 .card-divider.urgency-urgent div {
   color: white;
-}
-/*******************************************************************************
- * Card TNT
- ******************************************************************************/
-.tnt-card-output {
-  border: 3px solid #e6e6e6;
-  margin: 2rem;
-}
-.tnt-card-output .card-divider {
-  color: black;
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: left;
-  padding: .5rem;
-}
-
-.tnt-card-output .body {
-  padding: .5rem;
-}
-
-.tnt-card-output .footer {
-  padding: .5rem;
 }
 
 /*******************************************************************************

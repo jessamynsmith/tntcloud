@@ -24,16 +24,16 @@ var rawTemplateRequestList =
   <div class="data-row row expanded small-12 medium-6 large-6 columns tnt-card-output {{ BranchFrom }} {{ BranchTo }}" >
     <div class="card-header">
        <div class="card-divider urgency-{{Urgency}}">
-         <div>{{ Vendor }}</div>
-         <div>{{Date}}&nbsp;&nbsp;@&nbsp;&nbsp;{{DateTime}}</div>
+         <div class="data-item">{{ Vendor }}</div>
+         <div class="data-item">{{Date}}&nbsp;&nbsp;@&nbsp;&nbsp;{{DateTime}}</div>
        </div>
     </div>
     <div class="body">
-      <div>{{BranchFrom}}&nbsp;&mdash;>&nbsp;{{BranchTo}}</div>
-      <div>{{ CreatedByDisplayName }}</div>
-      <div>Reference:&nbsp;{{Reference}}</div>
-      <div>Instructions:&nbsp;{{Instructions}}</div>
-      <div>Driver:&nbsp;{{Driver}}</div>
+      <div class="data-item">{{BranchFrom}}&nbsp;&mdash;>&nbsp;{{BranchTo}}</div>
+      <div class="data-item">{{ CreatedByDisplayName }}</div>
+      <div class="data-item">Ref:&nbsp;{{Reference}}</div>
+      <div class="data-item">Inst:&nbsp;{{Instructions}}</div>
+      <div class="data-item">Driver:&nbsp;{{Driver}}</div>
     </div>
     <div class="footer">
       <div class="created-by-uid edit-link" title="{{ CreatedByUID }}" data-status="{{ Status }}">
