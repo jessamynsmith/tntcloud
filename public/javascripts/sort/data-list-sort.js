@@ -27,7 +27,7 @@ for (var i = 0; i < myArray.length; i++) {
   var trNext = document.createElement('tr');
   trNext.innerHTML = myArray[i];
 
-  document.getElementById("new-people-list").appendChild(trNext);
+  document.getElementById("data-list-sorted").appendChild(trNext);
 }
 
-document.getElementById("people-list").remove();
+document.getElementById("data-list-pre-sorted").remove();

@@ -17,7 +17,7 @@
     </tr>
   </thead>
   <!-- nodejs generated list used by people-list.js to get original list ------>
-  <tbody id="people-list" class="list">
+  <tbody id="data-list-pre-sorted" class="list">
     {{#each peopleData }}
       <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
         <td>{{ PersonName }}</td>
@@ -25,8 +25,9 @@
       </tr>
     {{/each}}
   <!-- sorted list output by people-list.js appended to this tbody tag -------->
-  <tbody id="new-people-list" class="list">
+  <tbody id="data-list-sorted" class="list">
   </tbody>
 </table>
 
-<script src="/javascripts/core-warranty/people-list.js"></script>
+<!-- import sort code after list markup has been generated -------------------->
+<script src="/javascripts/sort/data-list-sort.js"></script>

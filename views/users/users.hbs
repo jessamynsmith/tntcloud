@@ -14,7 +14,7 @@
     <th class="col11">Edit User</th>
     <th class="col11">Delete User</th>
   </thead>
-  <tbody id="records-list" class="list">
+  <tbody id="data-list-pre-sorted" class="list">
   <!--------------------------------------------------------------------------->
   <!-- Handlebars ------------------------------------------------------------->
   <!--------------------------------------------------------------------------->
@@ -27,6 +27,10 @@
         <td><a class="button list-record" href="/users/user-delete/?KEY={{@key}}">Delete User</a></td>
       </tr>
     {{/each}}
+  <tbody id="data-list-sorted" class="list">
   </tbody>
 </table>
 </div>
+
+<!-- import sort code after list markup has been generated -------------------->
+<script src="/javascripts/sort/data-list-sort.js"></script>
