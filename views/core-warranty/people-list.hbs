@@ -16,6 +16,7 @@
       <th class="col2">Delete Person</th>
     </tr>
   </thead>
+  <!-- nodejs generated list used by people-list.js to get original list ------>
   <tbody id="people-list" class="list">
     {{#each peopleData }}
       <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
@@ -23,5 +24,9 @@
         <td><a class="button list-record" href="people-delete/?KEY={{@key}}">Delete Person</a></td>
       </tr>
     {{/each}}
+  <!-- sorted list output by people-list.js appended to this tbody tag -------->
+  <tbody id="new-people-list" class="list">
   </tbody>
 </table>
+
+<script src="/javascripts/core-warranty/people-list.js"></script>
