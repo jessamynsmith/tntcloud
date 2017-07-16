@@ -74,7 +74,7 @@ body {
 }
 
 /*******************************************************************************
- * Nav Main
+ * Nav Main: Header
  ******************************************************************************/
 #main-nav {
   display: inline-block;
@@ -118,18 +118,13 @@ body {
   line-height: 0;
   border-bottom: 1px solid #efefef;
 }
-.nav-bar,
-.nav .menu {
-  background: none;
-}
-.nav-bar .menu > li > a {
-/*  line-height: 0;  */
-}
 .nav-bar .row {
   padding: .75rem .5rem;
 }
-#navigation {
+.nav-bar .button-parent {
+  padding: 0 1rem;
 }
+
 /*******************************************************************************
  * Grid
  ******************************************************************************/
@@ -145,13 +140,12 @@ body {
  ********************************/
 #selectBranch-wrapper {
   width: auto;
+  padding: 0 1rem;
 }
 #selectBranch {
   display:inline-block;
 }
-#create-request-button {
-  margin-left: 1rem;
-}
+
 /*********************************
  * Section Intro (Dispatching)
  ********************************/

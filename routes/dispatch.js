@@ -29,7 +29,7 @@ var navDispatchCreateRequest =
     <li><a href="/dispatch/dispatching" class="">Dispatching</a></li>
     <li><a href="/dispatch/history" class="">History</a></li>
     ${branchSelector}
-    <li><button title="actionRequestCreate" id="create-request-button" class="button alert" data-open="requestCreate">Create Request</button></li>
+    <li class="button-parent"><button title="actionRequestCreate" class="button alert" data-open="requestCreate">Create Request</button></li>
   </ul>`;
 
 /*******************************************************************************
