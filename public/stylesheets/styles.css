@@ -69,10 +69,24 @@ body {
 #site-name {
   display: inline-block;
 }
+
+/*******************************************************************************
+ * Nav Main
+ ******************************************************************************/
+#main-nav {
+  display: inline-block;
+  float: right;
+}
+#main-nav .menu a {
+  color: white;
+  font-size: 1rem;
+}
+
 /*******************************************************************************
  * All Site Wrap
  ******************************************************************************/
 .all-site-wrap {
+  clear: both; /* clear header child floats or right-side of all-site-wrap has huge margin */
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -94,23 +108,6 @@ body {
   overflow: hidden;
 }
 
-/*******************************************************************************
- * Nav Main
- ******************************************************************************/
-.all-site-wrap .main-nav {
-   -webkit-box-flex: 0;
-   -webkit-flex: 0 0 100px;
-   -moz-box-flex: 0;
-   -ms-flex: 0 0 100px;
-   flex: 0 0 100px;
-}
-#main-nav {
-   float: right;
-}
-#main-nav .menu a {
-  color: white;
-  font-size: 1rem;
-}
 /*******************************************************************************
  * Top Bar
  ******************************************************************************/
