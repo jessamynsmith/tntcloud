@@ -37,11 +37,12 @@ var navDispatchCreateRequest =
  ******************************************************************************/
 // this router is for /dispatch dir, see app.js for initializer
 router.get('/', mw.userRole, function(req, res, next) {
+  var title = "Dispatch";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-  res.render('dispatch/dispatch', { displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatch });
+  res.render('dispatch/dispatch', { title: title, displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatch });
 });
 
 
@@ -49,11 +50,12 @@ router.get('/', mw.userRole, function(req, res, next) {
  * History Page
  ******************************************************************************/
 router.get('/history', mw.userRole, function(req, res, next) {
+  var title = "Dispatch History";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-  res.render('dispatch/history', { displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatch });
+  res.render('dispatch/history', { title: title, displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatch });
 });
 
 
@@ -61,6 +63,7 @@ router.get('/history', mw.userRole, function(req, res, next) {
  * Dispatching Page
  ******************************************************************************/
 router.get('/dispatching', mw.userRole, function(req, res, next) {
+  var title = "Dispatching All Branches";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
@@ -74,7 +77,7 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
     showDriverInput = true;
   }
 
-  res.render('dispatch/dispatching', { displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { title: title, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
 });
 
 
@@ -82,6 +85,7 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
  * Dispatching Page: JAX
  ******************************************************************************/
 router.get('/dispatching/jax', mw.userRole, function(req, res, next) {
+  var title = "Dispatching JAX";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
@@ -97,7 +101,7 @@ router.get('/dispatching/jax', mw.userRole, function(req, res, next) {
     showDriverInput = true;
   }
 
-  res.render('dispatch/dispatching', { isJAX: isJAX, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { title: title, isJAX: isJAX, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
 });
 
 
@@ -105,6 +109,7 @@ router.get('/dispatching/jax', mw.userRole, function(req, res, next) {
  * Dispatching Page: NFWS
  ******************************************************************************/
 router.get('/dispatching/nfws', mw.userRole, function(req, res, next) {
+  var title = "Dispatching NFWS";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
@@ -120,7 +125,7 @@ router.get('/dispatching/nfws', mw.userRole, function(req, res, next) {
     showDriverInput = true;
   }
 
-  res.render('dispatch/dispatching', { isNFWS: isNFWS, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { title: title, isNFWS: isNFWS, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
 });
 
 
@@ -128,6 +133,7 @@ router.get('/dispatching/nfws', mw.userRole, function(req, res, next) {
  * Dispatching Page: LC
  ******************************************************************************/
 router.get('/dispatching/lc', mw.userRole, function(req, res, next) {
+  var title = "Dispatching LC";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
@@ -143,7 +149,7 @@ router.get('/dispatching/lc', mw.userRole, function(req, res, next) {
     showDriverInput = true;
   }
 
-  res.render('dispatch/dispatching', { isLC: isLC, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { title: title, isLC: isLC, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
 });
 
 
@@ -151,6 +157,7 @@ router.get('/dispatching/lc', mw.userRole, function(req, res, next) {
  * Dispatching Page: WC
  ******************************************************************************/
 router.get('/dispatching/wc', mw.userRole, function(req, res, next) {
+  var title = "Dispatching WC";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
@@ -166,7 +173,7 @@ router.get('/dispatching/wc', mw.userRole, function(req, res, next) {
     showDriverInput = true;
   }
 
-  res.render('dispatch/dispatching', { isWC: isWC, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { title: title, isWC: isWC, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
 });
 
 
@@ -174,6 +181,7 @@ router.get('/dispatching/wc', mw.userRole, function(req, res, next) {
  * Dispatching Page: 440
  ******************************************************************************/
 router.get('/dispatching/440', mw.userRole, function(req, res, next) {
+  var title = "Dispatching 440";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
@@ -189,7 +197,7 @@ router.get('/dispatching/440', mw.userRole, function(req, res, next) {
     showDriverInput = true;
   }
 
-  res.render('dispatch/dispatching', { is440: is440, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { title: title, is440: is440, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
 });
 
 

@@ -18,6 +18,7 @@ var navUsers =
  ******************************************************************************/
 // this router is for /users dir, see app.js for initializer
 router.get('/', function(req, res, next) {
+  var title = "Users";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
@@ -35,7 +36,7 @@ router.get('/', function(req, res, next) {
     // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
     // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
     // handlebars object: templateData: templateData === anyName: variableName
-    res.render('users/users', { displayName: displayName, isAdmin: isAdmin, userData: templateData, navUsers: navUsers } );
+    res.render('users/users', { title: title, displayName: displayName, isAdmin: isAdmin, userData: templateData, navUsers: navUsers } );
   };
 });
 
@@ -43,11 +44,12 @@ router.get('/', function(req, res, next) {
  * User Create: Page
  ******************************************************************************/
 router.get('/user-create', function(req, res, next) {
+  var title = "Create User";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-  res.render('users/user-create', { displayName: displayName, isAdmin: isAdmin, navUsers: navUsers });
+  res.render('users/user-create', { title: title, displayName: displayName, isAdmin: isAdmin, navUsers: navUsers });
 });
 
 /*******************************************************************************
@@ -97,6 +99,7 @@ router.post('/user-create-input', function(req, res){
  * User Edit: Page
  ******************************************************************************/
 router.get('/user-edit', function(req, res, next) {
+  var title = "Edit User";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
@@ -115,7 +118,7 @@ router.get('/user-edit', function(req, res, next) {
   function gotData(data) {
     // access data values
     templateData = data.val();
-      res.render('users/user-edit', { displayName: displayName, isAdmin: isAdmin, uid: uid, templateData: templateData, navUsers: navUsers });
+      res.render('users/user-edit', { title: title, displayName: displayName, isAdmin: isAdmin, uid: uid, templateData: templateData, navUsers: navUsers });
   }
 });
 
@@ -160,7 +163,6 @@ router.post('/user-edit-display-name', function(req, res){
  * User Edit: Password Form
  ******************************************************************************/
 router.post('/user-edit-password', function(req, res){
-
   // get uid from form button, get password from form input
   var item = {
     uid: req.body.uid,
@@ -204,6 +206,7 @@ router.post('/user-edit-role', function(req, res){
  * User Delete: Page
  ******************************************************************************/
 router.get('/user-delete', function(req, res, next) {
+  var title = "Delete User";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
@@ -220,7 +223,7 @@ router.get('/user-delete', function(req, res, next) {
       userEmail = userRecord.email;
       userDisplayName = userRecord.displayName;
       // See the UserRecord reference doc for the contents of userRecord.
-      res.render('users/user-delete', { displayName: displayName, isAdmin: isAdmin, uid: uid, userEmail: userEmail, userDisplayName: userDisplayName, navUsers: navUsers });
+      res.render('users/user-delete', { title: title, displayName: displayName, isAdmin: isAdmin, uid: uid, userEmail: userEmail, userDisplayName: userDisplayName, navUsers: navUsers });
     })
     .catch(function(error) {
       console.log("Error fetching user data:", error);

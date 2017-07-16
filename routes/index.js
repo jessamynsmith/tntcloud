@@ -7,9 +7,10 @@ var firebase = require("../private/firebase/firebase");
  * Home Page
  ******************************************************************************/
 router.get('/', function(req, res, next) {
+  var title = "TNT Cloud";
   req.session.errors = null;
 
-  res.render('index', { error: req.flash('error'), isFrontPage: true });
+  res.render('index', { error: req.flash('error'), title: title, isFrontPage: true });
 });
 
 /*******************************************************************************
