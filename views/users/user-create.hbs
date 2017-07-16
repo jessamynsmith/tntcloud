@@ -7,51 +7,43 @@
 <!-- Firebase User Create ----------------------------------------------------->
 <!-- https://codepen.io/johngerome/pen/pdrgk -->
 <!-- DO NOT USE <FORM> as wrapper of firebase auth input fields -->
-<div class="row expanded small-12 medium-10 large-6 columns">
+<div class="row expanded small-12 medium-10 large-4 columns">
   <div class="row">
     <!-- User Create Form ------------------------------------------------->
     <form action="/users/user-create-input" method="post">
       <!--Display Name----------------------------------->
       <div class="row">
-        <div class="large-6">
-          <div class="input-group">
-            <span class="input-group-label">Display Name</span>
-            <input id="displayName" class="input-group-field" type="text" required placeholder="Display Name" name="displayName">
-          </div>
+        <div class="input-group">
+          <span class="input-group-label">Display Name</span>
+          <input id="displayName" class="input-group-field" type="text" required placeholder="Display Name" name="displayName">
         </div>
       </div>
       <!--Email----------------------------------->
       <div class="row">
-        <div class="large-6">
-          <div class="input-group">
-            <span class="input-group-label">Email</span>
-            <input id="email" class="input-group-field" type="email" required placeholder="Email" name="email">
-          </div>
+        <div class="input-group">
+          <span class="input-group-label">Email</span>
+          <input id="email" class="input-group-field" type="email" required placeholder="Email" name="email">
         </div>
       </div>
       <!--Password----------------------------------->
       <div class="row">
-        <div class="large-6">
-          <div class="input-group">
-            <span class="input-group-label">Password</span>
-            <input id="password" class="input-group-field" type="password" required placeholder="Password" name="password">
-          </div>
+        <div class="input-group">
+          <span class="input-group-label">Password</span>
+          <input id="password" class="input-group-field" type="password" required placeholder="Password" name="password">
         </div>
       </div>
       <!--Role----------------------------------->
       <div class="row">
-        <div class="large-6">
-          <div class="input-group">
-            <span class="input-group-label">Role</span>
-            <select id="role" class="input-group-field" placeholder="Role" name="role">
-              <option value="basic">Basic</option>
-              <option value="admin">Administrator</option>
-            </select>
-            <!-- Radio inputs
-              <input type="radio" name="basic">Basic<br>
-              <input type="radio" name="admin">Admin<br>
-            -->
-          </div>
+        <div class="input-group">
+          <span class="input-group-label">Role</span>
+          <select id="role" class="input-group-field" placeholder="Role" name="role">
+            <option value="basic">Basic</option>
+            <option value="admin">Administrator</option>
+          </select>
+          <!-- Radio inputs
+            <input type="radio" name="basic">Basic<br>
+            <input type="radio" name="admin">Admin<br>
+          -->
         </div>
       </div>
       <!--Button----------------------->
