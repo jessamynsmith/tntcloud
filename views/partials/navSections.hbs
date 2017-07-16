@@ -1,34 +1,40 @@
 
-<!-- Dispatch Nav Section ----------------------------------------------------->
-{{#if navDispatch }}
-  <div class="top-bar">
-    <div class="row small-11">
-    <!-- Dispatch -->
+{{#if isFrontPage }}
+<br>
+{{ else }}
+<div class="top-bar">
+  <div class="row small-11">
+    <!-- Section Nav ------------------------------------------------------------>
+    <div id="navigation" style="display: inline-block;">
+    <!-- Dispatch Nav ----------------------------------------------------------->
+      {{#if navDispatch }}
         {{{ navDispatch }}}
-    <!-- End Dispatch -->
-    </div>
-  </div>
-{{/if}}
-
-<!-- Core Warranty Nav Section ------------------------------------------------>
-{{#if navCW }}
-  <div class="top-bar">
-    <div class="row small-11">
-    <!-- Core Warranty -->
+      {{/if}}
+    <!-- Core Warranty Nav ------------------------------------------------------>
+      {{#if navCW }}
         {{{ navCW }}}
-    <!-- End Core Warranty -->
-    </div>
-  </div>
-{{/if}}
-
-
-<!-- Users Nav Section ------------------------------------------------>
-{{#if navUsers }}
-  <div class="top-bar">
-    <div class="row small-11">
-    <!-- Users -->
+      {{/if}}
+    <!-- Users Nav Section ---------------------------------------------------->
+      {{#if navUsers }}
         {{{ navUsers }}}
-    <!-- End Users -->
+      {{/if}}
     </div>
-  </div>
+    <!-- End Section Nav -------------------------------------------------------->
+    <!-- Display Name + Logout -------------------------------------------------->
+    <div id="user-info-logout" style="display: inline-block; float: right;">
+    <ul class="menu">
+      <li id="display-name">
+        {{#if displayName }}
+          <span style="color: gray;">Logged in &ndash; {{ displayName }} &nbsp;</span>
+        {{/if}}
+      </li>
+      <li id="logout">
+        <form action="/logout" method="post">
+          <button id="sign-out-button" type="submit" name="logout">Sign Out</button>
+        </form>
+      </li>
+    </ul>
+    </div><!-- End Display Name + Logout -->
+  </div><!-- End Row -->
+</div><!-- End Top Bar -->
 {{/if}}
