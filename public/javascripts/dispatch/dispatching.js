@@ -9,28 +9,39 @@ switch (userRole) {
     var isBasic = true;
     break;
   case "dispatch_jax" :
-    var isDispatchJAX = true;
+    var isDispatchRoleJAX = true;
     break;
   case "dispatch_nfws" :
-    var isDispatchNFWS = true;
+    var isDispatchRoleNFWS = true;
     break;
   case "dispatch_lc" :
-    var isDispatchLC = true;
+    var isDispatchRoleLC = true;
     break;
   case "dispatch_wc" :
-    var isDispatchWC = true;
+    var isDispatchRoleWC = true;
     break;
   case "dispatch_440" :
-    var isDispatch440 = true;
+    var isDispatchRole440 = true;
     break;
   default :
     var isBasic = "basic";
 }
 console.log("What is USER ROLE? ", userRole);
+
+// show Delete link?
 var showDelete = false;
-var showReceived = false;
 if (isAdmin) {
   showDelete = true;
+}
+
+// show Received link?
+var showReceived = false;
+if (isAdmin ||
+    isDispatchRoleJAX && isDispatchURL_JAX ||
+    isDispatchRoleNFWS && isDispatchURL_NFWS ||
+    isDispatchRoleLC && isDispatchURL_LC ||
+    isDispatchRoleWC && isDispatchURL_WC ||
+    isDispatchRole440 && isDispatchURL_440 ) {
   showReceived = true;
 }
 

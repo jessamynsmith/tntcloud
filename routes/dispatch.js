@@ -55,7 +55,8 @@ router.get('/history', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-  res.render('dispatch/history', { title: title, displayName: displayName, isAdmin: isAdmin, navDispatch: navDispatch });
+  res.render('dispatch/history', { title: title, displayName: displayName,
+    isAdmin: isAdmin, navDispatch: navDispatch });
 });
 
 
@@ -68,6 +69,8 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
   var isBasic = req.app.locals.userRole === 'basic';
+  // isBranch for conditionally loading javascript branch file
+  var isAllBranches = true;
 
   var userUID = req.user.uid;
   console.log("dispatch.js UID ", userUID);
@@ -81,6 +84,7 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
 
   res.render('dispatch/dispatching', { title: title, displayName: displayName,
     showDriverInput: showDriverInput, showReceivedConfirm: showReceivedConfirm,
+    isAllBranches: isAllBranches,
     navDispatch: navDispatchCreateRequest });
 });
 
@@ -94,7 +98,7 @@ router.get('/dispatching/jax', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
   var isBasic = req.app.locals.userRole === 'basic';
-  var isDispatchJax = req.app.locals.userRole === 'dispatch_jax';
+  var isDispatchRoleJAX = req.app.locals.userRole === 'dispatch_jax';
   // isBranch for conditionally loading javascript branch file
   var isJAX = true;
 
@@ -103,7 +107,7 @@ router.get('/dispatching/jax', mw.userRole, function(req, res, next) {
 
   var showDriverInput = false;
   var showReceivedConfirm = false;
-  if (isAdmin || isDispatchJax) {
+  if (isAdmin || isDispatchRoleJAX) {
     showDriverInput = true;
     showReceivedConfirm = true;
   }
@@ -124,7 +128,7 @@ router.get('/dispatching/nfws', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
   var isBasic = req.app.locals.userRole === 'basic';
-  var isDispatchNFWS = req.app.locals.userRole === 'dispatch_nfws';
+  var isDispatchRoleNFWS = req.app.locals.userRole === 'dispatch_nfws';
   // isBranch for conditionally loading javascript branch file
   var isNFWS = true;
 
@@ -133,7 +137,7 @@ router.get('/dispatching/nfws', mw.userRole, function(req, res, next) {
 
   var showDriverInput = false;
   var showReceivedConfirm = false;
-  if (isAdmin || isDispatchNFWS) {
+  if (isAdmin || isDispatchRoleNFWS) {
     showDriverInput = true;
     showReceivedConfirm = true;
   }
@@ -154,7 +158,7 @@ router.get('/dispatching/lc', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
   var isBasic = req.app.locals.userRole === 'basic';
-  var isDispatchLC = req.app.locals.userRole === 'dispatch_lc';
+  var isDispatchRoleLC = req.app.locals.userRole === 'dispatch_lc';
   // isBranch for conditionally loading javascript branch file
   var isLC = true;
 
@@ -163,7 +167,7 @@ router.get('/dispatching/lc', mw.userRole, function(req, res, next) {
 
   var showDriverInput = false;
   var showReceivedConfirm = false;
-  if (isAdmin || isDispatchLC) {
+  if (isAdmin || isDispatchRoleLC) {
     showDriverInput = true;
     showReceivedConfirm = true;
   }
@@ -181,10 +185,10 @@ router.get('/dispatching/lc', mw.userRole, function(req, res, next) {
 router.get('/dispatching/wc', mw.userRole, function(req, res, next) {
   var title = "Dispatching WC";
   var displayName = req.user.displayName;
-  var isDispatchWC = req.app.locals.userRole === 'dispatch_wc';
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
   var isBasic = req.app.locals.userRole === 'basic';
+  var isDispatchRoleWC = req.app.locals.userRole === 'dispatch_wc';
   // isBranch for conditionally loading javascript branch file
   var isWC = true;
 
@@ -193,7 +197,7 @@ router.get('/dispatching/wc', mw.userRole, function(req, res, next) {
 
   var showDriverInput = false;
   var showReceivedConfirm = false;
-  if (isAdmin || isDispatchWC) {
+  if (isAdmin || isDispatchRoleWC) {
     showDriverInput = true;
     showReceivedConfirm = true;
   }
@@ -214,7 +218,7 @@ router.get('/dispatching/440', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
   var isBasic = req.app.locals.userRole === 'basic';
-  var isDispatch440 = req.app.locals.userRole ='dispatch_440';
+  var isDispatchRole440 = req.app.locals.userRole ='dispatch_440';
   // isBranch for conditionally loading javascript branch file
   var is440 = true;
 
@@ -223,7 +227,7 @@ router.get('/dispatching/440', mw.userRole, function(req, res, next) {
 
   var showDriverInput = false;
   var showReceivedConfirm = false;
-  if (isAdmin || isDispatch440) {
+  if (isAdmin || isDispatchRole440) {
     showDriverInput = true;
     showReceivedConfirm = true;
   }

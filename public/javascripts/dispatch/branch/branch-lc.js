@@ -7,9 +7,12 @@ $(document).ready(function() {
     // Set Branch Dropdown Value to selected branch or reverts to default
     var branchToSelect = document.getElementById('selectBranch');
     branchToSelect.value = valueToSelect;
-    // Set records parent div class to branch to css can hide/display correct records
+    // Set records parent div class to branch so css can hide/display correct records
     var parentDIV = document.getElementById("dispatchRecords");
     parentDIV.className += " " + valueToSelect;
   }
   SelectElement("LC");
 });
+
+// originally declared as false in branch-all.js
+isDispatchURL_LC = true;

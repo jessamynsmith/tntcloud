@@ -2,12 +2,13 @@
 <!-- Import After Branch Selector Markup dispatching.js needs to run after it --->
 <!-- If Branch Selector in Navigation, dispatching.js can be @ top of this file -->
 <script src="/javascripts/handlebars/4.0.10/handlebars-v4.0.10.js"></script>
-<script language="javascript" src="/javascripts/dispatch/dispatching.js"></script>
+{{#if isAllBranches }}<script language="javascript" src="/javascripts/dispatch/branch/branch-all.js"></script>{{/if}}
 {{#if isJAX }}<script language="javascript" src="/javascripts/dispatch/branch/branch-jax.js"></script>{{/if}}
 {{#if isNFWS }}<script language="javascript" src="/javascripts/dispatch/branch/branch-nfws.js"></script>{{/if}}
 {{#if isLC }}<script language="javascript" src="/javascripts/dispatch/branch/branch-lc.js"></script>{{/if}}
 {{#if isWC }}<script language="javascript" src="/javascripts/dispatch/branch/branch-wc.js"></script>{{/if}}
 {{#if is440 }}<script language="javascript" src="/javascripts/dispatch/branch/branch-440.js"></script>{{/if}}
+<script language="javascript" src="/javascripts/dispatch/dispatching.js"></script>
 
 <!-- Title/Intro -------------------------------------------------------------->
 <div class="section-intro dispatch">
@@ -98,12 +99,14 @@
         <input type="text" id="createInstructions" placeholder="Instructions" class="input-group-field" name="Instructions"/>
       </div>
       <!-- Driver ------------------------------------------------------->
-      {{#if showDriverInput }}
+<!--
+      {{#if showDriverInputCreate }}
       <div class="input-group">
         <span class="input-group-label">Driver</span>
         <input type="text" id="createDriver" placeholder="Driver" class="input-group-field" name="Driver"/>
       </div>
       {{/if}}
+-->
       <!-- Submit Button ------------------------------------------------------>
       <div>
         <input id="submit-dispatch-request" type="submit" class="button success">
