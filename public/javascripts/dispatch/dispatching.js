@@ -26,7 +26,6 @@ switch (userRole) {
   default :
     var isBasic = "basic";
 }
-console.log("What is USER ROLE? ", userRole);
 
 // show Delete link?
 var showDelete = false;
@@ -44,7 +43,7 @@ if (isAdmin ||
     isDispatchRole440 && isDispatchURL_440 ) {
   showReceivedLink = true;
 }
-console.log("Match JAX ? #2 ", showReceivedLink);
+
 /*******************************************************************************
 * Handlebars
 *******************************************************************************/
@@ -129,7 +128,6 @@ function handleData(parentSelector, gotData) {
   // about the '../' in the above {{# if ../ }}
   // required when using handlebars template in separate .js file outside of .hbs node express
   // 'showDelete' is coming from top of this file, not the dispatch.js route file
-  console.log("Match JAX ? #3 ", showReceivedLink);
   var data = { showDeleteLink: showDelete, showReceivedLink: showReceivedLink, dispatch: dataVal };
   var html = compiledTemplate(data);
 
