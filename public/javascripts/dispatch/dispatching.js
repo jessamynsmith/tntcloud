@@ -142,11 +142,11 @@ function handleData(parentSelector, gotData) {
 
   if (!isAdmin) {
     // get record's 'created-by-uid' from the edit link's <div> title attribute
-    var actionLinks = document.getElementsByClassName("action-link");
-    for (var i = 0; i < actionLinks.length; i++) {
+    var editLinks = document.getElementsByClassName("edit-link");
+    for (var i = 0; i < editLinks.length; i++) {
       // if currentUID not equal to
-      if (currentUID !== actionLinks[i].title) {
-        actionLinks[i].className += " hide";
+      if (currentUID !== editLinks[i].title) {
+        editLinks[i].className += " hide";
       }
     }
   }
