@@ -66,16 +66,16 @@ var rawTemplateRequestList =
       <div class="data-item">Driver:&nbsp;{{Driver}}</div>
     </div>
     <div class="footer">
-      <div class="created-by-uid edit-link" title="{{ CreatedByUID }}" data-status="{{ Status }}">
+      <div class="action-link edit-link" title="{{ CreatedByUID }}" data-status="{{ Status }}">
         <a class="editLink" data-open="requestEdit" title="actionRequestEdit" onClick="dispatchEditFormDataLoad(this.id); getIdKey(this.id);" id="{{@key}}">Edit</a>
       </div>
       {{#if ../showDeleteLink }}
-      <div class="created-by-uid delete-link">
+      <div class="action-link delete-link">
         <a data-open="requestDelete" title="actionRequestDelete" onClick="dispatchDeleteLoadConfirmForm(this.id);" id="{{@key}}">Delete</a>
       </div>
       {{/if}}
       {{#if ../showReceivedLink }}
-      <div class="created-by-uid received-link">
+      <div class="action-link received-link">
         <a data-open="requestReceived" title="actionRequestReceived" onClick="dispatchReceivedLoadConfirmForm(this.id);" id="{{@key}}">RECEIVED</a>
       </div>
       {{/if}}
@@ -139,12 +139,14 @@ function handleData(parentSelector, gotData) {
   // get currentUID
   var currentUID = firebase.auth().currentUser.uid;
 
+
   if (!isAdmin) {
     // get record's 'created-by-uid' from the edit link's <div> title attribute
-    var requestCreatedByUIDs = document.getElementsByClassName("created-by-uid");
-    for (var i = 0; i < requestCreatedByUIDs.length; i++) {
-      if (currentUID !== requestCreatedByUIDs[i].title) {
-        requestCreatedByUIDs[i].className += " hide";
+    var actionLinks = document.getElementsByClassName("action-link");
+    for (var i = 0; i < actionLinks.length; i++) {
+      // if currentUID not equal to
+      if (currentUID !== actionLinks[i].title) {
+        actionLinks[i].className += " hide";
       }
     }
   }
