@@ -73,11 +73,15 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
   console.log("dispatch.js UID ", userUID);
 
   var showDriverInput = false;
+  var showReceivedConfirm = false;
   if (isAdmin) {
     showDriverInput = true;
+    showReceivedConfirm = true;
   }
 
-  res.render('dispatch/dispatching', { title: title, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { title: title, displayName: displayName,
+    showReceivedConfirm: showReceivedConfirm, showDriverInput: showDriverInput,
+    navDispatch: navDispatchCreateRequest });
 });
 
 
@@ -186,6 +190,7 @@ router.get('/dispatching/440', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
   var isBasic = req.app.locals.userRole === 'basic';
+  var isDispatch440 = req.app.locals.userRole ='dispatch_440';
   // isBranch for conditionally loading javascript branch file
   var is440 = true;
 

@@ -1,12 +1,32 @@
 
 // User Role Cookie + Role
 var userRole = Cookies.get('userRole');
-//console.log("User Role Cookie ", userRole);
-var isAdmin = userRole === 'admin';
-//console.log("User Role ", isAdmin);
-var isBasic = userRole === 'basic';
-//console.log("User Role ", isBasic);
-
+switch (userRole) {
+  case "admin" :
+    var isAdmin = true;
+    break;
+  case "basic" :
+    var isBasic = true;
+    break;
+  case "dispatch_jax" :
+    var isDispatchJAX = true;
+    break;
+  case "dispatch_nfws" :
+    var isDispatchNFWS = true;
+    break;
+  case "dispatch_lc" :
+    var isDispatchLC = true;
+    break;
+  case "dispatch_wc" :
+    var isDispatchWC = true;
+    break;
+  case "dispatch_440" :
+    var isDispatch440 = true;
+    break;
+  default :
+    var isBasic = "basic";
+}
+console.log("What is USER ROLE? ", userRole);
 var showDelete = false;
 var showReceived = false;
 if (isAdmin) {
