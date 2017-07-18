@@ -28,9 +28,9 @@ switch (userRole) {
 }
 
 // show Delete link?
-var showDelete = false;
+var showDeleteLink = false;
 if (isAdmin) {
-  showDelete = true;
+  showDeleteLink = true;
 }
 
 // show Received link?
@@ -128,7 +128,7 @@ function handleData(parentSelector, gotData) {
   // about the '../' in the above {{# if ../ }}
   // required when using handlebars template in separate .js file outside of .hbs node express
   // 'showDelete' is coming from top of this file, not the dispatch.js route file
-  var data = { showDeleteLink: showDelete, showReceivedLink: showReceivedLink, dispatch: dataVal };
+  var data = { showDeleteLink: showDeleteLink, showReceivedLink: showReceivedLink, dispatch: dataVal };
   var html = compiledTemplate(data);
 
   parentDiv.append(html);
