@@ -1,4 +1,13 @@
 
+// due to switching between urls, need to set isDispatchURL_XXX url to false 
+// for the URLs that are NOT this branch
+// originally declared in branch-all.js as false
+// then, if a location url is hit, the bottom of this page sets 'true'
+isDispatchURL_JAX = false;
+isDispatchURL_NFWS = false;
+isDispatchURL_LC = false;
+isDispatchURL_WC = false;
+
 // Only different between branch-*.js files is in the function call parameter
 
 // After Branch URL Page Load

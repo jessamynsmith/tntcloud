@@ -35,16 +35,16 @@ if (isAdmin) {
 }
 
 // show Received link?
-var showReceived = false;
+var showReceivedLink = false;
 if (isAdmin ||
     isDispatchRoleJAX && isDispatchURL_JAX ||
     isDispatchRoleNFWS && isDispatchURL_NFWS ||
     isDispatchRoleLC && isDispatchURL_LC ||
     isDispatchRoleWC && isDispatchURL_WC ||
     isDispatchRole440 && isDispatchURL_440 ) {
-  showReceived = true;
+  showReceivedLink = true;
 }
-
+console.log("Match JAX ? #2 ", showReceivedLink);
 /*******************************************************************************
 * Handlebars
 *******************************************************************************/
@@ -129,7 +129,8 @@ function handleData(parentSelector, gotData) {
   // about the '../' in the above {{# if ../ }}
   // required when using handlebars template in separate .js file outside of .hbs node express
   // 'showDelete' is coming from top of this file, not the dispatch.js route file
-  var data = { showDeleteLink: showDelete, showReceivedLink: showReceived, dispatch: dataVal };
+  console.log("Match JAX ? #3 ", showReceivedLink);
+  var data = { showDeleteLink: showDelete, showReceivedLink: showReceivedLink, dispatch: dataVal };
   var html = compiledTemplate(data);
 
   parentDiv.append(html);
@@ -155,6 +156,12 @@ function handleData(parentSelector, gotData) {
     //console.log("Got Dispatched? ", gotDispatched);
     for (var i = 0; i < gotDispatched.length; i++) {
       gotDispatched[i].className += " hide";
+    }
+  }
+  if (showReceivedLink) {
+    var receivedLinks = document.getElementsByClassName("received-link");
+    for (var i = 0; i < receivedLinks.length; i++) {
+      receivedLinks[i].classList.remove("hide");
     }
   }
 
