@@ -80,7 +80,7 @@ router.get('/dispatching', mw.userRole, function(req, res, next) {
   }
 
   res.render('dispatch/dispatching', { title: title, displayName: displayName,
-    showReceivedConfirm: showReceivedConfirm, showDriverInput: showDriverInput,
+    showDriverInput: showDriverInput, showReceivedConfirm: showReceivedConfirm,
     navDispatch: navDispatchCreateRequest });
 });
 
@@ -101,11 +101,16 @@ router.get('/dispatching/jax', mw.userRole, function(req, res, next) {
   console.log("dispatch.js UID ", userUID);
 
   var showDriverInput = false;
+  var showReceivedConfirm = false;
   if (isAdmin) {
     showDriverInput = true;
+    showReceivedConfirm = true;
   }
 
-  res.render('dispatch/dispatching', { title: title, isJAX: isJAX, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { title: title, displayName: displayName,
+    showDriverInput: showDriverInput, showReceivedConfirm: showReceivedConfirm,
+    isJAX: isJAX, isAdmin: isAdmin,
+    navDispatch: navDispatchCreateRequest });
 });
 
 
@@ -125,11 +130,16 @@ router.get('/dispatching/nfws', mw.userRole, function(req, res, next) {
   console.log("dispatch.js UID ", userUID);
 
   var showDriverInput = false;
+  var showReceivedConfirm = false;
   if (isAdmin) {
     showDriverInput = true;
+    showReceivedConfirm = true;
   }
 
-  res.render('dispatch/dispatching', { title: title, isNFWS: isNFWS, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { title: title, displayName: displayName,
+    showDriverInput: showDriverInput, showReceivedConfirm: showReceivedConfirm,
+    isNFWS: isNFWS, isAdmin: isAdmin,
+    navDispatch: navDispatchCreateRequest });
 });
 
 
@@ -149,11 +159,16 @@ router.get('/dispatching/lc', mw.userRole, function(req, res, next) {
   console.log("dispatch.js UID ", userUID);
 
   var showDriverInput = false;
+  var showReceivedConfirm = false;
   if (isAdmin) {
     showDriverInput = true;
+    showReceivedConfirm = true;
   }
 
-  res.render('dispatch/dispatching', { title: title, isLC: isLC, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { title: title, displayName: displayName,
+    showDriverInput: showDriverInput, showReceivedConfirm: showReceivedConfirm,
+    isLC: isLC, isAdmin: isAdmin,
+    navDispatch: navDispatchCreateRequest });
 });
 
 
@@ -173,11 +188,16 @@ router.get('/dispatching/wc', mw.userRole, function(req, res, next) {
   console.log("dispatch.js UID ", userUID);
 
   var showDriverInput = false;
+  var showReceivedConfirm = false;
   if (isAdmin) {
     showDriverInput = true;
+    showReceivedConfirm = true;
   }
 
-  res.render('dispatch/dispatching', { title: title, isWC: isWC, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { title: title, displayName: displayName,
+    showDriverInput: showDriverInput, showReceivedConfirm: showReceivedConfirm,
+    isWC: isWC, isAdmin: isAdmin,
+    navDispatch: navDispatchCreateRequest });
 });
 
 
@@ -198,11 +218,16 @@ router.get('/dispatching/440', mw.userRole, function(req, res, next) {
   console.log("dispatch.js UID ", userUID);
 
   var showDriverInput = false;
+  var showReceivedConfirm = false;
   if (isAdmin) {
     showDriverInput = true;
+    showReceivedConfirm = true;
   }
 
-  res.render('dispatch/dispatching', { title: title, is440: is440, displayName: displayName, isAdmin: isAdmin, showDriverInput: showDriverInput, navDispatch: navDispatchCreateRequest });
+  res.render('dispatch/dispatching', { title: title, displayName: displayName,
+    showDriverInput: showDriverInput, showReceivedConfirm: showReceivedConfirm,
+    is440: is440, isAdmin: isAdmin, 
+    navDispatch: navDispatchCreateRequest });
 });
 
 
