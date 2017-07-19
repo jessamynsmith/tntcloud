@@ -227,12 +227,12 @@ body {
 /*********************************
  * Card Footer Links (Dispatching)
  ********************************/
-/* required by dispatching.js ::: isDispatchRoleJAX && isDispatchURL_JAX
+/* required by dispatching.js ::: isDispatchRoleXXX && isDispatchURL_XXX
  * when needing to 'show' records that have css style 'hide' applied to them */
 .dispatching .show.hide {
   display: block !important;
 }
-/* End 'reuired by dispatching.js ...' */
+/* End 'required by dispatching.js ...' */
 .dispatching .edit-link {
   float: left;
   width: 20%;

@@ -31,7 +31,7 @@
     <!-- Handlebars ------------------------------------------------------------->
     <!--------------------------------------------------------------------------->
       {{#each receivedData }}
-        <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
+        <tr class="data-row {{BranchFrom}} {{BranchTo}} hide" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
           <td class="date-server-created">{{Date}},&nbsp;{{DateTime}}</td>
           <td class="date-server-created-time-stamp">{{DateTimeStampServer}}</td>
           <td class="vendor">{{Vendor}}</td>
@@ -67,9 +67,9 @@
   })
   .appendTo( $wrapper );
 
-  /***************************************
-  * Search and Columns Sort: List JS
-  ***************************************/
+  ////////////////////////////////////////
+  // Search and Columns Sort: List JS
+  ////////////////////////////////////////
   // <th> 'data-sort' value and <td> 'class' value must match to work
   /* DATE SORT required work-around:
    * (because of Date Turned In format DD/MM/YYY, which would work properly if it was YYYY/MM/DD)
@@ -79,5 +79,54 @@
     valueNames: [ 'date-server-created', 'vendor', 'branch-from', 'branch-to', 'reference', 'created-by', 'driver' ]
   };
   var monkeyList = new List('table-and-search', options);
+
+
+  /***************************************
+  * Select Branch
+  ***************************************/
+  // data-row's have 'hide' class by default
+  // need to .removeClass("hide") for data-row's we want to see
+  // After Page Load: Remove all 'data-row' 'hide' classes for default view "All Branches"
+  $(document).ready(function() {
+    $(".data-row").removeClass("hide");
+  });
+  // listen for change on selectBranch element
+  var selectBranch = document.getElementById("selectBranch");
+  selectBranch.addEventListener("change", function() {
+    switch(selectBranch.value) {
+      // show all records (remove 'hide' classes from all rows)
+      case "allBranches" :
+        $(".data-row").removeClass("hide");
+        break;
+      // show JAX records
+      case "JAX" :
+        $(".data-row").addClass("hide"); // first hide all, then remove 'hide' from desired rows
+        $(".data-row.JAX").removeClass("hide");
+        break;
+      // show NFWS records
+      case "NFWS" :
+        $(".data-row").addClass("hide"); // first hide all, then remove 'hide' from desired rows
+        $(".data-row.NFWS").removeClass("hide");
+        break;
+      // show LC records
+      case "LC" :
+        $(".data-row").addClass("hide"); // first hide all, then remove 'hide' from desired rows
+        $(".data-row.LC").removeClass("hide");
+        break;
+      // show WC records
+      case "WC" :
+        $(".data-row").addClass("hide"); // first hide all, then remove 'hide' from desired rows
+        $(".data-row.WC").removeClass("hide");
+        break;
+      // show 440 records
+      case "440" :
+        $(".data-row").addClass("hide"); // first hide all, then remove 'hide' from desired rows
+        $(".data-row.440").removeClass("hide");
+        break;
+      // show all records by default (remove 'hide' classes from all rows)
+      default :
+        $(".data-row").removeClass("hide");
+    } // end switch
+  }); // end selectBranch.addEventListener
 
 </script>
