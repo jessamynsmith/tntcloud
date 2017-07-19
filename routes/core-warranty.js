@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var firebase = require("firebase");
 var mw = require('../middleware');
+var firebase = require("firebase");
 var dbRef = firebase.database().ref();
 
 /*******************************************************************************
@@ -38,7 +38,7 @@ router.get('/', mw.userRole, function(req, res, next) {
 });
 
 /*******************************************************************************
- * Warranty: Create Record Page
+ * Create Record Page: Warranty
  ******************************************************************************/
 router.get('/create-warranty', mw.userRole, function(req, res, next) {
   var title = "Create Warranty Record";
@@ -66,7 +66,7 @@ router.get('/create-warranty', mw.userRole, function(req, res, next) {
 });
 
 /*******************************************************************************
- * Core: Create Record Page
+ * Create Record Page: Core
  ******************************************************************************/
 router.get('/create-core', mw.userRole, function(req, res, next) {
   var title = "Create Core Record";

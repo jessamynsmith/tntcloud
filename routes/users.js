@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var firebase = require("firebase");
 var mw = require('../middleware');
+var firebase = require("firebase");
 var dbRef = firebase.database().ref();
 var admin = require('../private/firebase/firebase-admin-init');
 

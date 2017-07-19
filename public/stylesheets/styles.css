@@ -432,6 +432,8 @@ body {
  * Table Sort
  ******************************************************************************/
 .col-hidden,
+/* must call out specific data-value css selectors because List JS needs it for sorting */
+.date-server-created-time-stamp,
 .date-server-turned-in {
   display: none;
 }

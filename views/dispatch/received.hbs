@@ -5,3 +5,79 @@
 </div>
 
 <!-- Primary Content -------------------------------------------------------->
+<div id="table-and-search">
+  <!-- Search Form -->
+  <input type="text" class="search" placeholder="Search received records...">
+
+  <!-- Records list -->
+  <table class="data-table stack">
+    <thead>
+      <th class="col sort desc" data-sort="date-server-created">Created Date</th>
+      <th class="col-hidden" data-sort="date-server-created-time-stamp">Server Time Stamp Created</th>
+      <th class="col sort" data-sort="vendor">Vendor</th>
+      <th class="col sort" data-sort="branch-from">From</th>
+      <th class="col sort" data-sort="branch-to">To</th>
+      <th class="col sort" data-sort="reference">Reference</th>
+      <th class="col sort" data-sort="created-by">Submitted By</th>
+      <th class="col sort" data-sort="driver">Driver</th>
+<!--
+      <th class="col sort" data-sort="date-server-received">Created Date</th>
+      <th class="col-hidden" data-sort="date-server-received-time-stamp">Server Time Stamp Received</th>
+-->
+      <th class="col">View</th>
+    </thead>
+    <tbody id="records-list" class="list">
+    <!--------------------------------------------------------------------------->
+    <!-- Handlebars ------------------------------------------------------------->
+    <!--------------------------------------------------------------------------->
+      {{#each receivedData }}
+        <tr class="data-row" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
+          <td class="date-server-created">{{Date}},&nbsp;{{DateTime}}</td>
+          <td class="date-server-created-time-stamp">{{DateTimeStampServer}}</td>
+          <td class="vendor">{{Vendor}}</td>
+          <td class="branch-from">{{BranchFrom}}</td>
+          <td class="branch-to">{{BranchTo}}</td>
+          <td class="reference">{{Reference}}</td>
+          <td class="created-by">{{CreatedByDisplayName}}</td>
+          <td class="driver">{{Driver}}</td>
+<!--
+          <td class="date-server-created">{{Date}},&nbsp;{{DateTime}}</td>
+          <td class="date-server-created-time-stamp">{{DateTimeStampServer}}</td>
+-->
+          <td><a class="button list-record" href="/core-warranty/record-core/?KEY={{@key}}">View</a></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<!----------------------------------------------------------------------------->
+<!-- JavaScript --------------------------------------------------------------->
+<!----------------------------------------------------------------------------->
+<script>
+
+  /***************************************
+  * Table Sort: initial data load
+  ***************************************/
+  // http://jsfiddle.net/UdvDD/
+  var $wrapper = $('.list');
+
+  $wrapper.find('.data-row').sort(function (a, b) {
+    return b.dataset.sort - a.dataset.sort;
+  })
+  .appendTo( $wrapper );
+
+  /***************************************
+  * Search and Columns Sort: List JS
+  ***************************************/
+  // <th> 'data-sort' value and <td> 'class' value must match to work
+  /* DATE SORT required work-around:
+   * (because of Date Turned In format DD/MM/YYY, which would work properly if it was YYYY/MM/DD)
+   * The column "Date Turned In" contains data-sort="w-date-server-turned-in"
+   * that actually sorts by the DateTimeStampServer column, which is hidden. */
+  var options = {
+    valueNames: [ 'date-server-created', 'vendor', 'branch-from', 'branch-to', 'reference', 'created-by', 'driver' ]
+  };
+  var monkeyList = new List('table-and-search', options);
+
+</script>

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mw = require('../middleware');
+var firebase = require("firebase");
+var dbRef = firebase.database().ref();
 
 /*******************************************************************************
  * Core Warranty: Navigation
@@ -47,7 +49,7 @@ router.get('/', mw.userRole, function(req, res, next) {
 
 
 /*******************************************************************************
- * History Page
+ * Received Page
  ******************************************************************************/
 router.get('/received', mw.userRole, function(req, res, next) {
   var title = "Received Requests";
@@ -55,8 +57,23 @@ router.get('/received', mw.userRole, function(req, res, next) {
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-  res.render('dispatch/received', { title: title, displayName: displayName,
-    isAdmin: isAdmin, navDispatch: navDispatch });
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+//dbRef.child('core').once('value', gotData);
+  dbRef.child('dispatch').orderByChild('Status').equalTo('received').once('value', gotData);
+  // global variable so warranty data can be accessed after the function
+  var templateData;
+
+  function gotData(data) {
+    // access data values
+    templateData = data.val();
+    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
+    // handlebars object: templateData: templateData === anyName: variableName
+    res.render('dispatch/received', { title: title, displayName: displayName,
+      isAdmin: isAdmin, receivedData: templateData, navDispatch: navDispatch });
+  };
 });
 
 
