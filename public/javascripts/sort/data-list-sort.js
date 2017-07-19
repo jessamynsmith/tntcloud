@@ -1,6 +1,6 @@
 
 /***************************************************************************
- * Sort Table Rows
+ * Alphabetically Sort Table Rows 
  **************************************************************************/
 var myArray = [];
 var listElements = document.getElementsByClassName("data-row");
