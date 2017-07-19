@@ -64,9 +64,7 @@ function dispatchEditFormDataUpdate(){
     let submitData = $("#requestEditForm").serializeJSON();
 
     // Status of Dispatch Request
-    if (submitData.Driver === "") {
-      submitData.Status = "requested";
-    } else {
+    if (submitData.Driver !== "") {
       submitData.Status = "dispatched";
     }
 
