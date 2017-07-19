@@ -32,13 +32,8 @@ function dispatchCreateFormDataRecord(){
     let submitData = $("#requestCreateForm").serializeJSON();
 
     // Status of Dispatch Request
-    if (submitData.Driver === "" || !isAdmin) {
-      submitData.Status = "requested";
-    } if (!isAdmin) {
-      submitData.Driver = "";
-    } if (submitData.Driver !== "") {
-      submitData.Status = "dispatched";
-    }
+    submitData.Driver = "";
+    submitData.Status = "requested";
 
     submitData.CreatedByUID = CreatedByUID;
     submitData.CreatedByDisplayName = CreatedByDisplayName;

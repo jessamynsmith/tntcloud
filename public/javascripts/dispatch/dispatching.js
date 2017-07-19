@@ -139,7 +139,13 @@ function handleData(parentSelector, gotData) {
   // get currentUID
   var currentUID = firebase.auth().currentUser.uid;
 
-  if (isDispatchRoleJAX && isDispatchURL_JAX) {
+  if (
+      isDispatchRoleJAX && isDispatchURL_JAX ||
+      isDispatchRoleNFWS && isDispatchURL_NFWS ||
+      isDispatchRoleLC && isDispatchURL_LC ||
+      isDispatchRoleWC && isDispatchURL_WC ||
+      isDispatchRole440 && isDispatchURL_440
+    ) {
     var editLinks = document.getElementsByClassName("edit-link");
     for (var i = 0; i < editLinks.length; i++) {
       editLinks[i].className += " show";
