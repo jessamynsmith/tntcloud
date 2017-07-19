@@ -1,6 +1,6 @@
 
 <!-- Title/Intro ------------------------------------------------------------>
-<div class="section-intro dispatch">
+<div class="section-intro dispatch received">
   <h1>Received Requests</h2>
 </div>
 
@@ -10,9 +10,9 @@
   <input type="text" class="search" placeholder="Search received records...">
 
   <!-- Records list -->
-  <table class="data-table stack">
+  <table id="dispatchReceivedTable" class="data-table stack">
     <thead>
-      <th class="col sort desc" data-sort="date-server-created">Created Date/Time</th>
+      <th class="col sort desc" data-sort="date-server-created">Date Created</th>
       <th class="col-hidden" data-sort="date-server-created-time-stamp">Server Time Stamp Created</th>
       <th class="col sort" data-sort="vendor">Vendor</th>
       <th class="col sort" data-sort="branch-from">From</th>
@@ -20,10 +20,8 @@
       <th class="col sort" data-sort="reference">Reference</th>
       <th class="col sort" data-sort="created-by">Submitted By</th>
       <th class="col sort" data-sort="driver">Driver</th>
-<!--
-      <th class="col sort" data-sort="date-server-received">Created Date</th>
+      <th class="col sort" data-sort="date-server-received">Date Received</th>
       <th class="col-hidden" data-sort="date-server-received-time-stamp">Server Time Stamp Received</th>
--->
       <th class="col">View</th>
     </thead>
     <tbody id="records-list" class="list">
@@ -31,7 +29,7 @@
     <!-- Handlebars ------------------------------------------------------------->
     <!--------------------------------------------------------------------------->
       {{#each receivedData }}
-        <tr class="data-row {{BranchFrom}} {{BranchTo}} hide" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
+        <tr class="data-row received {{BranchFrom}} {{BranchTo}} hide" data-sort="{{DateTimeStampServer}}" id="{{@key}}">
           <td class="date-server-created">{{Date}},&nbsp;{{DateTime}}</td>
           <td class="date-server-created-time-stamp">{{DateTimeStampServer}}</td>
           <td class="vendor">{{Vendor}}</td>
@@ -40,10 +38,8 @@
           <td class="reference">{{Reference}}</td>
           <td class="created-by">{{CreatedByDisplayName}}</td>
           <td class="driver">{{Driver}}</td>
-<!--
-          <td class="date-server-created">{{Date}},&nbsp;{{DateTime}}</td>
-          <td class="date-server-created-time-stamp">{{DateTimeStampServer}}</td>
--->
+          <td class="date-server-received">{{ReceivedDate}},&nbsp;{{ReceivedDateTime}}</td>
+          <td class="date-server-received-time-stamp">{{ReceivedDateTimeStampServer}}</td>
           <td><a class="button list-record" href="/core-warranty/record-core/?KEY={{@key}}">View</a></td>
         </tr>
       {{/each}}

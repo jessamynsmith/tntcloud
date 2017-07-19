@@ -149,7 +149,7 @@ body {
 /*********************************
  * Section Intro (Dispatching)
  ********************************/
-.section-intro.dispatch {
+.section-intro.dispatch.dispatching {
   margin-top: 1rem;
 }
 
@@ -388,7 +388,6 @@ body {
 /*******************************************************************************
  * Output Form: Print Area for Browser to pick up only what we want printed
  ******************************************************************************/
-
 @media print {
   body * {
     visibility: hidden;
@@ -416,7 +415,6 @@ body {
 /*******************************************************************************
  * Tables Layout
  ******************************************************************************/
-
 .data-table {
   table-layout: fixed;
   width: 100%;
@@ -427,6 +425,11 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* dispatch-received: override table-layout so date/time columns don't wrap,
+  and other column sizes better align to their content */
+#dispatchReceivedTable.data-table {
+  table-layout: auto;
+}
 
 /*******************************************************************************
  * Table Sort
@@ -434,10 +437,10 @@ body {
 .col-hidden,
 /* must call out specific data-value css selectors because List JS needs it for sorting */
 .date-server-created-time-stamp,
+.date-server-received-time-stamp,
 .date-server-turned-in {
   display: none;
 }
-
 .sort {
   height: 0;
   background: url(../images/imgbg.gif) no-repeat center right;
