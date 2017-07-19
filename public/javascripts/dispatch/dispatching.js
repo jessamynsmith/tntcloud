@@ -134,23 +134,31 @@ function handleData(parentSelector, gotData) {
   parentDiv.append(html);
 
   //////////////////////////////////////////////////////////////////////////////
-  // Hide 'Edit' link if Not Admin and currentUID is-not-equal-to CreatedByUID
+  // 'Edit' Link: Show/Hide
   //////////////////////////////////////////////////////////////////////////////
   // get currentUID
   var currentUID = firebase.auth().currentUser.uid;
 
+  if (isDispatchRoleJAX && isDispatchURL_JAX) {
+    var editLinks = document.getElementsByClassName("edit-link");
+    for (var i = 0; i < editLinks.length; i++) {
+      editLinks[i].className += " show";
+    }
+  }
 
   if (!isAdmin) {
+    // EDIT Links
     // get record's 'created-by-uid' from the edit link's <div> title attribute
     var editLinks = document.getElementsByClassName("edit-link");
     for (var i = 0; i < editLinks.length; i++) {
-      // if currentUID not equal to
+      // if currentUID not equal to edit link's title-attribute {{ CreatedByUID }}
       if (currentUID !== editLinks[i].title) {
         editLinks[i].className += " hide";
       }
     }
   }
   if (isBasic) {
+    // EDIT Links
     // if Basic user, hide 'edit' link on all 'Dispatched' records
     var gotDispatched = $("div[data-status='dispatched']");
     //console.log("Got Dispatched? ", gotDispatched);

@@ -227,6 +227,10 @@ body {
 /*********************************
  * Card Footer Links (Dispatching)
  ********************************/
+.dispatching .show.hide {
+  display: block !important;
+}
+
 .dispatching .edit-link {
   float: left;
   width: 20%;
