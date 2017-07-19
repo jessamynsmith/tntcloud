@@ -19,29 +19,36 @@ function dispatchCreateFormDataRecord(){
   firebase.auth().signInWithCustomToken(authToken)
   .then(function() {
 
-    // Server Date/Time https://firebase.google.com/docs/reference/js/firebase.database.ServerValue
+    // Current User Info
     var CreatedByUID = firebase.auth().currentUser.uid;
     var CreatedByDisplayName = firebase.auth().currentUser.displayName;
+    // Server Date/Time https://firebase.google.com/docs/reference/js/firebase.database.ServerValue
     const DateTimeStampServer = firebase.database.ServerValue.TIMESTAMP;
     let Date = DateTimeStampServer;
     Date = moment().format('L'); // Format date with moment.js
     let DateTime = moment().format('h:mm:ss A');
 
-    // For this to work correctly, all template form field names must match the field
+    // Create Object 'submitData' for data to submit to Firebase
+    // for this to work correctly, all template form field names must match the field
     // names in firebase.
     let submitData = $("#requestCreateForm").serializeJSON();
 
-    // Status of Dispatch Request
+    // Add to object 'submitData' to send to Firebase
+    // status of Dispatch Request
     submitData.Driver = "";
     submitData.Status = "requested";
 
+    // current user
     submitData.CreatedByUID = CreatedByUID;
     submitData.CreatedByDisplayName = CreatedByDisplayName;
+    // date created
     submitData.Date = Date;
     submitData.DateTime = DateTime;
     submitData.DateTimeStampServer = DateTimeStampServer;
-
-    //console.log(submitData);
+    // date received -- add empty values so 'dispatch-request-received.js' has fields to 'update'
+    submitData.ReceivedDate = "";
+    submitData.ReceivedDateTime = "";
+    submitData.ReceivedDateTimeStampServer = "";
 
     // Get a key for a new core Record
     var newKey = firebase.database().ref().child('dispatch').push().key;

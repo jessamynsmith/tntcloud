@@ -31,9 +31,28 @@ function dispatchReceived(clicked_id) {
   firebase.auth().signInWithCustomToken(authToken)
   .then(function() {
 
+    // Current User Info
+    var ReceivedByUID = firebase.auth().currentUser.uid;
+    var ReceivedByDisplayName = firebase.auth().currentUser.displayName;
+    // Server Date/Time https://firebase.google.com/docs/reference/js/firebase.database.ServerValue
+    const DateTimeStampServer = firebase.database.ServerValue.TIMESTAMP;
+    let Date = DateTimeStampServer;
+    Date = moment().format('L'); // Format date with moment.js
+    let DateTime = moment().format('h:mm:ss A');
+
+    // Create Object 'submitData' for data to submit to Firebase
     var submitData = {
       Status: "received"
     }
+    // Add to object 'submitData' to send to Firebase
+    // current user
+    submitData.ReceivedByUID = ReceivedByUID;
+    submitData.ReceivedByDisplayName = ReceivedByDisplayName;
+    // date received
+    submitData.ReceivedDate = Date;
+    submitData.ReceivedDateTime = DateTime;
+    submitData.ReceivedDateTimeStampServer = DateTimeStampServer;
+
     ////////////////////////////////////////////////////////////////////////////
     // Update record Status to 'received'
     ////////////////////////////////////////////////////////////////////////////
