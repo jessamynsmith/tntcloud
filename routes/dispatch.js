@@ -60,7 +60,6 @@ router.get('/received', mw.userRole, function(req, res, next) {
   /*****************************************************************************
    * Data for Handlebars
   *****************************************************************************/
-//dbRef.child('core').once('value', gotData);
   dbRef.child('dispatch').orderByChild('Status').equalTo('received').once('value', gotData);
   // global variable so warranty data can be accessed after the function
   var templateData;
@@ -73,6 +72,34 @@ router.get('/received', mw.userRole, function(req, res, next) {
     // handlebars object: templateData: templateData === anyName: variableName
     res.render('dispatch/received', { title: title, displayName: displayName,
       isAdmin: isAdmin, receivedData: templateData, navDispatch: navDispatch });
+  };
+});
+
+/*******************************************************************************
+ * Received Record Page
+ ******************************************************************************/
+router.get('/record-received', mw.userRole, function(req, res, next) {
+  var title = "View Received Record";
+  var displayName = req.user.displayName;
+  // works as boolean, if conditional is true, then true, conditional is false, then false
+  var isAdmin = req.app.locals.userRole === 'admin';
+
+  /*****************************************************************************
+   * Data for Handlebars
+  *****************************************************************************/
+  // get key from url query parameter '?KEY='
+  var key = req.query.KEY;
+  // get 'dispatch' data record associated with 'key' value
+  dbRef.child('dispatch/' + key).once('value', gotData);
+
+  function gotData(data) {
+    // access data values
+    templateData = data.val();
+    // Question) Why won't this line work if it's below the closing '};' of the gotData function, even though I have global variable var myData
+    // Answer) because the page render will happen faster than the data collection, so need to render to template after data collected
+    // handlebars object: templateData: templateData === anyName: variableName
+    res.render('dispatch/record-received', { title: title, displayName: displayName,
+      isAdmin: isAdmin, templateData: templateData, key: key, navDispatch: navDispatch });
   };
 });
 

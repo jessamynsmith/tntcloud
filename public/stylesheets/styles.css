@@ -445,17 +445,17 @@ body {
   height: 0;
   background: url(../images/imgbg.gif) no-repeat center right;
   position: relative;
-  top:4px;
+/*  top:4px; */
 }
 .sort.asc {
   height: 0;
   background: url(../images/imgasc.gif) no-repeat center right;
   position: relative;
-  top:4px;
+/*  top:4px; */
 }
 .sort.desc {
   height: 0;
   background: url(../images/imgdesc.gif) no-repeat center right;
   position: relative;
-  top:4px;
+/*  top:4px; */
 }
