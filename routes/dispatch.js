@@ -20,14 +20,14 @@ var branchSelector =
 var navDispatch =
   `<ul class="menu">
     <li><a href="/dispatch/dispatching" class="">Dispatching</a></li>
-    <li><a href="/dispatch/history" class="">History</a></li>
+    <li><a href="/dispatch/received" class="">Received</a></li>
     ${branchSelector}
   </ul>`;
 
 var navDispatchCreateRequest =
   `<ul class="menu">
     <li><a href="/dispatch/dispatching" class="">Dispatching</a></li>
-    <li><a href="/dispatch/history" class="">History</a></li>
+    <li><a href="/dispatch/received" class="">Received</a></li>
     ${branchSelector}
     <li class="button-parent"><button title="actionRequestCreate" class="button alert" data-open="requestCreate">Create Request</button></li>
   </ul>`;
@@ -49,13 +49,13 @@ router.get('/', mw.userRole, function(req, res, next) {
 /*******************************************************************************
  * History Page
  ******************************************************************************/
-router.get('/history', mw.userRole, function(req, res, next) {
-  var title = "Dispatch History";
+router.get('/received', mw.userRole, function(req, res, next) {
+  var title = "Received Requests";
   var displayName = req.user.displayName;
   // works as boolean, if conditional is true, then true, conditional is false, then false
   var isAdmin = req.app.locals.userRole === 'admin';
 
-  res.render('dispatch/history', { title: title, displayName: displayName,
+  res.render('dispatch/received', { title: title, displayName: displayName,
     isAdmin: isAdmin, navDispatch: navDispatch });
 });
 
