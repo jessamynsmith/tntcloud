@@ -63,10 +63,13 @@ function dispatchEditFormDataUpdate(){
     // names in firebase.
     let submitData = $("#requestEditForm").serializeJSON();
 
+
     // Status of Dispatch Request
-    if (submitData.Driver === "") {
+    // must check if 'disabled' because if not, then status is changed to 'dispatched'
+    // even if the driver is === "" 
+    if (submitData.Driver === "" || document.getElementById('editDriver').disabled) {
       submitData.Status = "requested";
-    } if (submitData.Driver !== "") {
+    } else {
       submitData.Status = "dispatched";
     }
 
