@@ -58,8 +58,10 @@ router.post('/password-reset', function(req, res){
       var errorMessage = error.message;
       // [START_EXCLUDE]
       if (errorCode == 'auth/invalid-email') {
+        console.log("Password reset error Code #1 ", errorCode);
       } else if (errorCode == 'auth/user-not-found') {
-        alert(errorMessage);
+        console.log("Password reset error Code #2 ", errorCode);
+//        alert(errorMessage);
       }
       // console.log(error);
       // [END_EXCLUDE]
