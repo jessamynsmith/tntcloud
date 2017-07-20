@@ -60,10 +60,17 @@
     <!-- Edit Password Form --------------------------------------------------->
     <h4>Change password</h4>
     <form action="/users/user-edit-password" method="post">
-      <!--Inputs----------------------------------->
+      <!--Password----------------------------------->
+      <div class="row">
+        <div id="passwordError"></div>
+        <div class="large-6">
+          <input id="password" type="password" required placeholder="New password" name="password" onkeyup="checkPass(); return false;" />
+        </div>
+      </div>
+      <!--Password Confirm--------------------------->
       <div class="row">
         <div class="large-6">
-          <input id="password" type="password" placeholder="New password" name="password">
+          <input id="passwordConfirm" type="password" required placeholder="Confirm password" name="passwordConfirm" onkeyup="checkPass(); return false;" />
         </div>
       </div>
       <!--Button----------------------->
@@ -76,3 +83,36 @@
     <!-- End Edit Password Form ----------------------------------------------->
   </div><!-- End <div> row ---------------------------------------------------->
 </div><!-- End <div> row expanded --------------------------------------------->
+
+<script>
+
+function checkPass() {
+  var pass1 = document.getElementById('password');
+  var pass2 = document.getElementById('passwordConfirm');
+  var message = document.getElementById('passwordError');
+  var goodColor = "#3adb76";
+  var badColor = "#cc4b37";
+
+  if (pass1.value.length > 5) {
+    pass1.style.backgroundColor = goodColor;
+    message.style.color = goodColor;
+    message.innerHTML = "character number ok!"
+  } else {
+    pass1.style.backgroundColor = badColor;
+    message.style.color = badColor;
+    message.innerHTML = " You have to enter at least 6 digits!"
+    return;
+  }
+
+  if (pass1.value == pass2.value) {
+    pass2.style.backgroundColor = goodColor;
+    message.style.color = goodColor;
+    message.innerHTML = "Okay!"
+  } else {
+    pass2.style.backgroundColor = badColor;
+    message.style.color = badColor;
+    message.innerHTML = " These passwords don't match"
+  }
+}
+
+</script>
