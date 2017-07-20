@@ -56,7 +56,7 @@
         </div>
       </div>
       <!--Button----------------------->
-      <button id="btnUserCreate" class="button hide">
+      <button id="btnUserCreate" class="button" disabled="true">
         Create User
       </button>
       <a href="/users" class="button secondary">Cancel</a>
@@ -84,7 +84,8 @@ function checkPass() {
     pass1.style.backgroundColor = badColor;
     message.style.color = badColor;
     message.innerHTML = " You have to enter at least 6 digits!"
-    btnUserCreate.classList.add('hide');
+    // must set full attribute for this to work: 'disabled', 'true'
+    btnUserCreate.setAttribute('disabled', 'true');
     return;
   }
   // Check if Passwords Match
@@ -92,12 +93,13 @@ function checkPass() {
     pass2.style.backgroundColor = goodColor;
     message.style.color = goodColor;
     message.innerHTML = "Okay!"
-    btnUserCreate.classList.remove('hide');
+    btnUserCreate.removeAttribute('disabled');
   } else {
     pass2.style.backgroundColor = badColor;
     message.style.color = badColor;
     message.innerHTML = " These passwords don't match"
-    btnUserCreate.classList.add('hide');
+    // must set full attribute for this to work: 'disabled', 'true'
+    btnUserCreate.setAttribute('disabled', 'true');
   }
 }
 

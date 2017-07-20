@@ -74,7 +74,7 @@
         </div>
       </div>
       <!--Button----------------------->
-      <button id="btnUpdatePassword" class="button hide" name="uid" value={{ uid }}>
+      <button id="btnUpdatePassword" class="button" disabled="true" name="uid" value={{ uid }}>
         Update Password
       </button>
     </form>
@@ -106,7 +106,7 @@ function checkPass() {
     pass1.style.backgroundColor = badColor;
     message.style.color = badColor;
     message.innerHTML = " You have to enter at least 6 digits!"
-    btnUpdatePassword.classList.add('hide');
+    btnUpdatePassword.setAttribute('disabled', 'true');
     return;
   }
   // Check if Passwords Match
@@ -114,13 +114,12 @@ function checkPass() {
     pass2.style.backgroundColor = goodColor;
     message.style.color = goodColor;
     message.innerHTML = "Okay!"
-    // Enable 'update password' button
-    btnUpdatePassword.classList.remove('hide');
+    btnUpdatePassword.removeAttribute('disabled');
   } else {
     pass2.style.backgroundColor = badColor;
     message.style.color = badColor;
     message.innerHTML = " These passwords don't match"
-    btnUpdatePassword.classList.add('hide');
+    btnUpdatePassword.setAttribute('disabled', 'true');
   }
 }
 
