@@ -426,8 +426,10 @@ body {
   text-overflow: ellipsis;
 }
 /* dispatch-received: override table-layout so date/time columns don't wrap,
-  and other column sizes better align to their content */
-#dispatchReceivedTable.data-table {
+  and other column sizes better align to their content.
+  users table: override so colum with buttons does not take so much space. */
+#dispatchReceivedTable.data-table,
+#usersTable.data-table {
   table-layout: auto;
 }
 
