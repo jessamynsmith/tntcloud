@@ -8,15 +8,16 @@
 <table id="dispatchReceivedTable" class="data-table stack">
   <thead>
     <tr>
-      <th class="col sort desc">Date Created</th>
-      <th class="col sort">Vendor</th>
-      <th class="col sort">From</th>
-      <th class="col sort">To</th>
-      <th class="col sort">Reference</th>
-      <th class="col sort">Instructions</th>
-      <th class="col sort">Submitted By</th>
-      <th class="col sort">Driver</th>
-      <th class="col sort">Date Received</th>
+      <th class="col">Date Created</th>
+      <th class="col">Vendor</th>
+      <th class="col">From</th>
+      <th class="col">To</th>
+      <th class="col">Reference</th>
+      <th class="col">Instructions</th>
+      <th class="col">Submitted By</th>
+      <th class="col">Received By</th>
+      <th class="col">Driver</th>
+      <th class="col">Date Received</th>
       <th class="col">Back to All Records</th>
     </tr>
   </thead>
@@ -29,6 +30,7 @@
       <td id="reference">{{ templateData.Reference }}</td>
       <td id="reference">{{ templateData.Instructions }}</td>
       <td id="created-by">{{ templateData.CreatedByDisplayName }}</td>
+      <td id="received-by">{{ templateData.ReceivedByDisplayName }}</td>
       <td id="driver">{{ templateData.Driver }}</td>
       <td id="date-server-received">{{ templateData.ReceivedDate }},&nbsp;{{ templateData.ReceivedDateTime }}</td>
       <td><a class="button secondary" href="/dispatch/received">Back to All Records</a></td>

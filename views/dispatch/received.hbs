@@ -19,6 +19,7 @@
       <th class="col sort" data-sort="branch-to">To</th>
       <th class="col sort" data-sort="reference">Reference</th>
       <th class="col sort" data-sort="created-by">Submitted By</th>
+      <th class="col sort" data-sort="received-by">Received By</th>
       <th class="col sort" data-sort="driver">Driver</th>
       <th class="col sort" data-sort="date-server-received">Date Received</th>
       <th class="col-hidden" data-sort="date-server-received-time-stamp">Server Time Stamp Received</th>
@@ -37,6 +38,7 @@
           <td class="branch-to">{{BranchTo}}</td>
           <td class="reference">{{Reference}}</td>
           <td class="created-by">{{CreatedByDisplayName}}</td>
+          <td class="received-by">{{ReceivedByDisplayName}}</td>
           <td class="driver">{{Driver}}</td>
           <td class="date-server-received">{{ReceivedDate}},&nbsp;{{ReceivedDateTime}}</td>
           <td class="date-server-received-time-stamp">{{ReceivedDateTimeStampServer}}</td>
@@ -72,7 +74,7 @@
    * The column "Date Turned In" contains data-sort="w-date-server-turned-in"
    * that actually sorts by the DateTimeStampServer column, which is hidden. */
   var options = {
-    valueNames: [ 'date-server-created', 'vendor', 'branch-from', 'branch-to', 'reference', 'created-by', 'driver', 'date-server-received' ]
+    valueNames: [ 'date-server-created', 'vendor', 'branch-from', 'branch-to', 'reference', 'created-by', 'received-by', 'driver', 'date-server-received' ]
   };
   var monkeyList = new List('table-and-search', options);
 
