@@ -122,6 +122,7 @@ router.get('/user-edit', function(req, res, next) {
   }
 });
 
+
 /*******************************************************************************
  * User Edit: Display Name Form
  ******************************************************************************/
@@ -159,6 +160,29 @@ router.post('/user-edit-display-name', function(req, res){
   });
 });
 
+
+/*******************************************************************************
+ * User Edit: Role Form
+ ******************************************************************************/
+router.post('/user-edit-role', function(req, res){
+  // get email, password, and role entered into create user form
+  var item = {
+    uid: req.body.uid,
+  	role: req.body.role
+  };
+  // Select the user from the database that you want to edit
+  var dbUpdate = req.app.locals.dbRef.child('users/' + item.uid).update({ 'role': item.role });
+
+  dbUpdate.then(function() {
+    // url redirect after post, include query parameter
+    res.redirect('/users');
+  })
+  .catch(function(error) {
+    console.log("error", error);
+  });
+});
+
+
 /*******************************************************************************
  * User Edit: Password Form
  ******************************************************************************/
@@ -181,26 +205,6 @@ router.post('/user-edit-password', function(req, res){
     });
 });
 
-/*******************************************************************************
- * User Edit: User Role Form
- ******************************************************************************/
-router.post('/user-edit-role', function(req, res){
-  // get email, password, and role entered into create user form
-  var item = {
-    uid: req.body.uid,
-  	role: req.body.role
-  };
-  // Select the user from the database that you want to edit
-  var dbUpdate = req.app.locals.dbRef.child('users/' + item.uid).update({ 'role': item.role });
-
-  dbUpdate.then(function() {
-    // url redirect after post, include query parameter
-    res.redirect('/users');
-  })
-  .catch(function(error) {
-    console.log("error", error);
-  });
-});
 
 /*******************************************************************************
  * User Delete: Page
