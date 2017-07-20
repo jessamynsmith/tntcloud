@@ -6,6 +6,7 @@
   <div id="loginBox">
     <div class="row">
       <div class="large-12 columns">
+        <h4>Sign in with email</h4>
         <!--Error Message------------------------------>
         <div class="row">
           <div class="large-12 columns">
@@ -38,10 +39,12 @@
         </form>
         <!-- End Login Form --------------------------------------------------->
         <!-- Password reset --------------------------------------------------->
+        <span>Need to reset your password?</span>
         <form action="/password-reset" method="post">
           <div class="row">
             <div class="large-12 columns">
-              <input id="emailPasswordReset" type="email" placeholder="Email" name="emailPasswordReset">
+              <input id="emailPasswordReset" type="email" placeholder="Enter Your Email Address Here" name="emailPasswordReset" style="margin-bottom: 0;">
+              <span style="color: gray;">password reset link will be emailed to you</span>
             </div>
           </div>
           <!--Button----------------------->
