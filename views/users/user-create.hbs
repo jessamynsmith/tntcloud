@@ -56,7 +56,7 @@
         </div>
       </div>
       <!--Button----------------------->
-      <button id="btnUserCreate" class="button">
+      <button id="btnUserCreate" class="button hide">
         Create User
       </button>
       <a href="/users" class="button secondary">Cancel</a>
@@ -70,10 +70,12 @@
 function checkPass() {
   var pass1 = document.getElementById('password');
   var pass2 = document.getElementById('passwordConfirm');
+  var btnUserCreate = document.getElementById('btnUserCreate');
   var message = document.getElementById('passwordError');
   var goodColor = "#3adb76";
   var badColor = "#cc4b37";
 
+  // Check Password Length
   if (pass1.value.length > 5) {
     pass1.style.backgroundColor = goodColor;
     message.style.color = goodColor;
@@ -82,17 +84,20 @@ function checkPass() {
     pass1.style.backgroundColor = badColor;
     message.style.color = badColor;
     message.innerHTML = " You have to enter at least 6 digits!"
+    btnUserCreate.classList.add('hide');
     return;
   }
-
+  // Check if Passwords Match
   if (pass1.value == pass2.value) {
     pass2.style.backgroundColor = goodColor;
     message.style.color = goodColor;
     message.innerHTML = "Okay!"
+    btnUserCreate.classList.remove('hide');
   } else {
     pass2.style.backgroundColor = badColor;
     message.style.color = badColor;
     message.innerHTML = " These passwords don't match"
+    btnUserCreate.classList.add('hide');
   }
 }
 

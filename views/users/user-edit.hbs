@@ -74,7 +74,7 @@
         </div>
       </div>
       <!--Button----------------------->
-      <button id="updatePasswordButton" class="button hide" name="uid" value={{ uid }}>
+      <button id="btnUpdatePassword" class="button hide" name="uid" value={{ uid }}>
         Update Password
       </button>
     </form>
@@ -92,7 +92,7 @@
 function checkPass() {
   var pass1 = document.getElementById('password');
   var pass2 = document.getElementById('passwordConfirm');
-  var updatePasswordButton = document.getElementById('updatePasswordButton');
+  var btnUpdatePassword = document.getElementById('btnUpdatePassword');
   var message = document.getElementById('passwordError');
   var goodColor = "#3adb76";
   var badColor = "#cc4b37";
@@ -106,7 +106,7 @@ function checkPass() {
     pass1.style.backgroundColor = badColor;
     message.style.color = badColor;
     message.innerHTML = " You have to enter at least 6 digits!"
-    updatePasswordButton.classList.add('hide');
+    btnUpdatePassword.classList.add('hide');
     return;
   }
   // Check if Passwords Match
@@ -115,12 +115,12 @@ function checkPass() {
     message.style.color = goodColor;
     message.innerHTML = "Okay!"
     // Enable 'update password' button
-    updatePasswordButton.classList.remove('hide');
+    btnUpdatePassword.classList.remove('hide');
   } else {
     pass2.style.backgroundColor = badColor;
     message.style.color = badColor;
     message.innerHTML = " These passwords don't match"
-    updatePasswordButton.classList.add('hide');
+    btnUpdatePassword.classList.add('hide');
   }
 }
 
