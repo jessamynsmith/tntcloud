@@ -152,8 +152,8 @@ router.post('/user-edit-display-name', function(req, res){
   var dbUpdate = req.app.locals.dbRef.child('users/' + item.uid).update({ 'displayName': item.newDisplayName });
 
   dbUpdate.then(function() {
-    // url redirect after post, include query parameter
-    res.redirect('/users');
+    // url re-load user page (via redirect) after post
+    res.redirect('/users/user-edit/?KEY=' + item.uid);
   })
   .catch(function(error) {
     console.log("error", error);
@@ -171,15 +171,14 @@ router.post('/user-edit-role', function(req, res){
   	role: req.body.role
   };
   // Select the user from the database that you want to edit
-  var dbUpdate = req.app.locals.dbRef.child('users/' + item.uid).update({ 'role': item.role });
-
-  dbUpdate.then(function() {
-    // url redirect after post, include query parameter
-    res.redirect('/users');
-  })
-  .catch(function(error) {
-    console.log("error", error);
-  });
+  var dbUpdate = req.app.locals.dbRef.child('users/' + item.uid).update({ 'role': item.role })
+    .then(function() {
+      // url re-load user page (via redirect) after post
+      res.redirect('/users/user-edit/?KEY=' + item.uid);
+    })
+    .catch(function(error) {
+      console.log("error", error);
+    });
 });
 
 
@@ -198,7 +197,8 @@ router.post('/user-edit-password', function(req, res){
     password: item.newPassword
   })
     .then(function(userRecord) {
-      res.redirect('/users');
+    // url re-load user page (via redirect) after post
+    res.redirect('/users/user-edit/?KEY=' + item.uid);
     })
     .catch(function(error) {
       console.log("Error editing user:", error);
